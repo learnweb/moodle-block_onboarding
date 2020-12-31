@@ -24,16 +24,25 @@ use templatable;
 use renderer_base;
 
 class overview implements renderable, templatable {
+  public function __construct() {
+  }
 
-    public function __construct() {
+  public function export_for_template(renderer_base $output) {
+    global $DB;
+
+    $categories = array_values($DB->get_records('block_wiki_categories'));
+    $links = array_values($DB->get_records('block_wiki_links'));
+
+    foreach($categories as $category){
+      foreach($links as $link){
+        if($link->category_id == $category->id){
+          $category->links[] = $link;
+        }
+      }
     }
 
-    public function export_for_template(renderer_base $output) {
-        $wikilib = new wikilib();
-        $categories_with_links = $wikilib->get_categories_with_links();
-
-        return [
-            'categories_with_links' => $categories_with_links
-        ];
-    }
+    return [
+        'categories_with_links' => $categories
+    ];
+  }
 }
