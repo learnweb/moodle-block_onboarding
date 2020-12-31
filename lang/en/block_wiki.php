@@ -21,3 +21,17 @@ $string['wiki:addinstance'] = 'Add a new wiki block';
 $string['overview'] = 'Overview';
 
 $string['admin'] = 'Admin';
+
+$string['edit_category'] = 'Edit Category';
+$string['category'] = 'Category';
+$string['category_name'] = 'Name';
+$string['default_category_name'] = 'Sample Category';
+
+$string['edit_link'] = 'Edit Link';
+$string['link_name'] = 'Name';
+$string['link_category'] = 'Category';
+$string['link_url'] = 'URL';
+$string['link_description'] = 'Description';
+$string['default_link_name'] = 'Sample Link';
+$string['default_link_url'] = 'http://www.example.com';
+$string['default_link_description'] = 'Sample Description';

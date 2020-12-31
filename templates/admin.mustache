@@ -1,10 +1,13 @@
-<ul>
 {{#categories_with_links}}
-    <input>{{{name}}}</input>
+    <h4>{{{name}}} (<a href="edit_category.php?category_id={{{id}}}">edit</a> | <a href="delete_category.php?category_id={{{id}}}">delete</a>)</h3>
     <ul>
       {{#links}}
-      <input>{{{name}}}</input>
+      <li>
+        <a href="{{{url}}}">{{{name}}}</a> (<a href="edit_link.php?link_id={{{id}}}">edit</a> | <a href="delete_link.php?link_id={{{id}}}">delete</a>)
+      </li>
       {{/links}}
     </ul>
 {{/categories_with_links}}
-</ul>
+<a href="edit_category.php">New Category</a>
+<br>
+<a href="edit_link.php">New Link</a>

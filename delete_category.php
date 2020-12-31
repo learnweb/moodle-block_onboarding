@@ -18,19 +18,9 @@ require(__DIR__ . '/../../config.php');
 
 require_login();
 
+global $DB;
+
 $context = context_system::instance();
-$url = new moodle_url('/blocks/wiki/admin.php');
 
-$PAGE->set_url($url);
-$PAGE->set_context($context);
-$PAGE->set_title(get_string('admin', 'block_wiki'));
-$PAGE->set_heading(get_string('admin', 'block_wiki'));
-$PAGE->navbar->add(get_string('pluginname', 'block_wiki'));
-
-$output = $PAGE->get_renderer('block_wiki');
-echo $output->header();
-echo $output->container_start('wiki-admin');
-$renderable = new \block_wiki\output\renderables\admin();
-echo $output->render($renderable);
-echo $output->container_end();
-echo $output->footer();
+$DB->delete_records('block_wiki_categories', array('id' => optional_param('category_id', -1, PARAM_INT)));
+redirect('admin.php');
