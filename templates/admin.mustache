@@ -1,9 +1,9 @@
 {{#categories_with_links}}
-    <h4>{{{name}}} (<a href="edit_category.php?category_id={{{id}}}">edit</a> | <a href="delete_category.php?category_id={{{id}}}">delete</a>)</h3>
+    <h4>{{{name}}} <a href="edit_category.php?category_id={{{id}}}">{{#pix}}t/editstring, core, Edit Link{{/pix}}</a><a href="delete_category.php?category_id={{{id}}}">{{#pix}}t/delete, core, Delete Link{{/pix}}</a></h3>
     <ul>
       {{#links}}
       <li>
-        <a href="{{{url}}}">{{{name}}}</a> (<a href="edit_link.php?link_id={{{id}}}">edit</a> | <a href="delete_link.php?link_id={{{id}}}">delete</a>)
+        <a href="{{{url}}}">{{{name}}}</a> <a href="edit_link.php?link_id={{{id}}}">{{#pix}}t/editstring, core, Edit Link{{/pix}}</a><a href="delete_link.php?link_id={{{id}}}">{{#pix}}t/delete, core, Delete Link{{/pix}}</a>
       </li>
       {{/links}}
     </ul>
