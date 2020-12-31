@@ -1,10 +1,10 @@
-{{#categories_with_experiences}}
-    <h4>{{{name}}}</h3>
+{{#experiences_with_categories}}
+    <h4>{{{name}}}</h4>
     <ul>
-      {{#experiences}}
+      {{#categories}}
       <li>
-        <a href="{{{url}}}">{{{name}}}</a>
+        <p>{{{name}}}</p>
       </li>
-      {{/experiences}}
+      {{/categories}}
     </ul>
-{{/categories_with_experiences}}
+{{/experiences_with_categories}}
