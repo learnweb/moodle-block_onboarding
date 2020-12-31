@@ -57,9 +57,6 @@ if ($mform->is_cancelled()) {
 
 echo $OUTPUT->header();
 
-/*echo html_writer::tag('h2', get_string('about-me', 'block_wiki'));
-echo html_writer::tag('p', get_string('welcome_text', 'block_wiki'));*/
-
 $mform->display();
 
 echo $OUTPUT->footer();
