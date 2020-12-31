@@ -16,14 +16,13 @@
 
 $string['pluginname'] = 'Wiki Block';
 $string['wiki'] = 'Wiki';
-$string['wiki:addinstance'] = 'Add a new wiki block';
+$string['wiki:addinstance'] = 'Add a new Wiki block';
 
 $string['overview'] = 'Overview';
 
 $string['admin'] = 'Admin';
 
 $string['edit_category'] = 'Edit Category';
-$string['category'] = 'Category';
 $string['category_name'] = 'Name';
 $string['default_category_name'] = 'Sample Category';
 
