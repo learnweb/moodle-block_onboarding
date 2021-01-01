@@ -22,15 +22,8 @@ $string['overview'] = 'Overview';
 
 $string['admin'] = 'Admin';
 
-$string['edit_category'] = 'Edit Category';
-$string['category_name'] = 'Name';
-$string['default_category_name'] = 'Sample Category';
-
-$string['edit_step'] = 'Edit Link';
+$string['edit_step'] = 'Edit Step';
 $string['step_name'] = 'Name';
-$string['step_category'] = 'Category';
-$string['step_url'] = 'URL';
 $string['step_description'] = 'Description';
-$string['default_step_name'] = 'Sample Link';
-$string['default_step_url'] = 'http://www.example.com';
+$string['default_step_name'] = 'Sample Name';
 $string['default_step_description'] = 'Sample Description';

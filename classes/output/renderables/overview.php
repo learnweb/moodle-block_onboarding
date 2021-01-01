@@ -33,7 +33,8 @@ class overview implements renderable, templatable {
     $steps = array_values($DB->get_records('block_steps_steps'));
 
     return [
-        'steps' => $steps
+      'can_edit_steps' => has_capability('block/steps:edit_steps', \context_system::instance()) ? true : false,
+      'steps' => $steps
     ];
   }
 }
