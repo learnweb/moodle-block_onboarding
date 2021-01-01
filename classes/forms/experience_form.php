@@ -47,6 +47,19 @@ class experience_form extends moodleform {
           $mform->setDefault('category_' . $experience_category->category_id, true);
         }
 
+        $categories = $DB->get_records('block_experiences_cats');
+        $experiences_categories = $DB->get_records('block_experiences_exps_cats', array('experience_id' => $experience->id));
+        $experiences_categories_mapped = array();
+        foreach($experiences_categories as $experience_category){
+          $experiences_categories_mapped[$experience_category->category_id] = $experience_category;
+        }
+        foreach($categories as $category){
+          $mform->addElement('textarea', 'experience_category_' . $category->id . '_description', $category->name);
+          $mform->setType('experience_category_' . $category->id . '_description', PARAM_TEXT);
+          $mform->setDefault('experience_category_' . $category->id . '_description', isset($experiences_categories_mapped[$category->id]) ? $experiences_categories_mapped[$category->id]->description : '');
+          $mform->hideIf('experience_category_' . $category->id . '_description', 'category_' . $category->id);
+        }
+
         $this->add_action_buttons();
     }
 

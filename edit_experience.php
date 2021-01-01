@@ -62,12 +62,13 @@ if($experience_id == -1 || $USER->id == $pExperience->user_id || has_capability(
       $experiences_categories = array();
 
       foreach($categories as $category){
-        $formproperty = 'category_' . $category->id;
-        if(isset($fromform->$formproperty)){
+        $formproperty_category_checkbox = 'category_' . $category->id;
+        if(isset($fromform->$formproperty_category_checkbox)){
           $experience_category = new stdClass;
           $experience_category->experience_id = $experience->id;
           $experience_category->category_id = $category->id;
-          $experience_category->description = '';
+          $formproperty_category_textarea = 'experience_category_' . $category->id . '_description';
+          $experience_category->description = $fromform->$formproperty_category_textarea;
           $experience_category->timecreated = time();
           $experience_category->timemodified = time();
           $experiences_categories[] = $experience_category;
