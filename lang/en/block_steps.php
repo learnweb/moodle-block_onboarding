@@ -18,6 +18,9 @@ $string['pluginname'] = 'Steps Block';
 $string['steps'] = 'Steps';
 $string['steps:addinstance'] = 'Add a new Steps block';
 
+$string['error'] = "Error";
+$string['insufficient_permissions'] = 'Sorry, insufficient permissions';
+
 $string['overview'] = 'Overview';
 
 $string['admin'] = 'Admin';

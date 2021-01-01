@@ -22,5 +22,17 @@ global $DB;
 
 $context = context_system::instance();
 
-$DB->delete_records('block_steps_steps', array('id' => optional_param('step_id', -1, PARAM_INT)));
-redirect('admin.php');
+if(has_capability('block/steps:edit_steps', $context)){
+  $DB->delete_records('block_steps_steps', array('id' => optional_param('step_id', -1, PARAM_INT)));
+  redirect('admin.php');
+}else{
+  $PAGE->set_context($context);
+  $PAGE->set_url(new moodle_url('/blocks/steps/delete_step.php'));
+  $PAGE->navbar->add(get_string('pluginname', 'block_steps'));
+  $PAGE->set_title(get_string('error', 'block_steps'));
+  $PAGE->set_heading(get_string('error', 'block_steps'));
+
+  echo $OUTPUT->header();
+  echo html_writer::tag('p', get_string('insufficient_permissions', 'block_steps'));
+  echo $OUTPUT->footer();
+}

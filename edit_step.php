@@ -24,41 +24,49 @@ $context = context_system::instance();
 
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/steps/edit_step.php'));
-$PAGE->set_title(get_string('edit_step', 'block_steps'));
-$PAGE->set_heading(get_string('edit_step', 'block_steps'));
 $PAGE->navbar->add(get_string('pluginname', 'block_steps'));
 
-require_once('./classes/forms/step_form.php');
+if(has_capability('block/steps:edit_steps', $context)){
+  $PAGE->set_title(get_string('edit_step', 'block_steps'));
+  $PAGE->set_heading(get_string('edit_step', 'block_steps'));
 
-$step_id = optional_param('step_id', -1, PARAM_INT);
-$pStep = new stdClass;
-$pStep->id = -1;
-if($step_id != -1){
-  $pStep = $DB->get_record('block_steps_steps', array('id'=>$step_id), $fields='*', $strictness=IGNORE_MISSING);
+  require_once('./classes/forms/step_form.php');
+
+  $step_id = optional_param('step_id', -1, PARAM_INT);
+  $pStep = new stdClass;
+  $pStep->id = -1;
+  if($step_id != -1){
+    $pStep = $DB->get_record('block_steps_steps', array('id'=>$step_id), $fields='*', $strictness=IGNORE_MISSING);
+  }
+  $mform = new step_form(null, array('step' => $pStep));
+
+  if ($mform->is_cancelled()) {
+  		redirect('admin.php');
+  } else if ($fromform = $mform->get_data()) {
+      $step = new stdClass();
+      $step->name = $fromform->name;
+      $step->description = $fromform->description;
+      $step->position = $fromform->position;
+      $step->timecreated = time();
+      $step->timemodified = time();
+
+      if($fromform->id != -1){
+        $step->id = $fromform->id;
+        $DB->update_record('block_steps_steps', $step, $bulk=false);
+      }else{
+        $step->id = $DB->insert_record('block_steps_steps', $step);
+      }
+      redirect('admin.php');
+  }
+
+  echo $OUTPUT->header();
+  $mform->display();
+  echo $OUTPUT->footer();
+}else{
+  $PAGE->set_title(get_string('error', 'block_steps'));
+  $PAGE->set_heading(get_string('error', 'block_steps'));
+
+  echo $OUTPUT->header();
+  echo html_writer::tag('p', get_string('insufficient_permissions', 'block_steps'));
+  echo $OUTPUT->footer();
 }
-$mform = new step_form(null, array('step' => $pStep));
-
-if ($mform->is_cancelled()) {
-		redirect('admin.php');
-} else if ($fromform = $mform->get_data()) {
-    $step = new stdClass();
-    $step->name = $fromform->name;
-    $step->description = $fromform->description;
-    $step->position = $fromform->position;
-    $step->timecreated = time();
-    $step->timemodified = time();
-
-    if($fromform->id != -1){
-      $step->id = $fromform->id;
-      $DB->update_record('block_steps_steps', $step, $bulk=false);
-    }else{
-      $step->id = $DB->insert_record('block_steps_steps', $step);
-    }
-    redirect('admin.php');
-}
-
-echo $OUTPUT->header();
-
-$mform->display();
-
-echo $OUTPUT->footer();
