@@ -24,42 +24,50 @@ $context = context_system::instance();
 
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/wiki/edit_link.php'));
-$PAGE->set_title(get_string('edit_link', 'block_wiki'));
-$PAGE->set_heading(get_string('edit_link', 'block_wiki'));
 $PAGE->navbar->add(get_string('pluginname', 'block_wiki'));
 
-require_once('./classes/forms/link_form.php');
+if(has_capability('block/wiki:manage_wiki', $context)){
+  $PAGE->set_title(get_string('edit_link', 'block_wiki'));
+  $PAGE->set_heading(get_string('edit_link', 'block_wiki'));
 
-$link_id = optional_param('link_id', -1, PARAM_INT);
-$pLink = new stdClass;
-$pLink->id = -1;
-if($link_id != -1){
-  $pLink = $DB->get_record('block_wiki_links', array('id'=>$link_id), $fields='*', $strictness=IGNORE_MISSING);
+  require_once('./classes/forms/link_form.php');
+
+  $link_id = optional_param('link_id', -1, PARAM_INT);
+  $pLink = new stdClass;
+  $pLink->id = -1;
+  if($link_id != -1){
+    $pLink = $DB->get_record('block_wiki_links', array('id'=>$link_id), $fields='*', $strictness=IGNORE_MISSING);
+  }
+  $mform = new link_form(null, array('link' => $pLink));
+
+  if ($mform->is_cancelled()) {
+  		redirect('overview.php');
+  } else if ($fromform = $mform->get_data()) {
+      $link = new stdClass();
+      $link->name = $fromform->name;
+      $link->category_id = $fromform->category_id;
+      $link->url = $fromform->url;
+      $link->description = $fromform->description;
+      $link->timecreated = time();
+      $link->timemodified = time();
+
+      if($fromform->id != -1){
+        $link->id = $fromform->id;
+        $DB->update_record('block_wiki_links', $link, $bulk=false);
+      }else{
+        $link->id = $DB->insert_record('block_wiki_links', $link);
+      }
+      redirect('overview.php');
+  }
+
+  echo $OUTPUT->header();
+  $mform->display();
+  echo $OUTPUT->footer();
+}else{
+  $PAGE->set_title(get_string('error', 'block_wiki'));
+  $PAGE->set_heading(get_string('error', 'block_wiki'));
+
+  echo $OUTPUT->header();
+  echo html_writer::tag('p', get_string('insufficient_permissions', 'block_wiki'));
+  echo $OUTPUT->footer();
 }
-$mform = new link_form(null, array('link' => $pLink));
-
-if ($mform->is_cancelled()) {
-		redirect('admin.php');
-} else if ($fromform = $mform->get_data()) {
-    $link = new stdClass();
-    $link->name = $fromform->name;
-    $link->category_id = $fromform->category_id;
-    $link->url = $fromform->url;
-    $link->description = $fromform->description;
-    $link->timecreated = time();
-    $link->timemodified = time();
-
-    if($fromform->id != -1){
-      $link->id = $fromform->id;
-      $DB->update_record('block_wiki_links', $link, $bulk=false);
-    }else{
-      $link->id = $DB->insert_record('block_wiki_links', $link);
-    }
-    redirect('admin.php');
-}
-
-echo $OUTPUT->header();
-
-$mform->display();
-
-echo $OUTPUT->footer();

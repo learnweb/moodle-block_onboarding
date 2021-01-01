@@ -22,5 +22,17 @@ global $DB;
 
 $context = context_system::instance();
 
-$DB->delete_records('block_wiki_links', array('id' => optional_param('link_id', -1, PARAM_INT)));
-redirect('admin.php');
+if(has_capability('block/wiki:manage_wiki', $context)){
+  $DB->delete_records('block_wiki_links', array('id' => optional_param('link_id', -1, PARAM_INT)));
+  redirect('overview.php');
+}else{
+  $PAGE->set_context($context);
+  $PAGE->set_url(new moodle_url('/blocks/wiki/delete_link.php'));
+  $PAGE->set_title(get_string('error', 'block_wiki'));
+  $PAGE->set_heading(get_string('error', 'block_wiki'));
+  $PAGE->navbar->add(get_string('pluginname', 'block_wiki'));
+
+  echo $OUTPUT->header();
+  echo html_writer::tag('p', get_string('insufficient_permissions', 'block_wiki'));
+  echo $OUTPUT->footer();
+}

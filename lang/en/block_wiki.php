@@ -18,6 +18,9 @@ $string['pluginname'] = 'Wiki Block';
 $string['wiki'] = 'Wiki';
 $string['wiki:addinstance'] = 'Add a new Wiki block';
 
+$string['error'] = "Error";
+$string['insufficient_permissions'] = 'Sorry, insufficient permissions';
+
 $string['overview'] = 'Overview';
 
 $string['admin'] = 'Admin';
