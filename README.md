@@ -1,6 +1,6 @@
 [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
 
-# Wiki Block Plugin for Moodle
+# Wiki Plugin for Moodle
 This project is devoted to creating a block plugin for Moodle that enables businesses or organizations to quickly set up an internal wiki of their digital tools and sources of information. This can especially be helpful in the broader context of setting up an effective onboarding strategy.
 
 ## Development Setup
