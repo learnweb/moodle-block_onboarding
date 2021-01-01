@@ -23,7 +23,9 @@ global $DB;
 $context = context_system::instance();
 
 if(has_capability('block/wiki:manage_wiki', $context)){
-  $DB->delete_records('block_wiki_categories', array('id' => optional_param('category_id', -1, PARAM_INT)));
+  $category_id = optional_param('category_id', -1, PARAM_INT);
+  $DB->delete_records('block_wiki_links', array('category_id' => $category_id));
+  $DB->delete_records('block_wiki_categories', array('id' => $category_id));
   redirect('overview.php');
 }else{
   $PAGE->set_context($context);
