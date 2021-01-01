@@ -16,7 +16,9 @@ When setting up your environment for the first time use the following steps:
 6. Login with the following credentials:
     - username: admin
     - password: pw
-7. Ready. Happy coding!
+7. Moodle will probably ask you some additional questions. Feel free to enter fictional data.
+8. Click on *Customize this page* -> *Add a block* -> *Wiki block*
+9. Ready. The block should appear on the dashboard. Happy coding!
 
 :warning: If you want to instantly see your newly created strings in the language files while developing, navigate to *'Site Administration'* -> *'Language settings'*. Then disable *'Cache all language strings'* and click *'Save changes'*.
 
