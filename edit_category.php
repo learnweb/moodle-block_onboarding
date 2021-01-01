@@ -41,7 +41,7 @@ if(has_capability('block/experiences:edit_categories', \context_system::instance
   $mform = new category_form(null, array('category' => $pCategory));
 
   if ($mform->is_cancelled()) {
-  		redirect('admin.php');
+  		redirect('overview.php');
   } else if ($fromform = $mform->get_data()) {
       $category = new stdClass();
       $category->name = $fromform->name;
@@ -54,7 +54,7 @@ if(has_capability('block/experiences:edit_categories', \context_system::instance
       }else{
         $category->id = $DB->insert_record('block_experiences_cats', $category);
       }
-      redirect('admin.php');
+      redirect('overview.php');
   }
 
   echo $OUTPUT->header();
