@@ -2,15 +2,19 @@
 {{#can_edit_categories}}<a href="edit_category.php">New Category</a>{{/can_edit_categories}}
 <br></br>
 {{#categories_general}}
-    <h5>{{{name}}}{{#can_edit_categories}} <a href="edit_category.php?category_id={{{id}}}">{{#pix}}t/editstring, core, Edit Category{{/pix}}</a><a href="delete_category.php?category_id={{{id}}}">{{#pix}}t/delete, core, Delete Category{{/pix}}</a>{{/can_edit_categories}}</h5>
+    <div class="block-experiences-overview-category">
+      <h5 class="block-experiences-overview-category-text">{{{name}}}</h5>
+      {{#can_edit_categories}} <a href="edit_category.php?category_id={{{id}}}">{{#pix}}t/editstring, core, Edit Category{{/pix}}</a><a href="delete_category.php?category_id={{{id}}}">{{#pix}}t/delete, core, Delete Category{{/pix}}</a>{{/can_edit_categories}}
+    </div>
 {{/categories_general}}
-<br>
+<br></br>
+<br></br>
 <h2>Experiences</h2>
 <a href="edit_experience.php">New Experience</a>
 <br></br>
 {{#experiences_with_categories}}
     <div>
       <h4><a href="experience.php?experience_id={{{id}}}">{{{name}}}{{#editable}}</a> <a href="edit_experience.php?experience_id={{{id}}}">{{#pix}}t/editstring, core, Edit Experience{{/pix}}</a><a href="delete_experience.php?experience_id={{{id}}}">{{#pix}}t/delete, core, Delete Experience{{/pix}}</a>{{/editable}}</h4>
-      {{#categories}}<p class="block-experiences-badge">{{{name}}}</p> {{/categories}}
+      {{#categories}}<p class="block-experiences-overview-category-badge">{{{name}}}</p> {{/categories}}
     </div>
 {{/experiences_with_categories}}

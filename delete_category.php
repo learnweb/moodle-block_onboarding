@@ -26,7 +26,7 @@ if(has_capability('block/experiences:edit_categories', $context)){
   $category_id = optional_param('category_id', -1, PARAM_INT);
   $DB->delete_records('block_experiences_exps_cats', array('category_id' => $category_id));
   $DB->delete_records('block_experiences_cats', array('id' => $category_id));
-  redirect('admin.php');
+  redirect('overview.php');
 }else{
   $PAGE->set_context($context);
   $PAGE->set_url(new moodle_url('/blocks/experiences/edit_experience.php'));
