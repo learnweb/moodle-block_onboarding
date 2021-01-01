@@ -22,6 +22,8 @@ $string['overview'] = 'Overview';
 
 $string['admin'] = 'Admin';
 
+$string['experience'] = 'Experience';
+
 $string['error'] = "Error";
 $string['insufficient_permissions'] = 'Sorry, insufficient permissions';
 

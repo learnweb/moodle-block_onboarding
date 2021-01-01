@@ -7,7 +7,7 @@
 <a href="edit_experience.php">New Experience</a>
 <br></br>
 {{#experiences_with_categories}}
-    <h4>{{{name}}}{{#editable}} <a href="edit_experience.php?experience_id={{{id}}}">{{#pix}}t/editstring, core, Edit Experience{{/pix}}</a><a href="delete_experience.php?experience_id={{{id}}}">{{#pix}}t/delete, core, Delete Experience{{/pix}}</a>{{/editable}}</h4>
+    <h4><a href="experience.php?experience_id={{{id}}}">{{{name}}}{{#editable}}</a> <a href="edit_experience.php?experience_id={{{id}}}">{{#pix}}t/editstring, core, Edit Experience{{/pix}}</a><a href="delete_experience.php?experience_id={{{id}}}">{{#pix}}t/delete, core, Delete Experience{{/pix}}</a>{{/editable}}</h4>
     <p>Categories:</p>
     <ul>
       {{#categories}}

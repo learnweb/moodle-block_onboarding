@@ -18,7 +18,6 @@ namespace block_experiences\output\renderables;
 
 defined('MOODLE_INTERNAL') || die();
 
-use block_experiences\experienceslib;
 use renderable;
 use templatable;
 use renderer_base;
