@@ -25,6 +25,7 @@ $PAGE->set_url(new moodle_url('/blocks/experiences/overview.php'));
 $PAGE->set_title(get_string('overview', 'block_experiences'));
 $PAGE->set_heading(get_string('overview', 'block_experiences'));
 $PAGE->navbar->add(get_string('pluginname', 'block_experiences'));
+$PAGE->requires->css('/blocks/experiences/style.css');
 
 $output = $PAGE->get_renderer('block_experiences');
 echo $output->header();
