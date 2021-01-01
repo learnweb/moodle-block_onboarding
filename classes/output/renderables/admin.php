@@ -34,7 +34,7 @@ class admin implements renderable, templatable {
 
     return [
         'can_edit_categories' => has_capability('block/experiences:edit_categories', \context_system::instance()) ? true : false,
-        'categories' => $categories
+        'categories_general' => $categories
     ];
   }
 }

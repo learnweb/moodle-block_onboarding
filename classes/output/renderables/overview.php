@@ -52,7 +52,7 @@ class overview implements renderable, templatable {
     }
 
     return [
-        'categories' => $categories,
+        'categories_general' => $categories,
         'experiences_with_categories' => array_values($experiences_mapped)
     ];
   }
