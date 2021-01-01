@@ -1,10 +1,15 @@
 {{#categories_with_links}}
-    <h4>{{{name}}}</h4>
+    <h4>{{{name}}} {{#can_manage_wiki}}<a href="edit_category.php?category_id={{{id}}}">{{#pix}}t/editstring, core, Edit Link{{/pix}}</a><a href="delete_category.php?category_id={{{id}}}">{{#pix}}t/delete, core, Delete Link{{/pix}}</a>{{/can_manage_wiki}}</h4>
     <ul>
       {{#links}}
       <li>
-        <a href="{{{url}}}">{{{name}}}</a>
+        <a href="{{{url}}}">{{{name}}}</a> {{#can_manage_wiki}}<a href="edit_link.php?link_id={{{id}}}">{{#pix}}t/editstring, core, Edit Link{{/pix}}</a><a href="delete_link.php?link_id={{{id}}}">{{#pix}}t/delete, core, Delete Link{{/pix}}</a>{{/can_manage_wiki}}
       </li>
       {{/links}}
     </ul>
 {{/categories_with_links}}
+{{#can_manage_wiki}}
+<a href="edit_category.php">New Category</a>
+<br>
+<a href="edit_link.php">New Link</a>
+{{/can_manage_wiki}}

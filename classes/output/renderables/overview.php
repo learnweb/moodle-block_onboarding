@@ -42,7 +42,8 @@ class overview implements renderable, templatable {
     }
 
     return [
-        'categories_with_links' => $categories
+      'can_manage_wiki' => has_capability('block/wiki:manage_wiki', \context_system::instance()) ? true : false,
+      'categories_with_links' => $categories
     ];
   }
 }

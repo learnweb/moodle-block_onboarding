@@ -29,16 +29,8 @@ class block implements renderable, templatable {
     }
 
     public function export_for_template(renderer_base $output) {
-      $buttons[] = [
-          'title' => get_string('overview', 'block_wiki'),
-          'url' => new \moodle_url('/blocks/wiki/overview.php')
+      return [
+        'overview_url' => new \moodle_url('/blocks/wiki/overview.php')
       ];
-
-      $buttons[] = [
-          'title' => get_string('admin', 'block_wiki'),
-          'url' => new \moodle_url('/blocks/wiki/admin.php')
-      ];
-
-      return ['buttons' => $buttons];
     }
 }

@@ -23,4 +23,13 @@
 
         'clonepermissionsfrom' => 'moodle/site:manageblocks'
     ),
+
+    'block/wiki:manage_wiki' => [
+        'riskbitmask' => RISK_SPAM,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_MODULE,
+        'archetypes' => [
+            'editingteacher' => CAP_ALLOW,
+        ],
+    ]
 );
