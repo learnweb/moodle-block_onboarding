@@ -1,6 +1,8 @@
 <h2>Categories</h2>
+{{#can_edit_categories}}<a href="edit_category.php">New Category</a>{{/can_edit_categories}}
+<br></br>
 {{#categories_general}}
-    <h5>{{{name}}}</h5>
+    <h5>{{{name}}}{{#can_edit_categories}} <a href="edit_category.php?category_id={{{id}}}">{{#pix}}t/editstring, core, Edit Category{{/pix}}</a><a href="delete_category.php?category_id={{{id}}}">{{#pix}}t/delete, core, Delete Category{{/pix}}</a>{{/can_edit_categories}}</h5>
 {{/categories_general}}
 <br>
 <h2>Experiences</h2>

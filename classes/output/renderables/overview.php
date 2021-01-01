@@ -51,6 +51,7 @@ class overview implements renderable, templatable {
     }
 
     return [
+        'can_edit_categories' => has_capability('block/experiences:edit_categories', \context_system::instance()) ? true : false,
         'categories_general' => $categories,
         'experiences_with_categories' => array_values($experiences_mapped)
     ];
