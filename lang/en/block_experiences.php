@@ -22,6 +22,9 @@ $string['overview'] = 'Overview';
 
 $string['admin'] = 'Admin';
 
+$string['error'] = "Error";
+$string['insufficient_permissions'] = 'Sorry, insufficient permissions';
+
 $string['edit_category'] = 'Edit Category';
 $string['category_name'] = 'Name';
 $string['default_category_name'] = 'Sample Category';

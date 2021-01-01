@@ -22,5 +22,19 @@ global $DB;
 
 $context = context_system::instance();
 
-$DB->delete_records('block_experiences_categories', array('id' => optional_param('category_id', -1, PARAM_INT)));
-redirect('admin.php');
+if(has_capability('block/experiences:edit_categories', $context)){
+  $category_id = optional_param('category_id', -1, PARAM_INT);
+  $DB->delete_records('block_experiences_exps_cats', array('category_id' => $category_id));
+  $DB->delete_records('block_experiences_cats', array('id' => $category_id));
+  redirect('admin.php');
+}else{
+  $PAGE->set_context($context);
+  $PAGE->set_url(new moodle_url('/blocks/experiences/edit_experience.php'));
+  $PAGE->set_title(get_string('error', 'block_experiences'));
+  $PAGE->set_heading(get_string('error', 'block_experiences'));
+  $PAGE->navbar->add(get_string('pluginname', 'block_experiences'));
+
+  echo $OUTPUT->header();
+  echo html_writer::tag('p', get_string('insufficient_permissions', 'block_experiences'));
+  echo $OUTPUT->footer();
+}

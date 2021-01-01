@@ -1,12 +1,7 @@
 <h2>Categories</h2>
+{{#can_edit_categories}}<a href="edit_category.php">New Category</a>{{/can_edit_categories}}
+<br></br>
 {{#categories}}
-    <h4>{{{name}}} <a href="edit_category.php?category_id={{{id}}}">{{#pix}}t/editstring, core, Edit Category{{/pix}}</a><a href="delete_category.php?category_id={{{id}}}">{{#pix}}t/delete, core, Delete Category{{/pix}}</a></h4>
+    <h5>{{{name}}}{{#can_edit_categories}}<a href="edit_category.php?category_id={{{id}}}">{{#pix}}t/editstring, core, Edit Category{{/pix}}</a><a href="delete_category.php?category_id={{{id}}}">{{#pix}}t/delete, core, Delete Category{{/pix}}</a>{{/can_edit_categories}}</h5>
 {{/categories}}
-<h2>Experiences</h2>
-{{#experiences_with_categories}}
-    <h4>{{{name}}} <a href="edit_experience.php?experience_id={{{id}}}">{{#pix}}t/editstring, core, Edit Experience{{/pix}}</a><a href="delete_experience.php?experience_id={{{id}}}">{{#pix}}t/delete, core, Delete Experience{{/pix}}</a></h4>
-{{/experiences_with_categories}}
-
-<a href="edit_category.php">New Category</a>
 <br>
-<a href="edit_experience.php">New Experience</a>

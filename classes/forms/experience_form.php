@@ -21,7 +21,7 @@ require_once("$CFG->libdir/formslib.php");
 class experience_form extends moodleform {
 
     public function definition() {
-        global $CFG, $DB;
+        global $CFG, $DB, $USER;
 
         $mform = $this->_form;
 
@@ -30,27 +30,22 @@ class experience_form extends moodleform {
         $mform->addElement('hidden','id', $experience->id);
         $mform->setType('id', PARAM_INT);
 
+        $mform->addElement('hidden','user_id', $USER->id);
+        $mform->setType('user_id', PARAM_INT);
+
         $mform->addElement('text', 'name', get_string('experience_name', 'block_experiences'));
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($experience->name) ? $experience->name : get_string('default_experience_name', 'block_experiences'));
 
-        $categories = $DB->get_records('block_experiences_categories');
-        $categories_modified = array();
+        $categories = $DB->get_records('block_experiences_cats');
+        $experiences_categories = $DB->get_records('block_experiences_exps_cats', array('experience_id' => $experience->id));
         foreach($categories as $category){
-          $categories_modified[$category->id] = $category->name;
-        }
-        $mform->addElement('select', 'category_id', get_string('experience_category', 'block_experiences'), $categories_modified);
-        if(isset($experience->category_id)){
-          $mform->setDefault('category_id', $experience->category_id);
+          $mform->addElement('checkbox', 'category_' . $category->id, $category->name);
         }
 
-        $mform->addElement('text', 'url', get_string('experience_url', 'block_experiences'));
-        $mform->setType('url', PARAM_TEXT);
-        $mform->setDefault('url', isset($experience->url) ? $experience->url : get_string('default_experience_url', 'block_experiences'));
-
-        $mform->addElement('text', 'description', get_string('experience_description', 'block_experiences'));
-        $mform->setType('description', PARAM_TEXT);
-        $mform->setDefault('description', isset($experience->description) ? $experience->description : get_string('default_experience_description', 'block_experiences'));
+        foreach($experiences_categories as $experience_category){
+          $mform->setDefault('category_' . $experience_category->category_id, true);
+        }
 
         $this->add_action_buttons();
     }

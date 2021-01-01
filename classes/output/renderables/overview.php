@@ -28,21 +28,32 @@ class overview implements renderable, templatable {
   }
 
   public function export_for_template(renderer_base $output) {
-    global $DB;
+    global $DB, $USER;
 
     $experiences = array_values($DB->get_records('block_experiences_exps'));
-    $categories = array_values($DB->get_records('block_experiences_categories'));
+    $categories = array_values($DB->get_records('block_experiences_cats'));
+    $experiences_categories = array_values($DB->get_records('block_experiences_exps_cats'));
 
+    $experiences_mapped = array();
     foreach($experiences as $experience){
-      foreach($categories as $category){
-        if($category->id == $experience->category_id){
-          $experience->categories[] = $category;
-        }
+      if($USER->id == $experience->user_id || has_capability('block/experiences:edit_all_experiences', \context_system::instance())){
+        $experience->editable = true;
       }
+      $experiences_mapped[$experience->id] = $experience;
+    }
+
+    $categories_mapped = array();
+    foreach($categories as $category){
+      $categories_mapped[$category->id] = $category;
+    }
+
+    foreach($experiences_categories as $experience_category){
+      $experiences_mapped[$experience_category->experience_id]->categories[] = $categories_mapped[$experience_category->category_id];
     }
 
     return [
-        'experiences_with_categories' => $experiences
+        'categories' => $categories,
+        'experiences_with_categories' => array_values($experiences_mapped)
     ];
   }
 }

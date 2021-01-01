@@ -18,17 +18,13 @@ require(__DIR__ . '/../../config.php');
 
 require_login();
 
-global $DB;
+global $DB, $USER;
 
 $context = context_system::instance();
 
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/experiences/edit_experience.php'));
-$PAGE->set_title(get_string('edit_experience', 'block_experiences'));
-$PAGE->set_heading(get_string('edit_experience', 'block_experiences'));
 $PAGE->navbar->add(get_string('pluginname', 'block_experiences'));
-
-require_once('./classes/forms/experience_form.php');
 
 $experience_id = optional_param('experience_id', -1, PARAM_INT);
 $pExperience = new stdClass;
@@ -36,30 +32,60 @@ $pExperience->id = -1;
 if($experience_id != -1){
   $pExperience = $DB->get_record('block_experiences_exps', array('id'=>$experience_id), $fields='*', $strictness=IGNORE_MISSING);
 }
-$mform = new experience_form(null, array('experience' => $pExperience));
 
-if ($mform->is_cancelled()) {
-		redirect('admin.php');
-} else if ($fromform = $mform->get_data()) {
-    $experience = new stdClass();
-    $experience->name = $fromform->name;
-    $experience->category_id = $fromform->category_id;
-    $experience->url = $fromform->url;
-    $experience->description = $fromform->description;
-    $experience->timecreated = time();
-    $experience->timemodified = time();
+if($experience_id == -1 || $USER->id == $pExperience->user_id || has_capability('block/experiences:edit_all_experiences', \context_system::instance())){
+  $PAGE->set_title(get_string('edit_experience', 'block_experiences'));
+  $PAGE->set_heading(get_string('edit_experience', 'block_experiences'));
 
-    if($fromform->id != -1){
-      $experience->id = $fromform->id;
-      $DB->update_record('block_experiences_exps', $experience, $bulk=false);
-    }else{
-      $experience->id = $DB->insert_record('block_experiences_exps', $experience);
-    }
-    redirect('admin.php');
+  require_once('./classes/forms/experience_form.php');
+
+  $mform = new experience_form(null, array('experience' => $pExperience));
+
+  if ($mform->is_cancelled()) {
+  		redirect('overview.php');
+  } else if ($fromform = $mform->get_data()) {
+      $experience = new stdClass();
+      $experience->name = $fromform->name;
+      $experience->user_id = $fromform->user_id;
+      $experience->timecreated = time();
+      $experience->timemodified = time();
+
+      if($fromform->id != -1){
+        $experience->id = $fromform->id;
+        $DB->update_record('block_experiences_exps', $experience, $bulk=false);
+      }else{
+        $experience->id = $DB->insert_record('block_experiences_exps', $experience);
+      }
+
+      $DB->delete_records('block_experiences_exps_cats', array('experience_id' => $experience->id));
+      $categories = $DB->get_records('block_experiences_cats');
+      $experiences_categories = array();
+
+      foreach($categories as $category){
+        $formproperty = 'category_' . $category->id;
+        if(isset($fromform->$formproperty)){
+          $experience_category = new stdClass;
+          $experience_category->experience_id = $experience->id;
+          $experience_category->category_id = $category->id;
+          $experience_category->description = '';
+          $experience_category->timecreated = time();
+          $experience_category->timemodified = time();
+          $experiences_categories[] = $experience_category;
+        }
+      }
+      $DB->insert_records('block_experiences_exps_cats', $experiences_categories);
+
+      redirect('overview.php');
+  }
+
+  echo $OUTPUT->header();
+  $mform->display();
+  echo $OUTPUT->footer();
+}else{
+  $PAGE->set_title(get_string('error', 'block_experiences'));
+  $PAGE->set_heading(get_string('error', 'block_experiences'));
+
+  echo $OUTPUT->header();
+  echo html_writer::tag('p', get_string('insufficient_permissions', 'block_experiences'));
+  echo $OUTPUT->footer();
 }
-
-echo $OUTPUT->header();
-
-$mform->display();
-
-echo $OUTPUT->footer();

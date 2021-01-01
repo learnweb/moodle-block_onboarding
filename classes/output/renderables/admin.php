@@ -30,20 +30,11 @@ class admin implements renderable, templatable {
   public function export_for_template(renderer_base $output) {
     global $DB;
 
-    $experiences = array_values($DB->get_records('block_experiences_exps'));
-    $categories = array_values($DB->get_records('block_experiences_categories'));
-
-    foreach($experiences as $experience){
-      foreach($categories as $category){
-        if($category->id == $experience->category_id){
-          $experience->categories[] = $category;
-        }
-      }
-    }
+    $categories = array_values($DB->get_records('block_experiences_cats'));
 
     return [
-        'categories' => $categories,
-        'experiences_with_categories' => $experiences
+        'can_edit_categories' => has_capability('block/experiences:edit_categories', \context_system::instance()) ? true : false,
+        'categories' => $categories
     ];
   }
 }

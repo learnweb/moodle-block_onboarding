@@ -1,5 +1,14 @@
+<h2>Categories</h2>
+{{#categories}}
+    <h5>{{{name}}}</h5>
+{{/categories}}
+<br>
+<h2>Experiences</h2>
+<a href="edit_experience.php">New Experience</a>
+<br></br>
 {{#experiences_with_categories}}
-    <h4>{{{name}}}</h4>
+    <h4>{{{name}}}{{#editable}} <a href="edit_experience.php?experience_id={{{id}}}">{{#pix}}t/editstring, core, Edit Experience{{/pix}}</a><a href="delete_experience.php?experience_id={{{id}}}">{{#pix}}t/delete, core, Delete Experience{{/pix}}</a>{{/editable}}</h4>
+    <p>Categories:</p>
     <ul>
       {{#categories}}
       <li>

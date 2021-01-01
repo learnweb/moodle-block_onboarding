@@ -23,4 +23,22 @@
 
         'clonepermissionsfrom' => 'moodle/site:manageblocks'
     ),
+
+    'block/experiences:edit_categories' => [
+        'riskbitmask' => RISK_SPAM,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_MODULE,
+        'archetypes' => [
+            'editingteacher' => CAP_ALLOW,
+        ],
+    ],
+
+    'block/experiences:edit_all_experiences' => [
+        'riskbitmask' => RISK_SPAM,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_MODULE,
+        'archetypes' => [
+            'editingteacher' => CAP_ALLOW,
+        ],
+    ]
 );

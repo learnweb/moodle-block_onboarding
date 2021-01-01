@@ -24,39 +24,47 @@ $context = context_system::instance();
 
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/experiences/edit_category.php'));
-$PAGE->set_title(get_string('edit_category', 'block_experiences'));
-$PAGE->set_heading(get_string('edit_category', 'block_experiences'));
 $PAGE->navbar->add(get_string('pluginname', 'block_experiences'));
 
-require_once('./classes/forms/category_form.php');
+if(has_capability('block/experiences:edit_categories', \context_system::instance())){
+  $PAGE->set_title(get_string('edit_category', 'block_experiences'));
+  $PAGE->set_heading(get_string('edit_category', 'block_experiences'));
 
-$category_id = optional_param('category_id', -1, PARAM_INT);
-$pCategory = new stdClass;
-$pCategory->id = -1;
-if($category_id != -1){
-  $pCategory = $DB->get_record('block_experiences_categories', array('id'=>$category_id), $fields='*', $strictness=IGNORE_MISSING);
+  require_once('./classes/forms/category_form.php');
+
+  $category_id = optional_param('category_id', -1, PARAM_INT);
+  $pCategory = new stdClass;
+  $pCategory->id = -1;
+  if($category_id != -1){
+    $pCategory = $DB->get_record('block_experiences_cats', array('id'=>$category_id), $fields='*', $strictness=IGNORE_MISSING);
+  }
+  $mform = new category_form(null, array('category' => $pCategory));
+
+  if ($mform->is_cancelled()) {
+  		redirect('admin.php');
+  } else if ($fromform = $mform->get_data()) {
+      $category = new stdClass();
+      $category->name = $fromform->name;
+      $category->timecreated = time();
+      $category->timemodified = time();
+
+      if($fromform->id != -1){
+        $category->id = $fromform->id;
+        $DB->update_record('block_experiences_cats', $category, $bulk=false);
+      }else{
+        $category->id = $DB->insert_record('block_experiences_cats', $category);
+      }
+      redirect('admin.php');
+  }
+
+  echo $OUTPUT->header();
+  $mform->display();
+  echo $OUTPUT->footer();
+}else{
+  $PAGE->set_title(get_string('error', 'block_experiences'));
+  $PAGE->set_heading(get_string('error', 'block_experiences'));
+
+  echo $OUTPUT->header();
+  echo html_writer::tag('p', get_string('insufficient_permissions', 'block_experiences'));
+  echo $OUTPUT->footer();
 }
-$mform = new category_form(null, array('category' => $pCategory));
-
-if ($mform->is_cancelled()) {
-		redirect('admin.php');
-} else if ($fromform = $mform->get_data()) {
-    $category = new stdClass();
-    $category->name = $fromform->name;
-    $category->timecreated = time();
-    $category->timemodified = time();
-
-    if($fromform->id != -1){
-      $category->id = $fromform->id;
-      $DB->update_record('block_experiences_categories', $category, $bulk=false);
-    }else{
-      $category->id = $DB->insert_record('block_experiences_categories', $category);
-    }
-    redirect('admin.php');
-}
-
-echo $OUTPUT->header();
-
-$mform->display();
-
-echo $OUTPUT->footer();
