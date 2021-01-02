@@ -46,7 +46,8 @@ if(has_capability('block/steps:edit_steps', $context)){
       $step = new stdClass();
       $step->name = $fromform->name;
       $step->description = $fromform->description;
-      $step->position = $fromform->position;
+
+      $step->position = $fromform->position
       $step->timecreated = time();
       $step->timemodified = time();
 
