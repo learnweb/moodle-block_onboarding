@@ -1,5 +1,10 @@
+<!--
+Nimmt Array an Steps und baut html Bausteine
+-->
 {{#steps}}
 <h4>{{{name}}} <a href="edit_step.php?step_id={{{id}}}">{{#pix}}t/editstring, core, Edit Step{{/pix}}</a><a href="delete_step.php?step_id={{{id}}}">{{#pix}}t/delete, core, Delete Step{{/pix}}</a></h4>
 <p>{{{description}}}</p>
 {{/steps}}
+<!-- Hyperlink für das Erstellen eines neuen Steps
+-->
 <a href="edit_step.php">New Step</a>
