@@ -77,12 +77,12 @@ if(has_capability('block/steps:edit_steps', $context)){
       // wenn ein bestehender Schritt editiert wird, aktualisiere den Datensatz
       if($fromform->id != -1){
         $step->id = $fromform->id;
-        $step->position = $fromform->position;
+        $step->position = ++$fromform->position;
         $DB->update_record('block_steps_steps', $step, $bulk=false);
         // andernfalls wird ein neuer Schritt bzw. Datensatz hinzugefügt, dessen position aus der Form übernommen wird// andernfalls wird ein neuer Schritt bzw. Datensatz hinzugefügt, dessen position aus der Form übernommen wird
       }else{
           $step->timecreated = time();
-          $step->position = $fromform->position;
+          $step->position = ++$fromform->position;
           $step->id = $DB->insert_record('block_steps_steps', $step);
 
       }
