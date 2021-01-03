@@ -47,7 +47,7 @@ if(has_capability('block/steps:edit_steps', $context)){
       $step->name = $fromform->name;
       $step->description = $fromform->description;
 
-      $step->position = $fromform->position;
+
       $step->timecreated = time();
       $step->timemodified = time();
 
@@ -57,7 +57,8 @@ if(has_capability('block/steps:edit_steps', $context)){
         $DB->update_record('block_steps_steps', $step, $bulk=false);
       //hier neuer step
       }else{
-        $step->id = $DB->insert_record('block_steps_steps', $step);
+          $step->position = $fromform->position;
+          $step->id = $DB->insert_record('block_steps_steps', $step);
       }
       redirect('admin.php');
   }
