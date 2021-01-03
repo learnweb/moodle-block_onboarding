@@ -47,9 +47,9 @@ class step_form extends moodleform {
 
         $count_positions = $DB->count_records('block_steps_steps');
         if($step->id == -1){
-            $position_array = range(0, $count_positions+1);
+            $position_array = range(1, $count_positions+1);
         }else{
-            $position_array = range(0, $count_positions);
+            $position_array = range(1, $count_positions);
         }
         $mform->addElement('select', 'position',get_string('step_number', 'block_steps'),$position_array , array());
         $mform->setType('position', PARAM_INT);
