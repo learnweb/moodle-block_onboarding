@@ -47,19 +47,22 @@ if(has_capability('block/steps:edit_steps', $context)){
       $step->name = $fromform->name;
       $step->description = $fromform->description;
 
-
       $step->timecreated = time();
       $step->timemodified = time();
 
       // hier ist edit step
       if($fromform->id != -1){
         $step->id = $fromform->id;
+        $step->position = $fromform->position;
         $DB->update_record('block_steps_steps', $step, $bulk=false);
+
       //hier neuer step
       }else{
           $step->position = $fromform->position;
           $step->id = $DB->insert_record('block_steps_steps', $step);
       }
+      //hier muss funktion hin, die alle anderen Steps um einen nach hinten schiebt
+      //if(fromform->position )
       redirect('admin.php');
   }
 

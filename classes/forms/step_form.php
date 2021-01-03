@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 defined('MOODLE_INTERNAL') || die();
-
+// form API
 require_once("$CFG->libdir/formslib.php");
 
 class step_form extends moodleform {
@@ -39,11 +39,16 @@ class step_form extends moodleform {
         $mform->setDefault('description', isset($step->description) ? $step->description : get_string('default_step_description', 'block_steps'));
         // zählt DB Eintrag und ändert position anhand Anzahl von Einträgen
 
-        $mform->addElement('hidden','position', $DB->count_records('block_steps_steps'));
+        //$mform->addElement('hidden','position', $DB->count_records('block_steps_steps'));
+        $select = $mform->addElement('select', 'position',get_string('step_number', 'block_steps'), array("1"=>1,"2"=>2,"3"=>3,"4"=>4,"5"=>5,"6"=>6,"7"=>7), array());
         $mform->setType('position', PARAM_INT);
+
+
 
         $this->add_action_buttons();
     }
+
+
 
     public function validation($data, $files) {
         return array();
