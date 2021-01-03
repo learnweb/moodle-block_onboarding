@@ -25,6 +25,10 @@ class step_form extends moodleform {
 
         $mform = $this->_form;
 
+        /*
+         * _customdata erlaubt die Übergabe von weiteren Parametern beim Erstellen einer Instanz einer Moodle Form,
+         * hier lässt sich zusätzlich der step als Variable übergeben
+         */
         $step = $this->_customdata['step'];
 
         $mform->addElement('hidden','id', $step->id);
