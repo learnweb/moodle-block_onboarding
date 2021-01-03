@@ -44,10 +44,16 @@ class step_form extends moodleform {
         // zählt DB Eintrag und ändert position anhand Anzahl von Einträgen
 
         //$mform->addElement('hidden','position', $DB->count_records('block_steps_steps'));
-        $select = $mform->addElement('select', 'position',get_string('step_number', 'block_steps'), array("1"=>1,"2"=>2,"3"=>3,"4"=>4,"5"=>5,"6"=>6,"7"=>7), array());
+
+        $count_positions = $DB->count_records('block_steps_steps');
+        if($step->id == -1){
+            $position_array = range(0, $count_positions+1);
+        }else{
+            $position_array = range(0, $count_positions);
+        }
+        $mform->addElement('select', 'position',get_string('step_number', 'block_steps'),$position_array , array());
         $mform->setType('position', PARAM_INT);
-
-
+        $mform->setDefault('position', isset($step->position) ? $step->position : $DB->count_records('block_steps_steps'));
 
         $this->add_action_buttons();
     }
