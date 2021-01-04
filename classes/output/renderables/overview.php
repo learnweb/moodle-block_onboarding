@@ -31,6 +31,11 @@ class overview implements renderable, templatable {
     global $DB;
     //hier werden die Steps in ein Array gelegt
     $steps = array_values($DB->get_records('block_steps_steps'));
+    $cur = 1;
+    foreach($steps as $step){
+        $step->index = $cur;
+        $cur++;
+    }
 
     //dieses Format nimmt das Template entgegen
     return [
