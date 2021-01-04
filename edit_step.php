@@ -26,6 +26,7 @@ $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/steps/edit_step.php'));
 $PAGE->navbar->add(get_string('pluginname', 'block_steps'));
 
+// prüft Zugriffsrechte für die Datenbank-Zugriff
 if(has_capability('block/steps:edit_steps', $context)){
   $PAGE->set_title(get_string('edit_step', 'block_steps'));
   $PAGE->set_heading(get_string('edit_step', 'block_steps'));
@@ -79,7 +80,7 @@ if(has_capability('block/steps:edit_steps', $context)){
         $step->id = $fromform->id;
         $step->position = ++$fromform->position;
         $DB->update_record('block_steps_steps', $step, $bulk=false);
-        // andernfalls wird ein neuer Schritt bzw. Datensatz hinzugefügt, dessen position aus der Form übernommen
+        // andernfalls wird ein neuer Schritt bzw. Datensatz hinzugefügt, dessen position aus der Form übernommen wird
       }else{
           $step->timecreated = time();
           $step->position = ++$fromform->position;
@@ -90,6 +91,7 @@ if(has_capability('block/steps:edit_steps', $context)){
   }
 
   echo $OUTPUT->header();
+    // form wird angezeigt (hier nicht über renderable)
   $mform->display();
   echo $OUTPUT->footer();
 // andernfalls konnten die Daten nicht validiert werden und es wird ein Fehlerhinweis angezeigt

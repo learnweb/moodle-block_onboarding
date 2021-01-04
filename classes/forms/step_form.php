@@ -38,7 +38,7 @@ class step_form extends moodleform {
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($step->name) ? $step->name : get_string('default_step_name', 'block_steps'));
 
-        $mform->addElement('text', 'description', get_string('step_description', 'block_steps'));
+        $mform->addElement('textarea', 'description', get_string('step_description', 'block_steps'),'wrap="virtual" rows="10" cols="50"');
         $mform->setType('description', PARAM_TEXT);
         $mform->setDefault('description', isset($step->description) ? $step->description : get_string('default_step_description', 'block_steps'));
         // zählt DB Eintrag und ändert position anhand Anzahl von Einträgen
