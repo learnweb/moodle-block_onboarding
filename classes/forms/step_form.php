@@ -53,7 +53,7 @@ class step_form extends moodleform {
         }
         $mform->addElement('select', 'position',get_string('step_number', 'block_steps'),$position_array , array());
         $mform->setType('position', PARAM_INT);
-        $mform->setDefault('position', isset($step->position) ? $step->position : $DB->count_records('block_steps_steps'));
+        $mform->setDefault('position', isset($step->position) ? $step->position-1 : $DB->count_records('block_steps_steps'));
 
         $this->add_action_buttons();
     }

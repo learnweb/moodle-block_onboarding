@@ -30,5 +30,4 @@ $string['step_name'] = 'Name';
 $string['step_description'] = 'Description';
 $string['default_step_name'] = 'Sample Name';
 $string['default_step_description'] = 'Sample Description';
-
 $string['step_number'] = 'Step Position';
