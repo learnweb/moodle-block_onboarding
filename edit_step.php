@@ -77,15 +77,32 @@ if(has_capability('block/steps:edit_steps', $context)){
 
       // wenn ein bestehender Schritt editiert wird, aktualisiere den Datensatz
       if($fromform->id != -1){
+
+        $pStep = $DB->get_record('block_steps_steps', array('id' => $fromform->id), $fields = '*', $strictness = IGNORE_MISSING);
+        $cur_position = $pStep->position;
+        if($fromform->position > $cur_position){
+        $sql = 'UPDATE {block_steps_steps}
+                SET position = position -1
+                WHERE position > :initial_pos and position <= :insert_pos';
+        $DB->execute($sql, ['initial_pos' => $cur_position, 'insert_pos' => $fromform->position+1]);
+
+        } else if($fromform->position < $cur_position){
+            $sql = 'UPDATE {block_steps_steps}
+            SET position = position +1
+            WHERE position > :insert_pos and position <= :initial_pos';
+            $DB->execute($sql, ['initial_pos' => $cur_position, 'insert_pos' => $fromform->position]);
+        }
+
         $step->id = $fromform->id;
         $step->position = ++$fromform->position;
+
         $DB->update_record('block_steps_steps', $step, $bulk=false);
         // andernfalls wird ein neuer Schritt bzw. Datensatz hinzugefügt, dessen position aus der Form übernommen wird
       }else{
           $step->timecreated = time();
           $step->position = ++$fromform->position;
           $step->id = $DB->insert_record('block_steps_steps', $step);
-
+          # -> position switch funktion aufrufen mit werten!
       }
       redirect('admin.php');
   }
