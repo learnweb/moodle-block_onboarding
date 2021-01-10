@@ -30,7 +30,7 @@ class overview implements renderable, templatable {
   public function export_for_template(renderer_base $output) {
     global $DB;
     //hier werden die Steps in ein Array gelegt
-    $steps = array_values($DB->get_records('block_steps_steps'));
+      $steps = array_values($DB->get_records_sql('SELECT * FROM {block_steps_steps} ORDER BY position ASC'));
     $cur = 1;
     foreach($steps as $step){
         $step->index = $cur;
