@@ -16,6 +16,7 @@
 
 require(__DIR__ . '/../../config.php');
 
+// OBSOLETE -> DATEI UND VERWEISE ENTFERNEN!!!
 require_login();
 
 $context = context_system::instance();

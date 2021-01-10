@@ -26,6 +26,7 @@ use renderer_base;
 class overview implements renderable, templatable {
   public function __construct() {
   }
+// OBSOLETE -> DATEI UND VERWEISE ENTFERNEN!!!
 //hier werden die von uns erzeugten Daten für das Template bereitgestellt
   public function export_for_template(renderer_base $output) {
     global $DB;
