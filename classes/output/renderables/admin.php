@@ -30,7 +30,15 @@ class admin implements renderable, templatable {
   public function export_for_template(renderer_base $output) {
     global $DB;
 
-    $steps = array_values($DB->get_records('block_steps_steps'));
+    $steps = array_values($DB->get_records_sql('SELECT * FROM {block_steps_steps} ORDER BY position ASC'));
+    $cur = 1;
+    foreach($steps as $step){
+        $step->index = $cur;
+        $cur++;
+    }
+
+    //alte Funktion
+    //$steps = array_values($DB->get_records('block_steps_steps'));
 
     return [
         'steps' => $steps

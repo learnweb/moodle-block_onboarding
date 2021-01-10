@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 defined('MOODLE_INTERNAL') || die();
-
+// form API
 require_once("$CFG->libdir/formslib.php");
 
 class step_form extends moodleform {
@@ -25,6 +25,10 @@ class step_form extends moodleform {
 
         $mform = $this->_form;
 
+        /*
+         * _customdata erlaubt die Übergabe von weiteren Parametern beim Erstellen einer Instanz einer Moodle Form,
+         * hier lässt sich zusätzlich der step als Variable übergeben
+         */
         $step = $this->_customdata['step'];
 
         $mform->addElement('hidden','id', $step->id);
@@ -34,15 +38,27 @@ class step_form extends moodleform {
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($step->name) ? $step->name : get_string('default_step_name', 'block_steps'));
 
-        $mform->addElement('text', 'description', get_string('step_description', 'block_steps'));
+        $mform->addElement('textarea', 'description', get_string('step_description', 'block_steps'),'wrap="virtual" rows="10" cols="50"');
         $mform->setType('description', PARAM_TEXT);
         $mform->setDefault('description', isset($step->description) ? $step->description : get_string('default_step_description', 'block_steps'));
+        // zählt DB Eintrag und ändert position anhand Anzahl von Einträgen
 
-        $mform->addElement('hidden','position', $DB->count_records('block_steps_steps'));
+        //$mform->addElement('hidden','position', $DB->count_records('block_steps_steps'));
+
+        $count_positions = $DB->count_records('block_steps_steps');
+        if($step->id == -1){
+            $position_array = range(1, $count_positions+1);
+        }else{
+            $position_array = range(1, $count_positions);
+        }
+        $mform->addElement('select', 'position',get_string('step_number', 'block_steps'),$position_array , array());
         $mform->setType('position', PARAM_INT);
+        $mform->setDefault('position', isset($step->position) ? $step->position-1 : $DB->count_records('block_steps_steps'));
 
         $this->add_action_buttons();
     }
+
+
 
     public function validation($data, $files) {
         return array();

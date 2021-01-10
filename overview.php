@@ -26,9 +26,12 @@ $PAGE->set_title(get_string('overview', 'block_steps'));
 $PAGE->set_heading(get_string('overview', 'block_steps'));
 $PAGE->navbar->add(get_string('pluginname', 'block_steps'));
 
+
+//baut admin website auf
 $output = $PAGE->get_renderer('block_steps');
 echo $output->header();
 echo $output->container_start('steps-overview');
+//erzeugt renderable obj. mit allen inhalten die hinzugefügt werden
 $renderable = new \block_steps\output\renderables\overview();
 echo $output->render($renderable);
 echo $output->container_end();
