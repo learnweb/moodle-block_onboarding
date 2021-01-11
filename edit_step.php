@@ -91,7 +91,6 @@ if(has_capability('block/steps:edit_steps', $context)){
           $DB->execute($sql, ['cur_pos' => $cur, 'insert_pos' => $insert]);
       }
 
-
       // wenn ein bestehender Schritt editiert wird, aktualisiere den Datensatz
       if($fromform->id != -1){
         // aktueller Datensatz wird zwischengespeichert -> ggf. überflüssig
@@ -112,12 +111,18 @@ if(has_capability('block/steps:edit_steps', $context)){
         $DB->update_record('block_steps_steps', $step, $bulk=false);
         // andernfalls wird ein neuer Schritt bzw. Datensatz hinzugefügt, dessen position aus der Form übernommen wird
       }else{
+          $init_position = $DB->count_records('block_steps_steps')+1;
+          $insert_position = $fromform->position+1;
           $step->timecreated = time();
-          #$step->position = $DB->count_records('block_steps_steps');;
-          $step->position = ++$fromform->position;
+          $step->position = $init_position;
           $step->id = $DB->insert_record('block_steps_steps', $step);
-          #$step->position = ++$fromform->position;
-          # -> position switch funktion aufrufen mit werten!
+          // wenn neuer Schritt nicht hinten eingefügt werden soll
+          if($init_position != $insert_position){
+              insert_before($insert_position, $init_position);
+          }
+          $step->position = $fromform->position+1;
+          $step->timemodified = time();
+          $DB->update_record('block_steps_steps', $step, $bulk=false);
       }
       redirect('admin.php');
   }
