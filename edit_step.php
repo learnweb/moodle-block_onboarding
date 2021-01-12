@@ -72,37 +72,57 @@ if(has_capability('block/steps:edit_steps', $context)){
       $step = new stdClass();
       $step->name = $fromform->name;
       $step->description = $fromform->description;
-
       $step->timemodified = time();
+
+      // POSITION DER FUNKTIONEN FRAGWUERDIG
+      function insert_after($insert, $cur) {
+          $sql = 'UPDATE {block_steps_steps}
+                SET position = position -1
+                WHERE position > :cur_pos and position <= :insert_pos';
+          global $DB;
+          $DB->execute($sql, ['cur_pos' => $cur, 'insert_pos' => $insert]);
+      }
+
+      function insert_before($insert, $cur) {
+          $sql = 'UPDATE {block_steps_steps}
+            SET position = position +1
+            WHERE position >= :insert_pos and position < :cur_pos';
+          global $DB;
+          $DB->execute($sql, ['cur_pos' => $cur, 'insert_pos' => $insert]);
+      }
 
       // wenn ein bestehender Schritt editiert wird, aktualisiere den Datensatz
       if($fromform->id != -1){
-
+        // aktueller Datensatz wird zwischengespeichert -> ggf. überflüssig
         $pStep = $DB->get_record('block_steps_steps', array('id' => $fromform->id), $fields = '*', $strictness = IGNORE_MISSING);
         $cur_position = $pStep->position;
-        if($fromform->position > $cur_position){
-        $sql = 'UPDATE {block_steps_steps}
-                SET position = position -1
-                WHERE position > :initial_pos and position <= :insert_pos';
-        $DB->execute($sql, ['initial_pos' => $cur_position, 'insert_pos' => $fromform->position+1]);
-
-        } else if($fromform->position < $cur_position){
-            $sql = 'UPDATE {block_steps_steps}
-            SET position = position +1
-            WHERE position > :insert_pos and position <= :initial_pos';
-            $DB->execute($sql, ['initial_pos' => $cur_position, 'insert_pos' => $fromform->position]);
+        $insert_position = $fromform->position+1;
+        // wenn gewünschte Einfügeposition weiter hinten als aktuelle Position ist
+        if($insert_position > $cur_position){
+            insert_after($insert_position, $cur_position);
+        // wenn gewünschte Einfügeposition weiter vorne als aktuelle Position ist
+        } else if($insert_position < $cur_position){
+            insert_before($insert_position, $cur_position);
         }
-
+        // andernfalls ist die Position gleich und es müssen keine anderen Schrittpositionen verändert werden
         $step->id = $fromform->id;
-        $step->position = ++$fromform->position;
+        $step->position = $fromform->position+1;
 
         $DB->update_record('block_steps_steps', $step, $bulk=false);
         // andernfalls wird ein neuer Schritt bzw. Datensatz hinzugefügt, dessen position aus der Form übernommen wird
       }else{
+          $init_position = $DB->count_records('block_steps_steps')+1;
+          $insert_position = $fromform->position+1;
           $step->timecreated = time();
-          $step->position = ++$fromform->position;
+          $step->position = $init_position;
           $step->id = $DB->insert_record('block_steps_steps', $step);
-          # -> position switch funktion aufrufen mit werten!
+          // wenn neuer Schritt nicht hinten eingefügt werden soll
+          if($init_position != $insert_position){
+              insert_before($insert_position, $init_position);
+          }
+          $step->position = $fromform->position+1;
+          $step->timemodified = time();
+          $DB->update_record('block_steps_steps', $step, $bulk=false);
       }
       redirect('admin.php');
   }

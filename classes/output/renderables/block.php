@@ -30,7 +30,7 @@ class block implements renderable, templatable {
 
     public function export_for_template(renderer_base $output) {
       return [
-        'overview_url' => new \moodle_url('/blocks/steps/overview.php')
+        'admin_url' => new \moodle_url('/blocks/steps/admin.php')
       ];
     }
 }

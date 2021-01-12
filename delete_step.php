@@ -23,7 +23,17 @@ global $DB;
 $context = context_system::instance();
 
 if(has_capability('block/steps:edit_steps', $context)){
-  $DB->delete_records('block_steps_steps', array('id' => optional_param('step_id', -1, PARAM_INT)));
+  $step_id = optional_param('step_id', -1, PARAM_INT);
+  $pStep = $DB->get_record('block_steps_steps', array('id' => $step_id), $fields = '*', $strictness = IGNORE_MISSING);
+  $cur_position = $pStep->position;
+  $step_count = $DB->count_records('block_steps_steps');
+
+  $sql = 'UPDATE {block_steps_steps}
+                SET position = position -1
+                WHERE position > :cur_pos and position <= :max_pos';
+  $DB->execute($sql, ['cur_pos' => $cur_position, 'max_pos' => $step_count]);
+
+  $DB->delete_records('block_steps_steps', array('id' => $step_id));
   redirect('admin.php');
 }else{
   $PAGE->set_context($context);
