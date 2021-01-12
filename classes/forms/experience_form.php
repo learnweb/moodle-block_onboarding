@@ -60,6 +60,9 @@ class experience_form extends moodleform {
           $mform->hideIf('experience_category_' . $category->id . '_description', 'category_' . $category->id);
         }
 
+        $mform->addElement('text', 'contact', get_string('experience_contact', 'block_experiences'));
+        $mform->setType('contact', PARAM_TEXT);
+
         $this->add_action_buttons();
     }
 

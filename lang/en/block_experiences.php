@@ -32,10 +32,11 @@ $string['category_name'] = 'Name';
 $string['default_category_name'] = 'Sample Category';
 
 $string['edit_experience'] = 'Edit Experience';
-$string['experience_name'] = 'Name';
+$string['experience_name'] = 'Name*';
 $string['experience_category'] = 'Category';
 $string['experience_url'] = 'URL';
 $string['experience_description'] = 'Description';
 $string['default_experience_name'] = 'Sample Experience';
 $string['default_experience_url'] = 'http://www.example.com';
 $string['default_experience_description'] = 'Sample Description';
+$string['experience_contact'] = 'Contact Information';
