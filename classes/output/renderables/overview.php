@@ -32,6 +32,7 @@ class overview implements renderable, templatable {
     $experiences = array_values($DB->get_records('block_experiences_exps'));
     $categories = array_values($DB->get_records('block_experiences_cats'));
     $experiences_categories = array_values($DB->get_records('block_experiences_exps_cats'));
+    $courses = array_values($DB->get_records('block_experiences_courses'));
 
     $experiences_mapped = array();
     foreach($experiences as $experience){
@@ -50,9 +51,16 @@ class overview implements renderable, templatable {
       $experiences_mapped[$experience_category->experience_id]->categories[] = $categories_mapped[$experience_category->category_id];
     }
 
+    $courses_mapped = array();
+    foreach($courses as $course){
+      $courses_mapped[$course->id] = $course;
+    }
+
     return [
         'can_edit_categories' => has_capability('block/experiences:edit_categories', \context_system::instance()) ? true : false,
         'categories_general' => $categories,
+        'can_edit_courses' => has_capability('block/experiences:edit_categories', \context_system::instance()) ? true : false,
+        'courses_general' => $courses,
         'experiences_with_categories' => array_values($experiences_mapped)
     ];
   }

@@ -31,6 +31,10 @@ $string['edit_category'] = 'Edit Category';
 $string['category_name'] = 'Name';
 $string['default_category_name'] = 'Sample Category';
 
+$string['edit_course'] = 'Edit Courses';
+$string['course_name'] = 'Name';
+$string['default_course_name'] = 'Sample Course';
+
 $string['edit_experience'] = 'Edit Experience';
 $string['experience_name'] = 'Name*';
 $string['experience_category'] = 'Category';
