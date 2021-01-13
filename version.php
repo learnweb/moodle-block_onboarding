@@ -16,5 +16,5 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2021011001;
+$plugin->version   = 2021011301;
 $plugin->component = 'block_experiences';
