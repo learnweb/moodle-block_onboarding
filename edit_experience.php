@@ -48,6 +48,7 @@ if($experience_id == -1 || $USER->id == $pExperience->user_id || has_capability(
       $experience->name = $fromform->name;
       $experience->contact = $fromform->contact;
       $experience->user_id = $fromform->user_id;
+      $experience->course_id = $fromform->course_id;
       $experience->timecreated = time();
       $experience->timemodified = time();
 

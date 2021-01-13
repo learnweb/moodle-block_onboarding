@@ -34,6 +34,7 @@ $string['default_category_name'] = 'Sample Category';
 $string['edit_course'] = 'Edit Courses';
 $string['course_name'] = 'Name';
 $string['default_course_name'] = 'Sample Course';
+$string['course_select'] = 'Select Degree Program*';
 
 $string['edit_experience'] = 'Edit Experience';
 $string['experience_name'] = 'Name*';

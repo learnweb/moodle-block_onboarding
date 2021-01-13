@@ -37,9 +37,15 @@ class experience_form extends moodleform {
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($experience->name) ? $experience->name : get_string('default_experience_name', 'block_experiences'));
 
-        //$mform->addElement('select', 'course',get_string('course_select', 'block_experiences'),$courses_array , array());
-        //$mform->setType('course', PARAM_TEXT);
-        //$mform->setDefault('position', isset($step->position) ? $step->position-1 : $DB->count_records('block_steps_steps'));
+        $courses = $DB->get_records('block_experiences_courses');
+        $courses_modified = array();
+        foreach($courses as $course){
+            $courses_modified[$course->id] = $course->name;
+        }
+        $mform->addElement('select', 'course_id', get_string('course_select', 'block_experiences'), $courses_modified);
+        if(isset($link->course_id)){
+            $mform->setDefault('course_id', $link->course_id);
+        }
 
         $categories = $DB->get_records('block_experiences_cats');
         $experiences_categories = $DB->get_records('block_experiences_exps_cats', array('experience_id' => $experience->id));
