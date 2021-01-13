@@ -37,6 +37,10 @@ class experience_form extends moodleform {
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($experience->name) ? $experience->name : get_string('default_experience_name', 'block_experiences'));
 
+        //$mform->addElement('select', 'course',get_string('course_select', 'block_experiences'),$courses_array , array());
+        //$mform->setType('course', PARAM_TEXT);
+        //$mform->setDefault('position', isset($step->position) ? $step->position-1 : $DB->count_records('block_steps_steps'));
+
         $categories = $DB->get_records('block_experiences_cats');
         $experiences_categories = $DB->get_records('block_experiences_exps_cats', array('experience_id' => $experience->id));
         foreach($categories as $category){
@@ -54,7 +58,7 @@ class experience_form extends moodleform {
           $experiences_categories_mapped[$experience_category->category_id] = $experience_category;
         }
         foreach($categories as $category){
-          $mform->addElement('textarea', 'experience_category_' . $category->id . '_description', $category->name);
+          $mform->addElement('textarea', 'experience_category_' . $category->id . '_description', $category->name, 'wrap="virtual" rows="10" cols="100"');
           $mform->setType('experience_category_' . $category->id . '_description', PARAM_TEXT);
           $mform->setDefault('experience_category_' . $category->id . '_description', isset($experiences_categories_mapped[$category->id]) ? $experiences_categories_mapped[$category->id]->description : '');
           $mform->hideIf('experience_category_' . $category->id . '_description', 'category_' . $category->id);
