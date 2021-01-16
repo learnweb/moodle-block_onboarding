@@ -24,7 +24,6 @@ $context = context_system::instance();
 
 if(has_capability('block/experiences:edit_courses', $context)){
   $course_id = optional_param('course_id', -1, PARAM_INT);
-  //$DB->delete_records('block_experiences_exps', array('course_id' => $course_id));
   $DB->delete_records('block_experiences_courses', array('id' => $course_id));
   redirect('overview.php');
 }else{
