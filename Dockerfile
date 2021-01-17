@@ -45,6 +45,10 @@ RUN mv moodle-config.php.dist config.php
 WORKDIR /var/www/html/moodle
 RUN git clone git://github.com/moodlehq/moodle-local_codechecker.git local/codechecker
 
+# WWU Moodle Theme
+WORKDIR /var/www/html/moodle
+RUN git clone https://github.com/learnweb/moodle-theme_wwu2019.git theme/wwu2019
+
 # Behat
 ## Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
