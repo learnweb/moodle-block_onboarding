@@ -26,12 +26,19 @@ use renderer_base;
 class overview implements renderable, templatable {
   public function __construct() {
   }
-
+// OBSOLETE -> DATEI UND VERWEISE ENTFERNEN!!!
+//hier werden die von uns erzeugten Daten für das Template bereitgestellt
   public function export_for_template(renderer_base $output) {
     global $DB;
+    //hier werden die Steps in ein Array gelegt
+      $steps = array_values($DB->get_records_sql('SELECT * FROM {block_steps_steps} ORDER BY position ASC'));
+    $cur = 1;
+    foreach($steps as $step){
+        $step->index = $cur;
+        $cur++;
+    }
 
-    $steps = array_values($DB->get_records('block_steps_steps'));
-
+    //dieses Format nimmt das Template entgegen
     return [
       'can_edit_steps' => has_capability('block/steps:edit_steps', \context_system::instance()) ? true : false,
       'steps' => $steps
