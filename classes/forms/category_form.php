@@ -25,6 +25,7 @@ class category_form extends moodleform {
 
         $mform = $this->_form;
 
+
         $category = $this->_customdata['category'];
 
         $mform->addElement('hidden','id', $category->id);
