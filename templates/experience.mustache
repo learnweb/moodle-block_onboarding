@@ -1,6 +1,8 @@
 <h2>{{#experience}}{{{name}}}{{/experience}}</h2>
+<!-- <h4>{{#experiences_joined_courses_users}}{{# str }} author, block_experiences {{/ str }}{{{degreeprogram}}}{{/experiences_joined_courses_users}}</h4>
+<h4>{{#experience}}{{# str }} date, block_experiences {{/ str }}{{{timecreated}}}{{/experience}}</h4> -->
 {{#experiences_categories_joined_categories}}
 <h4>{{{name}}}</h4>
 <p>{{{description}}}</p>
 {{/experiences_categories_joined_categories}}
-<h4>{{#experience}}Contact: {{{contact}}}{{/experience}}</h4>
+<h4>{{#experience}}{{# str }} contact, block_experiences {{/ str }}{{{contact}}}{{/experience}}</h4>

@@ -11,14 +11,14 @@
   {{/categories_general}}
 </div>
 <div class="block-experiences-overview-courses">
-  <h2>Courses</h2>
+  <h2>Degree Programs</h2>
   <div class="block-experiences-overview-courses-actions">
     {{#can_edit_courses}}<a href="edit_course.php">New Degree Program</a>{{/can_edit_courses}}
   </div>
   {{#courses_general}}
       <div class="block-experiences-overview-course">
         <h5 class="block-experiences-overview-course-text">{{{name}}}</h5>
-        {{#can_edit_courses}} <a href="edit_course.php?course_id={{{id}}}">{{#pix}}t/editstring, core, Edit Course{{/pix}}</a><a href="delete_course.php?course_id={{{id}}}">{{#pix}}t/delete, core, Delete Course{{/pix}}</a>{{/can_edit_courses}}
+        {{#can_edit_courses}} <a href="edit_course.php?course_id={{{id}}}">{{#pix}}t/editstring, core, Edit Degree Program{{/pix}}</a><a href="delete_course.php?course_id={{{id}}}">{{#pix}}t/delete, core, Delete Course{{/pix}}</a>{{/can_edit_courses}}
       </div>
   {{/courses_general}}
 </div>

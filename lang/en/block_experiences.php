@@ -31,9 +31,9 @@ $string['edit_category'] = 'Edit Category';
 $string['category_name'] = 'Name';
 $string['default_category_name'] = 'Sample Category';
 
-$string['edit_course'] = 'Edit Courses';
+$string['edit_course'] = 'Edit Degree Programs';
 $string['course_name'] = 'Name';
-$string['default_course_name'] = 'Sample Course';
+$string['default_course_name'] = 'Sample Degree Program';
 $string['course_select'] = 'Select Degree Program*';
 
 $string['edit_experience'] = 'Edit Experience';
@@ -45,3 +45,7 @@ $string['default_experience_name'] = 'Sample Experience';
 $string['default_experience_url'] = 'http://www.example.com';
 $string['default_experience_description'] = 'Sample Description';
 $string['experience_contact'] = 'Contact Information';
+
+$string['contact'] = 'Contact: ';
+$string['author'] = 'Author: ';
+$string['date'] = 'Published: ';
