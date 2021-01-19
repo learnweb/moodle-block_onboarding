@@ -17,7 +17,7 @@
         <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for steps_steps"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="block_steps_userstep" COMMENT="currently displayed steps of users">
+    <TABLE NAME="block_steps_userstep__" COMMENT="currently displayed steps of users">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false"/>
         <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"/>
@@ -28,6 +28,18 @@
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for steps_userstep"/>
         <KEY NAME="stepid" TYPE="foreign" FIELDS="stepid" REFTABLE="block_steps_steps" REFFIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="block_steps_userstep" COMMENT="currently displayed steps of users">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false"/>
+        <FIELD NAME="stepid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for steps_userstep"/>
+        <KEY NAME="stepid" TYPE="foreign" FIELDS="stepid" REFTABLE="block_steps_steps" REFFIELDS="id"/>
+        <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="mdl_user" REFFIELDS="id"/>
       </KEYS>
     </TABLE>
   </TABLES>
