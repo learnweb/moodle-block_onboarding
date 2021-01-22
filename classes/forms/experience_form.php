@@ -33,7 +33,7 @@ class experience_form extends moodleform {
         $mform->addElement('hidden','user_id', $USER->id);
         $mform->setType('user_id', PARAM_INT);
 
-        $mform->addElement('text', 'name', get_string('experience_name', 'block_experiences'));
+        $mform->addElement('text', 'name', get_string('experience_name', 'block_experiences'), 'required');
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($experience->name) ? $experience->name : get_string('default_experience_name', 'block_experiences'));
 

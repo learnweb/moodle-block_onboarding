@@ -30,7 +30,7 @@ class category_form extends moodleform {
         $mform->addElement('hidden','id', $category->id);
         $mform->setType('id', PARAM_INT);
 
-        $mform->addElement('text', 'name', get_string('category_name', 'block_experiences'));
+        $mform->addElement('text', 'name', get_string('category_name', 'block_experiences'),'required');
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($category->name) ? $category->name : get_string('default_category_name', 'block_experiences'));
 
