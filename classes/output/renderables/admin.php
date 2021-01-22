@@ -31,9 +31,13 @@ class admin implements renderable, templatable {
 
     $categories = array_values($DB->get_records('block_experiences_cats'));
 
+    $courses = array_values($DB->get_records('block_experiences_courses'));
+
     return [
         'can_edit_categories' => has_capability('block/experiences:edit_categories', \context_system::instance()) ? true : false,
-        'categories_general' => $categories
+        'categories_general' => $categories,
+        'can_edit_courses' => has_capability('block/experiences:edit_courses', \context_system::instance()) ? true : false,
+        'courses_general' => $courses
     ];
   }
 }

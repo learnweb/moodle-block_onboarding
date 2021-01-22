@@ -33,9 +33,19 @@ class experience_form extends moodleform {
         $mform->addElement('hidden','user_id', $USER->id);
         $mform->setType('user_id', PARAM_INT);
 
-        $mform->addElement('text', 'name', get_string('experience_name', 'block_experiences'));
+        $mform->addElement('text', 'name', get_string('experience_name', 'block_experiences'), 'required');
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($experience->name) ? $experience->name : get_string('default_experience_name', 'block_experiences'));
+
+        $courses = $DB->get_records('block_experiences_courses');
+        $courses_modified = array();
+        foreach($courses as $course){
+            $courses_modified[$course->id] = $course->name;
+        }
+        $mform->addElement('select', 'course_id', get_string('course_select', 'block_experiences'), $courses_modified);
+        if(isset($link->course_id)){
+            $mform->setDefault('course_id', $link->course_id);
+        }
 
         $categories = $DB->get_records('block_experiences_cats');
         $experiences_categories = $DB->get_records('block_experiences_exps_cats', array('experience_id' => $experience->id));
@@ -54,11 +64,14 @@ class experience_form extends moodleform {
           $experiences_categories_mapped[$experience_category->category_id] = $experience_category;
         }
         foreach($categories as $category){
-          $mform->addElement('textarea', 'experience_category_' . $category->id . '_description', $category->name);
+          $mform->addElement('textarea', 'experience_category_' . $category->id . '_description', $category->name, 'wrap="virtual" rows="10" cols="100"');
           $mform->setType('experience_category_' . $category->id . '_description', PARAM_TEXT);
           $mform->setDefault('experience_category_' . $category->id . '_description', isset($experiences_categories_mapped[$category->id]) ? $experiences_categories_mapped[$category->id]->description : '');
           $mform->hideIf('experience_category_' . $category->id . '_description', 'category_' . $category->id);
         }
+
+        $mform->addElement('text', 'contact', get_string('experience_contact', 'block_experiences'));
+        $mform->setType('contact', PARAM_TEXT);
 
         $this->add_action_buttons();
     }

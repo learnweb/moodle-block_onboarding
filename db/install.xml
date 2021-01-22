@@ -21,13 +21,14 @@
         <FIELD NAME="user_id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="popularity" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="contact" TYPE="text" LENGTH="50" NOTNULL="false" SEQUENCE="false" />
+        <FIELD NAME="contact" TYPE="char" LENGTH="50" NOTNULL="false" SEQUENCE="false" />
         <FIELD NAME="course_id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"/>
         <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" />
         <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" />
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for experiences_experiences"/>
+        <KEY NAME="courses" TYPE="foreign" FIELDS="course_id" REFTABLE="block_experiences_courses" REFFIELDS="id"/>
       </KEYS>
     </TABLE>
     <TABLE NAME="block_experiences_exps_cats" COMMENT="matching categories and reports">

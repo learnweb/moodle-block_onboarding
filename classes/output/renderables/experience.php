@@ -42,9 +42,16 @@ class experience implements renderable, templatable {
     WHERE block_experiences_exps_cats.experience_id = {$this->experience_id}";
     $experiences_categories_joined_categories = $DB->get_records_sql($sql);
 
+    $moresql= "SELECT ec.name as degreeprogram, u.firstname as author
+    FROM {block_experiences_exps} ee
+    INNER JOIN {user} u ON ee.user_id=u.id 
+    INNER JOIN {block_experiences_courses} ec ON ee.course_id=ec.id";
+    $experiences_joined_courses_users = $DB->get_records_sql($moresql);
+
     return [
         'experience' => $experience,
-        'experiences_categories_joined_categories' => array_values($experiences_categories_joined_categories)
+        'experiences_categories_joined_categories' => array_values($experiences_categories_joined_categories),
+        'experiences_joined_courses_users' => $experiences_joined_courses_users
     ];
   }
 }
