@@ -30,13 +30,17 @@ class overview implements renderable, templatable {
   public function export_for_template(renderer_base $output) {
     global $DB;
 
-    $categories = array_values($DB->get_records('block_wiki_categories'));
+   $categories = array_values($DB->get_records('block_wiki_categories'));
     $links = array_values($DB->get_records('block_wiki_links'));
+
+
+
 
     foreach($categories as $category){
       foreach($links as $link){
         if($link->category_id == $category->id){
           $category->links[] = $link;
+
         }
       }
     }
@@ -44,6 +48,8 @@ class overview implements renderable, templatable {
     return [
       'can_manage_wiki' => has_capability('block/wiki:manage_wiki', \context_system::instance()) ? true : false,
       'categories_with_links' => $categories
+
     ];
   }
+
 }
