@@ -23,6 +23,7 @@ $url = new moodle_url('/blocks/steps/admin.php');
 
 $PAGE->set_url($url);
 $PAGE->set_context($context);
+$PAGE->requires->js_call_amd('block_steps/steps_view', 'init');
 $PAGE->set_title(get_string('admin', 'block_steps'));
 $PAGE->set_heading(get_string('admin', 'block_steps'));
 $PAGE->navbar->add(get_string('pluginname', 'block_steps'));
