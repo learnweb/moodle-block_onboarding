@@ -31,5 +31,14 @@
         'archetypes' => [
             'editingteacher' => CAP_ALLOW,
         ],
-    ]
+    ],
+
+    'block/steps:edit_steps' => [
+        'riskbitmask' => RISK_SPAM,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_MODULE,
+        'archetypes' => [
+            'editingteacher' => CAP_ALLOW,
+        ],
+    ],
 );
