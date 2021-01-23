@@ -14,29 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-unset($CFG);
-global $CFG;
-$CFG = new stdClass();
+namespace block_steps\output\renderables;
 
-$CFG->dbtype    = 'mysqli';
-$CFG->dblibrary = 'native';
-$CFG->dbhost    = 'db';
-$CFG->dbname    = 'test_db';
-$CFG->dbuser    = 'devuser';
-$CFG->dbpass    = 'devpw';
-$CFG->prefix    = 'mdl_';
-$CFG->dboptions = array (
-  'dbpersist' => 0,
-  'dbport' => '',
-  'dbsocket' => '',
-  'dbcollation' => 'utf8mb4_general_ci',
-);
+defined('MOODLE_INTERNAL') || die();
 
-$CFG->wwwroot   = 'http://localhost:8100/moodle';
-$CFG->dataroot  = '/var/www/moodledata';
-$CFG->admin     = 'admin';
-//added for development
-$CFG->cachejs = false;
-$CFG->directorypermissions = 02777;
+use block_steps\stepslib;
+use renderable;
+use templatable;
+use renderer_base;
 
-require_once(__DIR__ . '/lib/setup.php');
+class block implements renderable, templatable {
+
+    public function __construct() {
+    }
+
+    public function export_for_template(renderer_base $output) {
+      return [
+        'admin_url' => new \moodle_url('/blocks/steps/admin.php')
+      ];
+    }
+}
