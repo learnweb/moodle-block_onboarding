@@ -16,10 +16,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-class block_experiences extends block_base {
+class block_onboarding extends block_base {
 
     public function init() {
-        $this->title = get_string('experiences', 'block_experiences');
+        $this->title = get_string('experiences', 'block_onboarding');
     }
 
     public function get_content() {
@@ -28,8 +28,8 @@ class block_experiences extends block_base {
       }
 
       $this->content = new stdClass;
-      $renderer = $this->page->get_renderer('block_experiences');
-      $block = new \block_experiences\output\renderables\block();
+      $renderer = $this->page->get_renderer('block_onboarding');
+      $block = new \block_onboarding\output\renderables\block();
       $this->content->text = $renderer->render($block);
       return $this->content;
     }

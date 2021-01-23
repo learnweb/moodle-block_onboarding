@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-require(__DIR__ . '/../../config.php');
+require(__DIR__ . '/../../../config.php');
 
 require_login();
 
@@ -23,15 +23,15 @@ global $DB;
 $context = context_system::instance();
 
 $PAGE->set_context($context);
-$PAGE->set_url(new moodle_url('/blocks/steps/edit_step.php'));
-$PAGE->navbar->add(get_string('pluginname', 'block_steps'));
+$PAGE->set_url(new moodle_url('/blocks/onboarding/steps/edit_step.php'));
+$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
 
 // prüft Zugriffsrechte für die Datenbank-Zugriff
-if(has_capability('block/steps:edit_steps', $context)){
-  $PAGE->set_title(get_string('edit_step', 'block_steps'));
-  $PAGE->set_heading(get_string('edit_step', 'block_steps'));
+if(has_capability('block/onboarding:s_edit_steps', $context)){
+  $PAGE->set_title(get_string('edit_step', 'block_onboarding'));
+  $PAGE->set_heading(get_string('edit_step', 'block_onboarding'));
 
-    require_once('./classes/forms/step_form.php');
+    require_once('./../classes/forms/steps_step_form.php');
     /*
      * optional_param speichert die übergebene URL-Variable step_id in step_id
      * (bspw. moodle/blocks/steps/edit_step.php?step_id=8)
@@ -47,18 +47,18 @@ if(has_capability('block/steps:edit_steps', $context)){
     // wenn ein bestehender Schritt editiert werden soll, lese den Datensatz aus der Datenbank
     if ($step_id != -1) {
         /*
-         * speichere den Datensatz aus der Tabelle block_steps_steps (Tabebellen-Prefix nicht notwendig)
+         * speichere den Datensatz aus der Tabelle block_onb_s_steps (Tabebellen-Prefix nicht notwendig)
          * bei dem die id-Daten mit der Variable step-id übereinstimmen (Konditionen werden immer als Array angegeben)
          * wobei alle Felder bzw. Spalten des Datensatzes selektiert werden sollen
          * und werfe keine Exception wenn keine oder mehrere Datensätze auf Basis der Konditionen gefunden werden
          */
-        $pStep = $DB->get_record('block_steps_steps', array('id' => $step_id), $fields = '*', $strictness = IGNORE_MISSING);
+        $pStep = $DB->get_record('block_onb_s_steps', array('id' => $step_id), $fields = '*', $strictness = IGNORE_MISSING);
     }
     /*
      * erstelle eine neue Moodle Form als eine Step Form und übergebe zusätzlich die Hilfsvariable pStep
      * welche beim Editieren eines bestehenden Schrittes die Daten des Schrittes aus der Datenbank enthält
      */
-    $mform = new step_form(null, array('step' => $pStep));
+    $mform = new steps_step_form(null, array('step' => $pStep));
 
     // wenn der Cancel-Button geklickt wird, kehre zu admin.php zurück
     if ($mform->is_cancelled()) {
@@ -76,7 +76,7 @@ if(has_capability('block/steps:edit_steps', $context)){
 
       // POSITION DER FUNKTIONEN FRAGWUERDIG
       function insert_after($insert, $cur) {
-          $sql = 'UPDATE {block_steps_steps}
+          $sql = 'UPDATE {block_onb_s_steps}
                 SET position = position -1
                 WHERE position > :cur_pos and position <= :insert_pos';
           global $DB;
@@ -84,7 +84,7 @@ if(has_capability('block/steps:edit_steps', $context)){
       }
 
       function insert_before($insert, $cur) {
-          $sql = 'UPDATE {block_steps_steps}
+          $sql = 'UPDATE {block_onb_s_steps}
             SET position = position +1
             WHERE position >= :insert_pos and position < :cur_pos';
           global $DB;
@@ -94,7 +94,7 @@ if(has_capability('block/steps:edit_steps', $context)){
       // wenn ein bestehender Schritt editiert wird, aktualisiere den Datensatz
       if($fromform->id != -1){
         // aktueller Datensatz wird zwischengespeichert -> ggf. überflüssig
-        $pStep = $DB->get_record('block_steps_steps', array('id' => $fromform->id), $fields = '*', $strictness = IGNORE_MISSING);
+        $pStep = $DB->get_record('block_onb_s_steps', array('id' => $fromform->id), $fields = '*', $strictness = IGNORE_MISSING);
         $cur_position = $pStep->position;
         $insert_position = $fromform->position+1;
         // wenn gewünschte Einfügeposition weiter hinten als aktuelle Position ist
@@ -108,21 +108,21 @@ if(has_capability('block/steps:edit_steps', $context)){
         $step->id = $fromform->id;
         $step->position = $fromform->position+1;
 
-        $DB->update_record('block_steps_steps', $step, $bulk=false);
+        $DB->update_record('block_onb_s_steps', $step, $bulk=false);
         // andernfalls wird ein neuer Schritt bzw. Datensatz hinzugefügt, dessen position aus der Form übernommen wird
       }else{
-          $init_position = $DB->count_records('block_steps_steps')+1;
+          $init_position = $DB->count_records('block_onb_s_steps')+1;
           $insert_position = $fromform->position+1;
           $step->timecreated = time();
           $step->position = $init_position;
-          $step->id = $DB->insert_record('block_steps_steps', $step);
+          $step->id = $DB->insert_record('block_onb_s_steps', $step);
           // wenn neuer Schritt nicht hinten eingefügt werden soll
           if($init_position != $insert_position){
               insert_before($insert_position, $init_position);
           }
           $step->position = $fromform->position+1;
           $step->timemodified = time();
-          $DB->update_record('block_steps_steps', $step, $bulk=false);
+          $DB->update_record('block_onb_s_steps', $step, $bulk=false);
       }
       redirect('admin.php');
   }
@@ -133,10 +133,10 @@ if(has_capability('block/steps:edit_steps', $context)){
   echo $OUTPUT->footer();
 // andernfalls konnten die Daten nicht validiert werden und es wird ein Fehlerhinweis angezeigt
 }else{
-  $PAGE->set_title(get_string('error', 'block_steps'));
-  $PAGE->set_heading(get_string('error', 'block_steps'));
+  $PAGE->set_title(get_string('error', 'block_onboarding'));
+  $PAGE->set_heading(get_string('error', 'block_onboarding'));
 
   echo $OUTPUT->header();
-  echo html_writer::tag('p', get_string('insufficient_permissions', 'block_steps'));
+  echo html_writer::tag('p', get_string('insufficient_permissions', 'block_onboarding'));
   echo $OUTPUT->footer();
 }

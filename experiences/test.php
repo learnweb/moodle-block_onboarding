@@ -16,16 +16,16 @@ $table = new experience_table('uniqueid');
 // Print the page header
 $PAGE->set_title('Testing');
 $PAGE->set_heading('Testing table class');
-$PAGE->navbar->add('Testing table class', new moodle_url('/blocks/experiences/test.php'));
+$PAGE->navbar->add('Testing table class', new moodle_url('/blocks/onboarding/experiences/test.php'));
 echo $OUTPUT->header();
 
 
 // Work out the sql for the table.
 $fields = 'ee.id as id, ee.name as name, u.firstname as author, ec.name as degreeprogram, ee.timecreated as published, ee.popularity as popularity';
 
-$from = '{block_experiences_exps} ee 
+$from = '{block_onb_e_exps} ee 
 INNER JOIN {user} u ON ee.user_id=u.id
-INNER JOIN {block_experiences_courses} ec ON ee.course_id=ec.id';
+INNER JOIN {block_onb_e_courses} ec ON ee.course_id=ec.id';
 
 $table->set_sql($fields, $from, '1=1');
 

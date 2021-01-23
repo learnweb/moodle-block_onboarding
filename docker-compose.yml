@@ -3,7 +3,7 @@ version: '3'
 services:
   db:
     image: mysql:5.7
-    container_name: moodle-block_wiki_database
+    container_name: moodle-block_onboarding_database
     environment:
       MYSQL_ROOT_PASSWORD: rootpw
       MYSQL_DATABASE: test_db
@@ -13,11 +13,11 @@ services:
       - "9906:3306"
   web:
     build: .
-    container_name: moodle-block_wiki_website
+    container_name: moodle-block_onboarding_website
     depends_on:
       - db
     volumes:
-      - ./:/var/www/html/moodle/blocks/wiki
+      - ./:/var/www/html/moodle/blocks/onboarding
     ports:
       - "8100:80"
     stdin_open: true

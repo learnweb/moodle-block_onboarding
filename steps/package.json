@@ -1,27 +1,27 @@
 {
-  "name": "moodle-block_steps",
-  "version": "1.0.0",
-  "description": "steps plugin",
-  "main": "index.js",
-  "dependencies": {},
-  "devDependencies": {
-    "ajax": "0.0.4",
-    "grunt": "^0.4.5",
-    "grunt-contrib-uglify": "^5.0.0",
-    "grunt-contrib-watch": "^1.1.0",
-    "grunt-load-gruntfile": "0.0.2"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/wwu-ps-digital-onboarding/moodle-block_steps.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/wwu-ps-digital-onboarding/moodle-block_steps/issues"
-  },
-  "homepage": "https://github.com/wwu-ps-digital-onboarding/moodle-block_steps#readme"
+    "name": "moodle-block_onboarding",
+    "version": "1.0.0",
+    "description": "steps plugin",
+    "main": "index.js",
+    "dependencies": {},
+    "devDependencies": {
+        "ajax": "0.0.4",
+        "grunt": "^0.4.5",
+        "grunt-contrib-uglify": "^5.0.0",
+        "grunt-contrib-watch": "^1.1.0",
+        "grunt-load-gruntfile": "0.0.2"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/wwu-ps-digital-onboarding/moodle-block_onboarding.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/wwu-ps-digital-onboarding/moodle-block_onboarding/issues"
+    },
+    "homepage": "https://github.com/wwu-ps-digital-onboarding/moodle-block_onboarding#readme"
 }

@@ -1,7 +1,7 @@
 <?php
     $capabilities = array(
 
-    'block/wiki:myaddinstance' => array(
+    'block/onboarding:myaddinstance' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => array(
@@ -11,7 +11,7 @@
         'clonepermissionsfrom' => 'moodle/my:manageblocks'
     ),
 
-    'block/wiki:addinstance' => array(
+    'block/onboarding:addinstance' => array(
         'riskbitmask' => RISK_SPAM | RISK_XSS,
 
         'captype' => 'write',
@@ -24,7 +24,7 @@
         'clonepermissionsfrom' => 'moodle/site:manageblocks'
     ),
 
-    'block/wiki:manage_wiki' => [
+    'block/onboarding:w_manage_wiki' => [
         'riskbitmask' => RISK_SPAM,
         'captype' => 'write',
         'contextlevel' => CONTEXT_MODULE,
@@ -33,7 +33,7 @@
         ],
     ],
 
-    'block/steps:edit_steps' => [
+    'block/onboarding:s_edit_steps' => [
         'riskbitmask' => RISK_SPAM,
         'captype' => 'write',
         'contextlevel' => CONTEXT_MODULE,
@@ -42,7 +42,7 @@
         ],
     ],
 
-    'block/experiences:edit_categories' => [
+    'block/onboarding:e_edit_categories' => [
         'riskbitmask' => RISK_SPAM,
         'captype' => 'write',
         'contextlevel' => CONTEXT_MODULE,
@@ -51,7 +51,16 @@
         ],
     ],
 
-    'block/experiences:edit_all_experiences' => [
+    'block/onboarding:e_edit_courses' => [
+        'riskbitmask' => RISK_SPAM,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_MODULE,
+        'archetypes' => [
+            'editingteacher' => CAP_ALLOW,
+        ],
+    ],
+
+    'block/onboarding:e_edit_all_experiences' => [
         'riskbitmask' => RISK_SPAM,
         'captype' => 'write',
         'contextlevel' => CONTEXT_MODULE,

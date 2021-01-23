@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-require(__DIR__ . '/../../config.php');
+require(__DIR__ . '/../../../config.php');
 
 require_login();
 
@@ -23,22 +23,22 @@ global $DB;
 $context = context_system::instance();
 
 $PAGE->set_context($context);
-$PAGE->set_url(new moodle_url('/blocks/experiences/edit_category.php'));
-$PAGE->navbar->add(get_string('pluginname', 'block_experiences'));
+$PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/edit_category.php'));
+$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
 
-if(has_capability('block/experiences:edit_categories', \context_system::instance())){
-  $PAGE->set_title(get_string('edit_category', 'block_experiences'));
-  $PAGE->set_heading(get_string('edit_category', 'block_experiences'));
+if(has_capability('block/onboarding:e_edit_categories', \context_system::instance())){
+  $PAGE->set_title(get_string('edit_category', 'block_onboarding'));
+  $PAGE->set_heading(get_string('edit_category', 'block_onboarding'));
 
-  require_once('./classes/forms/category_form.php');
+  require_once('./../classes/forms/experiences_category_form.php');
 
   $category_id = optional_param('category_id', -1, PARAM_INT);
   $pCategory = new stdClass;
   $pCategory->id = -1;
   if($category_id != -1){
-    $pCategory = $DB->get_record('block_experiences_cats', array('id'=>$category_id), $fields='*', $strictness=IGNORE_MISSING);
+    $pCategory = $DB->get_record('block_onb_e_cats', array('id'=>$category_id), $fields='*', $strictness=IGNORE_MISSING);
   }
-  $mform = new category_form(null, array('category' => $pCategory));
+  $mform = new experiences_category_form(null, array('category' => $pCategory));
 
   if ($mform->is_cancelled()) {
   		redirect('overview.php');
@@ -51,9 +51,9 @@ if(has_capability('block/experiences:edit_categories', \context_system::instance
 
       if($fromform->id != -1){
         $category->id = $fromform->id;
-        $DB->update_record('block_experiences_cats', $category, $bulk=false);
+        $DB->update_record('block_onb_e_cats', $category, $bulk=false);
       }else{
-        $category->id = $DB->insert_record('block_experiences_cats', $category);
+        $category->id = $DB->insert_record('block_onb_e_cats', $category);
       }
       redirect('overview.php');
   }
@@ -62,10 +62,10 @@ if(has_capability('block/experiences:edit_categories', \context_system::instance
   $mform->display();
   echo $OUTPUT->footer();
 }else{
-  $PAGE->set_title(get_string('error', 'block_experiences'));
-  $PAGE->set_heading(get_string('error', 'block_experiences'));
+  $PAGE->set_title(get_string('error', 'block_onboarding'));
+  $PAGE->set_heading(get_string('error', 'block_onboarding'));
 
   echo $OUTPUT->header();
-  echo html_writer::tag('p', get_string('insufficient_permissions', 'block_experiences'));
+  echo html_writer::tag('p', get_string('insufficient_permissions', 'block_onboarding'));
   echo $OUTPUT->footer();
 }

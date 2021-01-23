@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="blocks/wiki/db" VERSION="2020123005" COMMENT="XMLDB file for Moodle blocks/wiki"
+<XMLDB PATH="blocks/onboarding/db" VERSION="2020123005" COMMENT="XMLDB file for Moodle blocks/onboarding"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
   <TABLES>
     <!-- Wiki -->
-    <TABLE NAME="block_wiki_categories" COMMENT="Categories of wiki">
+    <TABLE NAME="block_onb_w_categories" COMMENT="Categories of wiki">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false"/>
         <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
@@ -16,7 +16,7 @@
         <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for wiki_categories"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="block_wiki_links" COMMENT="Links of wiki">
+    <TABLE NAME="block_onb_w_links" COMMENT="Links of wiki">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false"/>
         <FIELD NAME="category_id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
@@ -28,11 +28,11 @@
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for wiki_links"/>
-        <KEY NAME="categories" TYPE="foreign" FIELDS="category_id" REFTABLE="block_wiki_categories" REFFIELDS="id"/>
+        <KEY NAME="categories" TYPE="foreign" FIELDS="category_id" REFTABLE="block_onb_w_categories" REFFIELDS="id"/>
       </KEYS>
     </TABLE>
     <!-- Steps -->
-    <TABLE NAME="block_steps_steps" COMMENT="steps">
+    <TABLE NAME="block_onb_s_steps" COMMENT="steps">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false"/>
         <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
@@ -46,7 +46,7 @@
       </KEYS>
     </TABLE>
     <!-- Experiences -->
-    <TABLE NAME="block_experiences_cats" COMMENT="stores categories of reports">
+    <TABLE NAME="block_onb_e_cats" COMMENT="stores categories of reports">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
         <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
@@ -57,7 +57,7 @@
         <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for experiences_categories"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="block_experiences_exps" COMMENT="stores report information">
+    <TABLE NAME="block_onb_e_exps" COMMENT="stores report information">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
         <FIELD NAME="user_id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
@@ -72,7 +72,7 @@
         <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for experiences_experiences"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="block_experiences_exps_cats" COMMENT="matching categories and reports">
+    <TABLE NAME="block_onb_e_exps_cats" COMMENT="matching categories and reports">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
         <FIELD NAME="experience_id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
@@ -83,11 +83,11 @@
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for experiences_experiences"/>
-        <KEY NAME="experiences" TYPE="foreign" FIELDS="experience_id" REFTABLE="block_experiences_exps" REFFIELDS="id"/>
-        <KEY NAME="categories" TYPE="foreign" FIELDS="category_id" REFTABLE="block_experiences_cats" REFFIELDS="id"/>
+        <KEY NAME="experiences" TYPE="foreign" FIELDS="experience_id" REFTABLE="block_onb_e_exps" REFFIELDS="id"/>
+        <KEY NAME="categories" TYPE="foreign" FIELDS="category_id" REFTABLE="block_onb_e_cats" REFFIELDS="id"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="block_experiences_comments" COMMENT="stores comments of reports">
+    <TABLE NAME="block_onb_e_comments" COMMENT="stores comments of reports">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
         <FIELD NAME="report_id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"/>
@@ -99,11 +99,11 @@
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id" />
-        <KEY NAME="report_id" TYPE="foreign" FIELDS="report_id" REFTABLE="block_experiences_exps" REFFIELDS="id"/>
+        <KEY NAME="report_id" TYPE="foreign" FIELDS="report_id" REFTABLE="block_onb_e_exps" REFFIELDS="id"/>
         <KEY NAME="user_id" TYPE="foreign" FIELDS="user_id" REFTABLE="user" REFFIELDS="id"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="block_experiences_courses" COMMENT="stores degreeprograms">
+    <TABLE NAME="block_onb_e_courses" COMMENT="stores degreeprograms">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="3" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
         <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" />

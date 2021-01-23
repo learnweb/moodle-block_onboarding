@@ -1,5 +1,5 @@
 <?php
-// This file is part of steps block for Moodle - http://moodle.org/
+// This file is part of wiki block for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,10 +19,12 @@ defined('MOODLE_INTERNAL') || die();
 class block_onboarding extends block_base {
 
     public function init() {
-        $this->title = get_string('steps', 'block_onboarding');
+        $this->title = get_string('onboarding', 'block_onboarding');
     }
 
     public function get_content() {
+        global $DB;
+
       if ($this->content !== null) {
         return $this->content;
       }
