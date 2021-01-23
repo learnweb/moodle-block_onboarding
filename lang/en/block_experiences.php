@@ -30,6 +30,7 @@ $string['insufficient_permissions'] = 'Sorry, insufficient permissions';
 $string['edit_category'] = 'Edit Category';
 $string['category_name'] = 'Name';
 $string['default_category_name'] = 'Sample Category';
+$string['questions'] = 'Questions';
 
 $string['edit_course'] = 'Edit Degree Programs';
 $string['course_name'] = 'Name';

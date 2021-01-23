@@ -45,6 +45,7 @@ if(has_capability('block/experiences:edit_categories', \context_system::instance
   } else if ($fromform = $mform->get_data()) {
       $category = new stdClass();
       $category->name = $fromform->name;
+      $category->questions = $fromform->questions;
       $category->timecreated = time();
       $category->timemodified = time();
 

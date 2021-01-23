@@ -66,12 +66,13 @@ class experience_form extends moodleform {
         foreach($categories as $category){
           $mform->addElement('textarea', 'experience_category_' . $category->id . '_description', $category->name, 'wrap="virtual" rows="10" cols="100"');
           $mform->setType('experience_category_' . $category->id . '_description', PARAM_TEXT);
-          $mform->setDefault('experience_category_' . $category->id . '_description', isset($experiences_categories_mapped[$category->id]) ? $experiences_categories_mapped[$category->id]->description : '');
+          $mform->setDefault('experience_category_' . $category->id . '_description', isset($experiences_categories_mapped[$category->id]) ? $experiences_categories_mapped[$category->id]->description : $category->questions);
           $mform->hideIf('experience_category_' . $category->id . '_description', 'category_' . $category->id);
         }
 
         $mform->addElement('text', 'contact', get_string('experience_contact', 'block_experiences'));
         $mform->setType('contact', PARAM_TEXT);
+        $mform->setDefault('contact', isset($experience->contact) ? $experience->contact : '');
 
         $this->add_action_buttons();
     }

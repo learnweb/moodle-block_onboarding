@@ -34,6 +34,10 @@ class category_form extends moodleform {
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($category->name) ? $category->name : get_string('default_category_name', 'block_experiences'));
 
+        $mform->addElement('textarea', 'questions', get_string('questions', 'block_experiences'),  'wrap="virtual" rows="10" cols="100"');
+        $mform->setType('questions', PARAM_TEXT);
+        $mform->setDefault('questions', isset($category->questions) ? $category->questions : '');
+
         $this->add_action_buttons();
     }
 
