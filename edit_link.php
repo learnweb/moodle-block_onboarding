@@ -39,7 +39,8 @@ if(has_capability('block/wiki:manage_wiki', $context)){
     $pLink = $DB->get_record('block_wiki_links', array('id'=>$link_id), $fields='*', $strictness=IGNORE_MISSING);
   }
   $mform = new link_form(null, array('link' => $pLink));
-
+    #$mform->addHelpButton('Link', 'link_description', 'block_wiki');
+   # $this->add_action_buttons();
   if ($mform->is_cancelled()) {
   		redirect('overview.php');
   } else if ($fromform = $mform->get_data()) {

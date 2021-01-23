@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1370c6ce-45cf-403b-8500-937a245ffd57" name="Default Changelist" comment="Added help bubble" />
+    <list default="true" id="1370c6ce-45cf-403b-8500-937a245ffd57" name="Default Changelist" comment="Added help bubble">
+      <change afterPath="$PROJECT_DIR$/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/block_wiki.php" beforeDir="false" afterPath="$PROJECT_DIR$/block_wiki.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/forms/link_form.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/forms/link_form.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/output/renderables/overview.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/output/renderables/overview.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/edit_link.php" beforeDir="false" afterPath="$PROJECT_DIR$/edit_link.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/overview.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/templates/overview.mustache" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,7 +50,13 @@
       <updated>1610266771661</updated>
       <workItem from="1610266773638" duration="19000" />
       <workItem from="1610718538109" duration="5779000" />
-      <workItem from="1610794546059" duration="20345000" />
+      <workItem from="1610794546059" duration="23830000" />
+      <workItem from="1610904451147" duration="2040000" />
+      <workItem from="1611164261848" duration="1665000" />
+      <workItem from="1611304406561" duration="8793000" />
+      <workItem from="1611313622749" duration="179000" />
+      <workItem from="1611325894161" duration="4794000" />
+      <workItem from="1611417684526" duration="5334000" />
     </task>
     <task id="LOCAL-00001" summary="Added help bubble">
       <created>1610875057233</created>
@@ -86,7 +100,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610876949561</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added help bubble">
+      <created>1610877280096</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1610877280096</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -102,6 +123,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added help bubble" />

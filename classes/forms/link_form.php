@@ -51,7 +51,7 @@ class link_form extends moodleform {
         $mform->addElement('text', 'description', get_string('link_description', 'block_wiki'));
         $mform->setType('description', PARAM_TEXT);
         $mform->setDefault('description', isset($link->description) ? $link->description : get_string('default_link_description', 'block_wiki'));
-        $mform->addHelpButton('description', 'link_description', 'block_wiki');
+        #$mform->addHelpButton('description', 'link_description', 'block_wiki');
         #$mform->addElement('text', 'link_description', get_string('description_help', 'block_wiki'));
 
         $this->add_action_buttons();

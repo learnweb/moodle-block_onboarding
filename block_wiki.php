@@ -23,9 +23,15 @@ class block_wiki extends block_base {
     }
 
     public function get_content() {
+        global $DB;
+
       if ($this->content !== null) {
         return $this->content;
       }
+
+      #DB->get_records(table: 'link_description' );
+
+
 
       $this->content = new stdClass;
       $renderer = $this->page->get_renderer('block_wiki');
