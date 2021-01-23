@@ -20,6 +20,16 @@ class experience_table extends table_sql {
         // Define the titles of columns to show in header.
         $headers = array('Name', 'Author', 'Degree Program', 'Published', 'Popularity');
         $this->define_headers($headers);
+
+        // Table configuration.
+        $this->set_attribute('cellspacing', '0');
+
+        $this->sortable(true, 'published', SORT_DESC);
+        //$this->no_sorting('moodlerelease');
+
+        $this->initialbars(false);
+        $this->collapsible(false);
+
     }
 
     /**

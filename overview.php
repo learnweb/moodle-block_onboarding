@@ -15,11 +15,14 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 require(__DIR__ . '/../../config.php');
+require "$CFG->libdir/tablelib.php";
+require($CFG->dirroot . '/blocks/experiences/classes/output/experience_table.php');
 
 require_login();
 
 $context = context_system::instance();
 
+$table = new experience_table('uniqueid');
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/experiences/overview.php'));
 $PAGE->set_title(get_string('overview', 'block_experiences'));
@@ -33,4 +36,18 @@ echo $output->container_start('experiences-overview');
 $renderable = new \block_experiences\output\renderables\overview();
 echo $output->render($renderable);
 echo $output->container_end();
+
+// Work out the sql for the table.
+$fields = 'ee.id as id, ee.name as name, u.firstname as author, ec.name as degreeprogram, ee.timecreated as published, ee.popularity as popularity';
+
+$from = '{block_experiences_exps} ee 
+INNER JOIN {user} u ON ee.user_id=u.id
+INNER JOIN {block_experiences_courses} ec ON ee.course_id=ec.id';
+
+$table->set_sql($fields, $from, '1=1');
+
+$table->define_baseurl("$CFG->wwwroot/blocks/experiences/overview.php");
+
+$table->out(40, true);
+
 echo $output->footer();

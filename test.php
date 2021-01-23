@@ -9,14 +9,14 @@ require "$CFG->libdir/tablelib.php";
 require($CFG->dirroot . '/blocks/experiences/classes/output/experience_table.php');
 $context = context_system::instance();
 $PAGE->set_context($context);
-$PAGE->set_url('/test.php');
+$PAGE->set_url('/blocks/experiences/test.php');
 
 $table = new experience_table('uniqueid');
 
 // Print the page header
 $PAGE->set_title('Testing');
 $PAGE->set_heading('Testing table class');
-$PAGE->navbar->add('Testing table class', new moodle_url('/test.php'));
+$PAGE->navbar->add('Testing table class', new moodle_url('/blocks/experiences/test.php'));
 echo $OUTPUT->header();
 
 
@@ -29,7 +29,7 @@ INNER JOIN {block_experiences_courses} ec ON ee.course_id=ec.id';
 
 $table->set_sql($fields, $from, '1=1');
 
-$table->define_baseurl("$CFG->wwwroot/test.php");
+$table->define_baseurl("$CFG->wwwroot/blocks/experiences/test.php");
 
 $table->out(40, true);
 
