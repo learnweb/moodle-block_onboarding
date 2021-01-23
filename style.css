@@ -1,0 +1,50 @@
+.block-experiences-overview-categories {
+  margin-bottom: 20px;
+}
+
+.block-experiences-overview-categories-actions {
+  margin-bottom: 20px;
+}
+
+.block-experiences-overview-category-badge {
+  display: inline-block;
+  background: #008196;
+  padding: 2px 7px 2px 7px;
+  color: #ffffff;
+}
+
+.block-experiences-overview-category-text {
+  display: inline-block;
+  background: #008196;
+  padding: 5px 10px 5px 10px;
+  color: #ffffff;
+}
+
+.block-experiences-overview-category {
+  display: inline-block;
+  padding: 0px 10px 0px 0px;
+}
+
+.block-experiences-overview-experiences-actions {
+  margin-bottom: 20px;
+}
+
+.block-experiences-overview-courses {
+  margin-bottom: 20px;
+}
+
+.block-experiences-overview-courses-actions {
+  margin-bottom: 20px;
+}
+
+.block-experiences-overview-course-text {
+  display: inline-block;
+  background: #008196;
+  padding: 5px 10px 5px 10px;
+  color: #ffffff;
+}
+
+.block-experiences-overview-course {
+  display: inline-block;
+  padding: 0px 10px 0px 0px;
+}
