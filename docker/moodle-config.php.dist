@@ -35,7 +35,8 @@ $CFG->dboptions = array (
 $CFG->wwwroot   = 'http://localhost:8100/moodle';
 $CFG->dataroot  = '/var/www/moodledata';
 $CFG->admin     = 'admin';
-
+//added for development
+$CFG->cachejs = false;
 $CFG->directorypermissions = 02777;
 
 require_once(__DIR__ . '/lib/setup.php');
