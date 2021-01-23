@@ -1,4 +1,9 @@
-define(['jquery'], function ($) {
+define(['jquery', 'core/ajax'], function ($, ajax) {
+
+    var sad = function() {
+
+    }
+
 
     return {
         init: function () {
