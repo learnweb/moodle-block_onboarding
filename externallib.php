@@ -17,7 +17,7 @@
 /**
  * PLUGIN external file
  *
- * @package    block_steps
+ * @package    block_onboarding
  * @category   external
  * @copyright  2021 Westfälische Wilhelms-Universität Münster
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -25,9 +25,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->libdir . "/externallib.php");
+require_once($CFG->libdir . '/externallib.php');
 
-class steps_view_external extends external_api {
+class block_onboarding_view_external extends external_api {
 
     /**
      * Returns description of method parameters

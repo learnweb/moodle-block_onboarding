@@ -26,10 +26,10 @@
 defined('MOODLE_INTERNAL') || die;
 
 $functions = array(
-    'blocks_steps_get_step' => array(
-        'classname'   => 'steps_view_external',
+    'block_onboarding_get_step' => array(
+        'classname'   => 'block_onboarding_view_external',
         'methodname'  => 'get_step',
-        'classpath'   => 'blocks/externallib.php',
+        'classpath'   => 'blocks/onboarding/externallib.php',
         'description' => 'Reads step data from database',
         'type'        => 'read',
         'ajax'        => true

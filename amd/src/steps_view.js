@@ -3,12 +3,13 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
     // beinahltet später mind. 3 Schritte: Progress speichern, nächsten Schritt anzeigen und Progressbar updaten
     // Fälle: kein Schritt und alle Schritte durchlaufen abdecken!
     var next_step = function (stepid_init, position_init) {
-        var stepid = stepid_init
-        var position = position_init
+        // alert("hallo :)");
+        var stepid = stepid_init;
+        var position = position_init;
         $('.next_btn').on('click', function () {
-            //alert("hallo! :)")
+            // alert("hallo! :)")
             var promises = ajax.call([{
-                methodname: 'blocks_onb_get_step',
+                methodname: 'block_onboarding_get_step',
                 args: {
                     stepid: stepid,
                     position: position
