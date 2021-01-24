@@ -7,7 +7,7 @@
 
 .custom-tooltip .custom-tooltiptext {
     visibility: hidden;
-    width: 120px;
+    width: 480px;
     background-color: black;
     color: #fff;
     padding: 5px 5px;
@@ -18,6 +18,21 @@
 
 .custom-tooltip:hover .custom-tooltiptext {
     visibility: visible;
+}
+
+
+/* Steps */
+
+.step_title{
+
+}
+
+.step_description{
+
+}
+
+.next_btn{
+
 }
 
 
