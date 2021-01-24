@@ -64,9 +64,9 @@ class experiences_experience_form extends moodleform {
           $experiences_categories_mapped[$experience_category->category_id] = $experience_category;
         }
         foreach($categories as $category){
-          $mform->addElement('textarea', 'experience_category_' . $category->id . '_description', $category->name, 'wrap="virtual" rows="10" cols="100"');
+          $mform->addElement('textarea', 'experience_category_' . $category->id . '_description', $category->name, array('wrap="virtual" rows="10" cols="100"', 'placeholder' => $category->questions));
           $mform->setType('experience_category_' . $category->id . '_description', PARAM_TEXT);
-          $mform->setDefault('experience_category_' . $category->id . '_description', isset($experiences_categories_mapped[$category->id]) ? $experiences_categories_mapped[$category->id]->description : $category->questions);
+          $mform->setDefault('experience_category_' . $category->id . '_description', isset($experiences_categories_mapped[$category->id]) ? $experiences_categories_mapped[$category->id]->description : "");
           $mform->hideIf('experience_category_' . $category->id . '_description', 'category_' . $category->id);
         }
 
