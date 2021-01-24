@@ -6,7 +6,7 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
         var stepid = stepid_init
         var position = position_init
         $('.next_btn').on('click', function () {
-            //alert("hi! :)")
+            //alert("hallo! :)")
             var promises = ajax.call([{
                 methodname: 'blocks_onb_get_step',
                 args: {

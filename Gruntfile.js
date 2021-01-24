@@ -12,11 +12,22 @@ module.exports = function(grunt) {
                     'amd/build/steps_view.min.js': ['amd/src/steps_view.js']
                 }
             }
+        },
+        watch: {
+            scripts: {
+                files: ['amd/src/*.js'],
+                tasks: ['uglify'],
+                options: {
+                    spawn: true,
+                },
+            },
         }
-    });
+    }),
+
 
     // Plugin-ins laden
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Grunt Tasks ausführen, weitere in uglify array
     grunt.registerTask('default', ['uglify']);
