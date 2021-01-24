@@ -42,14 +42,19 @@ class experiences_experience implements renderable, templatable {
     WHERE block_onb_e_exps_cats.experience_id = {$this->experience_id}";
     $experiences_categories_joined_categories = $DB->get_records_sql($sql);
 
-    //$moresql= "SELECT * FROM {block_onb_e_courses} ec
-    //WHERE ec.id = {$this->course_id}";
-    //$degreeprogram = $DB->get_records_sql($moresql);
+    $moresql= "SELECT ee.id, ec.name as degreeprogram, u.firstname as author
+    FROM {block_onb_e_exps} ee
+    INNER JOIN {block_onb_e_courses} ec
+    ON ee.course_id = ec.id
+    INNER JOIN {user} u
+    ON u.id = ee.user_id
+    WHERE ee.id = {$this->experience_id}";
+    $degreeprogram_author = $DB->get_record_sql($moresql);
 
     return [
         'experience' => $experience,
         'experiences_categories_joined_categories' => array_values($experiences_categories_joined_categories),
-        //'degreeprogram' => $degreeprogram
+        'degreeprogram_author' => $degreeprogram_author
     ];
   }
 }
