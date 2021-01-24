@@ -85,4 +85,5 @@ $string['experience_contact'] = 'Contact Information';
 $string['contact'] = 'Contact: ';
 $string['author'] = 'Author: ';
 $string['date'] = 'Published: ';
+$string['degreeprogram'] = 'Degree Program: ';
 
