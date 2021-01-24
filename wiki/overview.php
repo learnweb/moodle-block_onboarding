@@ -22,6 +22,14 @@ $context = context_system::instance();
 
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/wiki/overview.php'));
+// ------------------------------------------------------------------------------------
+// hier nur zum Testen:
+global $USER;
+global $DB;
+$step = $DB->get_record('block_onb_s_steps', array('position' => 1), $fields = '*', $strictness = IGNORE_MISSING);
+// startet immer bei pos. 1, später auch $USER->id übergeben in array
+$PAGE->requires->js_call_amd('block_steps/steps_view', 'next_step', array($step->id, $step->position));
+// ------------------------------------------------------------------------------------
 $PAGE->set_title(get_string('overview', 'block_onboarding'));
 $PAGE->set_heading(get_string('overview', 'block_onboarding'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
