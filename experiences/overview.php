@@ -16,7 +16,7 @@
 
 require(__DIR__ . '/../../../config.php');
 require "$CFG->libdir/tablelib.php";
-require('./../classes/output/experience_table.php');
+require($CFG->dirroot . '/blocks/onboarding/classes/output/experience_table.php');
 
 require_login();
 
