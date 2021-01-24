@@ -28,7 +28,7 @@ $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/overview.php'));
 $PAGE->set_title(get_string('overview', 'block_onboarding'));
 $PAGE->set_heading(get_string('overview', 'block_onboarding'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
-$PAGE->requires->css('/blocks/experiences/style.css');
+$PAGE->requires->css('/blocks/onboarding/style.css');
 
 $output = $PAGE->get_renderer('block_onboarding');
 echo $output->header();
@@ -46,7 +46,7 @@ INNER JOIN {block_onb_e_courses} ec ON ee.course_id=ec.id';
 
 $table->set_sql($fields, $from, '1=1');
 
-$table->define_baseurl("$CFG->wwwroot/blocks/experiences/overview.php");
+$table->define_baseurl("$CFG->wwwroot/blocks/onboarding/experiences/overview.php");
 
 $table->out(40, true);
 
