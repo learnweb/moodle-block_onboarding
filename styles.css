@@ -7,8 +7,8 @@
 
 .custom-tooltip .custom-tooltiptext {
     visibility: hidden;
-    width: 120px;
-    background-color: black;
+    width: 300px;
+    background-color: darkorange;
     color: #fff;
     padding: 5px 5px;
     border-radius: 6px;
