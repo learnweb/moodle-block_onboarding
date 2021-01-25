@@ -53,7 +53,8 @@ class experience_table extends table_sql {
     }
 
     function col_published($values) {
-        return $values->published;
+        $date = userdate($values->published, get_string('strftimedatetimeshort', 'core_langconfig'));
+        return $date;
     }
 
     function col_popularity($values) {

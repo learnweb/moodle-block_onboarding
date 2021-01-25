@@ -30,7 +30,7 @@ $output = $PAGE->get_renderer('block_onboarding');
 echo $output->header();
 echo $output->container_start('experiences-experience');
 $experience_id = optional_param('experience_id', -1, PARAM_INT);
-$renderable = new \block_onboarding\output\renderables\experience($experience_id);
+$renderable = new \block_onboarding\output\renderables\experiences_experience($experience_id);
 echo $output->render($renderable);
 echo $output->container_end();
 echo $output->footer();

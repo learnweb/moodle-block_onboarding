@@ -37,6 +37,9 @@ $CFG->dataroot  = '/var/www/moodledata';
 $CFG->admin     = 'admin';
 //added for development
 $CFG->cachejs = false;
+$CFG->cachetemplates = false;
+$CFG->langcache = false;
+$CFG->langstringcache = false;
 $CFG->directorypermissions = 02777;
 
 require_once(__DIR__ . '/lib/setup.php');
