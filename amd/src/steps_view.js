@@ -6,7 +6,7 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
         // alert("hallo :)");
         var stepid = stepid_init;
         var position = position_init;
-        $('.next_btn').on('click', function () {
+        $('.done_btn').on('click', function () {
             // alert("hallo! :)")
             var promises = ajax.call([{
                 methodname: 'block_onboarding_get_step',
