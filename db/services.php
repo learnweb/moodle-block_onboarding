@@ -26,14 +26,23 @@
 defined('MOODLE_INTERNAL') || die;
 
 $functions = array(
-    'block_onboarding_get_step' => array(
+    'block_onboarding_get_current_user_step' => array(
         'classname'   => 'block_onboarding_view_external',
-        'methodname'  => 'get_step',
+        'methodname'  => 'get_current_user_step',
         'classpath'   => 'blocks/onboarding/externallib.php',
-        'description' => 'Reads step data from database',
+        'description' => 'Reads currently stored user step data from database',
         'type'        => 'read',
         'ajax'        => true
-//        'capabilities' => '??????????????????????????????????'
+//        'capabilities' => '??????????????????????????????????' -> access.php (?)
+    ),
+    'block_onboarding_get_step_info' => array(
+        'classname'   => 'block_onboarding_view_external',
+        'methodname'  => 'get_step_info',
+        'classpath'   => 'blocks/onboarding/externallib.php',
+        'description' => 'Reads currently stored user step data from database',
+        'type'        => 'read',
+        'ajax'        => true
+//        'capabilities' => '??????????????????????????????????' -> access.php (?)
     )
 //    ,
 //    'blocks_steps_record_step' => array(
