@@ -29,6 +29,7 @@ require_once($CFG->libdir . '/externallib.php');
 
 // TODO: Randfälle behandeln, z.B. letzter Schritt in Liste, keine Schritte in Liste, usw.
 // TODO: Weitere erforderliche Funktionen hinzufügen, siehe steps_view.js Datei für Details
+// TODO: !!! irgendwo ist ein Validierungsfehler für userid, aber wo und warum???
 
 class block_onboarding_view_external extends external_api {
 
