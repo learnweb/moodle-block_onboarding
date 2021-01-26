@@ -37,13 +37,11 @@ $renderable = new \block_onboarding\output\renderables\experiences_overview();
 echo $output->render($renderable);
 echo $output->container_end();
 
-// Work out the sql for the table.
+// SQL Statement for Listview
 $fields = 'ee.id as id, ee.name as name, u.firstname as author, ec.name as degreeprogram, ee.timecreated as published, ee.popularity as popularity';
-
 $from = '{block_onb_e_exps} ee 
 INNER JOIN {user} u ON ee.user_id=u.id
 INNER JOIN {block_onb_e_courses} ec ON ee.course_id=ec.id';
-
 $table->set_sql($fields, $from, '1=1');
 
 $table->define_baseurl("$CFG->wwwroot/blocks/onboarding/experiences/overview.php");

@@ -30,6 +30,7 @@ $experience_id = optional_param('experience_id', -1, PARAM_INT);
 $pExperience = new stdClass;
 $pExperience->id = -1;
 if($experience_id != -1){
+  // Get the existing data from the Database
   $pExperience = $DB->get_record('block_onb_e_exps', array('id'=>$experience_id), $fields='*', $strictness=IGNORE_MISSING);
 }
 
@@ -44,6 +45,7 @@ if($experience_id == -1 || $USER->id == $pExperience->user_id || has_capability(
   if ($mform->is_cancelled()) {
   		redirect('overview.php');
   } else if ($fromform = $mform->get_data()) {
+      // Data written in the Database
       $experience = new stdClass();
       $experience->name = $fromform->name;
       $experience->contact = $fromform->contact;
