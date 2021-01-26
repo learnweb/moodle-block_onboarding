@@ -27,67 +27,127 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/externallib.php');
 
+// TODO: Randfälle behandeln, z.B. letzter Schritt in Liste, keine Schritte in Liste, usw.
+// TODO: Weitere erforderliche Funktionen hinzufügen, siehe steps_view.js Datei für Details
+
 class block_onboarding_view_external extends external_api {
 
     /**
      * Returns description of method parameters
+     * Parameter erklären!
      * @return external_function_parameters
      */
-    public static function get_step_parameters() {
+    public static function init_step_parameters() {
         return new external_function_parameters(
-            # userid wird auch erfolderlich sein für "richtige" Impl
             array(
-                'stepid' => new external_value(PARAM_INT, 'id of step', VALUE_REQUIRED),
-                'position' => new external_value(PARAM_INT, 'step position', VALUE_REQUIRED),
+                'userid' => new external_value(PARAM_INT, 'id of user', VALUE_REQUIRED),
             )
         );
     }
 
     /**
      * The function itself
-     * parameter erklären!!
+     * Parameter erklären!
      * @return string welcome message
      */
-    public static function get_step($stepid, $position) {
-        global $DB;
-        $params = self::validate_parameters(self::get_step_parameters(),
+    public static function init_step($userid) {
+
+        $params = self::validate_parameters(self::init_step_parameters(),
             array(
-                'stepid' => $stepid,
-                'position' => $position,
+                'userid' => $userid,
             )
         );
 
-        // CONTEXT & CAPABILITIES CHECKEN!
+        // Aktuelle step_id vom User abfragen
+        $cur_stepid = \block_onboarding\step_view_data_functions::get_current_user_stepid($userid);
+        // Position des aktuellen User Steps abfragen
+        $cur_position = \block_onboarding\step_view_data_functions::get_step_position($cur_stepid);
+        // Daten des aktuellen Steps abfragen
+        $step = \block_onboarding\step_view_data_functions::get_step_data($cur_position);
 
-        $step = $DB->get_record('block_onb_s_steps', array('id' => $stepid), $fields = '*', $strictness = IGNORE_MISSING);
+        $return_step['name'] = $step->name;
+        $return_step['description'] = $step->description;
+        $return_step['position'] = $step->position;
 
-        // Safety einügen fall step leer ist oder nicht gefunden wurde!
-        // kürzer mit  = array_values($step); ???
-        $next_step['id'] = $step->id;
-        $next_step['name'] = $step->name;
-        $next_step['description'] = $step->description;
-        $next_step['position'] = $step->position;
-
-        return $next_step;
+        return $return_step;
     }
 
     /**
      * Returns description of method result value
+     * Parameter erklären!
      * @return external_description
      */
-    public static function get_step_returns() {
+    public static function init_step_returns() {
 //        return new external_multiple_structure(
-            return new external_single_structure(
-                array(
-                    'id'            => new external_value(PARAM_INT, 'new step id'),
-                    'name'          => new external_value(PARAM_TEXT, 'name of new step'),
-                    'description'   => new external_value(PARAM_TEXT, 'description of new step'),
-                    'position'      => new external_value(PARAM_INT, 'position of new step'),
-                )
+        return new external_single_structure(
+            array(
+                'name'          => new external_value(PARAM_TEXT, 'name of new step'),
+                'description'   => new external_value(PARAM_TEXT, 'description of new step'),
+                'position'      => new external_value(PARAM_INT, 'position of new step'),
+            )
 //            )
         );
     }
 
 
+    /* --------------------------------------------------------------------------------------------------------- */
+
+
+    /**
+     * Returns description of method parameters
+     * Parameter erklären!
+     * @return external_function_parameters
+     */
+    public static function next_step_parameters() {
+        return new external_function_parameters(
+            array(
+                'userid' => new external_value(PARAM_INT, 'id of user', VALUE_REQUIRED),
+            )
+        );
+    }
+
+    /**
+     * The function itself
+     * Parameter erklären!
+     * @return string welcome message
+     */
+    public static function next_step($userid) {
+
+        $params = self::validate_parameters(self::next_step_parameters(),
+            array(
+                'userid' => $userid,
+            )
+        );
+
+        // Aktuelle step_id vom User abfragen
+        $cur_stepid = \block_onboarding\step_view_data_functions::get_current_user_stepid($userid);
+        // Position des aktuellen User Steps abfragen
+        $cur_position = \block_onboarding\step_view_data_functions::get_step_position($cur_stepid);
+        // Daten des nächsten Steps (cur_position + 1) abfragen
+        $step = \block_onboarding\step_view_data_functions::get_step_data($cur_position + 1);
+
+        $return_step['name'] = $step->name;
+        $return_step['description'] = $step->description;
+        $return_step['position'] = $step->position;
+
+        return $return_step;
+    }
+
+    /**
+     * Returns description of method result value
+     * Parameter erklären!
+     * @return external_description
+     */
+    public static function next_step_returns() {
+//        return new external_multiple_structure(
+        return new external_single_structure(
+            array(
+                'name'          => new external_value(PARAM_TEXT, 'name of new step'),
+                'description'   => new external_value(PARAM_TEXT, 'description of new step'),
+                'position'      => new external_value(PARAM_INT, 'position of new step'),
+            )
+//            )
+        );
+    }
 
 }

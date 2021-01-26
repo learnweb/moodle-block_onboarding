@@ -1,35 +1,53 @@
 define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notification) {
 
-    // beinahltet später mind. 3 Schritte: Progress speichern, nächsten Schritt anzeigen und Progressbar updaten
-    // Fälle: kein Schritt und alle Schritte durchlaufen abdecken!
-    var next_step = function (stepid_init, position_init) {
-        // alert("hallo :)");
-        var stepid = stepid_init;
-        var position = position_init;
-        $('.next_btn').on('click', function () {
+    // TODO: Randfälle behandeln, z.B. letzter Schritt in Liste usw.
+    // TODO: Fortschritt speichern -> set_current_step
+    // TODO: Erledigt, Überspringen und Zurück mit verschiedenen Aufurfparametern für get_cur, set_cur und get_info impl.
+    // TODO: clean code
+
+
+    var init = function (userid) {
+
+        // alert("hallo! :)")
+        var promises = ajax.call([{
+            methodname: 'block_onboarding_init_step',
+            args: {
+                userid: userid
+            }
+        }
+        ]);
+        promises[0].done(function (response) {
+            var html1 = '<div class=\"step_description\">' + response.description + '</div>';
+            $('.step_description').replaceWith(html1);
+            var html2 = '<h5 class=\"step_title\"><b>Step #' + response.position + ': ' + response.name + '</b></h5>';
+            $('.step_title').replaceWith(html2);
+        }).fail(notification.exception);
+    };
+
+
+    var next_step = function (userid) {
+
+        $('.done_btn').on('click', function () {
             // alert("hallo! :)")
             var promises = ajax.call([{
-                methodname: 'block_onboarding_get_step',
+                methodname: 'block_onboarding_next_step',
                 args: {
-                    stepid: stepid,
-                    position: position
+                    userid: userid
                 }
             }
             ]);
             promises[0].done(function (response) {
-                //alert(response.id)
                 var html1 = '<div class=\"step_description\">' + response.description + '</div>';
                 $('.step_description').replaceWith(html1);
                 var html2 = '<h5 class=\"step_title\"><b>Step #' + response.position + ': ' + response.name + '</b></h5>';
                 $('.step_title').replaceWith(html2);
-                stepid = response.id + 1
-                position = response.position + 1
             }).fail(notification.exception);
         })
-    }
+    };
+
 
     return {
-        next_step: next_step
-
+        init: init,
+        next_step: next_step()
     };
 });

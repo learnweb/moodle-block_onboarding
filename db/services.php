@@ -25,17 +25,27 @@
 
 defined('MOODLE_INTERNAL') || die;
 
+// TODO: Array-Informationen der Funktionen prüfen und überarbeiten!
+
 $functions = array(
-    'block_onboarding_get_step' => array(
+    'block_onboarding_next_step' => array(
         'classname'   => 'block_onboarding_view_external',
-        'methodname'  => 'get_step',
+        'methodname'  => 'next_step',
         'classpath'   => 'blocks/onboarding/externallib.php',
-        'description' => 'Reads step data from database',
+        'description' => 'BESCHREIBUNG',
         'type'        => 'read',
         'ajax'        => true
-//        'capabilities' => '??????????????????????????????????'
-    )
-//    ,
+//        'capabilities' => '??????????????????????????????????' -> access.php (?)
+    ),
+    'block_onboarding_init_step' => array(
+        'classname'   => 'block_onboarding_view_external',
+        'methodname'  => 'init_step',
+        'classpath'   => 'blocks/onboarding/externallib.php',
+        'description' => 'BESCHREIBUNG',
+        'type'        => 'read',
+        'ajax'        => true
+//        'capabilities' => '??????????????????????????????????' -> access.php (?)
+//    ),
 //    'blocks_steps_record_step' => array(
 //        'classname'    => 'steps_view_external',
 //        'methodname'   => 'record_step',
@@ -44,5 +54,5 @@ $functions = array(
 //        'type'         => 'write',
 //        'ajax'         => true,
 //        'capabilities' => '??????????????????????????????????'
-//    )
+    )
 );

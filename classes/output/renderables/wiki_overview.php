@@ -34,8 +34,6 @@ class wiki_overview implements renderable, templatable {
     $links = array_values($DB->get_records('block_onb_w_links'));
 
 
-
-
     foreach($categories as $category){
       foreach($links as $link){
         if($link->category_id == $category->id){
@@ -45,13 +43,9 @@ class wiki_overview implements renderable, templatable {
       }
     }
 
-    # hier sollten später die step-Daten / Platzhalter oder whatever rein!
-    $data = $DB->get_record('block_onb_s_steps', array('position' => 1), $fields = '*', $strictness = IGNORE_MISSING);
-
     return [
       'can_manage_wiki' => has_capability('block/onboarding:w_manage_wiki', \context_system::instance()) ? true : false,
-      'categories_with_links' => $categories,
-      'data' => $data
+      'categories_with_links' => $categories
     ];
   }
 
