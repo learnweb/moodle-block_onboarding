@@ -22,6 +22,9 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
             var html2 = '<h5 class=\"step_title\"><b>Step #' + response.position + ': ' + response.name + '</b></h5>';
             $('.step_title').replaceWith(html2);
         }).fail(notification.exception);
+
+        // muss hier initialisiert werden, weil call_amd nur eine Funktion aufrufen kann??
+        next_step(userid)
     };
 
 
@@ -29,6 +32,7 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
 
         $('.done_btn').on('click', function () {
             // alert("hallo! :)")
+            // alert(userid);
             var promises = ajax.call([{
                 methodname: 'block_onboarding_next_step',
                 args: {
