@@ -1,0 +1,37 @@
+<!--
+TODO: Language Strings / Mustache str verwenden & Sprache anpassen
+TODO: Warum müssen Buttons beim Ersten Klicken 2x geklickt werden um Aktion zu triggern? -> beheben!
+TODO: CSS Anpassungen in styles.css vornehmen / ersetzen
+TODO: UX überarbeiten
+-->
+<h5 class="step_title"><b>Step # EMPTY</b></h5>
+<h6>Instructions:</h6>
+<div class="step_description">
+    EMPTY
+</div>
+</br>
+<button class="back_btn" type=button><b>Zurück</b></button>
+<button class="skip_btn" type=button><b>Überspringen</b></button>
+<button class="done_btn" type=button><b>Erledigt!</b></button>
+</br>
+</br>
+</br>
+<h2><b>Wiki</b></h2>
+{{#categories_with_links}}
+    <h4>{{{name}}} {{#can_manage_wiki}}<a href="edit_category.php?category_id={{{id}}}">{{#pix}}t/editstring, core, Edit Link{{/pix}}</a><a href="delete_category.php?category_id={{{id}}}">{{#pix}}t/delete, core, Delete Link{{/pix}}</a>{{/can_manage_wiki}}</h4>
+    <ul>
+      {{#links}}
+      <li>
+        <a target="_blank" rel="noopener noreferrer" href="{{{url}}}">{{{name}}}</a> {{#can_manage_wiki}}<a href="edit_link.php?link_id={{{id}}}">{{#pix}}t/editstring, core, Edit Link{{/pix}}</a><a href="delete_link.php?link_id={{{id}}}">{{#pix}}t/delete, core, Delete Link{{/pix}}</a>{{/can_manage_wiki}}
+          <div class="custom-tooltip">{{#pix}}i/info, core,{{/pix}}
+              <span class="custom-tooltiptext">{{{description}}}</span>
+          </div>
+      </li>
+      {{/links}}
+    </ul>
+{{/categories_with_links}}
+{{#can_manage_wiki}}
+<a href="edit_category.php">New Category</a>
+<br>
+<a href="edit_link.php">New Link</a>
+{{/can_manage_wiki}}
