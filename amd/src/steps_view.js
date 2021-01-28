@@ -37,7 +37,7 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
             }
             ]);
             promises[0].done(function (response) {
-                alert(response.position);
+                // alert(response.position);
                 var html1 = '<div class=\"step_description\">' + response.description + '</div>';
                 $('.step_description').replaceWith(html1);
                 var html2 = '<h5 class=\"step_title\"><b>Step #' + response.position + ': ' + response.name + '</b></h5>';
