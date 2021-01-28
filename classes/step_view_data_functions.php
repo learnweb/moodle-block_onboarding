@@ -36,17 +36,17 @@ class step_view_data_functions {
     // !!! ÜBERGABE DER USERID HIER UND in JS ggf. ÜBERFLÜSSIG WG. $USER->ID ? -> prüfen
     // evtl. Komplikationen wegen Kontexten von verschiedenen Nutzern? -> eher nicht (?)
 
-    public static function get_current_user_stepid($userid) {
-        global $DB;
+    public static function get_current_user_stepid() {
+        global $DB, $USER;
 
-        $step_bool = $DB->record_exists('block_onb_s_current', array('userid' => $userid));
+        $step_bool = $DB->record_exists('block_onb_s_current', array('userid' => $USER->id));
 
         // wenn noch kein Fortschritt gemacht wurde, also kein Datensatz vorhanden ist -> starten bei pos = 1
         if($step_bool == false){
             $temp_step = $DB->get_record('block_onb_s_steps', array('position' => 1), $fields = '*', $strictness = IGNORE_MISSING);
 
             $step = new \stdClass();
-            $step->userid = $userid;
+            $step->userid = $USER->id;
             $step->stepid = $temp_step->id;
             $step->timecreated = time();
             $step->timemodified = time();
@@ -54,11 +54,22 @@ class step_view_data_functions {
 
             $return_stepid = $step->stepid;
         } else {
-            $step = $DB->get_record('block_onb_s_current', array('userid' => $userid), $fields = '*', $strictness = IGNORE_MISSING);
-            $return_stepid = $step->id;
+            $step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id), $fields = '*', $strictness = IGNORE_MISSING);
+            $return_stepid = $step->stepid;
         }
 
         return $return_stepid;
+    }
+
+    public static function set_current_user_stepid($stepid) {
+        global $DB, $USER;
+
+        // evtl. durch Funktion get_current_user_step (den ganzen Schritt) ersetzen
+        $step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id), $fields = '*', $strictness = IGNORE_MISSING);
+        $step->stepid = $stepid;
+        $step->timemodified = time();
+
+        $step = $DB->update_record('block_onb_s_current', $step, $bulk=false);
     }
 
 

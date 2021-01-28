@@ -6,13 +6,12 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
     // TODO: clean code
 
 
-    var init = function (userid) {
+    var init = function () {
 
         // alert("hallo! :)")
         var promises = ajax.call([{
             methodname: 'block_onboarding_init_step',
             args: {
-                userid: userid
             }
         }
         ]);
@@ -23,24 +22,22 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
             $('.step_title').replaceWith(html2);
         }).fail(notification.exception);
 
-        // muss hier initialisiert werden, weil call_amd nur eine Funktion aufrufen kann??
-        next_step(userid)
+
     };
 
 
-    var next_step = function (userid) {
+    var next_step = function () {
 
         $('.done_btn').on('click', function () {
             // alert("hallo! :)")
-            // alert(userid);
             var promises = ajax.call([{
                 methodname: 'block_onboarding_next_step',
                 args: {
-                    userid: userid
                 }
             }
             ]);
             promises[0].done(function (response) {
+                alert(response.position);
                 var html1 = '<div class=\"step_description\">' + response.description + '</div>';
                 $('.step_description').replaceWith(html1);
                 var html2 = '<h5 class=\"step_title\"><b>Step #' + response.position + ': ' + response.name + '</b></h5>';

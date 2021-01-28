@@ -41,7 +41,6 @@ class block_onboarding_view_external extends external_api {
     public static function init_step_parameters() {
         return new external_function_parameters(
             array(
-                'userid' => new external_value(PARAM_INT, 'id of user', VALUE_REQUIRED),
             )
         );
     }
@@ -51,16 +50,15 @@ class block_onboarding_view_external extends external_api {
      * Parameter erklären!
      * @return string welcome message
      */
-    public static function init_step($userid) {
+    public static function init_step() {
 
         $params = self::validate_parameters(self::init_step_parameters(),
             array(
-                'userid' => $userid,
             )
         );
 
         // Aktuelle step_id vom User abfragen
-        $cur_stepid = \block_onboarding\step_view_data_functions::get_current_user_stepid($userid);
+        $cur_stepid = \block_onboarding\step_view_data_functions::get_current_user_stepid();
         // Position des aktuellen User Steps abfragen
         $cur_position = \block_onboarding\step_view_data_functions::get_step_position($cur_stepid);
         // Daten des aktuellen Steps abfragen
@@ -102,7 +100,6 @@ class block_onboarding_view_external extends external_api {
     public static function next_step_parameters() {
         return new external_function_parameters(
             array(
-                'userid' => new external_value(PARAM_INT, 'id of user', VALUE_REQUIRED),
             )
         );
     }
@@ -112,21 +109,23 @@ class block_onboarding_view_external extends external_api {
      * Parameter erklären!
      * @return string welcome message
      */
-    public static function next_step($userid) {
+    public static function next_step() {
 
         $params = self::validate_parameters(self::next_step_parameters(),
             array(
-                'userid' => $userid,
             )
         );
 
         // Aktuelle step_id vom User abfragen
-        $cur_stepid = \block_onboarding\step_view_data_functions::get_current_user_stepid($userid);
+        $cur_stepid = \block_onboarding\step_view_data_functions::get_current_user_stepid();
         // Position des aktuellen User Steps abfragen
         $cur_position = \block_onboarding\step_view_data_functions::get_step_position($cur_stepid);
         // Daten des nächsten Steps (cur_position + 1) abfragen
         $step = \block_onboarding\step_view_data_functions::get_step_data($cur_position + 1);
+        // Datenbank-Eintrag für User updaten mit neuem step
+        \block_onboarding\step_view_data_functions::set_current_user_stepid($step->id);
 
+        // Rückgabe an JavaScript
         $return_step['name'] = $step->name;
         $return_step['description'] = $step->description;
         $return_step['position'] = $step->position;
