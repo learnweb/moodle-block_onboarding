@@ -41,7 +41,7 @@ class experiences_filter_form extends moodleform {
         $categories = $DB->get_records('block_onb_e_cats');
         $categories_modified = array();
         foreach($categories as $category){
-            $categories_modified[$course->id] = $category->name;
+            $categories_modified[$category->id] = $category->name;
         }
         $options = array(
             'multiple' => true,
