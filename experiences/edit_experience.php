@@ -49,6 +49,7 @@ if($experience_id == -1 || $USER->id == $pExperience->user_id || has_capability(
       $experience = new stdClass();
       $experience->name = $fromform->name;
       $experience->contact = $fromform->contact;
+      $experience->takeaways = $fromform->takeaways;
       $experience->user_id = $fromform->user_id;
       $experience->course_id = $fromform->course_id;
       $experience->timecreated = time();

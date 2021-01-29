@@ -86,4 +86,8 @@ $string['contact'] = 'Contact: ';
 $string['author'] = 'Author: ';
 $string['date'] = 'Published: ';
 $string['degreeprogram'] = 'Degree Program: ';
-
+$string['takeaways'] = 'Key Takeaways';
+$string['takeaways_default'] = 'Briefly summarize your report';
+$string['degreeprogram_filter'] = 'Degree Programs';
+$string['category_filter'] = 'Categories';
+$string['applyfilter'] = 'Apply Filter';

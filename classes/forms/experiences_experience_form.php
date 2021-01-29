@@ -73,6 +73,11 @@ class experiences_experience_form extends moodleform {
           $mform->hideIf('experience_category_' . $category->id . '_description', 'category_' . $category->id);
         }
 
+        // Key Takeaways Field
+        $mform->addElement('textarea', 'takeaways', get_string('takeaways', 'block_onboarding'),  array('wrap="virtual" rows="3" cols="80"', 'placeholder' => get_string('takeaways_default', 'block_onboarding'), 'required'));
+        $mform->setType('takeaways', PARAM_TEXT);
+        $mform->setDefault('takeaways', isset($experience->takeaways) ? $experience->takeaways : '');
+
         // Contact Field
         $mform->addElement('text', 'contact', get_string('experience_contact', 'block_onboarding'));
         $mform->setType('contact', PARAM_TEXT);

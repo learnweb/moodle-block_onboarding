@@ -37,6 +37,12 @@ $renderable = new \block_onboarding\output\renderables\experiences_overview();
 echo $output->render($renderable);
 echo $output->container_end();
 
+require_once('./../classes/forms/experiences_filter_form.php');
+
+$mform = new experiences_filter_form(null, null);
+
+$mform->display();
+
 // SQL Statement for Listview
 $fields = 'ee.id as id, ee.name as name, u.firstname as author, ec.name as degreeprogram, ee.timecreated as published, ee.popularity as popularity';
 $from = '{block_onb_e_exps} ee 
