@@ -20,6 +20,8 @@ require($CFG->dirroot . '/blocks/onboarding/classes/output/experience_table.php'
 
 require_login();
 
+global $DB;
+
 $context = context_system::instance();
 
 $table = new experience_table('uniqueid');
@@ -43,12 +45,54 @@ $mform = new experiences_filter_form(null, null);
 
 $mform->display();
 
+
 // SQL Statement for Listview
 $fields = 'ee.id as id, ee.name as name, u.firstname as author, ec.name as degreeprogram, ee.timecreated as published, ee.popularity as popularity';
 $from = '{block_onb_e_exps} ee 
 INNER JOIN {user} u ON ee.user_id=u.id
 INNER JOIN {block_onb_e_courses} ec ON ee.course_id=ec.id';
-$table->set_sql($fields, $from, '1=1');
+$where = '1=1';
+
+if ($fromform = $mform->get_data()) {
+    $cats = '(' . implode(',', $fromform->category_filter) . ')';
+    $crs = '(' . implode(',', $fromform->course_filter) . ')';
+
+    if (empty($fromform->category_filter) != true) {
+        $w = "WHERE category_id IN $cats";
+    } else {
+        $w = '';
+    }
+    $sql = "SELECT experience_id
+        FROM {block_onb_e_exps_cats} matching $w";
+    $firstresult = $DB->get_fieldset_sql($sql);
+    $sqlfirstresult = '(' . implode(',', $firstresult) . ')';
+
+    if (empty($fromform->course_filter) != true) {
+        if(empty($firstresult) != true) {
+            $w = "WHERE id IN $sqlfirstresult AND course_id IN $crs";
+        } else {
+            $w = "WHERE course_id IN $crs";
+        }
+    } else {
+        if(empty($firstresult) != true) {
+            $w = "WHERE id IN $sqlfirstresult";
+        } else {
+            $w = "";
+        }
+    }
+    $sql = "SELECT id
+        FROM {block_onb_e_exps} experiences $w";
+    $result = $DB->get_fieldset_sql($sql);
+    $sqlresult = implode(' OR ', $result);
+
+    if(empty($result) != true) {
+        $where = 'ee.id =' . $sqlresult;
+    } else {
+        $where = '1=0';
+    }
+}
+
+$table->set_sql($fields, $from, $where);
 
 $table->define_baseurl("$CFG->wwwroot/blocks/onboarding/experiences/overview.php");
 
