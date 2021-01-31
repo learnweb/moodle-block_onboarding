@@ -43,17 +43,22 @@ class step_view_data_functions {
 
         // wenn noch kein Fortschritt gemacht wurde, also kein Datensatz vorhanden ist -> starten bei pos = 1
         if($step_bool == false){
-            
-            $temp_step = $DB->get_record('block_onb_s_steps', array('position' => 1));
 
-            $step = new \stdClass();
-            $step->userid = $USER->id;
-            $step->stepid = $temp_step->id;
-            $step->timecreated = time();
-            $step->timemodified = time();
-            $step->id = $DB->insert_record('block_onb_s_current', $step);
+            // wenn kein step in Liste vorhanden ist
+            if($DB->count_records('block_onb_s_steps') == 0){
+                $return_stepid = -1;
+            } else {
+                $temp_step = $DB->get_record('block_onb_s_steps', array('position' => 1));
 
-            $return_stepid = $step->stepid;
+                $step = new \stdClass();
+                $step->userid = $USER->id;
+                $step->stepid = $temp_step->id;
+                $step->timecreated = time();
+                $step->timemodified = time();
+                $step->id = $DB->insert_record('block_onb_s_current', $step);
+
+                $return_stepid = $step->stepid;
+            }
         } else {
             $step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id));
             $return_stepid = $step->stepid;
@@ -108,6 +113,15 @@ class step_view_data_functions {
         global $DB;
 
         $return_step = $DB->get_record('block_onb_s_steps', array('position' => $position));
+
+        return $return_step;
+    }
+
+
+    public static function message_no_steps() {
+        $return_step['name'] = 'NO STEPS TO DISPLAY!';
+        $return_step['description'] = 'There are currently no steps saved in the database. Please add steps in the admin section or contact an administrator.';
+        $return_step['position'] = 0;
 
         return $return_step;
     }

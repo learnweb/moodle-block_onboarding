@@ -59,16 +59,22 @@ class block_onboarding_view_external extends external_api {
 
         // Aktuelle step_id vom User abfragen
         $cur_stepid = \block_onboarding\step_view_data_functions::get_current_user_stepid();
-        // Position des aktuellen User Steps abfragen
-        $cur_position = \block_onboarding\step_view_data_functions::get_step_position($cur_stepid);
-        // Daten des aktuellen Steps abfragen
-        $step = \block_onboarding\step_view_data_functions::get_step_data($cur_position);
 
-        $return_step['name'] = $step->name;
-        $return_step['description'] = $step->description;
-        $return_step['position'] = $step->position;
+        // Wenn kein Schritt in der Datenbank existiert
+        if($cur_stepid == -1){
+            return \block_onboarding\step_view_data_functions::message_no_steps();
+        } else {
+            // Position des aktuellen User Steps abfragen
+            $cur_position = \block_onboarding\step_view_data_functions::get_step_position($cur_stepid);
+            // Daten des aktuellen Steps abfragen
+            $step = \block_onboarding\step_view_data_functions::get_step_data($cur_position);
 
-        return $return_step;
+            $return_step['name'] = $step->name;
+            $return_step['description'] = $step->description;
+            $return_step['position'] = $step->position;
+
+            return $return_step;
+        }
     }
 
     /**
@@ -115,25 +121,31 @@ class block_onboarding_view_external extends external_api {
             array(
             )
         );
+
         // Aktuelle step_id vom User abfragen
         $cur_stepid = \block_onboarding\step_view_data_functions::get_current_user_stepid();
-        // Position des aktuellen User Steps abfragen
-        $cur_position = \block_onboarding\step_view_data_functions::get_step_position($cur_stepid);
 
-        // Daten des nächsten Steps (cur_position + 1) abfragen
-        //HIER MUSS EXCEPTION EINGEFÜGT WERDEN FALLS NÄCHSTER SCHRITT NICHT EXISTIERT
-        $step = \block_onboarding\step_view_data_functions::get_step_data($cur_position+1);
-        // Datenbank-Eintrag für User updaten mit neuem step
-        \block_onboarding\step_view_data_functions::set_current_user_stepid($step->id);
-        //Markiert den Step als completed
-        \block_onboarding\step_view_data_functions::set_step_id_complete($step->id);
+        // Wenn kein Schritt in der Datenbank existiert
+        if($cur_stepid == -1){
+            return \block_onboarding\step_view_data_functions::message_no_steps();
+        } else {
+            // Position des aktuellen User Steps abfragen
+            $cur_position = \block_onboarding\step_view_data_functions::get_step_position($cur_stepid);
+            // Daten des nächsten Steps (cur_position + 1) abfragen
+            //HIER MUSS EXCEPTION EINGEFÜGT WERDEN FALLS NÄCHSTER SCHRITT NICHT EXISTIERT
+            $step = \block_onboarding\step_view_data_functions::get_step_data($cur_position + 1);
+            // Datenbank-Eintrag für User updaten mit neuem step
+            \block_onboarding\step_view_data_functions::set_current_user_stepid($step->id);
+            //Markiert den Step als completed
+            \block_onboarding\step_view_data_functions::set_step_id_complete($step->id);
 
-        // Rückgabe an JavaScript
-        $return_step['name'] = $step->name;
-        $return_step['description'] = $step->description;
-        $return_step['position'] = $step->position;
+            // Rückgabe an JavaScript
+            $return_step['name'] = $step->name;
+            $return_step['description'] = $step->description;
+            $return_step['position'] = $step->position;
 
-        return $return_step;
+            return $return_step;
+        }
     }
 
 
@@ -172,21 +184,26 @@ class block_onboarding_view_external extends external_api {
 
         // Aktuelle step_id vom User abfragen
         $cur_stepid = \block_onboarding\step_view_data_functions::get_current_user_stepid();
-        // Position des aktuellen User Steps abfragen
-        $cur_position = \block_onboarding\step_view_data_functions::get_step_position($cur_stepid);
 
-        // Daten des nächsten Steps (cur_position + 1) abfragen
-        //HIER MUSS EXCEPTION EINGEFÜGT WERDEN FALLS NÄCHSTER SCHRITT NICHT EXISTIERT
-        $step = \block_onboarding\step_view_data_functions::get_step_data($cur_position + 1);
-        // Datenbank-Eintrag für User updaten mit neuem step
-        \block_onboarding\step_view_data_functions::set_current_user_stepid($step->id);
+        // Wenn kein Schritt in der Datenbank existiert
+        if($cur_stepid == -1){
+            return \block_onboarding\step_view_data_functions::message_no_steps();
+        } else {
+            // Position des aktuellen User Steps abfragen
+            $cur_position = \block_onboarding\step_view_data_functions::get_step_position($cur_stepid);
+            // Daten des nächsten Steps (cur_position + 1) abfragen
+            //HIER MUSS EXCEPTION EINGEFÜGT WERDEN FALLS NÄCHSTER SCHRITT NICHT EXISTIERT
+            $step = \block_onboarding\step_view_data_functions::get_step_data($cur_position + 1);
+            // Datenbank-Eintrag für User updaten mit neuem step
+            \block_onboarding\step_view_data_functions::set_current_user_stepid($step->id);
 
-        // Rückgabe an JavaScript
-        $return_step['name'] = $step->name;
-        $return_step['description'] = $step->description;
-        $return_step['position'] = $step->position;
+            // Rückgabe an JavaScript
+            $return_step['name'] = $step->name;
+            $return_step['description'] = $step->description;
+            $return_step['position'] = $step->position;
 
-        return $return_step;
+            return $return_step;
+        }
     }
 
     public static function skip_step_returns() {
@@ -216,21 +233,26 @@ class block_onboarding_view_external extends external_api {
         );
         // Aktuelle step_id vom User abfragen
         $cur_stepid = \block_onboarding\step_view_data_functions::get_current_user_stepid();
-        // Position des aktuellen User Steps abfragen
-        $cur_position = \block_onboarding\step_view_data_functions::get_step_position($cur_stepid);
 
-        // Daten des vorherigen Steps (cur_position - 1) abfragen
-        //HIER MUSS EXCEPTION EINGEFÜGT WERDEN FALLS NÄCHSTER SCHRITT NICHT EXISTIERT
-        $step = \block_onboarding\step_view_data_functions::get_step_data($cur_position - 1);
-        // Datenbank-Eintrag für User updaten mit neuem step
-        \block_onboarding\step_view_data_functions::set_current_user_stepid($step->id);
+        // Wenn kein Schritt in der Datenbank existiert
+        if($cur_stepid == -1){
+            return \block_onboarding\step_view_data_functions::message_no_steps();
+        } else {
+            // Position des aktuellen User Steps abfragen
+            $cur_position = \block_onboarding\step_view_data_functions::get_step_position($cur_stepid);
+            // Daten des vorherigen Steps (cur_position - 1) abfragen
+            //HIER MUSS EXCEPTION EINGEFÜGT WERDEN FALLS NÄCHSTER SCHRITT NICHT EXISTIERT
+            $step = \block_onboarding\step_view_data_functions::get_step_data($cur_position - 1);
+            // Datenbank-Eintrag für User updaten mit neuem step
+            \block_onboarding\step_view_data_functions::set_current_user_stepid($step->id);
 
-        // Rückgabe an JavaScript
-        $return_step['name'] = $step->name;
-        $return_step['description'] = $step->description;
-        $return_step['position'] = $step->position;
+            // Rückgabe an JavaScript
+            $return_step['name'] = $step->name;
+            $return_step['description'] = $step->description;
+            $return_step['position'] = $step->position;
 
-        return $return_step;
+            return $return_step;
+        }
     }
     public static function back_step_returns() {
 //        return new external_multiple_structure(
