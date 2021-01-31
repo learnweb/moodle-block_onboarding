@@ -43,7 +43,7 @@ class step_view_data_functions {
 
         // wenn noch kein Fortschritt gemacht wurde, also kein Datensatz vorhanden ist -> starten bei pos = 1
         if($step_bool == false){
-            $temp_step = $DB->get_record('block_onb_s_steps', array('position' => 1), $fields = '*', $strictness = IGNORE_MISSING);
+            $temp_step = $DB->get_record('block_onb_s_steps', array('position' => 1));
 
             $step = new \stdClass();
             $step->userid = $USER->id;
@@ -54,7 +54,7 @@ class step_view_data_functions {
 
             $return_stepid = $step->stepid;
         } else {
-            $step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id), $fields = '*', $strictness = IGNORE_MISSING);
+            $step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id));
             $return_stepid = $step->stepid;
         }
 
@@ -65,17 +65,17 @@ class step_view_data_functions {
         global $DB, $USER;
 
         // evtl. durch Funktion get_current_user_step (den ganzen Schritt) ersetzen
-        $step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id), $fields = '*', $strictness = IGNORE_MISSING);
+        $step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id));
         $step->stepid = $stepid;
         $step->timemodified = time();
 
-        $step = $DB->update_record('block_onb_s_current', $step, $bulk=false);
+        $step = $DB->update_record('block_onb_s_current', $step);
     }
 
     public static function set_step_id_complete($stepid) {
         global $DB, $USER;
 
-        $temp_step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id), $fields = '*', $strictness = IGNORE_MISSING);
+        $temp_step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id));
         $step = new \stdClass();
         $step->stepid = $stepid;
         $step->userid = $USER->id;
@@ -86,7 +86,7 @@ class step_view_data_functions {
     public static function get_step_id($position) {
         global $DB;
 
-        $step = $DB->get_record('block_onb_s_steps', array('position' => $position), $fields = '*', $strictness = IGNORE_MISSING);
+        $step = $DB->get_record('block_onb_s_steps', array('position' => $position));
         $return_stepid = $step->id;
 
         return $return_stepid;
@@ -96,7 +96,7 @@ class step_view_data_functions {
     public static function get_step_position($stepid) {
         global $DB;
 
-        $step = $DB->get_record('block_onb_s_steps', array('id' => $stepid), $fields = '*', $strictness = IGNORE_MISSING);
+        $step = $DB->get_record('block_onb_s_steps', array('id' => $stepid));
         $return_step_position = $step->position;
 
         return $return_step_position;
@@ -106,7 +106,7 @@ class step_view_data_functions {
     public static function get_step_data($position) {
         global $DB;
 
-        $return_step = $DB->get_record('block_onb_s_steps', array('position' => $position), $fields = '*', $strictness = IGNORE_MISSING);
+        $return_step = $DB->get_record('block_onb_s_steps', array('position' => $position));
 
         return $return_step;
     }

@@ -36,7 +36,7 @@ if(has_capability('block/onboarding:w_manage_wiki', $context)){
   $pLink = new stdClass;
   $pLink->id = -1;
   if($link_id != -1){
-    $pLink = $DB->get_record('block_onb_w_links', array('id'=>$link_id), $fields='*', $strictness=IGNORE_MISSING);
+    $pLink = $DB->get_record('block_onb_w_links', array('id'=>$link_id));
   }
   $mform = new wiki_link_form(null, array('link' => $pLink));
     #$mform->addHelpButton('Link', 'link_description', 'block_onboarding');
@@ -54,7 +54,7 @@ if(has_capability('block/onboarding:w_manage_wiki', $context)){
 
       if($fromform->id != -1){
         $link->id = $fromform->id;
-        $DB->update_record('block_onb_w_links', $link, $bulk=false);
+        $DB->update_record('block_onb_w_links', $link);
       }else{
         $link->id = $DB->insert_record('block_onb_w_links', $link);
       }

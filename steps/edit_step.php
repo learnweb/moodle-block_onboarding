@@ -55,7 +55,7 @@ if(has_capability('block/onboarding:s_edit_steps', $context)){
          * wobei alle Felder bzw. Spalten des Datensatzes selektiert werden sollen
          * und werfe keine Exception wenn keine oder mehrere Datensätze auf Basis der Konditionen gefunden werden
          */
-        $pStep = $DB->get_record('block_onb_s_steps', array('id' => $step_id), $fields = '*', $strictness = IGNORE_MISSING);
+        $pStep = $DB->get_record('block_onb_s_steps', array('id' => $step_id));
     }
     /*
      * erstelle eine neue Moodle Form als eine Step Form und übergebe zusätzlich die Hilfsvariable pStep
@@ -97,7 +97,7 @@ if(has_capability('block/onboarding:s_edit_steps', $context)){
       // wenn ein bestehender Schritt editiert wird, aktualisiere den Datensatz
       if($fromform->id != -1){
         // aktueller Datensatz wird zwischengespeichert -> ggf. überflüssig
-        $pStep = $DB->get_record('block_onb_s_steps', array('id' => $fromform->id), $fields = '*', $strictness = IGNORE_MISSING);
+        $pStep = $DB->get_record('block_onb_s_steps', array('id' => $fromform->id));
         $cur_position = $pStep->position;
         $insert_position = $fromform->position+1;
         // wenn gewünschte Einfügeposition weiter hinten als aktuelle Position ist
@@ -111,7 +111,7 @@ if(has_capability('block/onboarding:s_edit_steps', $context)){
         $step->id = $fromform->id;
         $step->position = $fromform->position+1;
 
-        $DB->update_record('block_onb_s_steps', $step, $bulk=false);
+        $DB->update_record('block_onb_s_steps', $step);
         // andernfalls wird ein neuer Schritt bzw. Datensatz hinzugefügt, dessen position aus der Form übernommen wird
       }else{
           $init_position = $DB->count_records('block_onb_s_steps')+1;
@@ -125,7 +125,7 @@ if(has_capability('block/onboarding:s_edit_steps', $context)){
           }
           $step->position = $fromform->position+1;
           $step->timemodified = time();
-          $DB->update_record('block_onb_s_steps', $step, $bulk=false);
+          $DB->update_record('block_onb_s_steps', $step);
       }
       redirect('admin.php');
   }
