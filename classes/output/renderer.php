@@ -41,12 +41,6 @@ class renderer extends plugin_renderer_base {
 
   // Steps
 
-  //OBSOLETE -> VERWEIS ENTFERNEN!!!
-  public function render_steps_overview(renderable $page) {
-    $data = $page->export_for_template($this);
-    return parent::render_from_template('block_onboarding/steps_overview', $data);
-  }
-
   public function render_steps_admin(renderable $page) {
     $data = $page->export_for_template($this);
     return parent::render_from_template('block_onboarding/steps_admin', $data);
