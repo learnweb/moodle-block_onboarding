@@ -72,6 +72,16 @@ class step_view_data_functions {
         $step = $DB->update_record('block_onb_s_current', $step, $bulk=false);
     }
 
+    public static function set_step_id_complete($stepid) {
+        global $DB, $USER;
+
+        $temp_step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id), $fields = '*', $strictness = IGNORE_MISSING);
+        $step = new \stdClass();
+        $step->stepid = $stepid;
+        $step->userid = $USER->id;
+        $step->stepid = $temp_step->id;
+        $step->id = $DB->insert_record('block_onb_s_completed', $step);
+    }
 
     public static function get_step_id($position) {
         global $DB;

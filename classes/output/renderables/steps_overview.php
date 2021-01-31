@@ -31,6 +31,7 @@ class steps_overview implements renderable, templatable {
   public function export_for_template(renderer_base $output) {
     global $DB;
     //hier werden die Steps in ein Array gelegt
+      //change to get_records
       $steps = array_values($DB->get_records_sql('SELECT * FROM {block_onb_s_steps} ORDER BY position ASC'));
     $cur = 1;
     foreach($steps as $step){
