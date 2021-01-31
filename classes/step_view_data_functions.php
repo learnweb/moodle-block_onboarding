@@ -43,6 +43,7 @@ class step_view_data_functions {
 
         // wenn noch kein Fortschritt gemacht wurde, also kein Datensatz vorhanden ist -> starten bei pos = 1
         if($step_bool == false){
+            
             $temp_step = $DB->get_record('block_onb_s_steps', array('position' => 1));
 
             $step = new \stdClass();
