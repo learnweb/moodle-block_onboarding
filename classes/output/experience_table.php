@@ -40,6 +40,8 @@ class experience_table extends table_sql {
      * @return $string Return username with link to profile or username only
      *     when downloading.
      */
+
+    //Configure Column Content
     function col_name($values) {
         return '<a href="experience.php?experience_id='.$values->id.'">'.$values->name.'</a>';
     }

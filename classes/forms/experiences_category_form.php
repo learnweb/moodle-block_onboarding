@@ -30,10 +30,12 @@ class experiences_category_form extends moodleform {
         $mform->addElement('hidden','id', $category->id);
         $mform->setType('id', PARAM_INT);
 
+        // Category Name Field
         $mform->addElement('text', 'name', get_string('category_name', 'block_onboarding'),'required');
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($category->name) ? $category->name : get_string('default_category_name', 'block_onboarding'));
 
+        // Questions Textarea
         $mform->addElement('textarea', 'questions', get_string('questions', 'block_onboarding'),  'wrap="virtual" rows="10" cols="100"');
         $mform->setType('questions', PARAM_TEXT);
         $mform->setDefault('questions', isset($category->questions) ? $category->questions : '');

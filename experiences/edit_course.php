@@ -36,6 +36,7 @@ if(has_capability('block/onboarding:e_edit_courses', \context_system::instance()
   $pCourse = new stdClass;
   $pCourse->id = -1;
   if($course_id != -1){
+    // Get the existing data from the Database
     $pCourse = $DB->get_record('block_onb_e_courses', array('id'=>$course_id), $fields='*', $strictness=IGNORE_MISSING);
   }
   $mform = new experiences_course_form(null, array('course' => $pCourse));
@@ -43,6 +44,7 @@ if(has_capability('block/onboarding:e_edit_courses', \context_system::instance()
   if ($mform->is_cancelled()) {
   		redirect('overview.php');
   } else if ($fromform = $mform->get_data()) {
+      // Data written in the Database
       $course = new stdClass();
       $course->name = $fromform->name;
       $course->timecreated = time();

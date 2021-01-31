@@ -29,6 +29,7 @@ class experiences_overview implements renderable, templatable {
   public function export_for_template(renderer_base $output) {
     global $DB, $USER;
 
+    // Get Database Entries for display on the Start Page
     $experiences = array_values($DB->get_records('block_onb_e_exps'));
     $categories = array_values($DB->get_records('block_onb_e_cats'));
     $experiences_categories = array_values($DB->get_records('block_onb_e_exps_cats'));

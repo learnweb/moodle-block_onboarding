@@ -33,10 +33,12 @@ class experiences_experience_form extends moodleform {
         $mform->addElement('hidden','user_id', $USER->id);
         $mform->setType('user_id', PARAM_INT);
 
+        // Experience Name Field
         $mform->addElement('text', 'name', get_string('experience_name', 'block_onboarding'), 'required');
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($experience->name) ? $experience->name : get_string('default_experience_name', 'block_onboarding'));
 
+        // Degree Program Drop Down Menu
         $courses = $DB->get_records('block_onb_e_courses');
         $courses_modified = array();
         foreach($courses as $course){
@@ -47,6 +49,7 @@ class experiences_experience_form extends moodleform {
             $mform->setDefault('course_id', $link->course_id);
         }
 
+        // Category Checkboxes and Textareas
         $categories = $DB->get_records('block_onb_e_cats');
         $experiences_categories = $DB->get_records('block_onb_e_exps_cats', array('experience_id' => $experience->id));
         foreach($categories as $category){
@@ -70,6 +73,12 @@ class experiences_experience_form extends moodleform {
           $mform->hideIf('experience_category_' . $category->id . '_description', 'category_' . $category->id);
         }
 
+        // Key Takeaways Field
+        $mform->addElement('textarea', 'takeaways', get_string('takeaways', 'block_onboarding'),  array('wrap="virtual" rows="3" cols="80"', 'placeholder' => get_string('takeaways_default', 'block_onboarding'), 'required'));
+        $mform->setType('takeaways', PARAM_TEXT);
+        $mform->setDefault('takeaways', isset($experience->takeaways) ? $experience->takeaways : '');
+
+        // Contact Field
         $mform->addElement('text', 'contact', get_string('experience_contact', 'block_onboarding'));
         $mform->setType('contact', PARAM_TEXT);
         $mform->setDefault('contact', isset($experience->contact) ? $experience->contact : '');

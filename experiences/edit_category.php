@@ -36,6 +36,7 @@ if(has_capability('block/onboarding:e_edit_categories', \context_system::instanc
   $pCategory = new stdClass;
   $pCategory->id = -1;
   if($category_id != -1){
+    // Get the existing data from the Database
     $pCategory = $DB->get_record('block_onb_e_cats', array('id'=>$category_id), $fields='*', $strictness=IGNORE_MISSING);
   }
   $mform = new experiences_category_form(null, array('category' => $pCategory));
@@ -43,6 +44,7 @@ if(has_capability('block/onboarding:e_edit_categories', \context_system::instanc
   if ($mform->is_cancelled()) {
   		redirect('overview.php');
   } else if ($fromform = $mform->get_data()) {
+      // Data written in the Database
       $category = new stdClass();
       $category->name = $fromform->name;
       $category->questions = $fromform->questions;

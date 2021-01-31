@@ -1,9 +1,15 @@
 <h2>{{#experience}}{{{name}}}{{/experience}}</h2>
-<h6>{{#degreeprogram_author}}{{# str }} author, block_onboarding {{/ str }}{{{author}}}{{/degreeprogram_author}}</h6>
-<h6>{{#degreeprogram_author}}{{# str }} degreeprogram, block_onboarding {{/ str }}{{{degreeprogram}}}{{/degreeprogram_author}}</h6>
-<h6>{{#experience}}{{# str }} date, block_onboarding {{/ str }} {{#userdate}}{{{timecreated}}}, {{#str}} strftimedatetimeshort {{/str}}{{/userdate}}{{/experience}}</h6>
+{{#degreeprogram_author}}
+<h6>{{# str }} author, block_onboarding {{/ str }}{{{author}}}</h6>
+<h6>{{# str }} degreeprogram, block_onboarding {{/ str }}{{{degreeprogram}}}</h6>
+{{/degreeprogram_author}}
+{{#experience}}
+<h6>{{# str }} date, block_onboarding {{/ str }} {{#userdate}}{{{timecreated}}}, {{#str}} strftimedatetimeshort {{/str}}{{/userdate}}</h6>
+<h4>{{# str }} takeaways, block_onboarding {{/ str }}</h4>
+<p>{{{takeaways}}}</p>
+{{/experience}}
 {{#experiences_categories_joined_categories}}
 <h4>{{{name}}}</h4>
 <p>{{{description}}}</p>
 {{/experiences_categories_joined_categories}}
-<h4>{{#experience}}{{# str }} contact, block_onboarding {{/ str }}{{{contact}}}{{/experience}}</h4>
+<h6>{{#experience}}{{# str }} contact, block_onboarding {{/ str }}{{{contact}}}{{/experience}}</h6>

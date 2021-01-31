@@ -24,6 +24,7 @@ $context = context_system::instance();
 
 if(has_capability('block/onboarding:e_edit_categories', $context)){
   $category_id = optional_param('category_id', -1, PARAM_INT);
+  // Deletion of the category and all content written for it
   $DB->delete_records('block_onb_e_exps_cats', array('category_id' => $category_id));
   $DB->delete_records('block_onb_e_cats', array('id' => $category_id));
   redirect('overview.php');
