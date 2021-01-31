@@ -36,7 +36,7 @@ if(has_capability('block/onboarding:w_manage_wiki', $context)){
   $pCategory = new stdClass;
   $pCategory->id = -1;
   if($category_id != -1){
-    $pCategory = $DB->get_record('block_onb_w_categories', array('id'=>$category_id), $fields='*', $strictness=IGNORE_MISSING);
+    $pCategory = $DB->get_record('block_onb_w_categories', array('id'=>$category_id));
   }
   $mform = new wiki_category_form(null, array('category' => $pCategory));
 
@@ -50,7 +50,7 @@ if(has_capability('block/onboarding:w_manage_wiki', $context)){
 
       if($fromform->id != -1){
         $category->id = $fromform->id;
-        $DB->update_record('block_onb_w_categories', $category, $bulk=false);
+        $DB->update_record('block_onb_w_categories', $category);
       }else{
         $category->id = $DB->insert_record('block_onb_w_categories', $category);
       }

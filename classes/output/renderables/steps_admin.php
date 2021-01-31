@@ -30,15 +30,9 @@ class steps_admin implements renderable, templatable {
   public function export_for_template(renderer_base $output) {
     global $DB;
 
-    $steps = array_values($DB->get_records_sql('SELECT * FROM {block_onb_s_steps} ORDER BY position ASC'));
-    $cur = 1;
-    foreach($steps as $step){
-        $step->index = $cur;
-        $cur++;
-    }
+    //$steps = array_values($DB->get_records_sql('SELECT * FROM {block_onb_s_steps} ORDER BY position ASC'));
 
-    //alte Funktion
-    //$steps = array_values($DB->get_records('block_onb_s_steps'));
+    $steps = array_values($DB->get_records('block_onb_s_steps', $conditions=null, $sort='position ASC'));
 
     return [
         'steps' => $steps

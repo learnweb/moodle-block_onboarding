@@ -1,18 +1,15 @@
 define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notification) {
 
     // TODO: Randfälle behandeln, z.B. letzter Schritt in Liste usw.
-    // TODO: Fortschritt speichern -> set_current_step
-    // TODO: Erledigt, Überspringen und Zurück mit verschiedenen Aufurfparametern für get_cur, set_cur und get_info impl.
     // TODO: clean code
 
 
-    var init = function (userid) {
+    var init = function () {
 
-        // alert("hallo! :)")
+
         var promises = ajax.call([{
             methodname: 'block_onboarding_init_step',
             args: {
-                userid: userid
             }
         }
         ]);
@@ -23,20 +20,52 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
             $('.step_title').replaceWith(html2);
         }).fail(notification.exception);
 
-        // muss hier initialisiert werden, weil call_amd nur eine Funktion aufrufen kann??
-        next_step(userid)
+
     };
 
 
-    var next_step = function (userid) {
+    var next_step = function () {
 
         $('.done_btn').on('click', function () {
-            // alert("hallo! :)")
-            // alert(userid);
             var promises = ajax.call([{
                 methodname: 'block_onboarding_next_step',
                 args: {
-                    userid: userid
+                }
+            }
+            ]);
+            promises[0].done(function (response) {
+                var html1 = '<div class=\"step_description\">' + response.description + '</div>';
+                $('.step_description').replaceWith(html1);
+                var html2 = '<h5 class=\"step_title\"><b>Step #' + response.position + ': ' + response.name + '</b></h5>';
+                $('.step_title').replaceWith(html2);
+            }).fail(notification.exception);
+        })
+    };
+
+    var skip_step = function () {
+
+        $('.skip_btn').on('click', function () {
+            var promises = ajax.call([{
+                methodname: 'block_onboarding_skip_step',
+                args: {
+                }
+            }
+            ]);
+            promises[0].done(function (response) {
+                var html1 = '<div class=\"step_description\">' + response.description + '</div>';
+                $('.step_description').replaceWith(html1);
+                var html2 = '<h5 class=\"step_title\"><b>Step #' + response.position + ': ' + response.name + '</b></h5>';
+                $('.step_title').replaceWith(html2);
+            }).fail(notification.exception);
+        })
+    };
+
+    var back_step = function () {
+
+        $('.back_btn').on('click', function () {
+            var promises = ajax.call([{
+                methodname: 'block_onboarding_back_step',
+                args: {
                 }
             }
             ]);
@@ -52,6 +81,8 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
 
     return {
         init: init,
-        next_step: next_step()
+        next_step: next_step(),
+        skip_step: skip_step(),
+        back_step: back_step(),
     };
 });

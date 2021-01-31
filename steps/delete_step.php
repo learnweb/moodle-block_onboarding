@@ -24,7 +24,7 @@ $context = context_system::instance();
 
 if(has_capability('block/onboarding:s_edit_steps', $context)){
   $step_id = optional_param('step_id', -1, PARAM_INT);
-  $pStep = $DB->get_record('block_onb_s_steps', array('id' => $step_id), $fields = '*', $strictness = IGNORE_MISSING);
+  $pStep = $DB->get_record('block_onb_s_steps', array('id' => $step_id));
   $cur_position = $pStep->position;
   $step_count = $DB->count_records('block_onb_s_steps');
 
