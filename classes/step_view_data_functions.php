@@ -26,6 +26,7 @@ namespace block_onboarding;
 defined('MOODLE_INTERNAL') || die();
 
 // TODO: Randfälle behandeln, z.B. letzter Schritt in, keine Schritte in Liste, usw.
+// TODO: Language Strings bei Messages verwenden!
 
 class step_view_data_functions {
 
