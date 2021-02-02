@@ -22,7 +22,7 @@ module.exports = function(grunt) {
                 },
             },
         }
-    }),
+    });
 
 
     // Plugin-ins laden
