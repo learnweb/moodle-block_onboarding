@@ -23,21 +23,24 @@ use templatable;
 use renderer_base;
 
 class experiences_admin implements renderable, templatable {
-  public function __construct() {
-  }
+    public function __construct() {
 
-  public function export_for_template(renderer_base $output) {
-    global $DB;
+    }
 
-    $categories = array_values($DB->get_records('block_onb_e_cats'));
+    public function export_for_template(renderer_base $output) {
+        global $DB;
 
-    $courses = array_values($DB->get_records('block_onb_e_courses'));
+        $categories = array_values($DB->get_records('block_onb_e_cats'));
 
-    return [
-        'can_edit_categories' => has_capability('block/onboarding:e_edit_categories', \context_system::instance()) ? true : false,
-        'categories_general' => $categories,
-        'can_edit_courses' => has_capability('block/onboarding:e_edit_courses', \context_system::instance()) ? true : false,
-        'courses_general' => $courses
-    ];
-  }
+        $courses = array_values($DB->get_records('block_onb_e_courses'));
+
+        return [
+            'can_edit_categories' => has_capability('block/onboarding:e_edit_categories',
+                \context_system::instance()) ? true : false,
+            'categories_general' => $categories,
+            'can_edit_courses' => has_capability('block/onboarding:e_edit_courses',
+                \context_system::instance()) ? true : false,
+            'courses_general' => $courses
+        ];
+    }
 }
