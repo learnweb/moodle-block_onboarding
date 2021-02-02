@@ -27,7 +27,7 @@ class experiences_filter_form extends moodleform {
 
         $courses = $DB->get_records('block_onb_e_courses');
         $coursesmodified = array();
-        foreach($courses as $course) {
+        foreach ($courses as $course) {
             $coursesmodified[$course->id] = $course->name;
         }
         $options = array(
@@ -39,7 +39,7 @@ class experiences_filter_form extends moodleform {
 
         $categories = $DB->get_records('block_onb_e_cats');
         $categoriesmodified = array();
-        foreach($categories as $category){
+        foreach ($categories as $category){
             $categoriesmodified[$category->id] = $category->name;
         }
         $options = array(

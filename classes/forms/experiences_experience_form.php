@@ -42,32 +42,32 @@ class experiences_experience_form extends moodleform {
         // Degree Program Drop Down Menu.
         $courses = $DB->get_records('block_onb_e_courses');
         $coursesmodified = array();
-        foreach($courses as $course){
+        foreach ($courses as $course){
             $coursesmodified[$course->id] = $course->name;
         }
         $mform->addElement('select', 'course_id', get_string('course_select', 'block_onboarding'), $coursesmodified);
-        if(isset($link->course_id)) {
+        if (isset($link->course_id)) {
             $mform->setDefault('course_id', $link->course_id);
         }
 
         // Category Checkboxes and Textareas.
         $categories = $DB->get_records('block_onb_e_cats');
         $experiencescategories = $DB->get_records('block_onb_e_exps_cats', array('experience_id' => $experience->id));
-        foreach($categories as $category) {
+        foreach ($categories as $category) {
             $mform->addElement('checkbox', 'category_' . $category->id, $category->name);
         }
 
-        foreach($experiencescategories as $experiencecategory) {
+        foreach ($experiencescategories as $experiencecategory) {
             $mform->setDefault('category_' . $experiencecategory->category_id, true);
         }
 
         $categories = $DB->get_records('block_onb_e_cats');
         $experiencescategories = $DB->get_records('block_onb_e_exps_cats', array('experience_id' => $experience->id));
         $experiencescategoriesmapped = array();
-        foreach($experiencescategories as $experiencecategory) {
+        foreach ($experiencescategories as $experiencecategory) {
             $experiencescategoriesmapped[$experiencecategory->category_id] = $experiencecategory;
         }
-        foreach($categories as $category) {
+        foreach ($categories as $category) {
             $mform->addElement('textarea', 'experiencecategory_' . $category->id . '_description', $category->name,
                 array('wrap="virtual" rows="10" cols="100"', 'placeholder' => $category->questions));
             $mform->setType('experiencecategory_' . $category->id . '_description', PARAM_TEXT);

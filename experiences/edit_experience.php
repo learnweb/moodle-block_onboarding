@@ -32,7 +32,7 @@ $pexperience->id = -1;
 if ($experience_id != -1) {
     // Get the existing data from the Database.
     $pexperience = $DB->get_record('block_onb_e_exps',
-        array('id'=>$experience_id), $fields='*', $strictness=IGNORE_MISSING);
+        array('id' => $experience_id), $fields = '*', $strictness = IGNORE_MISSING);
 }
 
 if ($experience_id == -1 || $USER->id == $pexperience->user_id ||
@@ -59,7 +59,7 @@ if ($experience_id == -1 || $USER->id == $pexperience->user_id ||
 
         if ($fromform->id != -1) {
             $experience->id = $fromform->id;
-            $DB->update_record('block_onb_e_exps', $experience, $bulk=false);
+            $DB->update_record('block_onb_e_exps', $experience, $bulk = false);
         } else {
             $experience->id = $DB->insert_record('block_onb_e_exps', $experience);
         }
@@ -70,7 +70,7 @@ if ($experience_id == -1 || $USER->id == $pexperience->user_id ||
 
         foreach ($categories as $category) {
             $formproperty_category_checkbox = 'category_' . $category->id;
-            if(isset($fromform->$formproperty_category_checkbox)){
+            if (isset($fromform->$formproperty_category_checkbox)) {
                 $experience_category = new stdClass;
                 $experience_category->experience_id = $experience->id;
                 $experience_category->category_id = $category->id;

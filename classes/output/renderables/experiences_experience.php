@@ -33,18 +33,18 @@ class experiences_experience implements renderable, templatable {
         global $DB;
 
         $experience = $DB->get_record('block_onb_e_exps', array('id' => $this->experience_id));
-        //$categories = $DB->get_records('block_onb_e_cats');
-        //$experiences_categories = $DB->get_records('block_onb_e_exps_cats', array('experience_id' => $experience_id));
+        // $categories = $DB->get_records('block_onb_e_cats');
+        // $experiences_categories = $DB->get_records('block_onb_e_exps_cats', array('experience_id' => $experience_id));
 
-        // SQL Query to get Category content written by the User
+        // SQL Query to get Category content written by the User.
         $sql = "SELECT * FROM {block_onb_e_exps_cats} block_onb_e_exps_cats
         INNER JOIN {block_onb_e_cats} block_onb_e_cats
         ON block_onb_e_exps_cats.category_id = block_onb_e_cats.id
         WHERE block_onb_e_exps_cats.experience_id = {$this->experience_id}";
         $experiences_categories_joined_categories = $DB->get_records_sql($sql);
 
-        // SQL Query to get Degree Program and Authors Firstname
-        $moresql= "SELECT ee.id, ec.name as degreeprogram, u.firstname as author
+        // SQL Query to get Degree Program and Authors Firstname.
+        $moresql = "SELECT ee.id, ec.name as degreeprogram, u.firstname as author
         FROM {block_onb_e_exps} ee
         INNER JOIN {block_onb_e_courses} ec
         ON ee.course_id = ec.id

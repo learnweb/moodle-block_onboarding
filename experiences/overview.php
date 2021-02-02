@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 require(__DIR__ . '/../../../config.php');
-require "$CFG->libdir/tablelib.php";
+require($CFG->libdir . '/tablelib.php');
 require($CFG->dirroot . '/blocks/onboarding/classes/output/experience_table.php');
 
 require_login();
@@ -47,7 +47,7 @@ $mform->display();
 
 
 // SQL Statement for Listview.
-$fields = 'ee.id as id, ee.name as name, u.firstname as author, ec.name as degreeprogram, ee.timecreated as published, 
+$fields = 'ee.id as id, ee.name as name, u.firstname as author, ec.name as degreeprogram, ee.timecreated as published,
 ee.popularity as popularity';
 $from = '{block_onb_e_exps} ee
 INNER JOIN {user} u ON ee.user_id=u.id
@@ -65,7 +65,7 @@ if ($fromform = $mform->get_data()) {
         FROM {block_onb_e_exps_cats} matching WHERE category_id IN $cats";
         $firstresult = $DB->get_fieldset_sql($sql);
         $sqlfirstresult = '(' . implode(',', $firstresult) . ')';
-        if(empty($firstresult) != true) {
+        if (empty($firstresult) != true) {
             // Results for Category Filter.
             $w = "WHERE id IN $sqlfirstresult";
             if (empty($fromform->course_filter) != true) {
@@ -84,7 +84,7 @@ if ($fromform = $mform->get_data()) {
             }
         }
     } else {
-        // Category Filter empty
+        // Category Filter empty.
         if (empty($fromform->course_filter) != true) {
             // Category Filter empty + Course Filter applied.
             $w = "WHERE course_id IN $crs";
@@ -93,7 +93,7 @@ if ($fromform = $mform->get_data()) {
             $skip = true;
         }
     }
-    if ($skip != true){
+    if ($skip != true) {
         $sql = "SELECT id
         FROM {block_onb_e_exps} experiences $w";
         $result = $DB->get_fieldset_sql($sql);

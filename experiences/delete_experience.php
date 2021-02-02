@@ -26,8 +26,8 @@ $experience_id = optional_param('experience_id', -1, PARAM_INT);
 $pexperience = new stdClass;
 $pexperience->id = -1;
 if ($experience_id != -1) {
-    $pexperience = $DB->get_record('block_onb_e_exps', array('id'=>$experience_id), $fields='*',
-        $strictness=IGNORE_MISSING);
+    $pexperience = $DB->get_record('block_onb_e_exps', array('id' => $experience_id), $fields = '*',
+        $strictness = IGNORE_MISSING);
 }
 
 if ($experience_id == -1 || $USER->id == $pexperience->user_id ||

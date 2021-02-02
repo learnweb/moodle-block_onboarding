@@ -57,7 +57,7 @@ class experiences_overview implements renderable, templatable {
         }
 
         $courses_mapped = array();
-        foreach($courses as $course){
+        foreach ($courses as $course) {
             $courses_mapped[$course->id] = $course;
         }
 

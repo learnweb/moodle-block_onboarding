@@ -38,7 +38,7 @@ if (has_capability('block/onboarding:e_edit_courses', \context_system::instance(
     if ($course_id != -1) {
         // Get the existing data from the Database.
         $pcourse = $DB->get_record('block_onb_e_courses', array('id' => $course_id), $fields = '*',
-            $strictness=IGNORE_MISSING);
+            $strictness = IGNORE_MISSING);
     }
     $mform = new experiences_course_form(null, array('course' => $pcourse));
 
@@ -51,9 +51,9 @@ if (has_capability('block/onboarding:e_edit_courses', \context_system::instance(
         $course->timecreated = time();
         $course->timemodified = time();
 
-        if($fromform->id != -1) {
+        if ($fromform->id != -1) {
             $course->id = $fromform->id;
-            $DB->update_record('block_onb_e_courses', $course, $bulk=false);
+            $DB->update_record('block_onb_e_courses', $course, $bulk = false);
         } else {
             $course->id = $DB->insert_record('block_onb_e_courses', $course);
         }

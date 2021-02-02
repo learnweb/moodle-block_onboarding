@@ -21,7 +21,7 @@ class experience_table extends table_sql {
      * @param int $uniqueid all tables have to have a unique id, this is used
      *      as a key when storing table properties like sort order in the session.
      */
-    function __construct($uniqueid) {
+    public function __construct($uniqueid) {
         parent::__construct($uniqueid);
         // Define the list of columns to show.
         $columns = array('name', 'author', 'degreeprogram', 'published', 'popularity');
@@ -51,24 +51,24 @@ class experience_table extends table_sql {
      */
 
     // Configure Column Content.
-    function col_name($values) {
+    public function col_name($values) {
         return '<a href="experience.php?experience_id='.$values->id.'">'.$values->name.'</a>';
     }
 
-    function col_author($values) {
+    public function col_author($values) {
         return $values->author;
     }
 
-    function col_degreeprogram($values) {
+    public function col_degreeprogram($values) {
         return $values->degreeprogram;
     }
 
-    function col_published($values) {
+    public function col_published($values) {
         $date = userdate($values->published, get_string('strftimedatetimeshort', 'core_langconfig'));
         return $date;
     }
 
-    function col_popularity($values) {
+    public function col_popularity($values) {
         return $values->popularity;
     }
 
