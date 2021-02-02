@@ -27,58 +27,64 @@ class experiences_experience_form extends moodleform {
 
         $experience = $this->_customdata['experience'];
 
-        $mform->addElement('hidden','id', $experience->id);
+        $mform->addElement('hidden', 'id', $experience->id);
         $mform->setType('id', PARAM_INT);
 
-        $mform->addElement('hidden','user_id', $USER->id);
+        $mform->addElement('hidden', 'user_id', $USER->id);
         $mform->setType('user_id', PARAM_INT);
 
-        // Experience Name Field
+        // Experience Name Field.
         $mform->addElement('text', 'name', get_string('experience_name', 'block_onboarding'), 'required');
         $mform->setType('name', PARAM_TEXT);
-        $mform->setDefault('name', isset($experience->name) ? $experience->name : get_string('default_experience_name', 'block_onboarding'));
+        $mform->setDefault('name', isset($experience->name) ? $experience->name : get_string('default_experience_name',
+            'block_onboarding'));
 
-        // Degree Program Drop Down Menu
+        // Degree Program Drop Down Menu.
         $courses = $DB->get_records('block_onb_e_courses');
-        $courses_modified = array();
-        foreach($courses as $course){
-            $courses_modified[$course->id] = $course->name;
+        $coursesmodified = array();
+        foreach ($courses as $course){
+            $coursesmodified[$course->id] = $course->name;
         }
-        $mform->addElement('select', 'course_id', get_string('course_select', 'block_onboarding'), $courses_modified);
-        if(isset($link->course_id)){
+        $mform->addElement('select', 'course_id', get_string('course_select', 'block_onboarding'), $coursesmodified);
+        if (isset($link->course_id)) {
             $mform->setDefault('course_id', $link->course_id);
         }
 
-        // Category Checkboxes and Textareas
+        // Category Checkboxes and Textareas.
         $categories = $DB->get_records('block_onb_e_cats');
-        $experiences_categories = $DB->get_records('block_onb_e_exps_cats', array('experience_id' => $experience->id));
-        foreach($categories as $category){
-          $mform->addElement('checkbox', 'category_' . $category->id, $category->name);
+        $experiencescategories = $DB->get_records('block_onb_e_exps_cats', array('experience_id' => $experience->id));
+        foreach ($categories as $category) {
+            $mform->addElement('checkbox', 'category_' . $category->id, $category->name);
         }
 
-        foreach($experiences_categories as $experience_category){
-          $mform->setDefault('category_' . $experience_category->category_id, true);
+        foreach ($experiencescategories as $experiencecategory) {
+            $mform->setDefault('category_' . $experiencecategory->category_id, true);
         }
 
         $categories = $DB->get_records('block_onb_e_cats');
-        $experiences_categories = $DB->get_records('block_onb_e_exps_cats', array('experience_id' => $experience->id));
-        $experiences_categories_mapped = array();
-        foreach($experiences_categories as $experience_category){
-          $experiences_categories_mapped[$experience_category->category_id] = $experience_category;
+        $experiencescategories = $DB->get_records('block_onb_e_exps_cats', array('experience_id' => $experience->id));
+        $experiencescategoriesmapped = array();
+        foreach ($experiencescategories as $experiencecategory) {
+            $experiencescategoriesmapped[$experiencecategory->category_id] = $experiencecategory;
         }
-        foreach($categories as $category){
-          $mform->addElement('textarea', 'experience_category_' . $category->id . '_description', $category->name, array('wrap="virtual" rows="10" cols="100"', 'placeholder' => $category->questions));
-          $mform->setType('experience_category_' . $category->id . '_description', PARAM_TEXT);
-          $mform->setDefault('experience_category_' . $category->id . '_description', isset($experiences_categories_mapped[$category->id]) ? $experiences_categories_mapped[$category->id]->description : "");
-          $mform->hideIf('experience_category_' . $category->id . '_description', 'category_' . $category->id);
+        foreach ($categories as $category) {
+            $mform->addElement('textarea', 'experiencecategory_' . $category->id . '_description', $category->name,
+                array('wrap="virtual" rows="10" cols="100"', 'placeholder' => $category->questions));
+            $mform->setType('experiencecategory_' . $category->id . '_description', PARAM_TEXT);
+            $mform->setDefault('experiencecategory_' . $category->id . '_description',
+                isset($experiencescategoriesmapped[$category->id]) ?
+                    $experiencescategoriesmapped[$category->id]->description : "");
+            $mform->hideIf('experiencecategory_' . $category->id . '_description', 'category_' . $category->id);
         }
 
-        // Key Takeaways Field
-        $mform->addElement('textarea', 'takeaways', get_string('takeaways', 'block_onboarding'),  array('wrap="virtual" rows="3" cols="80"', 'placeholder' => get_string('takeaways_default', 'block_onboarding'), 'required'));
+        // Key Takeaways Field.
+        $mform->addElement('textarea', 'takeaways', get_string('takeaways', 'block_onboarding'),
+            array('wrap="virtual" rows="3" cols="80"',
+                'placeholder' => get_string('takeaways_default', 'block_onboarding'), 'required'));
         $mform->setType('takeaways', PARAM_TEXT);
         $mform->setDefault('takeaways', isset($experience->takeaways) ? $experience->takeaways : '');
 
-        // Contact Field
+        // Contact Field.
         $mform->addElement('text', 'contact', get_string('experience_contact', 'block_onboarding'));
         $mform->setType('contact', PARAM_TEXT);
         $mform->setDefault('contact', isset($experience->contact) ? $experience->contact : '');

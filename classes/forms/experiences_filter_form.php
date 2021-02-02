@@ -26,30 +26,28 @@ class experiences_filter_form extends moodleform {
         $mform = $this->_form;
 
         $courses = $DB->get_records('block_onb_e_courses');
-        $courses_modified = array();
-        foreach($courses as $course){
-            $courses_modified[$course->id] = $course->name;
+        $coursesmodified = array();
+        foreach ($courses as $course) {
+            $coursesmodified[$course->id] = $course->name;
         }
         $options = array(
             'multiple' => true,
-
-
             'noselectionstring' => '',
         );
-        $mform->addElement('autocomplete', 'course_filter', get_string('degreeprogram_filter', 'block_onboarding'), $courses_modified, $options);
+        $mform->addElement('autocomplete', 'course_filter', get_string('degreeprogram_filter', 'block_onboarding'),
+            $coursesmodified, $options);
 
         $categories = $DB->get_records('block_onb_e_cats');
-        $categories_modified = array();
-        foreach($categories as $category){
-            $categories_modified[$category->id] = $category->name;
+        $categoriesmodified = array();
+        foreach ($categories as $category){
+            $categoriesmodified[$category->id] = $category->name;
         }
         $options = array(
             'multiple' => true,
-
-
             'noselectionstring' => '',
         );
-        $mform->addElement('autocomplete', 'category_filter', get_string('category_filter', 'block_onboarding'), $categories_modified, $options);
+        $mform->addElement('autocomplete', 'category_filter', get_string('category_filter', 'block_onboarding'),
+            $categoriesmodified, $options);
 
         $mform->addElement('submit', 'applyfilter', get_string('applyfilter', 'block_onboarding'));
     }

@@ -26,47 +26,48 @@ $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/edit_course.php'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
 
-if(has_capability('block/onboarding:e_edit_courses', \context_system::instance())){
-  $PAGE->set_title(get_string('edit_course', 'block_onboarding'));
-  $PAGE->set_heading(get_string('edit_course', 'block_onboarding'));
+if (has_capability('block/onboarding:e_edit_courses', \context_system::instance())) {
+    $PAGE->set_title(get_string('edit_course', 'block_onboarding'));
+    $PAGE->set_heading(get_string('edit_course', 'block_onboarding'));
 
-  require_once('./../classes/forms/experiences_course_form.php');
+    require_once('./../classes/forms/experiences_course_form.php');
 
-  $course_id = optional_param('course_id', -1, PARAM_INT);
-  $pCourse = new stdClass;
-  $pCourse->id = -1;
-  if($course_id != -1){
-    // Get the existing data from the Database
-    $pCourse = $DB->get_record('block_onb_e_courses', array('id'=>$course_id), $fields='*', $strictness=IGNORE_MISSING);
-  }
-  $mform = new experiences_course_form(null, array('course' => $pCourse));
+    $course_id = optional_param('course_id', -1, PARAM_INT);
+    $pcourse = new stdClass;
+    $pcourse->id = -1;
+    if ($course_id != -1) {
+        // Get the existing data from the Database.
+        $pcourse = $DB->get_record('block_onb_e_courses', array('id' => $course_id), $fields = '*',
+            $strictness = IGNORE_MISSING);
+    }
+    $mform = new experiences_course_form(null, array('course' => $pcourse));
 
-  if ($mform->is_cancelled()) {
-  		redirect('overview.php');
-  } else if ($fromform = $mform->get_data()) {
-      // Data written in the Database
-      $course = new stdClass();
-      $course->name = $fromform->name;
-      $course->timecreated = time();
-      $course->timemodified = time();
+    if ($mform->is_cancelled()) {
+        redirect('overview.php');
+    } else if ($fromform = $mform->get_data()) {
+        // Data written in the Database.
+        $course = new stdClass();
+        $course->name = $fromform->name;
+        $course->timecreated = time();
+        $course->timemodified = time();
 
-      if($fromform->id != -1){
-        $course->id = $fromform->id;
-        $DB->update_record('block_onb_e_courses', $course, $bulk=false);
-      }else{
-        $course->id = $DB->insert_record('block_onb_e_courses', $course);
-      }
-      redirect('overview.php');
-  }
+        if ($fromform->id != -1) {
+            $course->id = $fromform->id;
+            $DB->update_record('block_onb_e_courses', $course, $bulk = false);
+        } else {
+            $course->id = $DB->insert_record('block_onb_e_courses', $course);
+        }
+        redirect('overview.php');
+    }
 
-  echo $OUTPUT->header();
-  $mform->display();
-  echo $OUTPUT->footer();
-}else{
-  $PAGE->set_title(get_string('error', 'block_onboarding'));
-  $PAGE->set_heading(get_string('error', 'block_onboarding'));
+    echo $OUTPUT->header();
+    $mform->display();
+    echo $OUTPUT->footer();
+} else {
+    $PAGE->set_title(get_string('error', 'block_onboarding'));
+    $PAGE->set_heading(get_string('error', 'block_onboarding'));
 
-  echo $OUTPUT->header();
-  echo html_writer::tag('p', get_string('insufficient_permissions', 'block_onboarding'));
-  echo $OUTPUT->footer();
+    echo $OUTPUT->header();
+    echo html_writer::tag('p', get_string('insufficient_permissions', 'block_onboarding'));
+    echo $OUTPUT->footer();
 }

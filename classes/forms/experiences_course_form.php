@@ -27,10 +27,10 @@ class experiences_course_form extends moodleform {
 
         $course = $this->_customdata['course'];
 
-        $mform->addElement('hidden','id', $course->id);
+        $mform->addElement('hidden', 'id', $course->id);
         $mform->setType('id', PARAM_INT);
 
-        // Course Name Field
+        // Course Name Field.
         $mform->addElement('text', 'name', get_string('course_name', 'block_onboarding'), 'required');
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($course->name) ? $course->name : get_string('default_course_name', 'block_onboarding'));

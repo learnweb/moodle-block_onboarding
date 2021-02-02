@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 require(__DIR__ . '/../../../config.php');
-require "$CFG->libdir/tablelib.php";
+require($CFG->libdir . '/tablelib.php');
 require($CFG->dirroot . '/blocks/onboarding/classes/output/experience_table.php');
 
 require_login();
@@ -46,9 +46,10 @@ $mform = new experiences_filter_form(null, null);
 $mform->display();
 
 
-// SQL Statement for Listview
-$fields = 'ee.id as id, ee.name as name, u.firstname as author, ec.name as degreeprogram, ee.timecreated as published, ee.popularity as popularity';
-$from = '{block_onb_e_exps} ee 
+// SQL Statement for Listview.
+$fields = 'ee.id as id, ee.name as name, u.firstname as author, ec.name as degreeprogram, ee.timecreated as published,
+ee.popularity as popularity';
+$from = '{block_onb_e_exps} ee
 INNER JOIN {user} u ON ee.user_id=u.id
 INNER JOIN {block_onb_e_courses} ec ON ee.course_id=ec.id';
 $where = '1=1';
@@ -59,34 +60,49 @@ if ($fromform = $mform->get_data()) {
     $crs = '(' . implode(',', $fromform->course_filter) . ')';
 
     if (empty($fromform->category_filter) != true) {
+        // Category Filter applied.
         $sql = "SELECT experience_id
         FROM {block_onb_e_exps_cats} matching WHERE category_id IN $cats";
         $firstresult = $DB->get_fieldset_sql($sql);
         $sqlfirstresult = '(' . implode(',', $firstresult) . ')';
-        if(empty($firstresult) != true) {
+        if (empty($firstresult) != true) {
+            // Results for Category Filter.
             $w = "WHERE id IN $sqlfirstresult";
             if (empty($fromform->course_filter) != true) {
+                // Category and Course Filter applied.
                 $w = $w . "AND course_id IN $crs";
             }
         } else {
-            $where = '1=0';
-            $skip = true;
+            // No Results for Category Filter.
+            if (empty($fromform->course_filter) != true) {
+                // No Results for Category Filter + Course Filter applied.
+                $w = "WHERE course_id IN $crs";
+            } else {
+                // No Results for Category Filter + Course Filter empty.
+                $where = '1=0';
+                $skip = true;
+            }
         }
     } else {
+        // Category Filter empty.
         if (empty($fromform->course_filter) != true) {
+            // Category Filter empty + Course Filter applied.
             $w = "WHERE course_id IN $crs";
         } else {
+            // Category and Course Filter empty.
             $skip = true;
         }
     }
-    if ($skip != true){
+    if ($skip != true) {
         $sql = "SELECT id
         FROM {block_onb_e_exps} experiences $w";
         $result = $DB->get_fieldset_sql($sql);
-        $sqlresult = implode(' OR ', $result);
-        if(empty($result) != true) {
-            $where = 'ee.id =' . $sqlresult;
+        $sqlresult = '(' . implode(',', $result) . ')';
+        if (empty($result) != true) {
+            // Results.
+            $where = 'ee.id IN' . $sqlresult;
         } else {
+            // No Results.
             $where = '1=0';
         }
     }
