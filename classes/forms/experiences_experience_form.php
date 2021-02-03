@@ -68,13 +68,13 @@ class experiences_experience_form extends moodleform {
             $experiencescategoriesmapped[$experiencecategory->category_id] = $experiencecategory;
         }
         foreach ($categories as $category) {
-            $mform->addElement('textarea', 'experiencecategory_' . $category->id . '_description', $category->name,
+            $mform->addElement('textarea', 'experience_category_' . $category->id . '_description', $category->name,
                 array('wrap="virtual" rows="10" cols="100"', 'placeholder' => $category->questions));
-            $mform->setType('experiencecategory_' . $category->id . '_description', PARAM_TEXT);
-            $mform->setDefault('experiencecategory_' . $category->id . '_description',
+            $mform->setType('experience_category_' . $category->id . '_description', PARAM_TEXT);
+            $mform->setDefault('experience_category_' . $category->id . '_description',
                 isset($experiencescategoriesmapped[$category->id]) ?
                     $experiencescategoriesmapped[$category->id]->description : "");
-            $mform->hideIf('experiencecategory_' . $category->id . '_description', 'category_' . $category->id);
+            $mform->hideIf('experience_category_' . $category->id . '_description', 'category_' . $category->id);
         }
 
         // Key Takeaways Field.
