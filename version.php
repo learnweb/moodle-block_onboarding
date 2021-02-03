@@ -16,5 +16,5 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 20211020201;
+$plugin->version   = 2021020301;
 $plugin->component = 'block_onboarding';
