@@ -20,6 +20,9 @@ require_once("$CFG->libdir/formslib.php");
 
 class steps_step_form extends moodleform {
 
+    // TODO: Länge an DB anpassen
+    // TODO: ggf. position array +1 fixen oder anders zuordnen
+
     public function definition() {
         global $CFG, $DB;
 

@@ -18,24 +18,33 @@ require(__DIR__ . '/../../../config.php');
 
 require_login();
 
-global $DB;
+global $DB, $USER;
 
 // TODO: Löschen muss auch user_steps entfernen!!
 
 $context = context_system::instance();
 
 if(has_capability('block/onboarding:s_edit_steps', $context)){
-  $step_id = optional_param('step_id', -1, PARAM_INT);
-  $pStep = $DB->get_record('block_onb_s_steps', array('id' => $step_id));
-  $cur_position = $pStep->position;
-  $step_count = $DB->count_records('block_onb_s_steps');
+  $stepid = optional_param('step_id', -1, PARAM_INT);
+  $paramstep = $DB->get_record('block_onb_s_steps', array('id' => $stepid));
+  $curposition = $paramstep->position;
+  $stepcount = $DB->count_records('block_onb_s_steps');
 
   $sql = 'UPDATE {block_onb_s_steps}
                 SET position = position -1
                 WHERE position > :cur_pos and position <= :max_pos';
-  $DB->execute($sql, ['cur_pos' => $cur_position, 'max_pos' => $step_count]);
+  $DB->execute($sql, ['cur_pos' => $curposition, 'max_pos' => $stepcount]);
+  $DB->delete_records('block_onb_s_steps', array('id' => $stepid));
 
-  $DB->delete_records('block_onb_s_steps', array('id' => $step_id));
+  $step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id, 'stepid' => $stepid));
+  if($step != false){
+      $paramstep = $DB->get_record('block_onb_s_steps', array('position' => 1));
+      $step->stepid = $paramstep->id;
+      $DB->update_record('block_onb_s_current', $step);
+  }
+  $DB->delete_records('block_onb_s_completed', array('stepid' => $stepid));
+
+
   redirect('admin.php');
 }else{
   $PAGE->set_context($context);
