@@ -27,6 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 // TODO: Randfälle behandeln, z.B. letzter Schritt in, keine Schritte in Liste, usw.
 // TODO: Language Strings bei Messages verwenden!
+// TODO: ggf. unnötige Variblenzuweisung entfernen und Anweisungen direkt in return schreiben
 
 class step_view_data_functions {
 
@@ -82,12 +83,15 @@ class step_view_data_functions {
     public static function set_step_id_complete($stepid) {
         global $DB, $USER;
 
-        $temp_step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id));
-        $step = new \stdClass();
-        $step->stepid = $stepid;
-        $step->userid = $USER->id;
-        $step->stepid = $temp_step->id;
-        $step->id = $DB->insert_record('block_onb_s_completed', $step);
+        // nur wenn Step noch nicht abgeschlossen wurde, wird dieser hinzugefügt, sonst passiert nichts
+        $step_bool = $DB->record_exists('block_onb_s_completed', array('userid' => $USER->id, 'stepid' => $stepid));
+
+        if($step_bool == false) {
+            $step = new \stdClass();
+            $step->stepid = $stepid;
+            $step->userid = $USER->id;
+            $step->id = $DB->insert_record('block_onb_s_completed', $step);
+        }
     }
 
     public static function get_step_id($position) {
@@ -119,10 +123,23 @@ class step_view_data_functions {
     }
 
 
+    public static function get_user_progress() {
+        global $DB, $USER;
+
+        $total_steps = $DB->count_records('block_onb_s_steps');
+        $user_completed_steps = $DB->count_records('block_onb_s_completed', array('userid' => $USER->id));
+
+        $return_progress = ($user_completed_steps / $total_steps) *100;
+
+        return $return_progress;
+    }
+
+
     public static function message_no_steps() {
         $return_step['name'] = 'NO STEPS TO DISPLAY!';
         $return_step['description'] = 'There are currently no steps saved in the database. Please add steps in the admin section or contact an administrator.';
         $return_step['position'] = 0;
+        $return_step['progress'] = 0;
 
         return $return_step;
     }

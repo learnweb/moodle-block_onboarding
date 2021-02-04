@@ -14,13 +14,11 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
         }
         ]);
         promises[0].done(function (response) {
-            var html1 = '<div class=\"step_description\">' + response.description + '</div>';
-            $('.step_description').replaceWith(html1);
-            var html2 = '<h5 class=\"step_title\"><b>Step #' + response.position + ': ' + response.name + '</b></h5>';
-            $('.step_title').replaceWith(html2);
+            $('.step_description').text(response.description);
+            $('.step_title').text('Step #' + response.position + ': ' + response.name);
+            $('.progress_bar_value').text(response.progress + '%');
+            $('.progress_bar_fill').css('width', (response.progress + '%'));
         }).fail(notification.exception);
-
-
     };
 
 
@@ -34,10 +32,10 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
             }
             ]);
             promises[0].done(function (response) {
-                var html1 = '<div class=\"step_description\">' + response.description + '</div>';
-                $('.step_description').replaceWith(html1);
-                var html2 = '<h5 class=\"step_title\"><b>Step #' + response.position + ': ' + response.name + '</b></h5>';
-                $('.step_title').replaceWith(html2);
+                $('.step_description').text(response.description);
+                $('.step_title').text('Step #' + response.position + ': ' + response.name);
+                $('.progress_bar_value').text(response.progress + '%');
+                $('.progress_bar_fill').css('width', (response.progress + '%'));
             }).fail(notification.exception);
         })
     };
@@ -52,10 +50,8 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
             }
             ]);
             promises[0].done(function (response) {
-                var html1 = '<div class=\"step_description\">' + response.description + '</div>';
-                $('.step_description').replaceWith(html1);
-                var html2 = '<h5 class=\"step_title\"><b>Step #' + response.position + ': ' + response.name + '</b></h5>';
-                $('.step_title').replaceWith(html2);
+                $('.step_description').text(response.description);
+                $('.step_title').text('Step #' + response.position + ': ' + response.name);
             }).fail(notification.exception);
         })
     };
@@ -70,10 +66,8 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
             }
             ]);
             promises[0].done(function (response) {
-                var html1 = '<div class=\"step_description\">' + response.description + '</div>';
-                $('.step_description').replaceWith(html1);
-                var html2 = '<h5 class=\"step_title\"><b>Step #' + response.position + ': ' + response.name + '</b></h5>';
-                $('.step_title').replaceWith(html2);
+                $('.step_description').text(response.description);
+                $('.step_title').text('Step #' + response.position + ': ' + response.name);
             }).fail(notification.exception);
         })
     };

@@ -20,6 +20,8 @@ require_login();
 
 global $DB;
 
+// TODO: Löschen muss auch user_steps entfernen!!
+
 $context = context_system::instance();
 
 if(has_capability('block/onboarding:s_edit_steps', $context)){
