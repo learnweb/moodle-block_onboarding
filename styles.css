@@ -1,5 +1,9 @@
 /* Wiki */
 
+.wiki_title{
+    font-size: 1.5em;
+}
+
 .custom-tooltip {
     position: relative;
     display: inline-block;
@@ -38,9 +42,10 @@
 
 .progress_bar_fill{
     height: 100%;
+    width: 0%;
     border-radius: 8px;
     background: limegreen;
-    transition: width 0.8s;
+    transition: width 1.2s;
 }
 
 .progress_bar_value{
@@ -62,15 +67,15 @@
 }
 
 .done_btn{
-
+    font-weight: bold;
 }
 
 .skip_btn{
-
+    font-weight: bold;
 }
 
 .back_btn{
-
+    font-weight: bold;
 }
 
 
