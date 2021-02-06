@@ -30,12 +30,11 @@ if(has_capability('block/onboarding:s_edit_steps', $context)){
   $curposition = $paramstep->position;
   $stepcount = $DB->count_records('block_onb_s_steps');
 
-  $sql = 'UPDATE {block_onb_s_steps}
-                SET position = position -1
-                WHERE position > :cur_pos and position <= :max_pos';
-  $DB->execute($sql, ['cur_pos' => $curposition, 'max_pos' => $stepcount]);
+  // deleting step and adjusting other step positions accordingly
+  \block_onboarding\step_admin_functions::decrement_step_positions($stepcount, $curposition);
   $DB->delete_records('block_onb_s_steps', array('id' => $stepid));
 
+  // deleting all user progress for deleted step
   $step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id, 'stepid' => $stepid));
   if($step != false){
       $paramstep = $DB->get_record('block_onb_s_steps', array('position' => 1));

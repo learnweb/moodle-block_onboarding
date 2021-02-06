@@ -15,27 +15,27 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * functions to handle database calls when editing steps
- *
- * @package    block_onboarding
- * @copyright  2021 Westfälische Wilhelms-Universität Münster
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+* functions to handle database calls when editing wiki content
+*
+* @package    block_onboarding
+* @copyright  2021 Westfälische Wilhelms-Universität Münster
+* @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+*/
 
 namespace block_onboarding;
 defined('MOODLE_INTERNAL') || die();
 
-class step_admin_functions
+class wiki_admin_functions
 {
 
     /**
      * Beschreibung hinzufügen!
      */
-    public static function increment_step_positions($insert, $cur)
+    public static function increment_category_positions($insert, $cur)
     {
         global $DB;
 
-        $sql = 'UPDATE {block_onb_s_steps}
+        $sql = 'UPDATE {block_onb_w_categories}
             SET position = position +1
             WHERE position >= :insert_pos and position < :cur_pos';
         $DB->execute($sql, ['cur_pos' => $cur, 'insert_pos' => $insert]);
@@ -44,11 +44,11 @@ class step_admin_functions
     /**
      * Beschreibung hinzufügen!
      */
-    public static function decrement_step_positions($insert, $cur)
+    public static function decrement_category_positions($insert, $cur)
     {
         global $DB;
 
-        $sql = 'UPDATE {block_onb_s_steps}
+        $sql = 'UPDATE {block_onb_w_categories}
                 SET position = position -1
                 WHERE position > :cur_pos and position <= :insert_pos';
         $DB->execute($sql, ['cur_pos' => $cur, 'insert_pos' => $insert]);

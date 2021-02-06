@@ -35,9 +35,11 @@ $string['default_category_name'] = 'Sample Category';
 $string['edit_link'] = 'Edit Link';
 $string['link_name'] = 'Name';
 $string['link_category'] = 'Category';
+$string['category_number'] = 'Category Position';
 $string['link_url'] = 'URL';
 $string['link_description'] = 'Description';
 $string['link_description_help'] = 'Let me help you!';
+$string['link_number'] = 'Link Position';
 
 $string['default_link_name'] = 'Sample Link';
 $string['default_link_url'] = 'http://www.example.com';
