@@ -16,7 +16,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once("$CFG->libdir/formslib.php");
+require_once($CFG->libdir . '/formslib.php');
 
 class experiences_experience_form extends moodleform {
 
@@ -45,7 +45,8 @@ class experiences_experience_form extends moodleform {
         foreach ($courses as $course){
             $coursesmodified[$course->id] = $course->name;
         }
-        $mform->addElement('select', 'course_id', get_string('course_select', 'block_onboarding'), $coursesmodified);
+        $mform->addElement('select', 'course_id', get_string('course_select', 'block_onboarding'),
+            $coursesmodified, 'required');
         if (isset($link->course_id)) {
             $mform->setDefault('course_id', $link->course_id);
         }
@@ -78,7 +79,7 @@ class experiences_experience_form extends moodleform {
         }
 
         // Key Takeaways Field.
-        $mform->addElement('textarea', 'takeaways', get_string('takeaways', 'block_onboarding'),
+        $mform->addElement('textarea', 'takeaways', get_string('takeaways_required', 'block_onboarding'),
             array('wrap="virtual" rows="3" cols="80"',
                 'placeholder' => get_string('takeaways_default', 'block_onboarding'), 'required'));
         $mform->setType('takeaways', PARAM_TEXT);

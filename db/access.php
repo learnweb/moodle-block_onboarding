@@ -82,5 +82,14 @@
         'archetypes' => [
             'editingteacher' => CAP_ALLOW,
         ],
-    ]
+    ],
+
+    'block/onboarding:e_manage_reports' => [
+    'riskbitmask' => RISK_SPAM,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_MODULE,
+        'archetypes' => [
+            'editingteacher' => CAP_ALLOW,
+        ],
+    ],
 );
