@@ -23,7 +23,12 @@ global $DB;
 $context = context_system::instance();
 
 if(has_capability('block/onboarding:w_manage_wiki', $context)){
-  $DB->delete_records('block_onb_w_links', array('id' => optional_param('link_id', -1, PARAM_INT)));
+  $linkid = optional_param('link_id', -1, PARAM_INT);
+  $paramlink = $DB->get_record('block_onb_w_links', array('id'=>$linkid));
+  $curposition = $paramlink->position;
+  $linkcount = $DB->count_records('block_onb_w_links');
+  \block_onboarding\wiki_admin_functions::decrement_link_positions($linkcount, $curposition);
+  $DB->delete_records('block_onb_w_links', array('id' => $linkid));
   redirect('overview.php');
 }else{
   $PAGE->set_context($context);

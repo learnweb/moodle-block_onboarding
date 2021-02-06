@@ -53,4 +53,30 @@ class wiki_admin_functions
                 WHERE position > :cur_pos and position <= :insert_pos';
         $DB->execute($sql, ['cur_pos' => $cur, 'insert_pos' => $insert]);
     }
+
+    /**
+     * Beschreibung hinzufügen!
+     */
+    public static function increment_link_positions($insert, $cur)
+    {
+        global $DB;
+
+        $sql = 'UPDATE {block_onb_w_links}
+            SET position = position +1
+            WHERE position >= :insert_pos and position < :cur_pos';
+        $DB->execute($sql, ['cur_pos' => $cur, 'insert_pos' => $insert]);
+    }
+
+    /**
+     * Beschreibung hinzufügen!
+     */
+    public static function decrement_link_positions($insert, $cur)
+    {
+        global $DB;
+
+        $sql = 'UPDATE {block_onb_w_links}
+                SET position = position -1
+                WHERE position > :cur_pos and position <= :insert_pos';
+        $DB->execute($sql, ['cur_pos' => $cur, 'insert_pos' => $insert]);
+    }
 }

@@ -32,32 +32,53 @@ if(has_capability('block/onboarding:w_manage_wiki', $context)){
 
   require_once('./../classes/forms/wiki_link_form.php');
 
-  $link_id = optional_param('link_id', -1, PARAM_INT);
-  $pLink = new stdClass;
-  $pLink->id = -1;
-  if($link_id != -1){
-    $pLink = $DB->get_record('block_onb_w_links', array('id'=>$link_id));
-  }
-  $mform = new wiki_link_form(null, array('link' => $pLink));
-    #$mform->addHelpButton('Link', 'link_description', 'block_onboarding');
-   # $this->add_action_buttons();
-  if ($mform->is_cancelled()) {
-  		redirect('overview.php');
-  } else if ($fromform = $mform->get_data()) {
-      $link = new stdClass();
-      $link->name = $fromform->name;
-      $link->category_id = $fromform->category_id;
-      $link->url = $fromform->url;
-      $link->description = $fromform->description;
-      $link->timecreated = time();
-      $link->timemodified = time();
+    $linkid = optional_param('link_id', -1, PARAM_INT);
+    $paramlink = new stdClass;
+    $paramlink->id = -1;
+    if($linkid != -1){
+        $paramlink = $DB->get_record('block_onb_w_links', array('id'=>$linkid));
+    }
 
-      if($fromform->id != -1){
-        $link->id = $fromform->id;
-        $DB->update_record('block_onb_w_links', $link);
-      }else{
-        $link->id = $DB->insert_record('block_onb_w_links', $link);
-      }
+    $mform = new wiki_link_form(null, array('link' => $paramlink));
+
+    if ($mform->is_cancelled()) {
+        redirect('overview.php');
+
+    } else if ($fromform = $mform->get_data()) {
+        $link = new stdClass();
+        $link->name = $fromform->name;
+        $link->category_id = $fromform->category_id;
+        $link->url = $fromform->url;
+        $link->description= $fromform->description;
+        $insertposition = $fromform->position + 1;
+
+        if($fromform->id != -1){
+            $paramlink = $DB->get_record('block_onb_w_links', array('id'=>$fromform->id));
+            $curposition = $paramlink->position;
+            if ($insertposition > $curposition) {
+                \block_onboarding\wiki_admin_functions::decrement_link_positions($insertposition, $curposition);
+            } else if ($insertposition < $curposition) {
+                \block_onboarding\wiki_admin_functions::increment_link_positions($insertposition, $curposition);
+            }
+            $link->id = $fromform->id;
+            $link->position = $fromform->position + 1;
+            $link->timemodified = time();
+            $DB->update_record('block_onb_w_links', $link);
+
+        }else{
+            $initposition = $DB->count_records('block_onb_w_links') + 1;
+            $link->position = $initposition;
+            $link->timecreated = time();
+            $link->timemodified = time();
+            $link->id = $DB->insert_record('block_onb_w_links', $link);
+
+            if ($initposition != $insertposition) {
+                \block_onboarding\wiki_admin_functions::increment_link_positions($insertposition, $initposition);
+                $link->position = $insertposition;
+                $link->timemodified = time();
+                $DB->update_record('block_onb_w_links', $link);
+            }
+        }
       redirect('overview.php');
   }
 

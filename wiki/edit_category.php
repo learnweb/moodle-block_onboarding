@@ -47,8 +47,6 @@ if(has_capability('block/onboarding:w_manage_wiki', $context)){
   } else if ($fromform = $mform->get_data()) {
       $category = new stdClass();
       $category->name = $fromform->name;
-      $category->timecreated = time();
-      $category->timemodified = time();
       $insertposition = $fromform->position + 1;
 
       if($fromform->id != -1){
