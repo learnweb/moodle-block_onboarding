@@ -37,13 +37,15 @@ class steps_step_form extends moodleform {
         $mform->addElement('hidden','id', $step->id);
         $mform->setType('id', PARAM_INT);
 
-        $mform->addElement('text', 'name', get_string('step_name', 'block_onboarding'));
+        $mform->addElement('text', 'name', get_string('step_name', 'block_onboarding'), 'maxlength="150"');
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($step->name) ? $step->name : get_string('default_step_name', 'block_onboarding'));
+        $mform->addRule('name', get_string('step_name_req', 'block_onboarding'), 'required', null, 'client');
 
         $mform->addElement('textarea', 'description', get_string('step_description', 'block_onboarding'),'wrap="virtual" rows="10" cols="50"');
         $mform->setType('description', PARAM_TEXT);
         $mform->setDefault('description', isset($step->description) ? $step->description : get_string('default_step_description', 'block_onboarding'));
+        $mform->addRule('description', get_string('step_description_req', 'block_onboarding'), 'required', null, 'client');
         // zählt DB Eintrag und ändert position anhand Anzahl von Einträgen
 
         //$mform->addElement('hidden','position', $DB->count_records('block_onb_s_steps'));

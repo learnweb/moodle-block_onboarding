@@ -29,15 +29,19 @@ $string['admin'] = 'Admin';
 
 $string['edit_category'] = 'Edit Category';
 $string['category_name'] = 'Name';
+$string['category_name_req'] = 'Please enter a name for the category.';
 $string['default_category_name'] = 'Sample Category';
 
 
 $string['edit_link'] = 'Edit Link';
 $string['link_name'] = 'Name';
+$string['link_name_req'] = 'Please enter a name for the link.';
 $string['link_category'] = 'Category';
 $string['category_number'] = 'Category Position';
 $string['link_url'] = 'URL';
+$string['link_url_req'] = 'Please enter a link.';
 $string['link_description'] = 'Description';
+$string['link_description_req'] = 'Please provide a description for the link.';
 $string['link_description_help'] = 'Let me help you!';
 $string['link_number'] = 'Link Position';
 
@@ -52,7 +56,9 @@ $string['admin'] = 'Admin';
 
 $string['edit_step'] = 'Edit Step';
 $string['step_name'] = 'Name';
+$string['step_name_req'] = 'Please enter a name for the step.';
 $string['step_description'] = 'Description';
+$string['step_description_req'] = 'Please provide a description for the step.';
 $string['default_step_name'] = 'Sample Name';
 $string['default_step_description'] = 'Sample Description';
 $string['step_number'] = 'Step Position';

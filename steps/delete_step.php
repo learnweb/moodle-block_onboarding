@@ -38,8 +38,13 @@ if(has_capability('block/onboarding:s_edit_steps', $context)){
   $step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id, 'stepid' => $stepid));
   if($step != false){
       $paramstep = $DB->get_record('block_onb_s_steps', array('position' => 1));
-      $step->stepid = $paramstep->id;
-      $DB->update_record('block_onb_s_current', $step);
+      // gucken, ob überhaupt nich ein Schritt exisitiert
+      if($paramstep != false){
+          $step->stepid = $paramstep->id;
+          $DB->update_record('block_onb_s_current', $step);
+      }else{
+          $DB->delete_records('block_onb_s_current', array('stepid' => $stepid));
+      }
   }
   $DB->delete_records('block_onb_s_completed', array('stepid' => $stepid));
 

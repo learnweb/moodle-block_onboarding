@@ -31,9 +31,10 @@ class wiki_category_form extends moodleform {
         $mform->addElement('hidden','id', $category->id);
         $mform->setType('id', PARAM_INT);
 
-        $mform->addElement('text', 'name', get_string('category_name', 'block_onboarding'));
+        $mform->addElement('text', 'name', get_string('category_name', 'block_onboarding'), 'maxlength="150"');
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($category->name) ? $category->name : get_string('default_category_name', 'block_onboarding'));
+        $mform->addRule('name', get_string('category_name_req', 'block_onboarding'), 'required', null, 'client');
 
         $count_positions = $DB->count_records('block_onb_w_categories');
         if($category->id == -1){
