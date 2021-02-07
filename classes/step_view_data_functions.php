@@ -129,7 +129,7 @@ class step_view_data_functions {
         $total_steps = $DB->count_records('block_onb_s_steps');
         $user_completed_steps = $DB->count_records('block_onb_s_completed', array('userid' => $USER->id));
 
-        $return_progress = ($user_completed_steps / $total_steps) *100;
+        $return_progress = (int)round(($user_completed_steps / $total_steps) *100);
 
         return $return_progress;
     }

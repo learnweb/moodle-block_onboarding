@@ -30,8 +30,8 @@ class wiki_overview implements renderable, templatable {
   public function export_for_template(renderer_base $output) {
     global $DB;
 
-   $categories = array_values($DB->get_records('block_onb_w_categories'));
-    $links = array_values($DB->get_records('block_onb_w_links'));
+   $categories = array_values($DB->get_records('block_onb_w_categories', $conditions=null, $sort='position ASC'));
+   $links = array_values($DB->get_records('block_onb_w_links', $conditions=null, $sort='position ASC'));
 
 
     foreach($categories as $category){
