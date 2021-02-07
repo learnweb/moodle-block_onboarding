@@ -131,3 +131,11 @@
     display: inline-block;
     padding: 0px 10px 0px 0px;
 }
+
+.block-experiences-overview-report {
+    margin-bottom: 20px;
+}
+
+.block-experiences-overview-report-actions {
+    margin-bottom: 20px;
+}

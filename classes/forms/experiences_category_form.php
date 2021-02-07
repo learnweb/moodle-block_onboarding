@@ -16,7 +16,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once("$CFG->libdir/formslib.php");
+require_once($CFG->libdir . '/formslib.php');
 
 class experiences_category_form extends moodleform {
 
@@ -31,7 +31,9 @@ class experiences_category_form extends moodleform {
         $mform->setType('id', PARAM_INT);
 
         // Category Name Field.
-        $mform->addElement('text', 'name', get_string('category_name', 'block_onboarding'), 'required');
+        $mform->addElement('text', 'name', get_string('category_name', 'block_onboarding'));
+        $mform->addRule('name', get_string('experience_category_missing', 'block_onboarding'),
+            'required', null, 'server');
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($category->name) ? $category->name : get_string('default_category_name',
             'block_onboarding'));
@@ -39,6 +41,8 @@ class experiences_category_form extends moodleform {
         // Questions Textarea.
         $mform->addElement('textarea', 'questions', get_string('questions', 'block_onboarding'),
             'wrap="virtual" rows="10" cols="100"');
+        $mform->addRule('questions', get_string('experience_questions_missing', 'block_onboarding'),
+            'required', null, 'server');
         $mform->setType('questions', PARAM_TEXT);
         $mform->setDefault('questions', isset($category->questions) ? $category->questions : '');
 
