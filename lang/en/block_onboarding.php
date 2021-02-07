@@ -31,6 +31,8 @@ $string['admin'] = 'Admin';
 $string['edit_category'] = 'Edit Category';
 $string['category_name'] = 'Name';
 $string['default_category_name'] = 'Sample Category';
+$string['experience_category_missing'] = 'Please enter a name for a category.';
+$string['experience_questions_missing'] = 'Give a few suggestions...';
 
 
 $string['edit_link'] = 'Edit Link';
@@ -74,11 +76,13 @@ $string['questions'] = 'Questions';
 
 $string['edit_course'] = 'Edit Degree Programs';
 $string['course_name'] = 'Name';
+$string['course_name_missing'] = 'Please enter a course name.';
 $string['default_course_name'] = 'Sample Degree Program';
-$string['course_select'] = 'Select Degree Program*';
+$string['course_select'] = 'Select Degree Program';
 
 $string['edit_experience'] = 'Edit Experience';
-$string['experience_name'] = 'Name*';
+$string['experience_name'] = 'Name';
+$string['experience_name_missing'] = 'Please enter a name for your report.';
 $string['experience_category'] = 'Category';
 $string['experience_url'] = 'URL';
 $string['experience_description'] = 'Description';
@@ -91,9 +95,11 @@ $string['contact'] = 'Contact: ';
 $string['author'] = 'Author: ';
 $string['date'] = 'Published: ';
 $string['degreeprogram'] = 'Degree Program: ';
+$string['category_missing'] = 'Please enter some thoughts or uncheck the box.';
 $string['takeaways'] = 'Key Takeaways';
-$string['takeaways_required'] = 'Key Takeaways*';
-$string['takeaways_default'] = 'Briefly summarize your report';
+$string['takeaways_missing'] = 'Please enter a key takeaway for this category.';
+$string['takeaways_required'] = 'Key Takeaway';
+$string['takeaways_default'] = 'Summarize this category in one bullet point';
 $string['degreeprogram_filter'] = 'Degree Programs';
 $string['category_filter'] = 'Categories';
 $string['applyfilter'] = 'Apply Filter';
@@ -109,4 +115,11 @@ $string['other'] = 'Other';
 $string['types'] = 'Choose an Option';
 $string['report'] = 'Report Experience';
 $string['report_overview'] = 'Report Overview';
+$string['description_missing'] = 'Please enter a description.';
+$string['filter_or'] = 'this filter';
+$string['filter_or_help'] =
+    'This filter is OR connected meaning results from all selected categories will be displayed.';
+$string['aboutme'] = 'About Me';
+$string['aboutme_default'] = 'Write something about yourself. (Age, Semester, etc.)';
+
 
