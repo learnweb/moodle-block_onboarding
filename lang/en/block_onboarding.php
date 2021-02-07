@@ -30,6 +30,8 @@ $string['admin'] = 'Admin';
 $string['edit_category'] = 'Edit Category';
 $string['category_name'] = 'Name';
 $string['default_category_name'] = 'Sample Category';
+$string['experience_category_missing'] = 'Please enter a name for a category.';
+$string['experience_questions_missing'] = 'Give a few suggestions...';
 
 
 $string['edit_link'] = 'Edit Link';
@@ -69,11 +71,13 @@ $string['questions'] = 'Questions';
 
 $string['edit_course'] = 'Edit Degree Programs';
 $string['course_name'] = 'Name';
+$string['course_name_missing'] = 'Please enter a course name.';
 $string['default_course_name'] = 'Sample Degree Program';
-$string['course_select'] = 'Select Degree Program*';
+$string['course_select'] = 'Select Degree Program';
 
 $string['edit_experience'] = 'Edit Experience';
-$string['experience_name'] = 'Name*';
+$string['experience_name'] = 'Name';
+$string['experience_name_missing'] = 'Please enter a name for your report.';
 $string['experience_category'] = 'Category';
 $string['experience_url'] = 'URL';
 $string['experience_description'] = 'Description';
@@ -86,8 +90,10 @@ $string['contact'] = 'Contact: ';
 $string['author'] = 'Author: ';
 $string['date'] = 'Published: ';
 $string['degreeprogram'] = 'Degree Program: ';
+$string['category_missing'] = 'Please enter some thoughts or uncheck the box.';
 $string['takeaways'] = 'Key Takeaways';
-$string['takeaways_required'] = 'Key Takeaway*';
+$string['takeaways_missing'] = 'Please enter your key takeaways.';
+$string['takeaways_required'] = 'Key Takeaway';
 $string['takeaways_default'] = 'Summarize this category in one bullet point';
 $string['degreeprogram_filter'] = 'Degree Programs';
 $string['category_filter'] = 'Categories';
