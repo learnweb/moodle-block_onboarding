@@ -94,7 +94,8 @@ class experiences_experience_form extends moodleform {
             // Key Takeaway Field.
             $mform->addElement('textarea', 'experience_category_' . $category->id . '_takeaway',
                 get_string('takeaways_required', 'block_onboarding'),
-                array('wrap="virtual" rows="1" cols="100"', 'placeholder' => get_string('takeaways_default', 'block_onboarding'), 'required'));
+                array('style="resize:none" wrap="virtual" rows="1" cols="100"',
+                    'placeholder' => get_string('takeaways_default', 'block_onboarding'), 'required'));
             $mform->setType('experience_category_' . $category->id . '_takeaway', PARAM_TEXT);
             $mform->setDefault('experience_category_' . $category->id . '_takeaway',
                 isset($experiencescategoriesmapped[$category->id]) ?

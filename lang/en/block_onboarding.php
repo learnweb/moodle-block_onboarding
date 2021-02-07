@@ -105,7 +105,7 @@ $string['types'] = 'Choose an Option';
 $string['report'] = 'Report Experience';
 $string['report_overview'] = 'Report Overview';
 $string['filter_or'] = 'this filter';
-$string['filter_or_help'] = 'This filter is OR connected meaning results from all selected categories will be displayed';
+$string['filter_or_help'] = 'This filter is OR connected meaning results from all selected categories will be displayed.';
 $string['aboutme'] = 'About Me';
 $string['aboutme_default'] = 'Write something about yourself. (Age, Semester, etc.)';
 
