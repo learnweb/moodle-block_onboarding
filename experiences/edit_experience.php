@@ -51,11 +51,16 @@ if ($experience_id == -1 || $USER->id == $pexperience->user_id ||
         $experience = new stdClass();
         $experience->name = $fromform->name;
         $experience->contact = $fromform->contact;
-        // $experience->takeaways = $fromform->takeaways;
         $experience->user_id = $fromform->user_id;
         $experience->course_id = $fromform->course_id;
         $experience->timecreated = time();
         $experience->timemodified = time();
+
+        if (isset($fromform->aboutme)) {
+            $experience->aboutme = $fromform->aboutme_text;
+        } else {
+            $experience->aboutme = null;
+        }
 
         if ($fromform->id != -1) {
             $experience->id = $fromform->id;

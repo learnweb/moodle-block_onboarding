@@ -51,7 +51,12 @@ class experiences_experience_form extends moodleform {
             $mform->setDefault('course_id', $link->course_id);
         }
 
-        // Category Checkboxes and Textareas.
+        // About Me Checkbox
+        $mform->addElement('checkbox', 'aboutme', get_string('aboutme', 'block_onboarding'));
+        $mform->setDefault('aboutme', true);
+
+
+        // Category Checkboxes.
         $categories = $DB->get_records('block_onb_e_cats');
         $experiencescategories = $DB->get_records('block_onb_e_exps_cats', array('experience_id' => $experience->id));
         foreach ($categories as $category) {
@@ -62,6 +67,15 @@ class experiences_experience_form extends moodleform {
             $mform->setDefault('category_' . $experiencecategory->category_id, true);
         }
 
+        // About Me Textarea
+        $mform->addElement('textarea', 'aboutme_text', get_string('aboutme', 'block_onboarding'),
+            array('wrap="virtual" rows="10" cols="100"',
+                'placeholder' => get_string('aboutme_default', 'block_onboarding')));
+        $mform->setType('aboutme_text', PARAM_TEXT);
+        $mform->setDefault('aboutme_text', isset($experience->aboutme) ? $experience->aboutme : "");
+        $mform->hideIf('aboutme_text', 'aboutme');
+
+        // Category Textboxes.
         $categories = $DB->get_records('block_onb_e_cats');
         $experiencescategories = $DB->get_records('block_onb_e_exps_cats', array('experience_id' => $experience->id));
         $experiencescategoriesmapped = array();
