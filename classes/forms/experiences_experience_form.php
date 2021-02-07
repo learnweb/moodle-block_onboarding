@@ -76,14 +76,17 @@ class experiences_experience_form extends moodleform {
                 isset($experiencescategoriesmapped[$category->id]) ?
                     $experiencescategoriesmapped[$category->id]->description : "");
             $mform->hideIf('experience_category_' . $category->id . '_description', 'category_' . $category->id);
-        }
 
-        // Key Takeaways Field.
-        $mform->addElement('textarea', 'takeaways', get_string('takeaways_required', 'block_onboarding'),
-            array('wrap="virtual" rows="3" cols="80"',
-                'placeholder' => get_string('takeaways_default', 'block_onboarding'), 'required'));
-        $mform->setType('takeaways', PARAM_TEXT);
-        $mform->setDefault('takeaways', isset($experience->takeaways) ? $experience->takeaways : '');
+            // Key Takeaway Field.
+            $mform->addElement('textarea', 'experience_category_' . $category->id . '_takeaway',
+                get_string('takeaways_required', 'block_onboarding'),
+                array('wrap="virtual" rows="1" cols="100"', 'placeholder' => get_string('takeaways_default', 'block_onboarding'), 'required'));
+            $mform->setType('experience_category_' . $category->id . '_takeaway', PARAM_TEXT);
+            $mform->setDefault('experience_category_' . $category->id . '_takeaway',
+                isset($experiencescategoriesmapped[$category->id]) ?
+                    $experiencescategoriesmapped[$category->id]->takeaway : "");
+            $mform->hideIf('experience_category_' . $category->id . '_takeaway', 'category_' . $category->id);
+        }
 
         // Contact Field.
         $mform->addElement('text', 'contact', get_string('experience_contact', 'block_onboarding'));

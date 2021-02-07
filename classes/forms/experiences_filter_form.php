@@ -48,6 +48,7 @@ class experiences_filter_form extends moodleform {
         );
         $mform->addElement('autocomplete', 'category_filter', get_string('category_filter', 'block_onboarding'),
             $categoriesmodified, $options);
+        $mform->addHelpButton('category_filter', 'filter_or', 'block_onboarding');
 
         $mform->addElement('submit', 'applyfilter', get_string('applyfilter', 'block_onboarding'));
     }

@@ -51,7 +51,7 @@ if ($experience_id == -1 || $USER->id == $pexperience->user_id ||
         $experience = new stdClass();
         $experience->name = $fromform->name;
         $experience->contact = $fromform->contact;
-        $experience->takeaways = $fromform->takeaways;
+        // $experience->takeaways = $fromform->takeaways;
         $experience->user_id = $fromform->user_id;
         $experience->course_id = $fromform->course_id;
         $experience->timecreated = time();
@@ -76,6 +76,8 @@ if ($experience_id == -1 || $USER->id == $pexperience->user_id ||
                 $experience_category->category_id = $category->id;
                 $formproperty_category_textarea = 'experience_category_' . $category->id . '_description';
                 $experience_category->description = $fromform->$formproperty_category_textarea;
+                $formproperty_category_takeaway = 'experience_category_' . $category->id . '_takeaway';
+                $experience_category->takeaway = $fromform->$formproperty_category_takeaway;
                 $experience_category->timecreated = time();
                 $experience_category->timemodified = time();
                 $experiences_categories[] = $experience_category;
