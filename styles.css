@@ -1,5 +1,9 @@
 /* Wiki */
 
+.wiki_title{
+    font-size: 1.5em;
+}
+
 .custom-tooltip {
     position: relative;
     display: inline-block;
@@ -23,8 +27,39 @@
 
 /* Steps */
 
-.step_title{
+.step_container{
 
+}
+
+.progress_bar{
+    position: relative;
+    width: 800px;
+    height: 30px;
+    background: lightgrey;
+    border-radius: 8px;
+    border: 3px solid black;
+}
+
+.progress_bar_fill{
+    height: 100%;
+    width: 0%;
+    border-radius: 8px;
+    background: limegreen;
+    transition: width 1.2s;
+}
+
+.progress_bar_value{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.step_title{
+    font-size: 1.5em;
 }
 
 .step_description{
@@ -32,15 +67,15 @@
 }
 
 .done_btn{
-
+    font-weight: bold;
 }
 
 .skip_btn{
-
+    font-weight: bold;
 }
 
 .back_btn{
-
+    font-weight: bold;
 }
 
 
