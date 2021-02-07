@@ -25,12 +25,13 @@ $context = context_system::instance();
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/steps/edit_step.php'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
+$PAGE->navbar->add(get_string('guide', 'block_onboarding'));
 
 // TODO: Kommentare korrigieren und reduzieren und in Englisch
 // TODO: Clean Code!!
 
 // prüft Zugriffsrechte für die Datenbank-Zugriff
-if(has_capability('block/onboarding:s_edit_steps', $context)){
+if(has_capability('block/onboarding:s_manage_steps', $context)){
   $PAGE->set_title(get_string('edit_step', 'block_onboarding'));
   $PAGE->set_heading(get_string('edit_step', 'block_onboarding'));
 

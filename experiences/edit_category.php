@@ -25,8 +25,9 @@ $context = context_system::instance();
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/edit_category.php'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
+$PAGE->navbar->add(get_string('experiences', 'block_onboarding'));
 
-if (has_capability('block/onboarding:e_edit_categories', \context_system::instance())) {
+if (has_capability('block/onboarding:e_manage_experiences', \context_system::instance())) {
     $PAGE->set_title(get_string('edit_category', 'block_onboarding'));
     $PAGE->set_heading(get_string('edit_category', 'block_onboarding'));
 

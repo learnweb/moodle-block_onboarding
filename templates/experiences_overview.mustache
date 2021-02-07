@@ -1,4 +1,9 @@
-<a href="admin.php">Manage Experiences</a>
+<a href="../index.php">{{#pix}}t/left, core, Back{{/pix}}Back to Home</a>
+<br></br>
+<div class="experiences-title-wrapper">
+    <h2><b>Experiences</b></h2>
+    {{#can_manage_experiences}}<a href="admin.php">{{#pix}}i/settings, core, Settings{{/pix}}Settings</a>{{/can_manage_experiences}}
+</div>
 <br></br>
 <div class="block-experiences-overview-experiences-actions">
     <a href="edit_experience.php">New Experience</a>

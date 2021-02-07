@@ -25,9 +25,10 @@ $PAGE->set_url($url);
 $PAGE->set_context($context);
 
 if(has_capability('block/onboarding:w_manage_wiki', $context)){
-    $PAGE->set_title(get_string('admin', 'block_onboarding'));
-    $PAGE->set_heading(get_string('admin', 'block_onboarding'));
+    $PAGE->set_title(get_string('experiences', 'block_onboarding'));
+    $PAGE->set_heading(get_string('experiences', 'block_onboarding'));
     $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
+    $PAGE->navbar->add(get_string('experiences', 'block_onboarding'));
     
     $output = $PAGE->get_renderer('block_onboarding');
     echo $output->header();

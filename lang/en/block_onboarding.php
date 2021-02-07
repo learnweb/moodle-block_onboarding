@@ -59,6 +59,8 @@ $string['overview'] = 'Overview';
 
 $string['admin'] = 'Admin';
 
+$string['steps'] = 'Steps';
+
 $string['edit_step'] = 'Edit Step';
 $string['step_name'] = 'Name';
 $string['step_name_req'] = 'Please enter a name for the step.';

@@ -30,7 +30,7 @@ $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
 // TODO: Clean Code!!
 
 // prüft Zugriffsrechte für die Datenbank-Zugriff
-if (has_capability('block/onboarding:s_edit_steps', $context)) {
+if (has_capability('block/onboarding:s_manage_steps', $context)) {
     $PAGE->set_title(get_string('edit_step', 'block_onboarding'));
     $PAGE->set_heading(get_string('edit_step', 'block_onboarding'));
 

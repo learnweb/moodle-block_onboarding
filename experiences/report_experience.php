@@ -25,6 +25,7 @@ $context = context_system::instance();
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/report_experience.php'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
+$PAGE->navbar->add(get_string('experiences', 'block_onboarding'));
 
 $PAGE->set_title(get_string('report_experience', 'block_onboarding'));
 $PAGE->set_heading(get_string('report_experience', 'block_onboarding'));

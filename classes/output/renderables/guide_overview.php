@@ -30,8 +30,8 @@ class guide_overview implements renderable, templatable {
   public function export_for_template(renderer_base $output) {
     global $DB;
 
-   $categories = array_values($DB->get_records('block_onb_w_categories'));
-    $links = array_values($DB->get_records('block_onb_w_links'));
+   $categories = array_values($DB->get_records('block_onb_w_categories', $conditions=null, $sort='position ASC'));
+   $links = array_values($DB->get_records('block_onb_w_links', $conditions=null, $sort='position ASC'));
 
 
     foreach($categories as $category){
@@ -44,8 +44,8 @@ class guide_overview implements renderable, templatable {
     }
 
     return [
-      'can_manage_wiki' => has_capability('block/onboarding:w_manage_wiki', \context_system::instance()) ? true : false,
-      'can_edit_steps' => has_capability('block/onboarding:s_edit_steps', \context_system::instance()) ? true : false,
+      'can_manage_wiki' => has_capability('block/onboarding:w_manage_wiki', \context_system::instance()),
+      'can_manage_steps' => has_capability('block/onboarding:s_manage_steps', \context_system::instance()),
       'categories_with_links' => $categories
     ];
   }

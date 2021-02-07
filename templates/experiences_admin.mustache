@@ -1,12 +1,11 @@
-{{#can_manage_reports}}
-    <div class="block-experiences-overview-report">
-        <h2>{{# str }} report_overview, block_onboarding {{/ str }}</h2>
-        <div class="block-experiences-overview-report-actions">
-            <a href="report_overview.php"> {{# str }} report_overview, block_onboarding {{/ str }} </a>
-        </div>
+<a href="overview.php">{{#pix}}t/left, core, Back{{/pix}}Back to Overview</a>
+<br></br>
+<div class="block-experiences-overview-report">
+  <h2>{{# str }} report_overview, block_onboarding {{/ str }}</h2>
+    <div class="block-experiences-overview-report-actions">
+      <a href="report_overview.php"> {{# str }} report_overview, block_onboarding {{/ str }} </a>
     </div>
-{{/can_manage_reports}}
-{{#can_edit_categories}}
+  </div>
 <div class="block-experiences-overview-categories">
   <h2>Categories</h2>
   <div class="block-experiences-overview-categories-actions">
@@ -19,8 +18,6 @@
       </div>
   {{/categories_general}}
 </div>
-{{/can_edit_categories}}
-{{#can_edit_courses}}
 <div class="block-experiences-overview-courses">
   <h2>Degree Programs</h2>
   <div class="block-experiences-overview-courses-actions">
@@ -33,7 +30,6 @@
       </div>
   {{/courses_general}}
 </div>
-{{/can_edit_courses}}
 <div class="block-experiences-overview-experiences">
   <h2>Experiences</h2>
   <div class="block-experiences-overview-experiences-actions">

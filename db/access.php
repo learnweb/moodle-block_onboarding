@@ -48,7 +48,7 @@
         ],
     ],
 
-    'block/onboarding:s_edit_steps' => [
+    'block/onboarding:s_manage_steps' => [
         'riskbitmask' => RISK_SPAM,
         'captype' => 'write',
         'contextlevel' => CONTEXT_MODULE,
@@ -57,39 +57,12 @@
         ],
     ],
 
-    'block/onboarding:e_edit_categories' => [
+    'block/onboarding:e_manage_experiences' => [
         'riskbitmask' => RISK_SPAM,
         'captype' => 'write',
         'contextlevel' => CONTEXT_MODULE,
         'archetypes' => [
             'editingteacher' => CAP_ALLOW,
         ],
-    ],
-
-    'block/onboarding:e_edit_courses' => [
-        'riskbitmask' => RISK_SPAM,
-        'captype' => 'write',
-        'contextlevel' => CONTEXT_MODULE,
-        'archetypes' => [
-            'editingteacher' => CAP_ALLOW,
-        ],
-    ],
-
-    'block/onboarding:e_edit_all_experiences' => [
-        'riskbitmask' => RISK_SPAM,
-        'captype' => 'write',
-        'contextlevel' => CONTEXT_MODULE,
-        'archetypes' => [
-            'editingteacher' => CAP_ALLOW,
-        ],
-    ],
-
-    'block/onboarding:e_manage_reports' => [
-    'riskbitmask' => RISK_SPAM,
-        'captype' => 'write',
-        'contextlevel' => CONTEXT_MODULE,
-        'archetypes' => [
-            'editingteacher' => CAP_ALLOW,
-        ],
-    ],
+    ]
 );

@@ -38,7 +38,7 @@ class experiences_admin implements renderable, templatable {
 
         $experiences_mapped = array();
         foreach($experiences as $experience){
-            if($USER->id == $experience->user_id || has_capability('block/onboarding:e_edit_all_experiences',
+            if($USER->id == $experience->user_id || has_capability('block/onboarding:e_manage_experiences',
                     \context_system::instance())){
                 $experience->editable = true;
             }
@@ -61,15 +61,11 @@ class experiences_admin implements renderable, templatable {
         }
 
         return [
-            'can_edit_categories' => has_capability('block/onboarding:e_edit_categories',
-                \context_system::instance()) ? true : false,
+            'can_manage_experiences' => has_capability('block/onboarding:e_manage_experiences',
+                \context_system::instance()),
             'categories_general' => $categories,
-            'can_edit_courses' => has_capability('block/onboarding:e_edit_courses',
-                \context_system::instance()) ? true : false,
             'courses_general' => $courses,
-            'experiences_with_categories' => array_values($experiences_mapped),
-            'can_manage_reports' => has_capability('block/onboarding:e_manage_reports',
-                \context_system::instance()) ? true : false,
+            'experiences_with_categories' => array_values($experiences_mapped)
         ];
     }
 }

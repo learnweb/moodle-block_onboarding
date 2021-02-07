@@ -24,7 +24,7 @@ global $DB, $USER;
 
 $context = context_system::instance();
 
-if(has_capability('block/onboarding:s_edit_steps', $context)){
+if(has_capability('block/onboarding:s_manage_steps', $context)){
   $stepid = optional_param('step_id', -1, PARAM_INT);
   $paramstep = $DB->get_record('block_onb_s_steps', array('id' => $stepid));
   $curposition = $paramstep->position;

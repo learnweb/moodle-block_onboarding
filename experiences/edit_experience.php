@@ -25,6 +25,7 @@ $context = context_system::instance();
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/edit_experience.php'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
+$PAGE->navbar->add(get_string('experiences', 'block_onboarding'));
 
 $experience_id = optional_param('experience_id', -1, PARAM_INT);
 $pexperience = new stdClass;
@@ -36,7 +37,7 @@ if ($experience_id != -1) {
 }
 
 if ($experience_id == -1 || $USER->id == $pexperience->user_id ||
-    has_capability('block/onboarding:e_edit_all_experiences', \context_system::instance())) {
+    has_capability('block/onboarding:e_manage_experiences', \context_system::instance())) {
     $PAGE->set_title(get_string('edit_experience', 'block_onboarding'));
     $PAGE->set_heading(get_string('edit_experience', 'block_onboarding'));
 

@@ -44,7 +44,7 @@ class wiki_admin implements renderable, templatable {
     }
 
     return [
-      'can_manage_wiki' => has_capability('block/onboarding:w_manage_wiki', \context_system::instance()) ? true : false,
+      'can_manage_wiki' => has_capability('block/onboarding:w_manage_wiki', \context_system::instance()),
       'categories_with_links' => $categories
     ];
   }

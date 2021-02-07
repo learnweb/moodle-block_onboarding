@@ -30,6 +30,7 @@ $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/overview.php'));
 $PAGE->set_title(get_string('experiences', 'block_onboarding'));
 $PAGE->set_heading(get_string('experiences', 'block_onboarding'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
+$PAGE->navbar->add(get_string('experiences', 'block_onboarding'));
 $PAGE->requires->css('/blocks/onboarding/style.css');
 
 $output = $PAGE->get_renderer('block_onboarding');
