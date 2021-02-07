@@ -54,7 +54,7 @@ if(has_capability('block/onboarding:w_manage_wiki', $context)){
       }else{
         $category->id = $DB->insert_record('block_onb_w_categories', $category);
       }
-      redirect('overview.php');
+      redirect('admin_wiki.php');
   }
 
   echo $OUTPUT->header();

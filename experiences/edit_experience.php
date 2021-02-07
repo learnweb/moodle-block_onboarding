@@ -45,7 +45,7 @@ if ($experience_id == -1 || $USER->id == $pexperience->user_id ||
     $mform = new experiences_experience_form(null, array('experience' => $pexperience));
 
     if ($mform->is_cancelled()) {
-        redirect('overview.php');
+        redirect('admin.php');
     } else if ($fromform = $mform->get_data()) {
         // Data written in the Database.
         $experience = new stdClass();
@@ -83,7 +83,7 @@ if ($experience_id == -1 || $USER->id == $pexperience->user_id ||
         }
         $DB->insert_records('block_onb_e_exps_cats', $experiences_categories);
 
-        redirect('overview.php');
+        redirect('admin.php');
     }
 
     echo $OUTPUT->header();

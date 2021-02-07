@@ -43,7 +43,7 @@ if (has_capability('block/onboarding:e_edit_courses', \context_system::instance(
     $mform = new experiences_course_form(null, array('course' => $pcourse));
 
     if ($mform->is_cancelled()) {
-        redirect('overview.php');
+        redirect('admin.php');
     } else if ($fromform = $mform->get_data()) {
         // Data written in the Database.
         $course = new stdClass();
@@ -57,7 +57,7 @@ if (has_capability('block/onboarding:e_edit_courses', \context_system::instance(
         } else {
             $course->id = $DB->insert_record('block_onb_e_courses', $course);
         }
-        redirect('overview.php');
+        redirect('admin.php');
     }
 
     echo $OUTPUT->header();

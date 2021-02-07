@@ -58,7 +58,7 @@ if(has_capability('block/onboarding:w_manage_wiki', $context)){
       }else{
         $link->id = $DB->insert_record('block_onb_w_links', $link);
       }
-      redirect('overview.php');
+      redirect('admin_wiki.php');
   }
 
   echo $OUTPUT->header();

@@ -26,7 +26,7 @@ if (has_capability('block/onboarding:e_edit_courses', $context)) {
     $course_id = optional_param('course_id', -1, PARAM_INT);
     // Deletion of the course from the Database.
     $DB->delete_records('block_onb_e_courses', array('id' => $course_id));
-    redirect('overview.php');
+    redirect('admin.php');
 } else {
     $PAGE->set_context($context);
     $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/edit_experience.php'));

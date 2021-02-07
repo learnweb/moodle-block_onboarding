@@ -1,5 +1,5 @@
 <?php
-// This file is part of experiences block for Moodle - http://moodle.org/
+// This file is part of wiki block for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,18 +19,18 @@ require(__DIR__ . '/../../../config.php');
 require_login();
 
 $context = context_system::instance();
-$url = new moodle_url('/blocks/onboarding/experiences/admin.php');
 
-$PAGE->set_url($url);
+global $USER, $DB;
+
 $PAGE->set_context($context);
-$PAGE->set_title(get_string('admin', 'block_onboarding'));
-$PAGE->set_heading(get_string('admin', 'block_onboarding'));
+$PAGE->set_url(new moodle_url('/blocks/onboarding/wiki/admin_wiki.php'));
+$PAGE->set_title(get_string('wiki', 'block_onboarding'));
+$PAGE->set_heading(get_string('wiki', 'block_onboarding'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
-
 $output = $PAGE->get_renderer('block_onboarding');
 echo $output->header();
-echo $output->container_start('experiences-admin');
-$renderable = new \block_onboarding\output\renderables\experiences_admin();
+echo $output->container_start('wiki-overview');
+$renderable = new \block_onboarding\output\renderables\wiki_admin();
 echo $output->render($renderable);
 echo $output->container_end();
 echo $output->footer();

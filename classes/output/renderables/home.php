@@ -23,29 +23,16 @@ use renderable;
 use templatable;
 use renderer_base;
 
-class wiki_admin implements renderable, templatable {
+class home implements renderable, templatable {
   public function __construct() {
   }
 
   public function export_for_template(renderer_base $output) {
-    global $DB;
-
-   $categories = array_values($DB->get_records('block_onb_w_categories'));
-    $links = array_values($DB->get_records('block_onb_w_links'));
-
-
-    foreach($categories as $category){
-      foreach($links as $link){
-        if($link->category_id == $category->id){
-          $category->links[] = $link;
-
-        }
-      }
-    }
-
     return [
-      'can_manage_wiki' => has_capability('block/onboarding:w_manage_wiki', \context_system::instance()) ? true : false,
-      'categories_with_links' => $categories
+        'guide_url' => new \moodle_url('/blocks/onboarding/guide/overview.php'),
+        'steps_url' => new \moodle_url('/blocks/onboarding/steps/admin.php'),
+        'experiences_url' => new \moodle_url('/blocks/onboarding/experiences/overview.php')
     ];
   }
+
 }

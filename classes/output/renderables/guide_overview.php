@@ -23,7 +23,7 @@ use renderable;
 use templatable;
 use renderer_base;
 
-class wiki_overview implements renderable, templatable {
+class guide_overview implements renderable, templatable {
   public function __construct() {
   }
 
