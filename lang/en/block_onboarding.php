@@ -92,7 +92,7 @@ $string['date'] = 'Published: ';
 $string['degreeprogram'] = 'Degree Program: ';
 $string['category_missing'] = 'Please enter some thoughts or uncheck the box.';
 $string['takeaways'] = 'Key Takeaways';
-$string['takeaways_missing'] = 'Please enter your key takeaways.';
+$string['takeaways_missing'] = 'Please enter a key takeaway for this category.';
 $string['takeaways_required'] = 'Key Takeaway';
 $string['takeaways_default'] = 'Summarize this category in one bullet point';
 $string['degreeprogram_filter'] = 'Degree Programs';
@@ -110,8 +110,11 @@ $string['other'] = 'Other';
 $string['types'] = 'Choose an Option';
 $string['report'] = 'Report Experience';
 $string['report_overview'] = 'Report Overview';
+$string['description_missing'] = 'Please enter a description.';
 $string['filter_or'] = 'this filter';
-$string['filter_or_help'] = 'This filter is OR connected meaning results from all selected categories will be displayed.';
+$string['filter_or_help'] =
+    'This filter is OR connected meaning results from all selected categories will be displayed.';
 $string['aboutme'] = 'About Me';
 $string['aboutme_default'] = 'Write something about yourself. (Age, Semester, etc.)';
+
 

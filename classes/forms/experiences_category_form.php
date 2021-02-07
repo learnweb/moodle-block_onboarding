@@ -32,7 +32,8 @@ class experiences_category_form extends moodleform {
 
         // Category Name Field.
         $mform->addElement('text', 'name', get_string('category_name', 'block_onboarding'));
-        $mform->addRule('name', get_string('experience_category_missing', 'block_onboarding'), 'required', null, 'server');
+        $mform->addRule('name', get_string('experience_category_missing', 'block_onboarding'),
+            'required', null, 'server');
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($category->name) ? $category->name : get_string('default_category_name',
             'block_onboarding'));
@@ -40,7 +41,8 @@ class experiences_category_form extends moodleform {
         // Questions Textarea.
         $mform->addElement('textarea', 'questions', get_string('questions', 'block_onboarding'),
             'wrap="virtual" rows="10" cols="100"');
-        $mform->addRule('questions', get_string('experience_questions_missing', 'block_onboarding'), 'required', null, 'server');
+        $mform->addRule('questions', get_string('experience_questions_missing', 'block_onboarding'),
+            'required', null, 'server');
         $mform->setType('questions', PARAM_TEXT);
         $mform->setDefault('questions', isset($category->questions) ? $category->questions : '');
 

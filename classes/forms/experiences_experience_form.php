@@ -87,7 +87,8 @@ class experiences_experience_form extends moodleform {
             $mform->addElement('textarea', 'experience_category_' . $category->id . '_description', $category->name,
                 array('wrap="virtual" rows="10" cols="100"', 'placeholder' => $category->questions));
             $mform->setType('experience_category_' . $category->id . '_description', PARAM_TEXT);
-            $mform->addRule('experience_category_' . $category->id . '_description', get_string('category_missing', 'block_onboarding'), 'required', null, 'server');
+            $mform->addRule('experience_category_' . $category->id . '_description',
+                get_string('category_missing', 'block_onboarding'), 'required', null, 'server');
             $mform->setDefault('experience_category_' . $category->id . '_description',
                 isset($experiencescategoriesmapped[$category->id]) ?
                     $experiencescategoriesmapped[$category->id]->description : "");
@@ -96,8 +97,10 @@ class experiences_experience_form extends moodleform {
             // Key Takeaway Field.
             $mform->addElement('textarea', 'experience_category_' . $category->id . '_takeaway',
                 get_string('takeaways_required', 'block_onboarding'),
-                array('wrap="virtual" rows="1" cols="100"', 'placeholder' => get_string('takeaways_default', 'block_onboarding')));
-            $mform->addRule('experience_category_' . $category->id . '_takeaway', get_string('takeaways_missing', 'block_onboarding'), 'required', null, 'server');
+                array('style="resize:none" wrap="virtual" rows="1" cols="100"',
+                    'placeholder' => get_string('takeaways_default', 'block_onboarding')));
+            $mform->addRule('experience_category_' . $category->id . '_takeaway',
+                get_string('takeaways_missing', 'block_onboarding'), 'required', null, 'server');
             $mform->setType('experience_category_' . $category->id . '_takeaway', PARAM_TEXT);
             $mform->setDefault('experience_category_' . $category->id . '_takeaway',
                 isset($experiencescategoriesmapped[$category->id]) ?
