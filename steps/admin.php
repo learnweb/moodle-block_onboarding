@@ -23,7 +23,6 @@ $url = new moodle_url('/blocks/onboarding/steps/admin.php');
 
 $PAGE->set_url($url);
 $PAGE->set_context($context);
-$PAGE->requires->js_call_amd('block_onboarding/steps_view', 'init');
 $PAGE->set_title(get_string('admin', 'block_onboarding'));
 $PAGE->set_heading(get_string('admin', 'block_onboarding'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));

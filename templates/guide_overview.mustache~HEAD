@@ -1,0 +1,80 @@
+<!--
+TODO: Language Strings / Mustache str verwenden & Sprache anpassen
+TODO: Warum müssen Buttons beim Ersten Klicken 2x geklickt werden um Aktion zu triggern? -> beheben!
+TODO: CSS Anpassungen in styles.css vornehmen / ersetzen
+TODO: UX überarbeiten
+-->
+<<<<<<< HEAD:templates/guide_overview.mustache
+<h2><b>Steps</b></h2>
+<h5 class="step_title"><b>Step # </b></h5>
+<h6>Instructions:</h6>
+<div class="step_description">
+</div>
+<br>
+<button class="back_btn" type=button><b>Back</b></button>
+<button class="skip_btn" type=button><b>Skip</b></button>
+<button class="done_btn" type=button><b>Done!</b></button>
+<br>
+<br>
+<a href="admin_steps.php">Manage Steps</a>
+<br></br>
+<h2><b>Wiki</b></h2>
+{{#categories_with_links}}
+    <h4>{{{name}}}</h4>
+    <ul>
+      {{#links}}
+      <li>
+        <a target="_blank" rel="noopener noreferrer" href="{{{url}}}">{{{name}}}</a>
+          <div class="custom-tooltip">{{#pix}}i/info, core,{{/pix}}
+              <span class="custom-tooltiptext">{{{description}}}</span>
+          </div>
+      </li>
+      {{/links}}
+    </ul>
+{{/categories_with_links}}
+{{#can_manage_wiki}}<a href="admin_wiki.php">Manage Wiki</a>{{/can_manage_wiki}}
+=======
+<div class="step_container">
+    <div class="progress_bar">
+        <div class="progress_bar_value"></div>
+        <div class="progress_bar_fill"></div>
+    </div>
+    </br>
+    <div class="step_title">Step # </div>
+    <h6>Instructions:</h6>
+    <div class="step_description">
+    </div>
+    </br>
+    <button class="back_btn" type=button>Back</button>
+    <button class="skip_btn" type=button>Skip</button>
+    <button class="done_btn" type=button>Done!</button>
+    </br>
+</div>
+</br>
+</br>
+<div class="wiki_title">Wiki</div>
+{{#categories_with_links}}
+    <h4>{{{name}}} {{#can_manage_wiki}}
+        <a href="edit_category.php?category_id={{{id}}}">{{#pix}}t/editstring, core, Edit Link{{/pix}}</a><a
+            href="delete_category.php?category_id={{{id}}}">{{#pix}}
+        t/delete, core, Delete Link{{/pix}}</a>{{/can_manage_wiki}}</h4>
+    <ul>
+        {{#links}}
+            <li>
+                <a target="_blank" rel="noopener noreferrer" href="{{{url}}}">{{{name}}}</a> {{#can_manage_wiki}}
+                <a href="edit_link.php?link_id={{{id}}}">{{#pix}}t/editstring, core, Edit Link{{/pix}}</a><a
+                    href="delete_link.php?link_id={{{id}}}">{{#pix}}
+                t/delete, core, Delete Link{{/pix}}</a>{{/can_manage_wiki}}
+                <div class="custom-tooltip">{{#pix}}i/info, core,{{/pix}}
+                    <span class="custom-tooltiptext">{{{description}}}</span>
+                </div>
+            </li>
+        {{/links}}
+    </ul>
+{{/categories_with_links}}
+{{#can_manage_wiki}}
+    <a href="edit_category.php">New Category</a>
+    <br>
+    <a href="edit_link.php">New Link</a>
+{{/can_manage_wiki}}
+>>>>>>> ed862081da9c42e07ca0a50f5eda925321c7f5c4:templates/wiki_overview.mustache

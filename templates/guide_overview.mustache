@@ -15,7 +15,7 @@ TODO: UX überarbeiten
 <button class="done_btn" type=button><b>Done!</b></button>
 <br>
 <br>
-<a href="admin_steps.php">Manage Steps</a>
+{{#can_edit_steps}}<a href="admin_steps.php">Manage Steps</a>{{/can_edit_steps}}
 <br></br>
 <h2><b>Wiki</b></h2>
 {{#categories_with_links}}

@@ -68,10 +68,13 @@ class block_onboarding_view_external extends external_api {
             $cur_position = \block_onboarding\step_view_data_functions::get_step_position($cur_stepid);
             // Daten des aktuellen Steps abfragen
             $step = \block_onboarding\step_view_data_functions::get_step_data($cur_position);
+            // Progress des Users abfragen
+            $progress = \block_onboarding\step_view_data_functions::get_user_progress();
 
             $return_step['name'] = $step->name;
             $return_step['description'] = $step->description;
             $return_step['position'] = $step->position;
+            $return_step['progress'] = $progress;
 
             return $return_step;
         }
@@ -89,6 +92,7 @@ class block_onboarding_view_external extends external_api {
                 'name'          => new external_value(PARAM_TEXT, 'name of new step'),
                 'description'   => new external_value(PARAM_TEXT, 'description of new step'),
                 'position'      => new external_value(PARAM_INT, 'position of new step'),
+                'progress'      => new external_value(PARAM_INT, 'progress of user'),
             )
 //            )
         );
@@ -138,11 +142,14 @@ class block_onboarding_view_external extends external_api {
             \block_onboarding\step_view_data_functions::set_current_user_stepid($step->id);
             //Markiert den Step als completed
             \block_onboarding\step_view_data_functions::set_step_id_complete($step->id);
+            // berechnet Fortschritt des Nutzers
+            $progress = \block_onboarding\step_view_data_functions::get_user_progress();
 
             // Rückgabe an JavaScript
             $return_step['name'] = $step->name;
             $return_step['description'] = $step->description;
             $return_step['position'] = $step->position;
+            $return_step['progress'] = $progress;
 
             return $return_step;
         }
@@ -162,6 +169,7 @@ class block_onboarding_view_external extends external_api {
                 'name'          => new external_value(PARAM_TEXT, 'name of new step'),
                 'description'   => new external_value(PARAM_TEXT, 'description of new step'),
                 'position'      => new external_value(PARAM_INT, 'position of new step'),
+                'progress'      => new external_value(PARAM_INT, 'progress of user'),
             )
 //            )
         );

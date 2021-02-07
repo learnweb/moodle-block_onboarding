@@ -24,11 +24,9 @@ global $USER, $DB;
 
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/wiki/overview.php'));
-// Achtung: Es kann nur eine Funktion gecalled werden??
 $PAGE->requires->js_call_amd('block_onboarding/steps_view', 'init');
-$PAGE->requires->js_call_amd('block_onboarding/steps_view', 'next_step');
-$PAGE->set_title(get_string('guide', 'block_onboarding'));
-$PAGE->set_heading(get_string('guide', 'block_onboarding'));
+$PAGE->set_title(get_string('overview', 'block_onboarding'));
+$PAGE->set_heading(get_string('overview', 'block_onboarding'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
 $output = $PAGE->get_renderer('block_onboarding');
 echo $output->header();

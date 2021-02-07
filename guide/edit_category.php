@@ -32,27 +32,49 @@ if(has_capability('block/onboarding:w_manage_wiki', $context)){
 
   require_once('./../classes/forms/wiki_category_form.php');
 
-  $category_id = optional_param('category_id', -1, PARAM_INT);
-  $pCategory = new stdClass;
-  $pCategory->id = -1;
-  if($category_id != -1){
-    $pCategory = $DB->get_record('block_onb_w_categories', array('id'=>$category_id));
+  $categoryid = optional_param('category_id', -1, PARAM_INT);
+  $paramcategory = new stdClass;
+  $paramcategory->id = -1;
+  if($categoryid != -1){
+    $paramcategory = $DB->get_record('block_onb_w_categories', array('id'=>$categoryid));
   }
-  $mform = new wiki_category_form(null, array('category' => $pCategory));
+
+  $mform = new wiki_category_form(null, array('category' => $paramcategory));
 
   if ($mform->is_cancelled()) {
   		redirect('overview.php');
+
   } else if ($fromform = $mform->get_data()) {
       $category = new stdClass();
       $category->name = $fromform->name;
-      $category->timecreated = time();
-      $category->timemodified = time();
+      $insertposition = $fromform->position + 1;
 
       if($fromform->id != -1){
+        $paramcategory = $DB->get_record('block_onb_w_categories', array('id'=>$fromform->id));
+        $curposition = $paramcategory->position;
+        if ($insertposition > $curposition) {
+            \block_onboarding\wiki_admin_functions::decrement_category_positions($insertposition, $curposition);
+        } else if ($insertposition < $curposition) {
+            \block_onboarding\wiki_admin_functions::increment_category_positions($insertposition, $curposition);
+        }
         $category->id = $fromform->id;
+        $category->position = $fromform->position + 1;
+        $category->timemodified = time();
         $DB->update_record('block_onb_w_categories', $category);
+
       }else{
+        $initposition = $DB->count_records('block_onb_w_categories') + 1;
+        $category->position = $initposition;
+        $category->timecreated = time();
+        $category->timemodified = time();
         $category->id = $DB->insert_record('block_onb_w_categories', $category);
+
+        if ($initposition != $insertposition) {
+            \block_onboarding\wiki_admin_functions::increment_category_positions($insertposition, $initposition);
+            $category->position = $insertposition;
+            $category->timemodified = time();
+            $DB->update_record('block_onb_w_categories', $category);
+        }
       }
       redirect('admin_wiki.php');
   }
