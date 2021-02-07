@@ -39,7 +39,7 @@ if (has_capability('block/onboarding:e_edit_categories', \context_system::instan
         // Get the existing data from the Database.
         $pCategory = $DB->get_record('block_onb_e_cats', array('id'=>$category_id), $fields='*', $strictness=IGNORE_MISSING);
     }
-        $mform = new experiences_category_form(null, array('category' => $pCategory));
+    $mform = new experiences_category_form(null, array('category' => $pCategory));
 
     if ($mform->is_cancelled()) {
         redirect('overview.php');
@@ -53,7 +53,7 @@ if (has_capability('block/onboarding:e_edit_categories', \context_system::instan
 
         if ($fromform->id != -1) {
             $category->id = $fromform->id;
-            $DB->update_record('block_onb_e_cats', $category, $bulk=false);
+            $DB->update_record('block_onb_e_cats', $category, $bulk = false);
         } else {
             $category->id = $DB->insert_record('block_onb_e_cats', $category);
         }

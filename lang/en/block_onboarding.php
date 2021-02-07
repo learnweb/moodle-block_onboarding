@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-// General
+// General.
 $string['pluginname'] = 'Onboarding Block';
 $string['onboarding'] = 'Onboarding';
 $string['onboarding:addinstance'] = 'Add a new Onboarding block';
@@ -22,7 +22,7 @@ $string['onboarding:addinstance'] = 'Add a new Onboarding block';
 $string['error'] = "Error";
 $string['insufficient_permissions'] = 'Sorry, insufficient permissions';
 
-// Wiki
+// Wiki.
 $string['overview'] = 'Overview';
 
 $string['admin'] = 'Admin';
@@ -43,7 +43,7 @@ $string['default_link_name'] = 'Sample Link';
 $string['default_link_url'] = 'http://www.example.com';
 $string['default_link_description'] = 'Sample Description';
 
-// Steps
+// Steps.
 $string['overview'] = 'Overview';
 
 $string['admin'] = 'Admin';
@@ -55,7 +55,7 @@ $string['default_step_name'] = 'Sample Name';
 $string['default_step_description'] = 'Sample Description';
 $string['step_number'] = 'Step Position';
 
-//Experiences
+// Experiences.
 $string['overview'] = 'Overview';
 
 $string['admin'] = 'Admin';
@@ -87,7 +87,21 @@ $string['author'] = 'Author: ';
 $string['date'] = 'Published: ';
 $string['degreeprogram'] = 'Degree Program: ';
 $string['takeaways'] = 'Key Takeaways';
+$string['takeaways_required'] = 'Key Takeaways*';
 $string['takeaways_default'] = 'Briefly summarize your report';
 $string['degreeprogram_filter'] = 'Degree Programs';
 $string['category_filter'] = 'Categories';
 $string['applyfilter'] = 'Apply Filter';
+$string['report_experience'] = 'Report Experience';
+
+$string['spam'] = 'Spam/Advertisement';
+$string['profanity'] = 'Profanity';
+$string['offensive'] = 'Offensive Content';
+$string['falseinformation'] = 'False Information';
+$string['falsematching'] = 'Content does not fit Category';
+$string['personalinformation'] = 'Disclosure of Personal Information';
+$string['other'] = 'Other';
+$string['types'] = 'Choose an Option';
+$string['report'] = 'Report Experience';
+$string['report_overview'] = 'Report Overview';
+

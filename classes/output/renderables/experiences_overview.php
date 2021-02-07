@@ -68,7 +68,9 @@ class experiences_overview implements renderable, templatable {
             'can_edit_courses' => has_capability('block/onboarding:e_edit_courses',
                 \context_system::instance()) ? true : false,
             'courses_general' => $courses,
-            'experiences_with_categories' => array_values($experiences_mapped)
+            'experiences_with_categories' => array_values($experiences_mapped),
+            'can_manage_reports' => has_capability('block/onboarding:e_manage_reports',
+                \context_system::instance()) ? true : false,
         ];
     }
 }
