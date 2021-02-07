@@ -53,9 +53,11 @@ class experiences_report_form extends moodleform {
         $radioarray[] = $mform->createElement('radio', 'type', '',
             get_string('other', 'block_onboarding'), constants::OTHER, '');
         $mform->addGroup($radioarray, 'types', get_string('types', 'block_onboarding'), array('<br>'), false);
+        $mform->setDefault('type', constants::OTHER);
 
         $mform->addElement('textarea', 'description', get_string('experience_description', 'block_onboarding'),
             array('wrap="virtual" rows="5" cols="50"'));
+        $mform->addRule('description', get_string('description_missing', 'block_onboarding'), 'required', null, 'server');
         $mform->setType('description', PARAM_TEXT);
 
         $this->add_action_buttons();

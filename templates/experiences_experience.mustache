@@ -5,8 +5,16 @@
 {{/degreeprogram_author}}
 {{#experience}}
 <h6>{{# str }} date, block_onboarding {{/ str }} {{#userdate}}{{{timecreated}}}, {{#str}} strftimedatetimeshort {{/str}}{{/userdate}}</h6>
+{{/experience}}
 <h4>{{# str }} takeaways, block_onboarding {{/ str }}</h4>
-<p>{{{takeaways}}}</p>
+<p>
+{{#experiences_categories_joined_categories}}
+    - {{{takeaway}}} [{{{name}}}] <br>
+{{/experiences_categories_joined_categories}}
+</p>
+{{#experience}}
+    <h4>{{# str }} aboutme, block_onboarding {{/ str }}</h4>
+    <p>{{{aboutme}}}</p>
 {{/experience}}
 {{#experiences_categories_joined_categories}}
 <h4>{{{name}}}</h4>
