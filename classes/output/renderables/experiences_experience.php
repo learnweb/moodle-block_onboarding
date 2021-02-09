@@ -54,6 +54,8 @@ class experiences_experience implements renderable, templatable {
         $degreeprogram_author = $DB->get_record_sql($moresql);
 
         return [
+            'can_manage_experiences' => has_capability('block/onboarding:e_manage_experiences',
+                \context_system::instance()),
             'experience' => $experience,
             'experiences_categories_joined_categories' => array_values($experiences_categories_joined_categories),
             'degreeprogram_author' => $degreeprogram_author
