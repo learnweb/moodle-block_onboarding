@@ -66,6 +66,7 @@ $string['step_description_req'] = 'Please provide a description for the step.';
 $string['default_step_name'] = 'Please enter a step name.';
 $string['default_step_description'] = 'Sample Description';
 $string['step_number'] = 'Step Position';
+$string['no_steps_available'] = "There are no steps to display at the moment";
 
 // Experiences.
 $string['overview'] = 'Overview';

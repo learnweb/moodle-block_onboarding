@@ -114,14 +114,25 @@ class step_view_data_functions {
     }
 
 
-    public static function get_step_data($position) {
+    public static function get_next_step_data($position, $direction) {
         global $DB;
-
-        $return_step = $DB->get_record('block_onb_s_steps', array('position' => $position));
-
+        $position = $position+$direction;
+        $step_bool = $DB->record_exists('block_onb_s_steps', array('position' =>$position));
+        if($step_bool) {
+            $return_step = $DB->get_record('block_onb_s_steps', array('position' => $position));
+        } else {
+            $return_step = -1;
+        }
         return $return_step;
     }
 
+    public static function get_step_data($position) {
+        global $DB;
+
+            $return_step = $DB->get_record('block_onb_s_steps', array('position' => $position));
+
+        return $return_step;
+    }
 
     public static function get_user_progress() {
         global $DB, $USER;
