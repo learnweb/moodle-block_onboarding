@@ -33,18 +33,6 @@ require_once($CFG->libdir . '/externallib.php');
 class block_onboarding_view_external extends external_api {
 
     /**
-     * Returns description of method parameters
-     * Parameter erklären!
-     * @return external_function_parameters
-     */
-    public static function init_step_parameters() {
-        return new external_function_parameters(
-            array(
-            )
-        );
-    }
-
-    /**
      * The function itself
      * Parameter erklären!
      * @return string welcome message
@@ -53,31 +41,41 @@ class block_onboarding_view_external extends external_api {
     public static function init_step() {
 
         $params = self::validate_parameters(self::init_step_parameters(),
-            array(
-            )
+            array()
         );
 
         // Aktuelle step_id vom User abfragen
-        $cur_stepid = \block_onboarding\step_view_data_functions::get_current_user_stepid();
+        $curstepid = \block_onboarding\step_view_data_functions::get_current_user_stepid();
 
         // Wenn kein Schritt in der Datenbank existiert
-        if($cur_stepid == -1){
+        if ($curstepid == -1) {
             return \block_onboarding\step_view_data_functions::message_no_steps();
         } else {
             // Position des aktuellen User Steps abfragen
-            $cur_position = \block_onboarding\step_view_data_functions::get_step_position($cur_stepid);
+            $curposition = \block_onboarding\step_view_data_functions::get_step_position($curstepid);
             // Daten des aktuellen Steps abfragen
-            $step = \block_onboarding\step_view_data_functions::get_step_data($cur_position);
+            $step = \block_onboarding\step_view_data_functions::get_step_data($curposition);
             // Progress des Users abfragen
             $progress = \block_onboarding\step_view_data_functions::get_user_progress();
 
-            $return_step['name'] = $step->name;
-            $return_step['description'] = $step->description;
-            $return_step['position'] = $step->position;
-            $return_step['progress'] = $progress;
+            $returnstep['name'] = $step->name;
+            $returnstep['description'] = $step->description;
+            $returnstep['position'] = $step->position;
+            $returnstep['progress'] = $progress;
 
-            return $return_step;
+            return $returnstep;
         }
+    }
+
+    /**
+     * Returns description of method parameters
+     * Parameter erklären!
+     * @return external_function_parameters
+     */
+    public static function init_step_parameters() {
+        return new external_function_parameters(
+            array()
+        );
     }
 
     /**
@@ -86,21 +84,63 @@ class block_onboarding_view_external extends external_api {
      * @return external_description
      */
     public static function init_step_returns() {
-//        return new external_multiple_structure(
+        //return new external_multiple_structure(
         return new external_single_structure(
             array(
-                'name'          => new external_value(PARAM_TEXT, 'name of new step'),
-                'description'   => new external_value(PARAM_TEXT, 'description of new step'),
-                'position'      => new external_value(PARAM_INT, 'position of new step'),
-                'progress'      => new external_value(PARAM_INT, 'progress of user'),
+                'name' => new external_value(PARAM_TEXT, 'name of new step'),
+                'description' => new external_value(PARAM_TEXT, 'description of new step'),
+                'position' => new external_value(PARAM_INT, 'position of new step'),
+                'progress' => new external_value(PARAM_INT, 'progress of user'),
             )
-//            )
+            //)
         );
     }
 
 
     /* --------------------------------------------------------------------------------------------------------- */
 
+    /**
+     * The function itself
+     * Parameter erklären!
+     * @return string welcome message
+     */
+    public static function next_step() {
+
+        $params = self::validate_parameters(self::next_step_parameters(),
+            array()
+        );
+
+        // Aktuelle step_id vom User abfragen
+        $curstepid = \block_onboarding\step_view_data_functions::get_current_user_stepid();
+
+        // Wenn kein Schritt in der Datenbank existiert
+        if ($curstepid == -1) {
+            return \block_onboarding\step_view_data_functions::message_no_steps();
+        } else {
+            // Position des aktuellen User Steps abfragen
+            $curposition = \block_onboarding\step_view_data_functions::get_step_position($curstepid);
+            // Daten des nächsten Steps (cur_position + 1) abfragen
+            $step = \block_onboarding\step_view_data_functions::get_next_step_data($curposition, 1);
+            if ($step == -1) {
+                $step = \block_onboarding\step_view_data_functions::get_step_data($curposition);
+            } else {
+                // Datenbank-Eintrag für User updaten mit neuem step
+                \block_onboarding\step_view_data_functions::set_current_user_stepid($step->id);
+            }
+            //Markiert den Step als completed
+            \block_onboarding\step_view_data_functions::set_step_id_complete($step->id);
+            // berechnet Fortschritt des Nutzers
+            $progress = \block_onboarding\step_view_data_functions::get_user_progress();
+
+            // Rückgabe an JavaScript
+            $returnstep['name'] = $step->name;
+            $returnstep['description'] = $step->description;
+            $returntep['position'] = $step->position;
+            $returnstep['progress'] = $progress;
+
+            return $returnstep;
+        }
+    }
 
     /**
      * Returns description of method parameters
@@ -109,55 +149,9 @@ class block_onboarding_view_external extends external_api {
      */
     public static function next_step_parameters() {
         return new external_function_parameters(
-            array(
-            )
-        );
-    }
-
-    /**
-     * The function itself
-     * Parameter erklären!
-     * @return string welcome message
-     */
-    public static function next_step()
-    {
-
-        $params = self::validate_parameters(self::next_step_parameters(),
             array()
         );
-
-        // Aktuelle step_id vom User abfragen
-        $cur_stepid = \block_onboarding\step_view_data_functions::get_current_user_stepid();
-
-        // Wenn kein Schritt in der Datenbank existiert
-        if ($cur_stepid == -1) {
-            return \block_onboarding\step_view_data_functions::message_no_steps();
-        } else {
-            // Position des aktuellen User Steps abfragen
-            $cur_position = \block_onboarding\step_view_data_functions::get_step_position($cur_stepid);
-            // Daten des nächsten Steps (cur_position + 1) abfragen
-            $step = \block_onboarding\step_view_data_functions::get_next_step_data($cur_position, 1);
-            if($step == -1) {
-                $step = \block_onboarding\step_view_data_functions::get_step_data($cur_position);
-            } else {
-                // Datenbank-Eintrag für User updaten mit neuem step
-                \block_onboarding\step_view_data_functions::set_current_user_stepid($step->id);
-                //Markiert den Step als completed
-                \block_onboarding\step_view_data_functions::set_step_id_complete($step->id);
-            }
-                // berechnet Fortschritt des Nutzers
-            $progress = \block_onboarding\step_view_data_functions::get_user_progress();
-
-            // Rückgabe an JavaScript
-            $return_step['name'] = $step->name;
-            $return_step['description'] = $step->description;
-            $return_step['position'] = $step->position;
-            $return_step['progress'] = $progress;
-
-            return $return_step;
-            }
     }
-
 
     /**
      * Returns description of method result value
@@ -169,10 +163,10 @@ class block_onboarding_view_external extends external_api {
 //        return new external_multiple_structure(
         return new external_single_structure(
             array(
-                'name'          => new external_value(PARAM_TEXT, 'name of new step'),
-                'description'   => new external_value(PARAM_TEXT, 'description of new step'),
-                'position'      => new external_value(PARAM_INT, 'position of new step'),
-                'progress'      => new external_value(PARAM_INT, 'progress of user'),
+                'name' => new external_value(PARAM_TEXT, 'name of new step'),
+                'description' => new external_value(PARAM_TEXT, 'description of new step'),
+                'position' => new external_value(PARAM_INT, 'position of new step'),
+                'progress' => new external_value(PARAM_INT, 'progress of user'),
             )
 //            )
         );
@@ -180,53 +174,51 @@ class block_onboarding_view_external extends external_api {
 
     /* --------------------------------------------------------------------------------------------------------- */
 
-    public static function skip_step_parameters() {
-        return new external_function_parameters(
-            array(
-            )
-        );
-    }
-
     public static function skip_step() {
         $params = self::validate_parameters(self::skip_step_parameters(),
-            array(
-            )
+            array()
         );
 
         // Aktuelle step_id vom User abfragen
-        $cur_stepid = \block_onboarding\step_view_data_functions::get_current_user_stepid();
+        $curstepid = \block_onboarding\step_view_data_functions::get_current_user_stepid();
 
         // Wenn kein Schritt in der Datenbank existiert
-        if($cur_stepid == -1){
+        if ($curstepid == -1) {
             return \block_onboarding\step_view_data_functions::message_no_steps();
         } else {
             // Position des aktuellen User Steps abfragen
-            $cur_position = \block_onboarding\step_view_data_functions::get_step_position($cur_stepid);
+            $curposition = \block_onboarding\step_view_data_functions::get_step_position($curstepid);
             // Daten des nächsten Steps (cur_position + 1) abfragen
 
-            $step = \block_onboarding\step_view_data_functions::get_next_step_data($cur_position, 1);
-            if($step == -1) {
-                $step = \block_onboarding\step_view_data_functions::get_step_data($cur_position);
+            $step = \block_onboarding\step_view_data_functions::get_next_step_data($curposition, 1);
+            if ($step == -1) {
+                $step = \block_onboarding\step_view_data_functions::get_step_data($curposition);
             } else {
                 // Datenbank-Eintrag für User updaten mit neuem step
                 \block_onboarding\step_view_data_functions::set_current_user_stepid($step->id);
             }
             // Rückgabe an JavaScript
-            $return_step['name'] = $step->name;
-            $return_step['description'] = $step->description;
-            $return_step['position'] = $step->position;
+            $returnstep['name'] = $step->name;
+            $returnstep['description'] = $step->description;
+            $returnstep['position'] = $step->position;
 
-            return $return_step;
+            return $returnstep;
         }
+    }
+
+    public static function skip_step_parameters() {
+        return new external_function_parameters(
+            array()
+        );
     }
 
     public static function skip_step_returns() {
 //        return new external_multiple_structure(
         return new external_single_structure(
             array(
-                'name'          => new external_value(PARAM_TEXT, 'name of new step'),
-                'description'   => new external_value(PARAM_TEXT, 'description of new step'),
-                'position'      => new external_value(PARAM_INT, 'position of new step'),
+                'name' => new external_value(PARAM_TEXT, 'name of new step'),
+                'description' => new external_value(PARAM_TEXT, 'description of new step'),
+                'position' => new external_value(PARAM_INT, 'position of new step'),
             )
 //            )
         );
@@ -234,49 +226,49 @@ class block_onboarding_view_external extends external_api {
 
     /* --------------------------------------------------------------------------------------------------------- */
 
-    public static function back_step_parameters() {
-        return new external_function_parameters(
-            array(
-            )
-        );
-    }
-
     public static function back_step() {
         $params = self::validate_parameters(self::back_step_parameters(),
             array()
         );
         // Aktuelle step_id vom User abfragen
-        $cur_stepid = \block_onboarding\step_view_data_functions::get_current_user_stepid();
+        $curstepid = \block_onboarding\step_view_data_functions::get_current_user_stepid();
 
         // Wenn kein Schritt in der Datenbank existiert
-        if($cur_stepid == -1){
+        if ($curstepid == -1) {
             return \block_onboarding\step_view_data_functions::message_no_steps();
         } else {
             // Position des aktuellen User Steps abfragen
-            $cur_position = \block_onboarding\step_view_data_functions::get_step_position($cur_stepid);
+            $cur_position = \block_onboarding\step_view_data_functions::get_step_position($curstepid);
             // Daten des vorherigen Steps (cur_position - 1) abfragen
-            $step = \block_onboarding\step_view_data_functions::get_next_step_data($cur_position, -1);
-            if($step == -1) {
-                $step = \block_onboarding\step_view_data_functions::get_step_data($cur_position);
+            $step = \block_onboarding\step_view_data_functions::get_next_step_data($curposition, -1);
+            if ($step == -1) {
+                $step = \block_onboarding\step_view_data_functions::get_step_data($curposition);
             } else {
                 // Datenbank-Eintrag für User updaten mit neuem step
                 \block_onboarding\step_view_data_functions::set_current_user_stepid($step->id);
             }
             // Rückgabe an JavaScript
-            $return_step['name'] = $step->name;
-            $return_step['description'] = $step->description;
-            $return_step['position'] = $step->position;
+            $returnstep['name'] = $step->name;
+            $returnstep['description'] = $step->description;
+            $returnstep['position'] = $step->position;
 
-            return $return_step;
+            return $returnstep;
         }
     }
+
+    public static function back_step_parameters() {
+        return new external_function_parameters(
+            array()
+        );
+    }
+
     public static function back_step_returns() {
 //        return new external_multiple_structure(
         return new external_single_structure(
             array(
-                'name'          => new external_value(PARAM_TEXT, 'name of new step'),
-                'description'   => new external_value(PARAM_TEXT, 'description of new step'),
-                'position'      => new external_value(PARAM_INT, 'position of new step'),
+                'name' => new external_value(PARAM_TEXT, 'name of new step'),
+                'description' => new external_value(PARAM_TEXT, 'description of new step'),
+                'position' => new external_value(PARAM_INT, 'position of new step'),
             )
 //            )
         );

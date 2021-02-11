@@ -25,32 +25,29 @@
 namespace block_onboarding;
 defined('MOODLE_INTERNAL') || die();
 
-class step_admin_functions
-{
+class step_admin_functions {
 
     /**
      * Beschreibung hinzufügen!
      */
-    public static function increment_step_positions($insert, $cur)
-    {
+    public static function increment_step_positions($insert, $cur) {
         global $DB;
 
-        $sql = 'UPDATE {block_onb_s_steps}
-            SET position = position +1
-            WHERE position >= :insert_pos and position < :cur_pos';
+        $sql = "UPDATE {block_onb_s_steps}
+                SET position = position +1
+                WHERE position >= :insert_pos and position < :cur_pos";
         $DB->execute($sql, ['cur_pos' => $cur, 'insert_pos' => $insert]);
     }
 
     /**
      * Beschreibung hinzufügen!
      */
-    public static function decrement_step_positions($insert, $cur)
-    {
+    public static function decrement_step_positions($insert, $cur) {
         global $DB;
 
-        $sql = 'UPDATE {block_onb_s_steps}
+        $sql = "UPDATE {block_onb_s_steps}
                 SET position = position -1
-                WHERE position > :cur_pos and position <= :insert_pos';
+                WHERE position > :cur_pos and position <= :insert_pos";
         $DB->execute($sql, ['cur_pos' => $cur, 'insert_pos' => $insert]);
     }
 }
