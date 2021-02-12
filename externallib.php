@@ -305,10 +305,13 @@ class block_onboarding_view_external extends external_api {
             )
         );
 
-        // Aktuelle step_id vom User abfragen
+        // popularity prüfen
+        $popularity = $DB->count_records('block_onb_e_helpful', array('experience_id' => $experience_id));
+
+        // prüfen ob Report bereits markiert ist
         $already_helpful =
             $DB->record_exists('block_onb_e_helpful', array('user_id' => $USER->id, 'experience_id' => $experience_id));
-        // Wenn kein Schritt in der Datenbank existiert
+
         if ($already_helpful == false) {
             $helpful = new stdClass();
             $helpful->experience_id = $experience_id;
@@ -316,11 +319,13 @@ class block_onboarding_view_external extends external_api {
             $helpful->id = $DB->insert_record('block_onb_e_helpful', $helpful);
 
             $return_helpful['exists'] = 1;
+            $return_helpful['popularity'] = $popularity + 1;
             return $return_helpful;
         } else {
             $DB->delete_records('block_onb_e_helpful', array('user_id' => $USER->id, 'experience_id' => $experience_id));
 
             $return_helpful['exists'] = 0;
+            $return_helpful['popularity'] = $popularity - 1;
             return $return_helpful;
         }
     }
@@ -334,7 +339,8 @@ class block_onboarding_view_external extends external_api {
 //        return new external_multiple_structure(
         return new external_single_structure(
             array(
-                'exists'      => new external_value(PARAM_INT, 'entry existence')
+                'exists'      => new external_value(PARAM_INT, 'entry existence'),
+                'popularity'      => new external_value(PARAM_INT, 'popularity of report')
             )
 //            )
         );
@@ -371,15 +377,20 @@ class block_onboarding_view_external extends external_api {
             )
         );
 
-        // Aktuelle step_id vom User abfragen
+        // popularity prüfen
+        $popularity = $DB->count_records('block_onb_e_helpful', array('experience_id' => $experience_id));
+
+        // prüfen ob Report bereits markiert ist
         $already_helpful =
             $DB->record_exists('block_onb_e_helpful', array('user_id' => $USER->id, 'experience_id' => $experience_id));
-        // Wenn kein Schritt in der Datenbank existiert
+
         if ($already_helpful == false) {
-            $return_helpful['exists'] = 0;
+            $return_helpful['exists'] = 1;
+            $return_helpful['popularity'] = $popularity + 1;
             return $return_helpful;
         } else {
-            $return_helpful['exists'] = 1;
+            $return_helpful['exists'] = 0;
+            $return_helpful['popularity'] = $popularity - 1;
             return $return_helpful;
         }
     }
@@ -393,7 +404,8 @@ class block_onboarding_view_external extends external_api {
 //        return new external_multiple_structure(
         return new external_single_structure(
             array(
-                'exists'      => new external_value(PARAM_INT, 'entry existence')
+                'exists'      => new external_value(PARAM_INT, 'entry existence'),
+                'popularity'      => new external_value(PARAM_INT, 'popularity of report')
             )
 //            )
         );

@@ -135,5 +135,6 @@ $string['filter_or_help'] =
 $string['aboutme'] = 'About Me';
 $string['aboutme_default'] = 'Write something about yourself. (Age, Semester, etc.)';
 $string['helpful'] = 'Was this experience report helpful to you?';
+$string['popularity'] = 'Popularity: ';
 
 

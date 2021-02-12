@@ -11,14 +11,16 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
         ]);
         promises[0].done(function (response) {
             if(response.exists === 1) {
-                $('.helpful_btn').css('background-color' , '#20ab63');
+                $('.block-experiences-experience-popularity').text(response.popularity);
+                $('.block-experiences-experience-helpful_btn').css('background-color' , '#20ab63');
             } else {
-                $('.helpful_btn').css('background-color' , '#c8d1db');
+                $('.block-experiences-experience-popularity').text(response.popularity);
+                $('.block-experiences-experience-helpful_btn').css('background-color' , '#c8d1db');
             }
         }).fail(notification.exception);
 
 
-        $('.helpful_btn').on('click', function () {
+        $('.block-experiences-experience-helpful_btn').on('click', function () {
             var promises = ajax.call([{
                 methodname: 'block_onboarding_click_helpful',
                 args: {experience_id: experience_id}
@@ -26,9 +28,11 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
             ]);
             promises[0].done(function (response) {
                 if(response.exists === 1) {
-                    $('.helpful_btn').css('background-color' , '#20ab63');
+                    $('.block-experiences-experience-popularity').text(response.popularity);
+                    $('.block-experiences-experience-helpful_btn').css('background-color' , '#20ab63');
                 } else {
-                    $('.helpful_btn').css('background-color' , '#c8d1db');
+                    $('.block-experiences-experience-popularity').text(response.popularity);
+                    $('.block-experiences-experience-helpful_btn').css('background-color' , '#c8d1db');
                 }
             }).fail(notification.exception);
         })
