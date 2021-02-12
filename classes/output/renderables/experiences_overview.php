@@ -39,6 +39,7 @@ class experiences_overview implements renderable, templatable {
 
         $experiences_mapped = array();
         foreach($experiences as $experience){
+            $experience->popularity = $DB->count_records('block_onb_e_helpful', array('experience_id' => $experience->id));
             if($USER->id == $experience->user_id || has_capability('block/onboarding:e_manage_experiences',
                     \context_system::instance())){
                 $experience->editable = true;

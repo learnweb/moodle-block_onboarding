@@ -312,7 +312,13 @@ class block_onboarding_view_external extends external_api {
         $already_helpful =
             $DB->record_exists('block_onb_e_helpful', array('user_id' => $USER->id, 'experience_id' => $experience_id));
 
-        if ($already_helpful == false) {
+        if ($already_helpful) {
+            $DB->delete_records('block_onb_e_helpful', array('user_id' => $USER->id, 'experience_id' => $experience_id));
+
+            $return_helpful['exists'] = 0;
+            $return_helpful['popularity'] = $popularity - 1;
+            return $return_helpful;
+        } else {
             $helpful = new stdClass();
             $helpful->experience_id = $experience_id;
             $helpful->user_id = $USER->id;
@@ -320,12 +326,6 @@ class block_onboarding_view_external extends external_api {
 
             $return_helpful['exists'] = 1;
             $return_helpful['popularity'] = $popularity + 1;
-            return $return_helpful;
-        } else {
-            $DB->delete_records('block_onb_e_helpful', array('user_id' => $USER->id, 'experience_id' => $experience_id));
-
-            $return_helpful['exists'] = 0;
-            $return_helpful['popularity'] = $popularity - 1;
             return $return_helpful;
         }
     }
@@ -379,18 +379,17 @@ class block_onboarding_view_external extends external_api {
 
         // popularity prüfen
         $popularity = $DB->count_records('block_onb_e_helpful', array('experience_id' => $experience_id));
+        $return_helpful['popularity'] = $popularity;
 
         // prüfen ob Report bereits markiert ist
         $already_helpful =
             $DB->record_exists('block_onb_e_helpful', array('user_id' => $USER->id, 'experience_id' => $experience_id));
 
-        if ($already_helpful == false) {
+        if ($already_helpful) {
             $return_helpful['exists'] = 1;
-            $return_helpful['popularity'] = $popularity + 1;
             return $return_helpful;
         } else {
             $return_helpful['exists'] = 0;
-            $return_helpful['popularity'] = $popularity - 1;
             return $return_helpful;
         }
     }
