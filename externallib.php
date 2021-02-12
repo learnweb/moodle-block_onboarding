@@ -315,12 +315,12 @@ class block_onboarding_view_external extends external_api {
             $helpful->user_id = $USER->id;
             $helpful->id = $DB->insert_record('block_onb_e_helpful', $helpful);
 
-            $return_helpful['exists'] = 0;
+            $return_helpful['exists'] = 1;
             return $return_helpful;
         } else {
             $DB->delete_records('block_onb_e_helpful', array('user_id' => $USER->id, 'experience_id' => $experience_id));
 
-            $return_helpful['exists'] = 1;
+            $return_helpful['exists'] = 0;
             return $return_helpful;
         }
     }
@@ -334,7 +334,7 @@ class block_onboarding_view_external extends external_api {
 //        return new external_multiple_structure(
         return new external_single_structure(
             array(
-                'exists'      => new external_value(PARAM_INT, 'entry existence'),
+                'exists'      => new external_value(PARAM_INT, 'entry existence')
             )
 //            )
         );
@@ -393,7 +393,7 @@ class block_onboarding_view_external extends external_api {
 //        return new external_multiple_structure(
         return new external_single_structure(
             array(
-                'exists'      => new external_value(PARAM_INT, 'entry existence'),
+                'exists'      => new external_value(PARAM_INT, 'entry existence')
             )
 //            )
         );
