@@ -14,22 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-require(__DIR__ . '/../../../config.php');
+require(__DIR__ . '/../../config.php');
 
 require_login();
 
 $context = context_system::instance();
 
-$PAGE->set_url(new moodle_url('/blocks/onboarding/wiki/admin.php'));
-$PAGE->set_context($context);
-$PAGE->set_title(get_string('admin', 'block_onboarding'));
-$PAGE->set_heading(get_string('admin', 'block_onboarding'));
-$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
+global $USER, $DB;
 
+$PAGE->set_context($context);
+$PAGE->set_url(new moodle_url('/blocks/onboarding'));
+$PAGE->set_title(get_string('pluginname', 'block_onboarding'));
+$PAGE->set_heading(get_string('pluginname', 'block_onboarding'));
+$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
 $output = $PAGE->get_renderer('block_onboarding');
 echo $output->header();
-echo $output->container_start('wiki-admin');
-$renderable = new \block_onboarding\output\renderables\admin();
+echo $output->container_start('onboarding-home');
+$renderable = new \block_onboarding\output\renderables\home();
 echo $output->render($renderable);
 echo $output->container_end();
 echo $output->footer();

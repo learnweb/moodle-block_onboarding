@@ -25,8 +25,9 @@ $context = context_system::instance();
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/edit_course.php'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
+$PAGE->navbar->add(get_string('experiences', 'block_onboarding'));
 
-if (has_capability('block/onboarding:e_edit_courses', \context_system::instance())) {
+if (has_capability('block/onboarding:e_manage_experiences', \context_system::instance())) {
     $PAGE->set_title(get_string('edit_course', 'block_onboarding'));
     $PAGE->set_heading(get_string('edit_course', 'block_onboarding'));
 
@@ -43,7 +44,7 @@ if (has_capability('block/onboarding:e_edit_courses', \context_system::instance(
     $mform = new experiences_course_form(null, array('course' => $pcourse));
 
     if ($mform->is_cancelled()) {
-        redirect('overview.php');
+        redirect('admin.php');
     } else if ($fromform = $mform->get_data()) {
         // Data written in the Database.
         $course = new stdClass();
@@ -57,7 +58,7 @@ if (has_capability('block/onboarding:e_edit_courses', \context_system::instance(
         } else {
             $course->id = $DB->insert_record('block_onb_e_courses', $course);
         }
-        redirect('overview.php');
+        redirect('admin.php');
     }
 
     echo $OUTPUT->header();

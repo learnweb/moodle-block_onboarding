@@ -1,6 +1,12 @@
 /* Wiki */
 
-.wiki_title{
+.wiki-title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wiki_title {
     font-size: 1.5em;
 }
 
@@ -27,20 +33,26 @@
 
 /* Steps */
 
-.step_container{
-    width: 800px;
+.steps-title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.progress_bar{
+.step_container {
+    width: 100%;
+}
+
+.progress_bar {
     position: relative;
-    width: 800px;
+    width: 100%;
     height: 30px;
     background: lightgrey;
     border-radius: 8px;
     border: 3px solid black;
 }
 
-.progress_bar_fill{
+.progress_bar_fill {
     height: 100%;
     width: 0%;
     border-radius: 8px;
@@ -48,7 +60,7 @@
     transition: width 1.2s;
 }
 
-.progress_bar_value{
+.progress_bar_value {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -58,28 +70,32 @@
     font-weight: bold;
 }
 
-.step_title{
+.step_title {
     font-size: 1.5em;
 }
 
-.step_description{
+.step_description {}
 
-}
-
-.done_btn{
+.done_btn {
     font-weight: bold;
 }
 
-.skip_btn{
+.skip_btn {
     font-weight: bold;
 }
 
-.back_btn{
+.back_btn {
     font-weight: bold;
 }
 
 
 /* Experiences */
+
+.experiences-title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 .block-experiences-overview-categories {
     margin-bottom: 20px;
@@ -139,3 +155,6 @@
 .block-experiences-overview-report-actions {
     margin-bottom: 20px;
 }
+
+
+/* General */

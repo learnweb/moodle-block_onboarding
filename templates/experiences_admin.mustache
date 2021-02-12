@@ -1,14 +1,44 @@
-<h2>Categories</h2>
-{{#can_edit_categories}}<a href="edit_category.php">New Category</a>{{/can_edit_categories}}
+<a href="overview.php">{{#pix}}t/left, core, Back{{/pix}}Back to Overview</a>
 <br></br>
-{{#categories_general}}
-    <h5>{{{name}}}{{#can_edit_categories}} <a href="edit_category.php?category_id={{{id}}}">{{#pix}}t/editstring, core, Edit Category{{/pix}}</a><a href="delete_category.php?category_id={{{id}}}">{{#pix}}t/delete, core, Delete Category{{/pix}}</a>{{/can_edit_categories}}</h5>
-{{/categories_general}}
-<br>
-<h2>Courses</h2>
-{{#can_edit_courses}}<a href="edit_course.php">New Degree Program</a>{{/can_edit_courses}}
-<br></br>
-{{#courses_general}}
-    <h5>{{{name}}}{{#can_edit_courses}} <a href="edit_courses.php?category_id={{{id}}}">{{#pix}}t/editstring, core, Edit Degree Program{{/pix}}</a><a href="delete_course.php?course_id={{{id}}}">{{#pix}}t/delete, core, Delete Degree Program{{/pix}}</a>{{/can_edit_courses}}</h5>
-{{/courses_general}}
-<br>
+<div class="block-experiences-overview-report">
+  <h2>{{# str }} report_overview, block_onboarding {{/ str }}</h2>
+    <div class="block-experiences-overview-report-actions">
+      <a href="report_overview.php"> {{# str }} report_overview, block_onboarding {{/ str }} </a>
+    </div>
+  </div>
+<div class="block-experiences-overview-categories">
+  <h2>Categories</h2>
+  <div class="block-experiences-overview-categories-actions">
+    <a href="edit_category.php">New Category</a>
+  </div>
+  {{#categories_general}}
+      <div class="block-experiences-overview-category">
+        <h5 class="block-experiences-overview-category-text">{{{name}}}</h5>
+        <a href="edit_category.php?category_id={{{id}}}">{{#pix}}t/editstring, core, Edit Category{{/pix}}</a><a href="delete_category.php?category_id={{{id}}}">{{#pix}}t/delete, core, Delete Category{{/pix}}</a>
+      </div>
+  {{/categories_general}}
+</div>
+<div class="block-experiences-overview-courses">
+  <h2>Degree Programs</h2>
+  <div class="block-experiences-overview-courses-actions">
+    <a href="edit_course.php">New Degree Program</a>
+  </div>
+  {{#courses_general}}
+      <div class="block-experiences-overview-course">
+        <h5 class="block-experiences-overview-course-text">{{{name}}}</h5>
+        <a href="edit_course.php?course_id={{{id}}}">{{#pix}}t/editstring, core, Edit Degree Program{{/pix}}</a><a href="delete_course.php?course_id={{{id}}}">{{#pix}}t/delete, core, Delete Course{{/pix}}</a>
+      </div>
+  {{/courses_general}}
+</div>
+<div class="block-experiences-overview-experiences">
+  <h2>Experiences</h2>
+  <div class="block-experiences-overview-experiences-actions">
+    <a href="edit_experience.php">New Experience</a>
+  </div>
+  {{#experiences_with_categories}}
+      <div>
+        <h4><a href="experience.php?experience_id={{{id}}}">{{{name}}}</a> {{#editable}} <a href="edit_experience.php?experience_id={{{id}}}">{{#pix}}t/editstring, core, Edit Experience{{/pix}}</a><a href="delete_experience.php?experience_id={{{id}}}">{{#pix}}t/delete, core, Delete Experience{{/pix}}</a>{{/editable}}</h4>
+        {{#categories}}<p class="block-experiences-overview-category-badge">{{{name}}}</p> {{/categories}}
+      </div>
+  {{/experiences_with_categories}}
+</div>

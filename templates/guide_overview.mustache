@@ -1,0 +1,47 @@
+<!--
+TODO: Language Strings / Mustache str verwenden & Sprache anpassen
+TODO: Warum müssen Buttons beim Ersten Klicken 2x geklickt werden um Aktion zu triggern? -> beheben!
+TODO: CSS Anpassungen in styles.css vornehmen / ersetzen
+TODO: UX überarbeiten
+-->
+<a href="../index.php">{{#pix}}t/left, core, Back{{/pix}}Back to Home</a>
+<br></br>
+<div class="wiki-title-wrapper">
+    <h2><b>Steps</b></h2>
+    {{#can_manage_steps}}<a href="admin_steps.php">{{#pix}}i/settings, core, Manage Steps{{/pix}}Settings</a>{{/can_manage_steps}}
+</div>
+<div class="step_container">
+    <div class="progress_bar">
+        <div class="progress_bar_value"></div>
+        <div class="progress_bar_fill"></div>
+    </div>
+    <br>
+    <div class="step_title"></div>
+    <div class="step_description">
+    </div>
+    <br>
+    <button class="back_btn" type=button>Back</button>
+    <button class="skip_btn" type=button>Skip</button>
+    <button class="done_btn" type=button>Done!</button>
+    <br>
+</div>
+<br>
+<br>
+<br>
+<div class="steps-title-wrapper">
+    <h2><b>Wiki</b></h2>
+    {{#can_manage_wiki}}<a href="admin_wiki.php" class="admin-link">{{#pix}}i/settings, core, Manage Wiki{{/pix}}Settings</a>{{/can_manage_wiki}}
+</div>
+{{#categories_with_links}}
+    <h4>{{{name}}}</h4>
+    <ul>
+      {{#links}}
+      <li>
+        <a target="_blank" rel="noopener noreferrer" href="{{{url}}}">{{{name}}}</a>
+          <div class="custom-tooltip">{{#pix}}i/info, core,{{/pix}}
+              <span class="custom-tooltiptext">{{{description}}}</span>
+          </div>
+      </li>
+      {{/links}}
+    </ul>
+{{/categories_with_links}}

@@ -15,14 +15,15 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 // General.
-$string['pluginname'] = 'Onboarding Block';
+$string['pluginname'] = 'Onboarding';
 $string['onboarding'] = 'Onboarding';
 $string['onboarding:addinstance'] = 'Add a new Onboarding block';
 
 $string['error'] = "Error";
 $string['insufficient_permissions'] = 'Sorry, insufficient permissions';
 
-// Wiki.
+// Wiki
+$string['wiki'] = 'Wiki';
 $string['overview'] = 'Overview';
 
 $string['admin'] = 'Admin';
@@ -58,6 +59,8 @@ $string['overview'] = 'Overview';
 
 $string['admin'] = 'Admin';
 
+$string['steps'] = 'Steps';
+
 $string['edit_step'] = 'Edit Step';
 $string['step_name'] = 'Name';
 $string['step_name_req'] = 'Please enter a name for the step.';
@@ -68,12 +71,16 @@ $string['default_step_description'] = 'Sample Description';
 $string['step_number'] = 'Step Position';
 $string['no_steps_available'] = "There are no steps to display at the moment";
 
+// Guide
+$string['guide'] = 'Guide';
+
 // Experiences.
 $string['overview'] = 'Overview';
 
 $string['admin'] = 'Admin';
 
 $string['experience'] = 'Experience';
+$string['experiences'] = 'Experiences';
 
 $string['edit_category'] = 'Edit Category';
 $string['category_name'] = 'Name';

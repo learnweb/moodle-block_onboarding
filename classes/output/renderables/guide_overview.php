@@ -23,7 +23,7 @@ use renderable;
 use templatable;
 use renderer_base;
 
-class wiki_overview implements renderable, templatable {
+class guide_overview implements renderable, templatable {
   public function __construct() {
   }
 
@@ -44,7 +44,8 @@ class wiki_overview implements renderable, templatable {
     }
 
     return [
-      'can_manage_wiki' => has_capability('block/onboarding:w_manage_wiki', \context_system::instance()) ? true : false,
+      'can_manage_wiki' => has_capability('block/onboarding:w_manage_wiki', \context_system::instance()),
+      'can_manage_steps' => has_capability('block/onboarding:s_manage_steps', \context_system::instance()),
       'categories_with_links' => $categories
     ];
   }

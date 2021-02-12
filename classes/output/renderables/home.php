@@ -18,25 +18,19 @@ namespace block_onboarding\output\renderables;
 
 defined('MOODLE_INTERNAL') || die();
 
-use block_onboarding\stepslib;
+use block_onboarding\wikilib;
 use renderable;
 use templatable;
 use renderer_base;
 
-class steps_admin implements renderable, templatable {
+class home implements renderable, templatable {
   public function __construct() {
   }
 
   public function export_for_template(renderer_base $output) {
-    global $DB;
-
-    //$steps = array_values($DB->get_records_sql('SELECT * FROM {block_onb_s_steps} ORDER BY position ASC'));
-
-    $steps = array_values($DB->get_records('block_onb_s_steps', $conditions=null, $sort='position ASC'));
-
     return [
-      'can_manage_wiki' => has_capability('block/onboarding:s_manage_steps', \context_system::instance()),
-      'steps' => $steps
+        'dashboard_url' => new \moodle_url('/')
     ];
   }
+
 }

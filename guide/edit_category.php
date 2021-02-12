@@ -25,6 +25,7 @@ $context = context_system::instance();
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/wiki/edit_category.php'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
+$PAGE->navbar->add(get_string('guide', 'block_onboarding'));
 
 if(has_capability('block/onboarding:w_manage_wiki', $context)){
   $PAGE->set_title(get_string('edit_category', 'block_onboarding'));
@@ -76,7 +77,7 @@ if(has_capability('block/onboarding:w_manage_wiki', $context)){
             $DB->update_record('block_onb_w_categories', $category);
         }
       }
-      redirect('overview.php');
+      redirect('admin_wiki.php');
   }
 
   echo $OUTPUT->header();

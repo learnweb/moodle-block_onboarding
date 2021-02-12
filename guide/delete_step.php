@@ -18,38 +18,23 @@ require(__DIR__ . '/../../../config.php');
 
 require_login();
 
-global $DB, $USER;
-
-// TODO: Löschen muss auch user_steps entfernen!!
+global $DB;
 
 $context = context_system::instance();
 
 if(has_capability('block/onboarding:s_manage_steps', $context)){
-  $stepid = optional_param('step_id', -1, PARAM_INT);
-  $paramstep = $DB->get_record('block_onb_s_steps', array('id' => $stepid));
-  $curposition = $paramstep->position;
-  $stepcount = $DB->count_records('block_onb_s_steps');
+  $step_id = optional_param('step_id', -1, PARAM_INT);
+  $pStep = $DB->get_record('block_onb_s_steps', array('id' => $step_id));
+  $cur_position = $pStep->position;
+  $step_count = $DB->count_records('block_onb_s_steps');
 
-  // deleting step and adjusting other step positions accordingly
-  \block_onboarding\step_admin_functions::decrement_step_positions($stepcount, $curposition);
-  $DB->delete_records('block_onb_s_steps', array('id' => $stepid));
+  $sql = 'UPDATE {block_onb_s_steps}
+                SET position = position -1
+                WHERE position > :cur_pos and position <= :max_pos';
+  $DB->execute($sql, ['cur_pos' => $cur_position, 'max_pos' => $step_count]);
 
-  // deleting all user progress for deleted step
-  $step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id, 'stepid' => $stepid));
-  if($step != false){
-      $paramstep = $DB->get_record('block_onb_s_steps', array('position' => 1));
-      // gucken, ob überhaupt nich ein Schritt exisitiert
-      if($paramstep != false){
-          $step->stepid = $paramstep->id;
-          $DB->update_record('block_onb_s_current', $step);
-      }else{
-          $DB->delete_records('block_onb_s_current', array('stepid' => $stepid));
-      }
-  }
-  $DB->delete_records('block_onb_s_completed', array('stepid' => $stepid));
-
-
-  redirect('admin.php');
+  $DB->delete_records('block_onb_s_steps', array('id' => $step_id));
+  redirect('admin_steps.php');
 }else{
   $PAGE->set_context($context);
   $PAGE->set_url(new moodle_url('/blocks/onboarding/steps/delete_step.php'));
