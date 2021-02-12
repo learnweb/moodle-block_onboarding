@@ -5,7 +5,16 @@
     {{#can_manage_experiences}}<a href="admin.php">{{#pix}}i/settings, core, Settings{{/pix}}Settings</a>{{/can_manage_experiences}}
 </div>
 <br></br>
-<div class="block-experiences-overview-experiences-actions">
-    <a href="edit_experience.php">New Experience</a>
+<div class="block-experiences-overview-experiences">
+    <h2>{{# str }} myexperiencearea, block_onboarding {{/ str }}</h2>
+    <div class="block-experiences-overview-experiences-actions">
+        <a href="edit_experience.php">New Experience</a>
+    </div>
+    {{#experiences_with_categories}}
+        <div>
+            <h4><a href="experience.php?experience_id={{{id}}}">{{{name}}}</a> {{#editable}} <a href="edit_experience.php?experience_id={{{id}}}">{{#pix}}t/editstring, core, Edit Experience{{/pix}}</a><a href="delete_experience.php?experience_id={{{id}}}">{{#pix}}t/delete, core, Delete Experience{{/pix}}</a>{{/editable}}</h4>
+            {{#categories_general}}<p class="block-experiences-overview-category-badge">{{{name}}}</p> {{/categories_general}}
+        </div>
+    {{/experiences_with_categories}}
 </div>
 <br>

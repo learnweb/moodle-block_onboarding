@@ -91,6 +91,7 @@ $string['course_name'] = 'Name';
 $string['course_name_missing'] = 'Please enter a course name.';
 $string['default_course_name'] = 'Sample Degree Program';
 $string['course_select'] = 'Select Degree Program';
+$string['myexperiencearea'] = 'My Experience Area';
 
 $string['edit_experience'] = 'Edit Experience';
 $string['experience_name'] = 'Name';
@@ -133,5 +134,6 @@ $string['filter_or_help'] =
     'This filter is OR connected meaning results from all selected categories will be displayed.';
 $string['aboutme'] = 'About Me';
 $string['aboutme_default'] = 'Write something about yourself. (Age, Semester, etc.)';
+$string['helpful'] = 'Was this experience report helpful to you?';
 
 
