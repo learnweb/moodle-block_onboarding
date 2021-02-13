@@ -128,14 +128,14 @@ class block_onboarding_view_external extends external_api {
                 \block_onboarding\step_view_data_functions::set_current_user_stepid($step->id);
             }
             //Markiert den Step als completed
-            \block_onboarding\step_view_data_functions::set_step_id_complete($step->id);
+            \block_onboarding\step_view_data_functions::set_step_id_complete($curposition);
             // berechnet Fortschritt des Nutzers
             $progress = \block_onboarding\step_view_data_functions::get_user_progress();
 
             // Rückgabe an JavaScript
             $returnstep['name'] = $step->name;
             $returnstep['description'] = $step->description;
-            $returntep['position'] = $step->position;
+            $returnstep['position'] = $step->position;
             $returnstep['progress'] = $progress;
 
             return $returnstep;
@@ -240,9 +240,10 @@ class block_onboarding_view_external extends external_api {
             // Position des aktuellen User Steps abfragen
             $cur_position = \block_onboarding\step_view_data_functions::get_step_position($curstepid);
             // Daten des vorherigen Steps (cur_position - 1) abfragen
-            $step = \block_onboarding\step_view_data_functions::get_next_step_data($curposition, -1);
+            $step = \block_onboarding\step_view_data_functions::get_next_step_data($curstepid, -1);
             if ($step == -1) {
-                $step = \block_onboarding\step_view_data_functions::get_step_data($curposition);
+                //step aus if raus?
+                $step = \block_onboarding\step_view_data_functions::get_step_data($curstepid);
             } else {
                 // Datenbank-Eintrag für User updaten mit neuem step
                 \block_onboarding\step_view_data_functions::set_current_user_stepid($step->id);
