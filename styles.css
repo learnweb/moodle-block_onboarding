@@ -1,3 +1,55 @@
+.btn-normal {
+    background-color: #03A9F4;
+    /* Green */
+    border: none;
+    color: white;
+    padding: 7px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+
+/* Home */
+
+.home-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 -1em;
+}
+
+.onboarding-card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    width: 50%;
+    display: inline-block;
+    margin: 0 1em;
+    position: relative;
+}
+
+
+/* On mouse-over, add a deeper shadow */
+
+
+/*.onboarding-card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}*/
+
+
+/* Add some padding inside the card container */
+
+.onboarding-container {
+    padding: 2px 16px;
+}
+
+.onboarding-card-button {
+    position: absolute;
+    bottom: 0px;
+}
+
+
 /* Wiki */
 
 .wiki-title-wrapper {
@@ -74,20 +126,6 @@
     font-size: 1.5em;
 }
 
-.step_description {}
-
-.done_btn {
-    font-weight: bold;
-}
-
-.skip_btn {
-    font-weight: bold;
-}
-
-.back_btn {
-    font-weight: bold;
-}
-
 
 /* Experiences */
 
@@ -160,13 +198,9 @@
     float: right;
 }
 
-.block-experiences-experience-helpful_btn{
+.block-experiences-experience-helpful_btn {}
 
-}
-
-.block-experiences-experience-popularity{
-
-}
+.block-experiences-experience-popularity {}
 
 
 /* General */
