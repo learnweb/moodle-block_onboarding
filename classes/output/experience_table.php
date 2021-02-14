@@ -69,7 +69,8 @@ class experience_table extends table_sql {
     }
 
     public function col_popularity($values) {
-        return $values->popularity;
+        global $DB;
+        return $DB->count_records('block_onb_e_helpful', array('experience_id' => $values->id));
     }
 
     /**

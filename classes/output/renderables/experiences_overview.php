@@ -32,13 +32,14 @@ class experiences_overview implements renderable, templatable {
         global $DB, $USER;
 
         // Get Database Entries for display on the Start Page.
-        $experiences = array_values($DB->get_records('block_onb_e_exps'));
+        $experiences = array_values($DB->get_records('block_onb_e_exps', array('user_id' => $USER->id)));
         $categories = array_values($DB->get_records('block_onb_e_cats'));
         $experiences_categories = array_values($DB->get_records('block_onb_e_exps_cats'));
         $courses = array_values($DB->get_records('block_onb_e_courses'));
 
         $experiences_mapped = array();
         foreach($experiences as $experience){
+            $experience->popularity = $DB->count_records('block_onb_e_helpful', array('experience_id' => $experience->id));
             if($USER->id == $experience->user_id || has_capability('block/onboarding:e_manage_experiences',
                     \context_system::instance())){
                 $experience->editable = true;

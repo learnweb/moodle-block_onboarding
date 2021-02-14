@@ -274,4 +274,139 @@ class block_onboarding_view_external extends external_api {
         );
     }
 
+    /* --------------------------------------------------------------------------------------------------------- */
+
+    /**
+     * Returns description of method parameters
+     * Parameter erklären!
+     * @return external_function_parameters
+     */
+    public static function click_helpful_parameters() {
+        return new external_function_parameters(
+            array(
+                'experience_id' => new external_value(PARAM_INT, 'id of experience')
+            )
+        );
+    }
+
+    /**
+     * The function itself
+     * Parameter erklären!
+     * @return string welcome message
+     */
+
+    public static function click_helpful($experience_id) {
+
+        global $DB, $USER;
+
+        $params = self::validate_parameters(self::click_helpful_parameters(),
+            array(
+                'experience_id' => $experience_id
+            )
+        );
+
+        // popularity prüfen
+        $popularity = $DB->count_records('block_onb_e_helpful', array('experience_id' => $experience_id));
+
+        // prüfen ob Report bereits markiert ist
+        $already_helpful =
+            $DB->record_exists('block_onb_e_helpful', array('user_id' => $USER->id, 'experience_id' => $experience_id));
+
+        if ($already_helpful) {
+            $DB->delete_records('block_onb_e_helpful', array('user_id' => $USER->id, 'experience_id' => $experience_id));
+
+            $return_helpful['exists'] = 0;
+            $return_helpful['popularity'] = $popularity - 1;
+            return $return_helpful;
+        } else {
+            $helpful = new stdClass();
+            $helpful->experience_id = $experience_id;
+            $helpful->user_id = $USER->id;
+            $helpful->id = $DB->insert_record('block_onb_e_helpful', $helpful);
+
+            $return_helpful['exists'] = 1;
+            $return_helpful['popularity'] = $popularity + 1;
+            return $return_helpful;
+        }
+    }
+
+    /**
+     * Returns description of method result value
+     * Parameter erklären!
+     * @return external_description
+     */
+    public static function click_helpful_returns() {
+//        return new external_multiple_structure(
+        return new external_single_structure(
+            array(
+                'exists'      => new external_value(PARAM_INT, 'entry existence'),
+                'popularity'      => new external_value(PARAM_INT, 'popularity of report')
+            )
+//            )
+        );
+    }
+
+    /* --------------------------------------------------------------------------------------------------------- */
+
+    /**
+     * Returns description of method parameters
+     * Parameter erklären!
+     * @return external_function_parameters
+     */
+    public static function init_helpful_parameters() {
+        return new external_function_parameters(
+            array(
+                'experience_id' => new external_value(PARAM_INT, 'id of experience')
+            )
+        );
+    }
+
+    /**
+     * The function itself
+     * Parameter erklären!
+     * @return string welcome message
+     */
+
+    public static function init_helpful($experience_id) {
+
+        global $DB, $USER;
+
+        $params = self::validate_parameters(self::init_helpful_parameters(),
+            array(
+                'experience_id' => $experience_id
+            )
+        );
+
+        // popularity prüfen
+        $popularity = $DB->count_records('block_onb_e_helpful', array('experience_id' => $experience_id));
+        $return_helpful['popularity'] = $popularity;
+
+        // prüfen ob Report bereits markiert ist
+        $already_helpful =
+            $DB->record_exists('block_onb_e_helpful', array('user_id' => $USER->id, 'experience_id' => $experience_id));
+
+        if ($already_helpful) {
+            $return_helpful['exists'] = 1;
+            return $return_helpful;
+        } else {
+            $return_helpful['exists'] = 0;
+            return $return_helpful;
+        }
+    }
+
+    /**
+     * Returns description of method result value
+     * Parameter erklären!
+     * @return external_description
+     */
+    public static function init_helpful_returns() {
+//        return new external_multiple_structure(
+        return new external_single_structure(
+            array(
+                'exists'      => new external_value(PARAM_INT, 'entry existence'),
+                'popularity'      => new external_value(PARAM_INT, 'popularity of report')
+            )
+//            )
+        );
+    }
 }

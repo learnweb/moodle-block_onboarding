@@ -1,5 +1,14 @@
 <a href="overview.php">{{#pix}}t/left, core, Back{{/pix}}Back to Overview</a>
 <br></br>
+<div class="block-experiences-experience-helpful">
+    <p>
+        {{# str }} popularity, block_onboarding {{/ str }}
+        <span class="block-experiences-experience-popularity"></span>
+        <br>
+        {{# str }} helpful, block_onboarding {{/ str }}
+        <button class="block-experiences-experience-helpful_btn" type=button>Yes</button>
+    </p>
+</div>
 <h2>
 {{#experience}}{{{name}}}
     {{#can_manage_experiences}}
