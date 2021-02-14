@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 defined('MOODLE_INTERNAL') || die();
-// form API
+
 require_once("$CFG->libdir/formslib.php");
 
 class steps_step_form extends moodleform {
@@ -31,28 +31,31 @@ class steps_step_form extends moodleform {
          */
         $step = $this->_customdata['step'];
 
-        $mform->addElement('hidden','id', $step->id);
+        $mform->addElement('hidden', 'id', $step->id);
         $mform->setType('id', PARAM_INT);
 
-        $mform->addElement('text', 'name', get_string('step_name', 'block_onboarding'), array('maxlength'=>150, 'placeholder'=>get_string('default_step_name', 'block_onboarding')));
+        $mform->addElement('text', 'name', get_string('step_name', 'block_onboarding'),
+            array('maxlength' => 150, 'placeholder' => get_string('default_step_name', 'block_onboarding')));
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($step->name) ? $step->name : '');
         $mform->addRule('name', get_string('step_name_req', 'block_onboarding'), 'required', null, 'client');
 
-        $mform->addElement('textarea', 'description', get_string('step_description', 'block_onboarding'),array('wrap'=>"virtual", 'rows'=>10, 'cols'=>50, 'placeholder'=>get_string('step_description_req', 'block_onboarding')));
+        $mform->addElement('textarea', 'description', get_string('step_description', 'block_onboarding'),
+            array('wrap' => "virtual", 'rows' => 10, 'cols' => 50,
+                'placeholder' => get_string('step_description_req', 'block_onboarding')));
         $mform->setType('description', PARAM_TEXT);
         $mform->setDefault('description', isset($step->description) ? $step->description : '');
         $mform->addRule('description', get_string('step_description_req', 'block_onboarding'), 'required', null, 'client');
 
-        $count_positions = $DB->count_records('block_onb_s_steps');
-        if($step->id == -1){
-            $position_array = range(1, $count_positions+1);
-        }else{
-            $position_array = range(1, $count_positions);
+        $countpositions = $DB->count_records('block_onb_s_steps');
+        if ($step->id == -1) {
+            $positionarray = range(1, $countpositions + 1);
+        } else {
+            $positionarray = range(1, $countpositions);
         }
-        $mform->addElement('select', 'position',get_string('step_number', 'block_onboarding'),$position_array , array());
+        $mform->addElement('select', 'position', get_string('step_number', 'block_onboarding'), $positionarray, array());
         $mform->setType('position', PARAM_INT);
-        $mform->setDefault('position', isset($step->position) ? $step->position-1 : $DB->count_records('block_onb_s_steps'));
+        $mform->setDefault('position', isset($step->position) ? $step->position - 1 : $DB->count_records('block_onb_s_steps'));
 
         $this->add_action_buttons();
     }

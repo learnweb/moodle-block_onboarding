@@ -41,32 +41,32 @@ class step_view_data_functions {
     public static function get_current_user_stepid() {
         global $DB, $USER;
 
-        $step_bool = $DB->record_exists('block_onb_s_current', array('userid' => $USER->id));
+        $stepbool = $DB->record_exists('block_onb_s_current', array('userid' => $USER->id));
 
         // wenn noch kein Fortschritt gemacht wurde, also kein Datensatz vorhanden ist -> starten bei pos = 1
-        if($step_bool == false){
+        if ($stepbool == false) {
 
             // wenn kein step in Liste vorhanden ist
-            if($DB->count_records('block_onb_s_steps') == 0){
-                $return_stepid = -1;
+            if ($DB->count_records('block_onb_s_steps') == 0) {
+                $returnstepid = -1;
             } else {
-                $temp_step = $DB->get_record('block_onb_s_steps', array('position' => 1));
+                $tempstep = $DB->get_record('block_onb_s_steps', array('position' => 1));
 
                 $step = new \stdClass();
                 $step->userid = $USER->id;
-                $step->stepid = $temp_step->id;
+                $step->stepid = $tempstep->id;
                 $step->timecreated = time();
                 $step->timemodified = time();
                 $step->id = $DB->insert_record('block_onb_s_current', $step);
 
-                $return_stepid = $step->stepid;
+                $returnstepid = $step->stepid;
             }
         } else {
             $step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id));
-            $return_stepid = $step->stepid;
+            $returnstepid = $step->stepid;
         }
 
-        return $return_stepid;
+        return $returnstepid;
     }
 
     public static function set_current_user_stepid($stepid) {
@@ -84,9 +84,9 @@ class step_view_data_functions {
         global $DB, $USER;
 
         // nur wenn Step noch nicht abgeschlossen wurde, wird dieser hinzugefügt, sonst passiert nichts
-        $step_bool = $DB->record_exists('block_onb_s_completed', array('userid' => $USER->id, 'stepid' => $stepid));
+        $stepbool = $DB->record_exists('block_onb_s_completed', array('userid' => $USER->id, 'stepid' => $stepid));
 
-        if($step_bool == false) {
+        if ($stepbool == false) {
             $step = new \stdClass();
             $step->stepid = $stepid;
             $step->userid = $USER->id;
@@ -98,9 +98,9 @@ class step_view_data_functions {
         global $DB;
 
         $step = $DB->get_record('block_onb_s_steps', array('position' => $position));
-        $return_stepid = $step->id;
+        $returnstepid = $step->id;
 
-        return $return_stepid;
+        return $returnstepid;
     }
 
 
@@ -108,39 +108,52 @@ class step_view_data_functions {
         global $DB;
 
         $step = $DB->get_record('block_onb_s_steps', array('id' => $stepid));
-        $return_step_position = $step->position;
+        $returnstepposition = $step->position;
 
-        return $return_step_position;
+        return $returnstepposition;
     }
 
+
+    public static function get_next_step_data($position, $direction) {
+        global $DB;
+        $position = $position + $direction;
+        $stepbool = $DB->record_exists('block_onb_s_steps', array('position' => $position));
+        if ($stepbool) {
+            $returnstep = $DB->get_record('block_onb_s_steps', array('position' => $position));
+        } else {
+            $returnstep = -1;
+        }
+        return $returnstep;
+    }
 
     public static function get_step_data($position) {
         global $DB;
 
-        $return_step = $DB->get_record('block_onb_s_steps', array('position' => $position));
+        $returnstep = $DB->get_record('block_onb_s_steps', array('position' => $position));
 
-        return $return_step;
+        return $returnstep;
     }
-
 
     public static function get_user_progress() {
         global $DB, $USER;
 
-        $total_steps = $DB->count_records('block_onb_s_steps');
-        $user_completed_steps = $DB->count_records('block_onb_s_completed', array('userid' => $USER->id));
+        $totalsteps = $DB->count_records('block_onb_s_steps');
+        $usercompletedsteps = $DB->count_records('block_onb_s_completed', array('userid' => $USER->id));
 
-        $return_progress = (int)round(($user_completed_steps / $total_steps) *100);
+        $returnprogress = (int)round(($usercompletedsteps / $totalsteps) * 100);
 
-        return $return_progress;
+        return $returnprogress;
     }
 
 
     public static function message_no_steps() {
-        $return_step['name'] = 'NO STEPS TO DISPLAY!';
-        $return_step['description'] = 'There are currently no steps saved in the database. Please add steps in the admin section or contact an administrator.';
-        $return_step['position'] = 0;
-        $return_step['progress'] = 0;
+        $returnstep['name'] = 'NO STEPS TO DISPLAY!';
+        $returnstep['description'] =
+            'There are currently no steps saved in the database. 
+            Please add steps in the admin section or contact an administrator.';
+        $returnstep['position'] = 0;
+        $returnstep['progress'] = 0;
 
-        return $return_step;
+        return $returnstep;
     }
 }
