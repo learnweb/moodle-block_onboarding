@@ -135,7 +135,7 @@ $string['filter_or_help'] =
     'This filter is OR connected meaning results from all selected categories will be displayed.';
 $string['aboutme'] = 'About Me';
 $string['aboutme_default'] = 'Write something about yourself. (Age, Semester, etc.)';
-$string['helpful'] = 'Was this experience report helpful to you?';
+$string['helpful'] = 'Was this helpful?';
 $string['popularity'] = 'Popularity: ';
 
 
