@@ -12,10 +12,10 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
         promises[0].done(function (response) {
             if(response.exists === 1) {
                 $('.block-experiences-experience-popularity').text(response.popularity);
-                $('.block-experiences-experience-helpful_btn').css('background-color' , '#20ab63');
+                $('.block-experiences-experience-helpful_btn').css({'background-color': '#008196', 'color': '#ffffff'});
             } else {
                 $('.block-experiences-experience-popularity').text(response.popularity);
-                $('.block-experiences-experience-helpful_btn').css('background-color' , '#c8d1db');
+                $('.block-experiences-experience-helpful_btn').css({'background': 'none', 'color': '#000000'});
             }
         }).fail(notification.exception);
 
@@ -29,10 +29,10 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
             promises[0].done(function (response) {
                 if(response.exists === 1) {
                     $('.block-experiences-experience-popularity').text(response.popularity);
-                    $('.block-experiences-experience-helpful_btn').css('background-color' , '#20ab63');
+                    $('.block-experiences-experience-helpful_btn').css({'background-color': '#008196', 'color': '#ffffff'});
                 } else {
                     $('.block-experiences-experience-popularity').text(response.popularity);
-                    $('.block-experiences-experience-helpful_btn').css('background-color' , '#c8d1db');
+                    $('.block-experiences-experience-helpful_btn').css({'background': 'none', 'color': '#000000'});
                 }
             }).fail(notification.exception);
         })
