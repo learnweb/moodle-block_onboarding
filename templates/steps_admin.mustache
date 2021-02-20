@@ -1,15 +1,10 @@
-<!--
-Template
--->
 <a href="overview.php">{{#pix}}t/left, core, Back{{/pix}}Back to Overview</a>
-<br></br>
+<br>
 {{#steps}}
-    <h4><b>{{{position}}}. Step &nbsp;</b> <br>
+    <h4><b>#{{{position}}} - {{{achievement}}}</b> <br>
         {{{name}}} <a href="edit_step.php?step_id={{{id}}}">{{#pix}}t/editstring, core, Edit Step{{/pix}}</a>
     <a href="delete_step.php?step_id={{{id}}}">{{#pix}}t/delete, core, Delete Step{{/pix}}</a>
     </h4>
 <p>{{{description}}}</p>
 {{/steps}}
-<!-- Hyperlink für das Erstellen eines neuen Steps
--->
 <a href="edit_step.php">New Step</a>

@@ -47,6 +47,9 @@ class steps_step_form extends moodleform {
         $mform->setDefault('description', isset($step->description) ? $step->description : '');
         $mform->addRule('description', get_string('step_description_req', 'block_onboarding'), 'required', null, 'client');
 
+        $mform->addElement('checkbox', 'achievement', get_string('step_achievement', 'block_onboarding'));
+        $mform->setDefault('achievement', isset($step->achievement) ? (($step->achievement == 1) ? true : false) : false);
+
         $countpositions = $DB->count_records('block_onb_s_steps');
         if ($step->id == -1) {
             $positionarray = range(1, $countpositions + 1);
