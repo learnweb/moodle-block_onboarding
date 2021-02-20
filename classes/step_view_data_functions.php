@@ -25,9 +25,8 @@
 namespace block_onboarding;
 defined('MOODLE_INTERNAL') || die();
 
-// TODO: Randfälle behandeln, z.B. letzter Schritt in, keine Schritte in Liste, usw.
 // TODO: Language Strings bei Messages verwenden!
-// TODO: ggf. unnötige Variblenzuweisung entfernen und Anweisungen direkt in return schreiben
+// TODO: Funktionen vereinfachen und zusammenfassen
 
 class step_view_data_functions {
 
@@ -152,6 +151,7 @@ class step_view_data_functions {
             'There are currently no steps saved in the database. 
             Please add steps in the admin section or contact an administrator.';
         $returnstep['position'] = 0;
+        $returnstep['achievement'] = 0;
         $returnstep['progress'] = 0;
 
         return $returnstep;

@@ -61,6 +61,7 @@ class block_onboarding_view_external extends external_api {
             $returnstep['name'] = $step->name;
             $returnstep['description'] = $step->description;
             $returnstep['position'] = $step->position;
+            $returnstep['achievement'] = $step->achievement;
             $returnstep['progress'] = $progress;
 
             return $returnstep;
@@ -90,6 +91,7 @@ class block_onboarding_view_external extends external_api {
                 'name' => new external_value(PARAM_TEXT, 'name of new step'),
                 'description' => new external_value(PARAM_TEXT, 'description of new step'),
                 'position' => new external_value(PARAM_INT, 'position of new step'),
+                'achievement' => new external_value(PARAM_INT, 'determines whether a step is an achievement'),
                 'progress' => new external_value(PARAM_INT, 'progress of user'),
             )
             //)
@@ -136,6 +138,7 @@ class block_onboarding_view_external extends external_api {
             $returnstep['name'] = $step->name;
             $returnstep['description'] = $step->description;
             $returnstep['position'] = $step->position;
+            $returnstep['achievement'] = $step->achievement;
             $returnstep['progress'] = $progress;
 
             return $returnstep;
@@ -166,6 +169,7 @@ class block_onboarding_view_external extends external_api {
                 'name' => new external_value(PARAM_TEXT, 'name of new step'),
                 'description' => new external_value(PARAM_TEXT, 'description of new step'),
                 'position' => new external_value(PARAM_INT, 'position of new step'),
+                'achievement' => new external_value(PARAM_INT, 'determines whether a step is an achievement'),
                 'progress' => new external_value(PARAM_INT, 'progress of user'),
             )
 //            )
@@ -200,6 +204,7 @@ class block_onboarding_view_external extends external_api {
             // Rückgabe an JavaScript
             $returnstep['name'] = $step->name;
             $returnstep['description'] = $step->description;
+            $returnstep['achievement'] = $step->achievement;
             $returnstep['position'] = $step->position;
 
             return $returnstep;
@@ -218,6 +223,7 @@ class block_onboarding_view_external extends external_api {
             array(
                 'name' => new external_value(PARAM_TEXT, 'name of new step'),
                 'description' => new external_value(PARAM_TEXT, 'description of new step'),
+                'achievement' => new external_value(PARAM_INT, 'determines whether a step is an achievement'),
                 'position' => new external_value(PARAM_INT, 'position of new step'),
             )
 //            )
@@ -251,6 +257,7 @@ class block_onboarding_view_external extends external_api {
             // Rückgabe an JavaScript
             $returnstep['name'] = $step->name;
             $returnstep['description'] = $step->description;
+            $returnstep['achievement'] = $step->achievement;
             $returnstep['position'] = $step->position;
 
             return $returnstep;
@@ -269,6 +276,7 @@ class block_onboarding_view_external extends external_api {
             array(
                 'name' => new external_value(PARAM_TEXT, 'name of new step'),
                 'description' => new external_value(PARAM_TEXT, 'description of new step'),
+                'achievement' => new external_value(PARAM_INT, 'determines whether a step is an achievement'),
                 'position' => new external_value(PARAM_INT, 'position of new step'),
             )
 //            )

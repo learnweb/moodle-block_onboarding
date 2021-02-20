@@ -1,6 +1,6 @@
 define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notification) {
 
-    // TODO: Randfälle behandeln, z.B. letzter Schritt in Liste usw.
+    // TODO: Language Strings übergeben anstatt Step etc.!
     // TODO: clean code
 
     var init = function() {
@@ -11,22 +11,34 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
             args: {}
         }]);
         promises[0].done(function(response) {
+            if(response.achievement == 1){
+                $('.step_container').css('background-color', '#009933');
+                $('.step_title').text('Achievement! ' + response.name);
+            } else {
+                $('.step_container').css('background-color', '');
+                $('.step_title').text('Step ' + response.position + ': ' + response.name);
+            }
             $('.step_description').text(response.description);
-            $('.step_title').text('Step ' + response.position + ': ' + response.name);
             $('.progress_bar_value').text(response.progress + '%');
             $('.progress_bar_fill').css('width', (response.progress + '%'));
         }).fail(notification.exception);
     };
 
 
-    $('.done_btn').on('click', function() {
+    $('.next_btn').on('click', function() {
         var promises = ajax.call([{
             methodname: 'block_onboarding_next_step',
             args: {}
         }]);
         promises[0].done(function(response) {
+            if(response.achievement == 1){
+                $('.step_container').css('background-color', '#009933');
+                $('.step_title').text('Achievement! ' + response.name);
+            } else {
+                $('.step_container').css('background-color', '');
+                $('.step_title').text('Step ' + response.position + ': ' + response.name);
+            }
             $('.step_description').text(response.description);
-            $('.step_title').text('Step ' + response.position + ': ' + response.name);
             $('.progress_bar_value').text(response.progress + '%');
             $('.progress_bar_fill').css('width', (response.progress + '%'));
         }).fail(notification.exception);
@@ -39,8 +51,14 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
             args: {}
         }]);
         promises[0].done(function(response) {
+            if(response.achievement == 1){
+                $('.step_container').css('background-color', '#009933');
+                $('.step_title').text('Achievement! ' + response.name);
+            } else {
+                $('.step_container').css('background-color', '');
+                $('.step_title').text('Step ' + response.position + ': ' + response.name);
+            }
             $('.step_description').text(response.description);
-            $('.step_title').text('Step ' + response.position + ': ' + response.name);
         }).fail(notification.exception);
     })
 
@@ -51,8 +69,14 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
             args: {}
         }]);
         promises[0].done(function(response) {
+            if(response.achievement == 1){
+                $('.step_container').css('background-color', '#009933');
+                $('.step_title').text('Achievement! ' + response.name);
+            } else {
+                $('.step_container').css('background-color', '');
+                $('.step_title').text('Step ' + response.position + ': ' + response.name);
+            }
             $('.step_description').text(response.description);
-            $('.step_title').text('Step ' + response.position + ': ' + response.name);
         }).fail(notification.exception);
     })
 
