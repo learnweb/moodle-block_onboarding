@@ -1,6 +1,5 @@
 <!--
 TODO: Language Strings / Mustache str verwenden & Sprache anpassen
-TODO: Warum müssen Buttons beim Ersten Klicken 2x geklickt werden um Aktion zu triggern? -> beheben!
 TODO: CSS Anpassungen in styles.css vornehmen / ersetzen
 TODO: UX überarbeiten
 -->
@@ -16,9 +15,11 @@ TODO: UX überarbeiten
         <div class="progress_bar_fill"></div>
     </div>
     <br>
-    <div class="step_title"></div>
-    <div class="step_description">
+    <div class="step_title_wrapper">
+        <span class="step_title"></span>
+        <span class="step_completed">{{# str }}completed, block_onboarding{{/ str }}</span>
     </div>
+    <div class="step_description"></div>
     <br>
     <button class="back_btn" type=button>Back</button>
     <button class="skip_btn" type=button>Skip</button>

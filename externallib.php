@@ -27,9 +27,6 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/externallib.php');
 
-// TODO: Randfälle behandeln, z.B. letzter Schritt in Liste, keine Schritte in Liste, usw.
-
-
 class block_onboarding_view_external extends external_api {
 
     /**
@@ -57,12 +54,15 @@ class block_onboarding_view_external extends external_api {
             $step = \block_onboarding\step_view_data_functions::get_step_data($curposition);
             // Progress des Users abfragen
             $progress = \block_onboarding\step_view_data_functions::get_user_progress();
+            // Prüfen, ob step schon completed wurde
+            $completed = \block_onboarding\step_view_data_functions::get_user_completed_step($step->id);
 
             $returnstep['name'] = $step->name;
             $returnstep['description'] = $step->description;
             $returnstep['position'] = $step->position;
             $returnstep['achievement'] = $step->achievement;
             $returnstep['progress'] = $progress;
+            $returnstep['completed'] = $completed;
 
             return $returnstep;
         }
@@ -93,6 +93,7 @@ class block_onboarding_view_external extends external_api {
                 'position' => new external_value(PARAM_INT, 'position of new step'),
                 'achievement' => new external_value(PARAM_INT, 'determines whether a step is an achievement'),
                 'progress' => new external_value(PARAM_INT, 'progress of user'),
+                'completed' => new external_value(PARAM_INT, 'determines whether user already completed step'),
             )
             //)
         );
@@ -129,8 +130,10 @@ class block_onboarding_view_external extends external_api {
                 // Datenbank-Eintrag für User updaten mit neuem step
                 \block_onboarding\step_view_data_functions::set_current_user_stepid($step->id);
             }
-            //Markiert den Step als completed
+            //Markiert den vorherigen Step als completed
             \block_onboarding\step_view_data_functions::set_step_id_complete($curposition);
+            // Prüfen, ob step schon completed wurde
+            $completed = \block_onboarding\step_view_data_functions::get_user_completed_step($step->id);
             // berechnet Fortschritt des Nutzers
             $progress = \block_onboarding\step_view_data_functions::get_user_progress();
 
@@ -140,6 +143,7 @@ class block_onboarding_view_external extends external_api {
             $returnstep['position'] = $step->position;
             $returnstep['achievement'] = $step->achievement;
             $returnstep['progress'] = $progress;
+            $returnstep['completed'] = $completed;
 
             return $returnstep;
         }
@@ -171,6 +175,7 @@ class block_onboarding_view_external extends external_api {
                 'position' => new external_value(PARAM_INT, 'position of new step'),
                 'achievement' => new external_value(PARAM_INT, 'determines whether a step is an achievement'),
                 'progress' => new external_value(PARAM_INT, 'progress of user'),
+                'completed' => new external_value(PARAM_INT, 'determines whether user already completed step'),
             )
 //            )
         );
@@ -201,11 +206,15 @@ class block_onboarding_view_external extends external_api {
                 // Datenbank-Eintrag für User updaten mit neuem step
                 \block_onboarding\step_view_data_functions::set_current_user_stepid($step->id);
             }
+            // Prüfen, ob step schon completed wurde
+            $completed = \block_onboarding\step_view_data_functions::get_user_completed_step($step->id);
+
             // Rückgabe an JavaScript
             $returnstep['name'] = $step->name;
             $returnstep['description'] = $step->description;
             $returnstep['achievement'] = $step->achievement;
             $returnstep['position'] = $step->position;
+            $returnstep['completed'] = $completed;
 
             return $returnstep;
         }
@@ -225,6 +234,7 @@ class block_onboarding_view_external extends external_api {
                 'description' => new external_value(PARAM_TEXT, 'description of new step'),
                 'achievement' => new external_value(PARAM_INT, 'determines whether a step is an achievement'),
                 'position' => new external_value(PARAM_INT, 'position of new step'),
+                'completed' => new external_value(PARAM_INT, 'determines whether user already completed step'),
             )
 //            )
         );
@@ -254,11 +264,15 @@ class block_onboarding_view_external extends external_api {
                 // Datenbank-Eintrag für User updaten mit neuem step
                 \block_onboarding\step_view_data_functions::set_current_user_stepid($step->id);
             }
+            // Prüfen, ob step schon completed wurde
+            $completed = \block_onboarding\step_view_data_functions::get_user_completed_step($step->id);
+
             // Rückgabe an JavaScript
             $returnstep['name'] = $step->name;
             $returnstep['description'] = $step->description;
             $returnstep['achievement'] = $step->achievement;
             $returnstep['position'] = $step->position;
+            $returnstep['completed'] = $completed;
 
             return $returnstep;
         }
@@ -278,6 +292,7 @@ class block_onboarding_view_external extends external_api {
                 'description' => new external_value(PARAM_TEXT, 'description of new step'),
                 'achievement' => new external_value(PARAM_INT, 'determines whether a step is an achievement'),
                 'position' => new external_value(PARAM_INT, 'position of new step'),
+                'completed' => new external_value(PARAM_INT, 'determines whether user already completed step'),
             )
 //            )
         );

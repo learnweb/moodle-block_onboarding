@@ -11,6 +11,11 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
             args: {}
         }]);
         promises[0].done(function(response) {
+            if(response.completed == 1){
+                $('.step_completed').css('visibility', 'visible');
+            } else{
+                $('.step_completed').css('visibility', 'hidden');
+            }
             if(response.achievement == 1){
                 $('.step_container').css('background-color', '#009933');
                 $('.step_title').text('Achievement! ' + response.name);
@@ -31,6 +36,11 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
             args: {}
         }]);
         promises[0].done(function(response) {
+            if(response.completed == 1){
+                $('.step_completed').css('visibility', 'visible');
+            } else{
+                $('.step_completed').css('visibility', 'hidden');
+            }
             if(response.achievement == 1){
                 $('.step_container').css('background-color', '#009933');
                 $('.step_title').text('Achievement! ' + response.name);
@@ -51,6 +61,11 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
             args: {}
         }]);
         promises[0].done(function(response) {
+            if(response.completed == 1){
+                $('.step_completed').css('visibility', 'visible');
+            } else{
+                $('.step_completed').css('visibility', 'hidden');
+            }
             if(response.achievement == 1){
                 $('.step_container').css('background-color', '#009933');
                 $('.step_title').text('Achievement! ' + response.name);
@@ -69,6 +84,11 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
             args: {}
         }]);
         promises[0].done(function(response) {
+            if(response.completed == 1){
+                $('.step_completed').css('visibility', 'visible');
+            } else{
+                $('.step_completed').css('visibility', 'hidden');
+            }
             if(response.achievement == 1){
                 $('.step_container').css('background-color', '#009933');
                 $('.step_title').text('Achievement! ' + response.name);

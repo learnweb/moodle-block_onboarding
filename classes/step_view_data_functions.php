@@ -144,6 +144,20 @@ class step_view_data_functions {
         return $returnprogress;
     }
 
+    public static function get_user_completed_step($stepid) {
+        global $DB, $USER;
+
+        $progress = $DB->get_records('block_onb_s_completed', array('userid' => $USER->id));
+
+        $returncompleted = 0;
+        foreach ($progress as $prostep)
+            if ($prostep->stepid == $stepid){
+                $returncompleted = 1;
+            }
+
+        return $returncompleted;
+    }
+
 
     public static function message_no_steps() {
         $returnstep['name'] = 'NO STEPS TO DISPLAY!';
