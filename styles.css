@@ -93,6 +93,7 @@
 
 .step_container {
     width: 100%;
+    position: relative;
 }
 
 .progress_bar {
@@ -135,21 +136,26 @@
     background-color: limegreen;
     padding: 0px 5px 0px 5px;
     border: 2px solid black;
-    border-radius: 3px;
+    border-radius: 5px;
     margin-left: 20px;
     visibility: hidden;
 }
 
 .next_btn {
-
 }
 
 .back_btn {
-
 }
 
 .skip_btn {
+}
 
+#achievement-confetti{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    opacity: 0.7;
+    pointer-events:none;
 }
 
 
