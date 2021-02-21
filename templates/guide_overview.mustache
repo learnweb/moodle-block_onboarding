@@ -1,6 +1,5 @@
 <!--
 TODO: Language Strings / Mustache str verwenden & Sprache anpassen
-TODO: Warum müssen Buttons beim Ersten Klicken 2x geklickt werden um Aktion zu triggern? -> beheben!
 TODO: CSS Anpassungen in styles.css vornehmen / ersetzen
 TODO: UX überarbeiten
 -->
@@ -11,18 +10,21 @@ TODO: UX überarbeiten
     {{#can_manage_steps}}<a href="admin_steps.php">{{#pix}}i/settings, core, Manage Steps{{/pix}}Settings</a>{{/can_manage_steps}}
 </div>
 <div class="step_container">
+    <canvas id="achievement-confetti"></canvas>
     <div class="progress_bar">
         <div class="progress_bar_value"></div>
         <div class="progress_bar_fill"></div>
     </div>
     <br>
-    <div class="step_title"></div>
-    <div class="step_description">
+    <div class="step_title_wrapper">
+        <span class="step_title"></span>
+        <span class="step_completed">{{# str }}completed, block_onboarding{{/ str }}</span>
     </div>
+    <div class="step_description"></div>
     <br>
-    <button class="btn btn-default" type=button>Back</button>
-    <button class="btn btn-default" type=button>Skip</button>
-    <button class="btn btn-default" type=button>Done!</button>
+    <button class="back_btn" type=button>Back</button>
+    <button class="skip_btn" type=button>Skip</button>
+    <button class="next_btn" type=button>Done!</button>
     <br>
 </div>
 <br>

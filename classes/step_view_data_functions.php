@@ -25,9 +25,8 @@
 namespace block_onboarding;
 defined('MOODLE_INTERNAL') || die();
 
-// TODO: Randfälle behandeln, z.B. letzter Schritt in, keine Schritte in Liste, usw.
 // TODO: Language Strings bei Messages verwenden!
-// TODO: ggf. unnötige Variblenzuweisung entfernen und Anweisungen direkt in return schreiben
+// TODO: Funktionen vereinfachen und zusammenfassen
 
 class step_view_data_functions {
 
@@ -145,6 +144,20 @@ class step_view_data_functions {
         return $returnprogress;
     }
 
+    public static function get_user_completed_step($stepid) {
+        global $DB, $USER;
+
+        $progress = $DB->get_records('block_onb_s_completed', array('userid' => $USER->id));
+
+        $returncompleted = 0;
+        foreach ($progress as $prostep)
+            if ($prostep->stepid == $stepid){
+                $returncompleted = 1;
+            }
+
+        return $returncompleted;
+    }
+
 
     public static function message_no_steps() {
         $returnstep['name'] = 'NO STEPS TO DISPLAY!';
@@ -152,6 +165,7 @@ class step_view_data_functions {
             'There are currently no steps saved in the database. 
             Please add steps in the admin section or contact an administrator.';
         $returnstep['position'] = 0;
+        $returnstep['achievement'] = 0;
         $returnstep['progress'] = 0;
 
         return $returnstep;

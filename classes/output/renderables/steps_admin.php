@@ -34,6 +34,15 @@ class steps_admin implements renderable, templatable {
 
     $steps = array_values($DB->get_records('block_onb_s_steps', $conditions=null, $sort='position ASC'));
 
+    foreach($steps as $step){
+        if($step->achievement == 1){
+            $step->achievement = get_string('step_achievement', 'block_onboarding');
+        } else {
+            $step->achievement = get_string('step_step', 'block_onboarding');
+        }
+    }
+
+
     return [
       'can_manage_wiki' => has_capability('block/onboarding:s_manage_steps', \context_system::instance()),
       'steps' => $steps
