@@ -25,6 +25,10 @@ class experiences_filter_form extends moodleform {
 
         $mform = $this->_form;
 
+        // $mform->addElement('header', 'filter', get_string('filters', 'block_onboarding'));
+
+        $filtergroup=array();
+
         $courses = $DB->get_records('block_onb_e_courses');
         $coursesmodified = array();
         foreach ($courses as $course) {
@@ -33,8 +37,9 @@ class experiences_filter_form extends moodleform {
         $options = array(
             'multiple' => true,
             'noselectionstring' => '',
+            'placeholder' => get_string('degreeprogram_filter', 'block_onboarding')
         );
-        $mform->addElement('autocomplete', 'course_filter', get_string('degreeprogram_filter', 'block_onboarding'),
+        $filtergroup[] =& $mform->createElement('autocomplete', 'course_filter', get_string('degreeprogram_filter', 'block_onboarding'),
             $coursesmodified, $options);
 
         $categories = $DB->get_records('block_onb_e_cats');
@@ -45,10 +50,13 @@ class experiences_filter_form extends moodleform {
         $options = array(
             'multiple' => true,
             'noselectionstring' => '',
+            'placeholder' => get_string('category_filter', 'block_onboarding')
         );
-        $mform->addElement('autocomplete', 'category_filter', get_string('category_filter', 'block_onboarding'),
+        $filtergroup[] =& $mform->createElement('autocomplete', 'category_filter', get_string('category_filter', 'block_onboarding'),
             $categoriesmodified, $options);
-        $mform->addHelpButton('category_filter', 'filter_or', 'block_onboarding');
+        // $mform->addHelpButton('category_filter', 'filter_or', 'block_onboarding');
+
+        $mform->addGroup($filtergroup, 'filtergroup', get_string('filters', 'block_onboarding'), '', false);
 
         $mform->addElement('submit', 'applyfilter', get_string('applyfilter', 'block_onboarding'));
     }

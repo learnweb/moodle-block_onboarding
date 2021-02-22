@@ -32,19 +32,18 @@ $PAGE->set_heading(get_string('experiences', 'block_onboarding'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
 $PAGE->navbar->add(get_string('experiences', 'block_onboarding'));
 
+require_once('./../classes/forms/experiences_filter_form.php');
+$mform = new experiences_filter_form(null, null);
+$form = $mform->render();
+
 $output = $PAGE->get_renderer('block_onboarding');
 echo $output->header();
 echo $output->container_start('experiences-overview');
-$renderable = new \block_onboarding\output\renderables\experiences_overview();
+$renderable = new \block_onboarding\output\renderables\experiences_overview($form);
 echo $output->render($renderable);
 echo $output->container_end();
 
-require_once('./../classes/forms/experiences_filter_form.php');
-
-$mform = new experiences_filter_form(null, null);
-
-$mform->display();
-
+//$mform->display();
 
 // SQL Statement for Listview.
 $fields = 'ee.id as id, ee.name as name, u.firstname as author, ec.name as degreeprogram, ee.timecreated as published,

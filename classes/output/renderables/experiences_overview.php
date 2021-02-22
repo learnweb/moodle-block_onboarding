@@ -23,8 +23,10 @@ use templatable;
 use renderer_base;
 
 class experiences_overview implements renderable, templatable {
-    public function __construct() {
+    var $form = null;
 
+    public function __construct($form) {
+        $this->form = $form;
     }
 
     public function export_for_template(renderer_base $output) {
@@ -66,7 +68,8 @@ class experiences_overview implements renderable, templatable {
             'can_manage_experiences' => has_capability('block/onboarding:e_manage_experiences', \context_system::instance()),
             'categories_general' => $categories,
             'courses_general' => $courses,
-            'experiences_with_categories' => array_values($experiences_mapped)
+            'experiences_with_categories' => array_values($experiences_mapped),
+            'form' => $this->form
         ];
     }
 }

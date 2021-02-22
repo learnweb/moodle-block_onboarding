@@ -36,6 +36,7 @@ class experiences_experience_form extends moodleform {
         // Experience Name Field.
         $mform->addElement('text', 'name', get_string('experience_name', 'block_onboarding'));
         $mform->addRule('name', get_string('experience_name_missing', 'block_onboarding'), 'required', null, 'server');
+        $mform->addRule('name', 'Max Length is 30 characters', 'maxlength', 30, 'block_onboarding');
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($experience->name) ? $experience->name : get_string('default_experience_name',
             'block_onboarding'));
@@ -47,7 +48,7 @@ class experiences_experience_form extends moodleform {
             $coursesmodified[$course->id] = $course->name;
         }
         $mform->addElement('select', 'course_id', get_string('course_select', 'block_onboarding'),
-            $coursesmodified, 'required');
+            $coursesmodified);
         if (isset($link->course_id)) {
             $mform->setDefault('course_id', $link->course_id);
         }
@@ -70,7 +71,7 @@ class experiences_experience_form extends moodleform {
 
         // About Me Textarea
         $mform->addElement('textarea', 'aboutme_text', get_string('aboutme', 'block_onboarding'),
-            array('wrap="virtual" rows="10" cols="100"',
+            array('wrap="virtual" rows="4" cols="100"',
                 'placeholder' => get_string('aboutme_default', 'block_onboarding')));
         $mform->setType('aboutme_text', PARAM_TEXT);
         $mform->setDefault('aboutme_text', isset($experience->aboutme) ? $experience->aboutme : "");
