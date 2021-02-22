@@ -142,12 +142,18 @@
 }
 
 .next_btn {
+    background: #008196;
+    color: #ffffff;
 }
 
 .back_btn {
+    background: #008196;
+    color: #ffffff;
 }
 
 .skip_btn {
+    background: #008196;
+    color: #ffffff;
 }
 
 #achievement-confetti{
