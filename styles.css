@@ -162,9 +162,7 @@
 /* Experiences */
 
 .experiences-title-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    float: right;
 }
 
 .block-experiences-overview-categories {
@@ -196,6 +194,7 @@
 
 .block-experiences-overview-experiences-actions {
     margin-bottom: 20px;
+    margin-left: 20px;
 }
 
 .block-experiences-overview-courses {
@@ -234,6 +233,30 @@
 
 .block-experiences-experience-popularity {}
 
-
+.block-experiences-overview-experiences {
+    height:35vh;
+    display: grid;
+    grid-template-rows: 40px 1fr;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+navigation {
+    grid-column-start:1;
+    grid-column-end:5;
+    grid-row-start:1;
+    grid-row-end:2;
+}
+filter {
+    grid-column-start:1;
+    grid-column-end:4;
+    grid-row-start:2;
+    grid-row-end:3;
+}
+aside {
+    border-left: 1px solid lightgray;
+    grid-column-start:4;
+    grid-column-end:5;
+    grid-row-start:2;
+    grid-row-end:3;
+}
 
 /* General */

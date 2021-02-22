@@ -119,7 +119,7 @@ $string['takeaways_required'] = 'Key Takeaway';
 $string['takeaways_default'] = 'Summarize this category in one bullet point';
 $string['degreeprogram_filter'] = 'Degree Programs';
 $string['category_filter'] = 'Categories';
-$string['applyfilter'] = 'Apply Filter';
+$string['applyfilter'] = 'Apply Filter Options';
 $string['report_experience'] = 'Report Experience';
 
 $string['spam'] = 'Spam/Advertisement';
@@ -140,5 +140,6 @@ $string['aboutme'] = 'About Me';
 $string['aboutme_default'] = 'Write something about yourself. (Age, Semester, etc.)';
 $string['helpful'] = 'Was this helpful?';
 $string['popularity'] = 'Popularity: ';
+$string['filters'] = 'Filter Options';
 
 
