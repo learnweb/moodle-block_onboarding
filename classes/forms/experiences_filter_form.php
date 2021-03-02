@@ -27,7 +27,7 @@ class experiences_filter_form extends moodleform {
 
         // $mform->addElement('header', 'filter', get_string('filters', 'block_onboarding'));
 
-        $filtergroup=array();
+        $filtergroup = array();
 
         $courses = $DB->get_records('block_onb_e_courses');
         $coursesmodified = array();
@@ -54,9 +54,9 @@ class experiences_filter_form extends moodleform {
         );
         $filtergroup[] =& $mform->createElement('autocomplete', 'category_filter', get_string('category_filter', 'block_onboarding'),
             $categoriesmodified, $options);
-        // $mform->addHelpButton('category_filter', 'filter_or', 'block_onboarding');
 
         $mform->addGroup($filtergroup, 'filtergroup', get_string('filters', 'block_onboarding'), '', false);
+        $mform->addHelpButton('filtergroup', 'filter_or', 'block_onboarding');
 
         $mform->addElement('submit', 'applyfilter', get_string('applyfilter', 'block_onboarding'));
     }

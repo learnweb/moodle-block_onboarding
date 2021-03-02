@@ -1,4 +1,4 @@
-<a href="overview.php">{{#pix}}t/left, core, Back{{/pix}}Back to Overview</a>
+<a href="overview.php">{{#pix}}t/left, core, Back{{/pix}}{{# str }} backtooverview, block_onboarding {{/ str }}</a>
 <br></br>
 <div class="block-experiences-overview-report">
   <h2>{{# str }} report_overview, block_onboarding {{/ str }}</h2>
@@ -9,7 +9,7 @@
 <div class="block-experiences-overview-categories">
   <h2>Categories</h2>
   <div class="block-experiences-overview-categories-actions">
-    <a href="edit_category.php">New Category</a>
+    <a href="edit_category.php">{{# str }} newcategory, block_onboarding {{/ str }}</a>
   </div>
   {{#categories_general}}
       <div class="block-experiences-overview-category">
@@ -21,7 +21,7 @@
 <div class="block-experiences-overview-courses">
   <h2>Degree Programs</h2>
   <div class="block-experiences-overview-courses-actions">
-    <a href="edit_course.php">New Degree Program</a>
+    <a href="edit_course.php">{{# str }} newdegreeprogram, block_onboarding {{/ str }}</a>
   </div>
   {{#courses_general}}
       <div class="block-experiences-overview-course">

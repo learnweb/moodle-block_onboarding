@@ -17,79 +17,65 @@
 // General.
 $string['pluginname'] = 'Onboarding';
 $string['onboarding'] = 'Onboarding';
-$string['onboarding:addinstance'] = 'Add a new Onboarding block';
+$string['onboarding:addinstance'] = 'Einen neuen Onboarding Block hinzufügen';
 
-$string['nav_back'] = 'Back';
-$string['nav_back_home'] = 'Back to Home';
-$string['settings'] = 'Settings';
-$string['error'] = 'Error';
-$string['insufficient_permissions'] = 'Sorry, insufficient permissions';
-$string['settings'] = 'Settings';
-$string['backtohome'] = 'Back to Home';
-$string['backtooverview'] = 'Back to Overview';
-$string['settings'] = 'Settings';
+$string['error'] = "Error";
+$string['insufficient_permissions'] = 'Sorry, ungenügende Berechtigungen';
+$string['settings'] = 'Einstellungen';
+$string['backtohome'] = 'Zurück zu Home';
+$string['backtooverview'] = 'Zurück zum Überblick';
+$string['overview'] = 'Überblick';
+$string['admin'] = 'Admin';
+$string['settings'] = 'Einstellungen';
 
 // Guide
 $string['guide'] = 'Guide';
+
+// -> Wiki
 $string['wiki'] = 'Wiki';
-$string['overview'] = 'Overview';
-$string['wiki_admin'] = 'Wiki Administration';
 
-$string['manage_wiki'] = 'Manage Wiki';
-$string['edit_category'] = 'Edit Category';
+$string['new_category'] = 'Neue Kategorie';
+$string['edit_category'] = 'Kategorie bearbeiten';
 $string['category_name'] = 'Name';
-$string['category_name_req'] = 'Please enter a name for the category.';
-$string['default_category_name_wiki'] = 'Default Category';
-$string['category_number'] = 'Category Position';
-$string['default_category_name'] = 'Sample Category';
-$string['experience_category_missing'] = 'Please enter a name for a category.';
-$string['experience_questions_missing'] = 'Give a few suggestions...';
+$string['category_name_req'] = 'Bitte gib einen Namen für die Kategorie an';
+$string['default_category_name_wiki'] = 'Beispiel Kategorie';
+$string['category_number'] = 'Kategorie Position';
+$string['default_category_name'] = 'Beispiel Kategorie';
 
-$string['new_link'] = 'New Link';
-$string['edit_link'] = 'Edit Link';
+$string['new_link'] = 'Neuer Link';
+$string['edit_link'] = 'Link bearbeiten';
 $string['link_name'] = 'Name';
-$string['link_name_req'] = 'Please enter a name for the link.';
-$string['link_category'] = 'Category';
-$string['link_category_req'] = 'Links must be added to categories. Please create a category first.';
+$string['link_name_req'] = 'Bitte gib einen Namen für den Link an';
+$string['link_category'] = 'Kategorie';
+$string['link_category_req'] = 'Links müssen zu Kategorien hinzugefügt werden. Bitte erstelle dafür eine Kategorie.';
 $string['link_url'] = 'URL';
-$string['link_url_req'] = 'Please enter a link.';
-$string['link_description'] = 'Description';
-$string['link_description_req'] = 'Please provide a description for the link.';
-$string['link_description_help'] = 'Let me help you!';
+$string['link_url_req'] = 'Bitte gib den vollständigen Link an (mit https://...)';
+$string['link_description'] = 'Beschreibung';
+$string['link_description_req'] = 'Bitte gib eine Beschreibung für den Link an';
+$string['link_description_help'] = 'Lass mich dir helfen';
 $string['link_number'] = 'Link Position';
-$string['default_link_name'] = 'Please enter a link name.';
-$string['default_link_name'] = 'Default Name';
-$string['default_link_url'] = 'http://www.example.com';
-$string['default_link_description'] = 'Sample Description';
 
-// Steps.
-$string['overview'] = 'Overview';
-$string['steps_admin'] = 'Steps Administration';
-$string['steps'] = 'First Steps';
-$string['manage_steps'] = 'Manage Steps';
+$string['default_link_name'] = 'Beispiel Name';
+$string['default_link_url'] = 'https://www.example.com';
+$string['default_link_description'] = 'Beispiel Beschreibung';
 
-$string['button_done'] = 'Done';
-$string['button_back'] = 'Back';
-
-$string['completed'] = 'Completed';
-$string['new_step'] = 'New Step';
-$string['edit_step'] = 'Edit Step';
+// -> Steps.
+$string['steps'] = 'Erste Schritte';
+$string['completed'] = 'Abgeschlossen';
+$string['edit_step'] = 'Schritt bearbeiten';
+$string['new_step'] = 'Neuer Schritt';
 $string['step_name'] = 'Name';
-$string['step_name_req'] = 'Please enter a name for the step.';
-$string['step_description'] = 'Description';
-$string['step_description_req'] = 'Please provide a description for the step.';
-$string['default_step_name'] = 'Please enter a step name.';
-$string['default_step_description'] = 'Sample Description';
-$string['step_achievement'] = 'Achievement';
-$string['step_step'] = 'Step';
-$string['step_number'] = 'Step Position';
-$string['no_steps_available'] = "There are no steps to display at the moment";
+$string['step_name_req'] = 'Bitte gib einen Namen für den Schritt an';
+$string['step_description'] = 'Beschreibung';
+$string['step_description_req'] = 'Bitte gib eine Beschreibung für den Schritt an';
+$string['default_step_name'] = 'Bitte gib einen Namen für den Schritt ein';
+$string['default_step_description'] = 'Beispiel Beschreibung';
+$string['step_achievement'] = 'Meilenstein';
+$string['step_step'] = 'Schritt';
+$string['step_number'] = 'Schritt Position';
+$string['no_steps_available'] = "Im Moment stehen keine Schritte zur Verfügung";
 
 // Experiences.
-$string['overview'] = 'Overview';
-
-$string['admin'] = 'Admin';
-
 $string['experience'] = 'Experience';
 $string['experiences'] = 'Experiences';
 
@@ -104,6 +90,9 @@ $string['course_name_missing'] = 'Please enter a course name.';
 $string['default_course_name'] = 'Sample Degree Program';
 $string['course_select'] = 'Select Degree Program';
 $string['myexperiencearea'] = 'My Experience Area';
+
+$string['experience_category_missing'] = 'Please enter a name for a category.';
+$string['experience_questions_missing'] = 'Give a few suggestions...';
 
 $string['edit_experience'] = 'Edit Experience';
 $string['newexperience'] = 'New Experience';
