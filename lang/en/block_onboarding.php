@@ -29,7 +29,7 @@ $string['insufficient_permissions'] = 'Sorry, insufficient permissions';
 $string['guide'] = 'Guide';
 $string['wiki'] = 'Wiki';
 $string['overview'] = 'Overview';
-$string['admin'] = 'Admin';
+$string['wiki_admin'] = 'Wiki Administration';
 
 $string['manage_wiki'] = 'Manage Wiki';
 $string['edit_category'] = 'Edit Category';
@@ -58,7 +58,7 @@ $string['default_link_description'] = 'Sample Description';
 
 // Steps.
 $string['overview'] = 'Overview';
-$string['admin'] = 'Admin';
+$string['steps_admin'] = 'Steps Administration';
 $string['steps'] = 'First Steps';
 $string['manage_steps'] = 'Manage Steps';
 

@@ -2,16 +2,22 @@
 <br></br>
 <h2><b>Wiki</b></h2>
 {{#categories_with_links}}
-    <h4>{{{name}}} {{#can_manage_wiki}}<a href="edit_category.php?category_id={{{id}}}">{{#pix}}t/editstring, core, Edit Link{{/pix}}</a><a href="delete_category.php?category_id={{{id}}}">{{#pix}}t/delete, core, Delete Link{{/pix}}</a>{{/can_manage_wiki}}</h4>
+    <h4>{{{name}}} {{#can_manage_wiki}}
+        <a href="edit_category.php?category_id={{{id}}}">{{#pix}}t/editstring, core, Edit Link{{/pix}}</a><a
+            href="delete_category.php?category_id={{{id}}}">{{#pix}}
+        t/delete, core, Delete Link{{/pix}}</a>{{/can_manage_wiki}}</h4>
     <ul>
-      {{#links}}
-      <li>
-        <a target="_blank" rel="noopener noreferrer" href="{{{url}}}">{{{name}}}</a> {{#can_manage_wiki}}<a href="edit_link.php?link_id={{{id}}}">{{#pix}}t/editstring, core, Edit Link{{/pix}}</a><a href="delete_link.php?link_id={{{id}}}">{{#pix}}t/delete, core, Delete Link{{/pix}}</a>{{/can_manage_wiki}}
-          <div class="custom-tooltip">{{#pix}}i/info, core,{{/pix}}
-              <span class="custom-tooltiptext">{{{description}}}</span>
-          </div>
-      </li>
-      {{/links}}
+        {{#links}}
+            <li>
+                <a target="_blank" rel="noopener noreferrer" href="{{{url}}}">{{{name}}}</a> {{#can_manage_wiki}}
+                <a href="edit_link.php?link_id={{{id}}}">{{#pix}}t/editstring, core, Edit Link{{/pix}}</a><a
+                    href="delete_link.php?link_id={{{id}}}">{{#pix}}
+                t/delete, core, Delete Link{{/pix}}</a>{{/can_manage_wiki}}
+                <div class="custom-tooltip">{{#pix}}i/info, core,{{/pix}}
+                    <span class="custom-tooltiptext">{{{description}}}</span>
+                </div>
+            </li>
+        {{/links}}
     </ul>
 {{/categories_with_links}}
 <a href="edit_category.php">New Category</a>
