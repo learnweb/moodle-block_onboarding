@@ -42,15 +42,20 @@
             settings, block_onboarding {{/ str }}</a>{{/can_manage_wiki}}
 </div>
 {{#categories_with_links}}
-    {{{name}}}
-    <ul>
-        {{#links}}
-            <li>
-                <a target="_blank" rel="noopener noreferrer" href="{{{url}}}">{{{name}}}</a>
-                <div class="custom-tooltip">{{#pix}}i/info, core,{{/pix}}
-                    <span class="custom-tooltiptext">{{{description}}}</span>
-                </div>
-            </li>
-        {{/links}}
-    </ul>
+    <div class="wiki-cat-container">
+        <div class="wiki-cat-title-wrapper">{{{name}}}</div>
+        <div class="wiki-cat-content-wrapper">
+            <ul>
+                {{#links}}
+                    <li>
+                        <a target="_blank" rel="noopener noreferrer" href="{{{url}}}">{{{name}}}</a>
+                        <div class="custom-tooltip">{{#pix}}i/info, core,{{/pix}}
+                            <span class="custom-tooltiptext">{{{description}}}</span>
+                        </div>
+                    </li>
+                {{/links}}
+            </ul>
+        </div>
+    </div>
 {{/categories_with_links}}
+
