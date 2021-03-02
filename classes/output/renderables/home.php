@@ -29,7 +29,8 @@ class home implements renderable, templatable {
 
   public function export_for_template(renderer_base $output) {
     return [
-        'dashboard_url' => new \moodle_url('/')
+      'base_plugin_url' => new \moodle_url('/blocks/onboarding/'),
+      'dashboard_url' => new \moodle_url('/')
     ];
   }
 
