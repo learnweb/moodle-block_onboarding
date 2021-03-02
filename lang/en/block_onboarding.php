@@ -19,20 +19,23 @@ $string['pluginname'] = 'Onboarding';
 $string['onboarding'] = 'Onboarding';
 $string['onboarding:addinstance'] = 'Add a new Onboarding block';
 
-$string['error'] = "Error";
+$string['nav_back'] = 'Back';
+$string['nav_back_home'] = 'Back to Home';
+$string['settings'] = 'Settings';
+$string['error'] = 'Error';
 $string['insufficient_permissions'] = 'Sorry, insufficient permissions';
 $string['settings'] = 'Settings';
 $string['backtohome'] = 'Back to Home';
 $string['backtooverview'] = 'Back to Overview';
 $string['settings'] = 'Settings';
 
-// Wiki
+// Guide
+$string['guide'] = 'Guide';
 $string['wiki'] = 'Wiki';
 $string['overview'] = 'Overview';
+$string['wiki_admin'] = 'Wiki Administration';
 
-$string['admin'] = 'Admin';
-
-$string['new_category'] = 'New Category';
+$string['manage_wiki'] = 'Manage Wiki';
 $string['edit_category'] = 'Edit Category';
 $string['category_name'] = 'Name';
 $string['category_name_req'] = 'Please enter a name for the category.';
@@ -54,17 +57,19 @@ $string['link_description'] = 'Description';
 $string['link_description_req'] = 'Please provide a description for the link.';
 $string['link_description_help'] = 'Let me help you!';
 $string['link_number'] = 'Link Position';
-
+$string['default_link_name'] = 'Please enter a link name.';
 $string['default_link_name'] = 'Default Name';
 $string['default_link_url'] = 'http://www.example.com';
 $string['default_link_description'] = 'Sample Description';
 
 // Steps.
 $string['overview'] = 'Overview';
+$string['steps_admin'] = 'Steps Administration';
+$string['steps'] = 'First Steps';
+$string['manage_steps'] = 'Manage Steps';
 
-$string['admin'] = 'Admin';
-
-$string['steps'] = 'Steps';
+$string['button_done'] = 'Done';
+$string['button_back'] = 'Back';
 
 $string['completed'] = 'Completed';
 $string['new_step'] = 'New Step';
@@ -79,9 +84,6 @@ $string['step_achievement'] = 'Achievement';
 $string['step_step'] = 'Step';
 $string['step_number'] = 'Step Position';
 $string['no_steps_available'] = "There are no steps to display at the moment";
-
-// Guide
-$string['guide'] = 'Guide';
 
 // Experiences.
 $string['overview'] = 'Overview';

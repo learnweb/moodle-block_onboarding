@@ -24,7 +24,10 @@ $context = context_system::instance();
 
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/steps/edit_step.php'));
-$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
+$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
+$PAGE->navbar->add(get_string('guide', 'block_onboarding'), new moodle_url('overview.php'));
+$PAGE->navbar->add(get_string('steps_admin', 'block_onboarding'), new moodle_url('admin_steps.php'));
+$PAGE->navbar->add(get_string('edit_step', 'block_onboarding'));
 
 // TODO: Kommentare korrigieren und reduzieren und in Englisch
 // TODO: Clean Code!!
