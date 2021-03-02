@@ -21,6 +21,9 @@ $string['onboarding:addinstance'] = 'Add a new Onboarding block';
 
 $string['error'] = "Error";
 $string['insufficient_permissions'] = 'Sorry, insufficient permissions';
+$string['settings'] = 'Settings';
+$string['backtohome'] = 'Back to Home';
+$string['backtooverview'] = 'Back to Overview';
 
 // Wiki
 $string['wiki'] = 'Wiki';
@@ -36,7 +39,6 @@ $string['category_number'] = 'Category Position';
 $string['default_category_name'] = 'Sample Category';
 $string['experience_category_missing'] = 'Please enter a name for a category.';
 $string['experience_questions_missing'] = 'Give a few suggestions...';
-
 
 $string['edit_link'] = 'Edit Link';
 $string['link_name'] = 'Name';
@@ -98,8 +100,10 @@ $string['course_select'] = 'Select Degree Program';
 $string['myexperiencearea'] = 'My Experience Area';
 
 $string['edit_experience'] = 'Edit Experience';
+$string['newexperience'] = 'New Experience';
 $string['experience_name'] = 'Name';
 $string['experience_name_missing'] = 'Please enter a name for your report.';
+$string['experience_degreeprogram_missing'] = 'Please select a degree program.';
 $string['experience_category'] = 'Category';
 $string['experience_url'] = 'URL';
 $string['experience_description'] = 'Description';
@@ -136,10 +140,22 @@ $string['description_missing'] = 'Please enter a description.';
 $string['filter_or'] = 'this filter';
 $string['filter_or_help'] =
     'This filter is OR connected meaning results from all selected categories will be displayed.';
+$string['selectcategory'] = 'this option select';
+$string['selectcategory_help'] =
+    'Select Categories you want to write something about.';
+$string['contactinformation'] = 'this text field';
+$string['contactinformation_help'] =
+    'If you want to give other students the possibility to contact you, enter your contact information here.';
+
 $string['aboutme'] = 'About Me';
 $string['aboutme_default'] = 'Write something about yourself. (Age, Semester, etc.)';
 $string['helpful'] = 'Was this helpful?';
 $string['popularity'] = 'Popularity: ';
 $string['filters'] = 'Filter Options';
+$string['newdegreeprogram'] = 'New Degree Program';
+$string['newcategory'] = 'New Category';
+$string['notenoughdata'] = 'Not enough data to create an Experience Report';
+$string['selectcategories'] = 'Select Categories';
+
 
 
