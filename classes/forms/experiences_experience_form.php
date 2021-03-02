@@ -49,33 +49,34 @@ class experiences_experience_form extends moodleform {
         }
         $mform->addElement('select', 'course_id', get_string('course_select', 'block_onboarding'),
             $coursesmodified);
-        if (isset($link->course_id)) {
-            $mform->setDefault('course_id', $link->course_id);
-        }
+        $mform->setDefault('course_id', isset($link->course_id) ? $link->course_id : '');
+        $mform->addRule('course_id', get_string('experience_degreeprogram_missing', 'block_onboarding'), 'required', null, 'server');
 
         // About Me Checkbox
-        $mform->addElement('checkbox', 'aboutme', get_string('aboutme', 'block_onboarding'));
-        $mform->setDefault('aboutme', true);
+        // $mform->addElement('checkbox', 'aboutme', get_string('aboutme', 'block_onboarding'));
+        // $mform->setDefault('aboutme', true);
 
 
         // Category Checkboxes.
+        $categorygroup = array();
         $categories = $DB->get_records('block_onb_e_cats');
         $experiencescategories = $DB->get_records('block_onb_e_exps_cats', array('experience_id' => $experience->id));
         foreach ($categories as $category) {
-            $mform->addElement('checkbox', 'category_' . $category->id, $category->name);
+            $categorygroup[] = $mform->createElement('checkbox', 'category_' . $category->id, $category->name);
         }
-
         foreach ($experiencescategories as $experiencecategory) {
             $mform->setDefault('category_' . $experiencecategory->category_id, true);
         }
+        $mform->addGroup($categorygroup, 'categorygroup', get_string('selectcategories', 'block_onboarding'), '<br>', false);
+        $mform->addHelpButton('categorygroup', 'selectcategory', 'block_onboarding');
 
         // About Me Textarea
         $mform->addElement('textarea', 'aboutme_text', get_string('aboutme', 'block_onboarding'),
-            array('wrap="virtual" rows="4" cols="100"',
+            array('style="resize:none" wrap="virtual" rows="4" cols="100"',
                 'placeholder' => get_string('aboutme_default', 'block_onboarding')));
         $mform->setType('aboutme_text', PARAM_TEXT);
         $mform->setDefault('aboutme_text', isset($experience->aboutme) ? $experience->aboutme : "");
-        $mform->hideIf('aboutme_text', 'aboutme');
+        // $mform->hideIf('aboutme_text', 'aboutme');
 
         // Category Textboxes.
         $categories = $DB->get_records('block_onb_e_cats');
@@ -113,6 +114,7 @@ class experiences_experience_form extends moodleform {
         $mform->addElement('text', 'contact', get_string('experience_contact', 'block_onboarding'));
         $mform->setType('contact', PARAM_TEXT);
         $mform->setDefault('contact', isset($experience->contact) ? $experience->contact : '');
+        $mform->addHelpButton('contact', 'contactinformation', 'block_onboarding');
 
         $this->add_action_buttons();
     }
