@@ -1,18 +1,28 @@
-<a href="overview.php">{{#pix}}t/left, core, Back{{/pix}}Back to Overview</a>
-<br></br>
-<h2><b>Wiki</b></h2>
+<a href="overview.php">
+    {{#pix}}t/left, core, {{# str }}nav_back, block_onboarding {{/ str }}
+    {{/pix}}{{# str }} nav_back_home, block_onboarding {{/ str }}
+</a>
+<br>
+<br>
+<div class="admin-title">{{# str }}wiki_admin, block_onboarding{{/ str }}</div>
 {{#categories_with_links}}
-    <h4>{{{name}}} {{#can_manage_wiki}}
-        <a href="edit_category.php?category_id={{{id}}}">{{#pix}}t/editstring, core, Edit Link{{/pix}}</a><a
-            href="delete_category.php?category_id={{{id}}}">{{#pix}}
-        t/delete, core, Delete Link{{/pix}}</a>{{/can_manage_wiki}}</h4>
-    <ul>
+    <span class="admin-content-title">{{{name}}}</span>
+    <span class="admin-edit-btn">
+        {{#can_manage_wiki}}
+            <a href="edit_category.php?category_id={{{id}}}">{{#pix}}t/editstring, core, Edit Link{{/pix}}</a>
+            <a href="delete_category.php?category_id={{{id}}}">{{#pix}}t/delete, core, Delete Link{{/pix}}</a>
+        {{/can_manage_wiki}}
+    </span>
+    <ul class="admin-content-wrapper">
         {{#links}}
             <li>
-                <a target="_blank" rel="noopener noreferrer" href="{{{url}}}">{{{name}}}</a> {{#can_manage_wiki}}
-                <a href="edit_link.php?link_id={{{id}}}">{{#pix}}t/editstring, core, Edit Link{{/pix}}</a><a
-                    href="delete_link.php?link_id={{{id}}}">{{#pix}}
-                t/delete, core, Delete Link{{/pix}}</a>{{/can_manage_wiki}}
+                <a target="_blank" rel="noopener noreferrer" href="{{{url}}}">{{{name}}}</a>
+                <span class="admin-edit-btn">
+                    {{#can_manage_wiki}}
+                        <a href="edit_link.php?link_id={{{id}}}">{{#pix}}t/editstring, core, Edit Link{{/pix}}</a>
+                        <a href="delete_link.php?link_id={{{id}}}">{{#pix}}t/delete, core, Delete Link{{/pix}}</a>
+                    {{/can_manage_wiki}}
+                </span>
                 <div class="custom-tooltip">{{#pix}}i/info, core,{{/pix}}
                     <span class="custom-tooltiptext">{{{description}}}</span>
                 </div>

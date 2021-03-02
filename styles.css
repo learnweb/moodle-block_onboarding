@@ -56,6 +56,31 @@
     bottom: 0px;
 }
 
+/* Guide */
+
+.admin-title{
+    font-size: 1.8em;
+    padding-bottom: 8px;
+}
+
+.admin-content-title{
+    width: fit-content;
+    font-size: 1.3em;
+    color: #ffffff;
+    background-color: #006784;
+    border-radius: 8px;
+    padding: 7px 9px;
+}
+
+.admin-content-wrapper{
+    font-size: 1.1em;
+    margin-top: 6px;
+    margin-left: 4px;
+}
+
+.admin-edit-btn{
+    padding-left: 12px;
+}
 
 /* Wiki */
 
