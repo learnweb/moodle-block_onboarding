@@ -2,7 +2,7 @@
     background-color: #03A9F4;
     /* Green */
     border: none;
-    color: white;
+    color: #ffffff;
     padding: 7px 16px;
     text-align: center;
     text-decoration: none;
@@ -10,6 +10,9 @@
     font-size: 16px;
 }
 
+.title {
+    font-size: 1.7em;
+}
 
 /* Home */
 
@@ -58,10 +61,6 @@
     align-items: center;
 }
 
-.wiki_title {
-    font-size: 1.5em;
-}
-
 .custom-tooltip {
     position: relative;
     display: inline-block;
@@ -70,8 +69,8 @@
 .custom-tooltip .custom-tooltiptext {
     visibility: hidden;
     width: 480px;
-    background-color: black;
-    color: #fff;
+    background-color: #000000;
+    color: #ffffff;
     padding: 5px 5px;
     border-radius: 6px;
     position: absolute;
@@ -85,35 +84,49 @@
 
 /* Steps */
 
+.steps-container {
+    width: 100%;
+    position: relative;
+    border-radius: 8px;
+    padding: 3px;
+    background-image: url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .steps-title-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.step_container {
-    width: 100%;
-    position: relative;
+.steps-content-wrapper {
+    background-color: rgba(128,128,128,0.8);
+    color: white;
+    margin: 3px;
+    padding: 7px;
+    border-radius: 6px;
 }
 
-.progress_bar {
+.progress-bar {
     position: relative;
-    width: 100%;
+    width: calc(100% - 6px);
     height: 30px;
-    background: lightgrey;
+    background-color: #868686;
+    margin: 3px;
     border-radius: 8px;
-    border: 3px solid black;
+    border: 3px solid #000000;
 }
 
-.progress_bar_fill {
+.progress-bar-fill {
     height: 100%;
     width: 0%;
-    border-radius: 8px;
-    background: limegreen;
+    border-radius: 5px;
+    background: #32cd32;
     transition: width 1.2s;
 }
 
-.progress_bar_value {
+.progress-bar-value {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -123,45 +136,42 @@
     font-weight: bold;
 }
 
-.step_title_wrapper{
-
+.steps-button-wrapper {
+    margin-top: 6px;
 }
 
-.step_title {
+.step-title {
     font-size: 1.5em;
 }
 
-.step_completed{
-    color: white;
-    background-color: limegreen;
+.step-completed {
+    color: #ffffff;
+    background-color: #32cd32;
     padding: 0px 5px 0px 5px;
-    border: 2px solid black;
+    border: 2px solid #000000;
     border-radius: 5px;
     margin-left: 20px;
     visibility: hidden;
 }
 
-.next_btn {
-    background: #008196;
-    color: #ffffff;
+.next-btn {
+    outline: 0 !important;
 }
 
-.back_btn {
-    background: #008196;
-    color: #ffffff;
+.back-btn {
+    outline: 0 !important;
 }
 
-.skip_btn {
-    background: #008196;
-    color: #ffffff;
+.skip-btn {
+    outline: 0 !important;
 }
 
-#achievement-confetti{
+#achievement-confetti {
     height: 100%;
     width: 100%;
     position: absolute;
     opacity: 0.7;
-    pointer-events:none;
+    pointer-events: none;
 }
 
 
@@ -235,34 +245,39 @@
     float: right;
 }
 
-.block-experiences-experience-helpful_btn {}
+.block-experiences-experience-helpful_btn {
+}
 
-.block-experiences-experience-popularity {}
+.block-experiences-experience-popularity {
+}
 
 .block-experiences-overview-experiences {
-    height:35vh;
+    height: 35vh;
     display: grid;
     grid-template-rows: 40px 1fr;
     grid-template-columns: 25% 25% 25% 25%;
 }
+
 navigation {
-    grid-column-start:1;
-    grid-column-end:5;
-    grid-row-start:1;
-    grid-row-end:2;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 2;
 }
+
 filter {
-    grid-column-start:1;
-    grid-column-end:4;
-    grid-row-start:2;
-    grid-row-end:3;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
 }
+
 aside {
     border-left: 1px solid lightgray;
-    grid-column-start:4;
-    grid-column-end:5;
-    grid-row-start:2;
-    grid-row-end:3;
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 2;
+    grid-row-end: 3;
 }
 
 /* General */
