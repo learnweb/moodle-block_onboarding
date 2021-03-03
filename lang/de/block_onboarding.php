@@ -18,7 +18,6 @@
 $string['pluginname'] = 'Onboarding';
 $string['onboarding'] = 'Onboarding';
 $string['onboarding:addinstance'] = 'Einen neuen Onboarding Block hinzufügen';
-
 $string['error'] = "Error";
 $string['insufficient_permissions'] = 'Sorry, ungenügende Berechtigungen';
 $string['settings'] = 'Einstellungen';
@@ -31,12 +30,13 @@ $string['settings'] = 'Einstellungen';
 
 // Guide
 $string['guide'] = 'Guide';
+$string['guide_summary'] = 'Im Guide findest du nützliche organisatorische Informationen rund um dein Studium. Außerdem hilft dir das "Erste Schritte" - Programm dich zurechtzufinden.';
 
 // -> Wiki
 $string['wiki'] = 'Wiki';
 $string['wiki_admin'] = 'Wiki Administration';
-
 $string['manage_wiki'] = 'Wiki bearbeiten';
+
 $string['new_category'] = 'Neue Kategorie';
 $string['edit_category'] = 'Kategorie bearbeiten';
 $string['category_name'] = 'Name';
@@ -44,7 +44,6 @@ $string['category_name_req'] = 'Bitte gib eine Bezeichnung für die Kategorie an
 $string['default_category_name_wiki'] = 'Beispiel Kategorie';
 $string['category_number'] = 'Kategorie Position';
 $string['default_category_name'] = 'Beispiel Kategorie';
-
 $string['new_link'] = 'Neuer Link';
 $string['edit_link'] = 'Link bearbeiten';
 $string['link_name'] = 'Name';
@@ -58,6 +57,7 @@ $string['link_description_req'] = 'Bitte gib eine Beschreibung für den Link an'
 $string['link_description_help'] = 'Lass mich dir helfen';
 $string['link_number'] = 'Link Position';
 $string['default_link_name'] = 'Beispiel Link';
+$string['default_link_name'] = 'Beispiel Name';
 $string['default_link_url'] = 'https://www.example.com';
 $string['default_link_description'] = 'Beispiel Beschreibung';
 
@@ -90,22 +90,19 @@ $string['error_nosteps_message'] = "Aktuell sind keine Ersten Schritte in der Da
 // Experiences.
 $string['experience'] = 'Experience';
 $string['experiences'] = 'Experiences';
-
+$string['experiences_summary'] = 'Our Experiences Portal gives you the oportunity to find out how other students before you have designed their studies. This is a great chance to learn from others mistakes. You can also find lots of inspiration on how to design your individual studies.';
 $string['edit_category'] = 'Edit Category';
 $string['category_name'] = 'Name';
 $string['default_category_name'] = 'Sample Category';
 $string['questions'] = 'Questions';
-
 $string['edit_course'] = 'Edit Degree Programs';
 $string['course_name'] = 'Name';
 $string['course_name_missing'] = 'Please enter a course name.';
 $string['default_course_name'] = 'Sample Degree Program';
 $string['course_select'] = 'Select Degree Program';
 $string['myexperiencearea'] = 'My Experience Area';
-
 $string['experience_category_missing'] = 'Please enter a name for a category.';
 $string['experience_questions_missing'] = 'Give a few suggestions...';
-
 $string['edit_experience'] = 'Edit Experience';
 $string['newexperience'] = 'New Experience';
 $string['experience_name'] = 'Name';
@@ -118,7 +115,6 @@ $string['default_experience_name'] = 'Sample Experience';
 $string['default_experience_url'] = 'http://www.example.com';
 $string['default_experience_description'] = 'Sample Description';
 $string['experience_contact'] = 'Contact Information';
-
 $string['contact'] = 'Contact: ';
 $string['author'] = 'Author: ';
 $string['date'] = 'Published: ';
@@ -132,7 +128,6 @@ $string['degreeprogram_filter'] = 'Degree Programs';
 $string['category_filter'] = 'Categories';
 $string['applyfilter'] = 'Apply Filter Options';
 $string['report_experience'] = 'Report Experience';
-
 $string['spam'] = 'Spam/Advertisement';
 $string['profanity'] = 'Profanity';
 $string['offensive'] = 'Offensive Content';
@@ -153,7 +148,6 @@ $string['selectcategory_help'] =
 $string['contactinformation'] = 'this text field';
 $string['contactinformation_help'] =
     'If you want to give other students the possibility to contact you, enter your contact information here.';
-
 $string['aboutme'] = 'About Me';
 $string['aboutme_default'] = 'Write something about yourself. (Age, Semester, etc.)';
 $string['helpful'] = 'Was this helpful?';

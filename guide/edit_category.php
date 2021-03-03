@@ -45,39 +45,20 @@ if(has_capability('block/onboarding:w_manage_wiki', $context)){
   $mform = new wiki_category_form(null, array('category' => $paramcategory));
 
   if ($mform->is_cancelled()) {
-  		redirect('overview.php');
+  		redirect('admin_wiki.php');
 
   } else if ($fromform = $mform->get_data()) {
       $category = new stdClass();
       $category->name = $fromform->name;
-      $insertposition = $fromform->position + 1;
+      $category->position = $fromform->position + 1;
 
       if($fromform->id != -1){
-        $paramcategory = $DB->get_record('block_onb_w_categories', array('id'=>$fromform->id));
-        $curposition = $paramcategory->position;
-        if ($insertposition > $curposition) {
-            \block_onboarding\wiki_admin_functions::decrement_category_positions($insertposition, $curposition);
-        } else if ($insertposition < $curposition) {
-            \block_onboarding\wiki_admin_functions::increment_category_positions($insertposition, $curposition);
-        }
         $category->id = $fromform->id;
-        $category->position = $fromform->position + 1;
-        $category->timemodified = time();
-        $DB->update_record('block_onb_w_categories', $category);
-
+        $wiki_lib = new block_onboarding\wiki_lib();
+        $wiki_lib->update_category($category);
       }else{
-        $initposition = $DB->count_records('block_onb_w_categories') + 1;
-        $category->position = $initposition;
-        $category->timecreated = time();
-        $category->timemodified = time();
-        $category->id = $DB->insert_record('block_onb_w_categories', $category);
-
-        if ($initposition != $insertposition) {
-            \block_onboarding\wiki_admin_functions::increment_category_positions($insertposition, $initposition);
-            $category->position = $insertposition;
-            $category->timemodified = time();
-            $DB->update_record('block_onb_w_categories', $category);
-        }
+        $wiki_lib = new block_onboarding\wiki_lib();
+        $wiki_lib->add_category($category);
       }
       redirect('admin_wiki.php');
   }
