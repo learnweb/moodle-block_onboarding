@@ -42,6 +42,9 @@ $CFG->langcache = false;
 $CFG->langstringcache = false;
 $CFG->directorypermissions = 02777;
 
+$CFG->phpunit_prefix = 'phpu_';
+$CFG->phpunit_dataroot = 'phpunitdataroot';
+
 require_once(__DIR__ . '/lib/setup.php');
 
 // WWU Theme
