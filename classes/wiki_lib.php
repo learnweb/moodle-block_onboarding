@@ -19,6 +19,7 @@ namespace block_onboarding;
 defined('MOODLE_INTERNAL') || die();
 
 class wiki_lib {
+
     public static function add_category($category){
         global $DB;
         $initposition = $DB->count_records('block_onb_w_categories') + 1;
