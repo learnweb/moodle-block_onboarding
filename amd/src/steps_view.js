@@ -38,6 +38,11 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
             args: {}
         }]);
         promises[0].done(function(response) {
+            if(response.completed == 1){
+                $('.step-completed').css('visibility', 'visible');
+            } else{
+                $('.step-completed').css('visibility', 'hidden');
+            }
             if(response.achievement == 1){
                 $('.step-title').text('Achievement! ' + response.name);
                 confetti_toogle = true;
@@ -45,13 +50,6 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
             } else {
                 $('.step-title').text('Step ' + response.position + ': ' + response.name);
                 confetti_toogle = false;
-            }
-            if(response.achievement == 1){
-                $('.steps-container').css('background-color', '');
-                $('.step-title').text('Achievement! ' + response.name);
-            } else {
-                $('.steps-container').css('background-color', '');
-                $('.step-title').text('Step ' + response.position + ': ' + response.name);
             }
             $('.step_description').text(response.description);
             $('.progress-bar-value').text(response.progress + '%');
@@ -115,7 +113,7 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
 
         let context = achievement_canvas.getContext('2d');
         let particle = [];
-        let number_of_particles = 50;
+        let number_of_particles = 45;
         let lastUpdateTime = Date.now();
 
         function randomColor() {

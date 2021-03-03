@@ -167,6 +167,7 @@ class step_view_data_functions {
         $returnstep['position'] = 0;
         $returnstep['achievement'] = 0;
         $returnstep['progress'] = 0;
+        $returnstep['completed'] = 0;
 
         return $returnstep;
     }
