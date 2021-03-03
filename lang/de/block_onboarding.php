@@ -21,10 +21,11 @@ $string['onboarding:addinstance'] = 'Einen neuen Onboarding Block hinzufügen';
 $string['error'] = "Error";
 $string['insufficient_permissions'] = 'Sorry, ungenügende Berechtigungen';
 $string['settings'] = 'Einstellungen';
+$string['back'] = 'Zurück';
 $string['backtohome'] = 'Zurück zu Home';
 $string['backtooverview'] = 'Zurück zum Überblick';
 $string['overview'] = 'Überblick';
-$string['admin'] = 'Admin';
+$string['admin'] = 'Administration';
 $string['settings'] = 'Einstellungen';
 
 // Guide
@@ -33,10 +34,13 @@ $string['guide_summary'] = 'Im Guide findest du nützliche organisatorische Info
 
 // -> Wiki
 $string['wiki'] = 'Wiki';
+$string['wiki_admin'] = 'Wiki Administration';
+$string['manage_wiki'] = 'Wiki bearbeiten';
+
 $string['new_category'] = 'Neue Kategorie';
 $string['edit_category'] = 'Kategorie bearbeiten';
 $string['category_name'] = 'Name';
-$string['category_name_req'] = 'Bitte gib einen Namen für die Kategorie an';
+$string['category_name_req'] = 'Bitte gib eine Bezeichnung für die Kategorie an.';
 $string['default_category_name_wiki'] = 'Beispiel Kategorie';
 $string['category_number'] = 'Kategorie Position';
 $string['default_category_name'] = 'Beispiel Kategorie';
@@ -52,15 +56,22 @@ $string['link_description'] = 'Beschreibung';
 $string['link_description_req'] = 'Bitte gib eine Beschreibung für den Link an';
 $string['link_description_help'] = 'Lass mich dir helfen';
 $string['link_number'] = 'Link Position';
+$string['default_link_name'] = 'Beispiel Link';
 $string['default_link_name'] = 'Beispiel Name';
 $string['default_link_url'] = 'https://www.example.com';
 $string['default_link_description'] = 'Beispiel Beschreibung';
 
-// -> Steps.
+// -> Steps
 $string['steps'] = 'Erste Schritte';
+$string['steps_admin'] = 'Steps Administration';
+$string['manage_steps'] = 'Erste Schritte bearbeiten';
+
+$string['button_done'] = 'Erledigt!';
+$string['button_back'] = 'Zurück';
+
 $string['completed'] = 'Abgeschlossen';
-$string['edit_step'] = 'Schritt bearbeiten';
 $string['new_step'] = 'Neuer Schritt';
+$string['edit_step'] = 'Schritt bearbeiten';
 $string['step_name'] = 'Name';
 $string['step_name_req'] = 'Bitte gib einen Namen für den Schritt an';
 $string['step_description'] = 'Beschreibung';
@@ -68,9 +79,13 @@ $string['step_description_req'] = 'Bitte gib eine Beschreibung für den Schritt 
 $string['default_step_name'] = 'Bitte gib einen Namen für den Schritt ein';
 $string['default_step_description'] = 'Beispiel Beschreibung';
 $string['step_achievement'] = 'Meilenstein';
+$string['step_achievement_js'] = 'Meilenstein! ';
 $string['step_step'] = 'Schritt';
+$string['step_step_js'] = 'Schritt ';
 $string['step_number'] = 'Schritt Position';
 $string['no_steps_available'] = "Im Moment stehen keine Schritte zur Verfügung";
+$string['error_nosteps_title'] = "KEINE SCHRITTE ZUM ANZEIGEN VORHANDEN!";
+$string['error_nosteps_message'] = "Aktuell sind keine Ersten Schritte in der Datenbank hinterlegt.";
 
 // Experiences.
 $string['experience'] = 'Experience';

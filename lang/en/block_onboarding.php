@@ -18,11 +18,15 @@
 $string['pluginname'] = 'Onboarding';
 $string['onboarding'] = 'Onboarding';
 $string['onboarding:addinstance'] = 'Add a new Onboarding block';
-$string['error'] = "Error";
+
+$string['error'] = 'Error';
 $string['insufficient_permissions'] = 'Sorry, insufficient permissions';
 $string['settings'] = 'Settings';
+$string['back'] = 'Back';
 $string['backtohome'] = 'Back to Home';
 $string['backtooverview'] = 'Back to Overview';
+$string['overview'] = 'Overview';
+$string['admin'] = 'Administration';
 $string['settings'] = 'Settings';
 
 // Guide
@@ -31,8 +35,9 @@ $string['guide_summary'] = 'In our Guide you can find useful Links along with a 
 
 // -> Wiki
 $string['wiki'] = 'Wiki';
-$string['overview'] = 'Overview';
-$string['admin'] = 'Admin';
+$string['wiki_admin'] = 'Wiki Administration';
+$string['manage_wiki'] = 'Manage Wiki';
+
 $string['new_category'] = 'New Category';
 $string['edit_category'] = 'Edit Category';
 $string['category_name'] = 'Name';
@@ -40,8 +45,6 @@ $string['category_name_req'] = 'Please enter a name for the category.';
 $string['default_category_name_wiki'] = 'Default Category';
 $string['category_number'] = 'Category Position';
 $string['default_category_name'] = 'Sample Category';
-$string['experience_category_missing'] = 'Please enter a name for a category.';
-$string['experience_questions_missing'] = 'Give a few suggestions...';
 $string['new_link'] = 'New Link';
 $string['edit_link'] = 'Edit Link';
 $string['link_name'] = 'Name';
@@ -59,9 +62,13 @@ $string['default_link_url'] = 'http://www.example.com';
 $string['default_link_description'] = 'Sample Description';
 
 // -> Steps
-$string['overview'] = 'Overview';
-$string['admin'] = 'Admin';
-$string['steps'] = 'Steps';
+$string['steps'] = 'First Steps';
+$string['steps_admin'] = 'Steps Administration';
+$string['manage_steps'] = 'Manage Steps';
+
+$string['button_done'] = 'Done';
+$string['button_back'] = 'Back';
+
 $string['completed'] = 'Completed';
 $string['new_step'] = 'New Step';
 $string['edit_step'] = 'Edit Step';
@@ -72,9 +79,13 @@ $string['step_description_req'] = 'Please provide a description for the step.';
 $string['default_step_name'] = 'Please enter a step name.';
 $string['default_step_description'] = 'Sample Description';
 $string['step_achievement'] = 'Achievement';
+$string['step_achievement_js'] = 'Achievement! ';
 $string['step_step'] = 'Step';
+$string['step_step_js'] = 'Step ';
 $string['step_number'] = 'Step Position';
 $string['no_steps_available'] = "There are no steps to display at the moment";
+$string['error_nosteps_title'] = "NO STEPS TO DISPLAY!";
+$string['error_nosteps_message'] = "There are currently no steps saved in the database.";
 
 // Experiences.
 $string['experience'] = 'Experience';
