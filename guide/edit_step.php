@@ -84,7 +84,7 @@ if (has_capability('block/onboarding:s_manage_steps', $context)) {
         // wenn ein bestehender Schritt editiert wird, aktualisiere den Datensatz
         if ($fromform->id != -1) {
             $step->id = $fromform->id;
-            block_onboarding\steps_lib::update_step($step);
+            block_onboarding\steps_lib::update_step($step, $fromform->position);
 
             // andernfalls wird ein neuer Schritt bzw. Datensatz hinzugefügt, dessen position aus der Form übernommen wird
         } else {

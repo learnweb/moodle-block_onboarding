@@ -31,7 +31,7 @@ class wiki_lib {
         $category->id = $DB->insert_record('block_onb_w_categories', $category);
 
         if ($initposition != $insertposition) {
-            \block_onboarding\wiki_admin_functions::increment_category_positions($insertposition, $initposition);
+            self::increment_category_positions($insertposition, $initposition);
             $category->position = $insertposition;
             $category->timemodified = time();
             $DB->update_record('block_onb_w_categories', $category);
@@ -45,9 +45,9 @@ class wiki_lib {
         $insertposition = $category->position;
         
         if ($insertposition > $curposition) {
-            \block_onboarding\wiki_admin_functions::decrement_category_positions($insertposition, $curposition);
+            self::decrement_category_positions($insertposition, $curposition);
         } else if ($insertposition < $curposition) {
-            \block_onboarding\wiki_admin_functions::increment_category_positions($insertposition, $curposition);
+            self::increment_category_positions($insertposition, $curposition);
         }
         $category->timemodified = time();
         $DB->update_record('block_onb_w_categories', $category);
@@ -58,7 +58,7 @@ class wiki_lib {
         $paramcategory = $DB->get_record('block_onb_w_categories', array('id'=>$category_id));
         $curposition = $paramcategory->position;
         $categorycount = $DB->count_records('block_onb_w_categories');
-        \block_onboarding\wiki_admin_functions::decrement_category_positions($categorycount, $curposition);
+        self::decrement_category_positions($categorycount, $curposition);
         $DB->delete_records('block_onb_w_categories', array('id' => $category_id));
 
         // deleting all links within the category
@@ -75,7 +75,7 @@ class wiki_lib {
         $link->id = $DB->insert_record('block_onb_w_links', $link);
 
         if ($initposition != $insertposition) {
-            \block_onboarding\wiki_admin_functions::increment_link_positions($insertposition, $initposition);
+            self::increment_link_positions($insertposition, $initposition);
             $link->position = $insertposition;
             $link->timemodified = time();
             $DB->update_record('block_onb_w_links', $link);
@@ -88,9 +88,9 @@ class wiki_lib {
         $curposition = $paramlink->position;
         $insertposition = $link->position;
         if ($insertposition > $curposition) {
-          \block_onboarding\wiki_admin_functions::decrement_link_positions($insertposition, $curposition);
+            self::decrement_link_positions($insertposition, $curposition);
         } else if ($insertposition < $curposition) {
-          \block_onboarding\wiki_admin_functions::increment_link_positions($insertposition, $curposition);
+            self::increment_link_positions($insertposition, $curposition);
         }
         $link->timemodified = time();
         $DB->update_record('block_onb_w_links', $link);
@@ -101,7 +101,48 @@ class wiki_lib {
         $paramlink = $DB->get_record('block_onb_w_links', array('id'=>$link_id));
         $curposition = $paramlink->position;
         $linkcount = $DB->count_records('block_onb_w_links');
-        \block_onboarding\wiki_admin_functions::decrement_link_positions($linkcount, $curposition);
+        self::decrement_link_positions($linkcount, $curposition);
         $DB->delete_records('block_onb_w_links', array('id' => $link_id));
+    }
+
+
+    public static function increment_category_positions($insert, $cur)
+    {
+        global $DB;
+
+        $sql = 'UPDATE {block_onb_w_categories}
+            SET position = position +1
+            WHERE position >= :insert_pos and position < :cur_pos';
+        $DB->execute($sql, ['cur_pos' => $cur, 'insert_pos' => $insert]);
+    }
+
+    public static function decrement_category_positions($insert, $cur)
+    {
+        global $DB;
+
+        $sql = 'UPDATE {block_onb_w_categories}
+                SET position = position -1
+                WHERE position > :cur_pos and position <= :insert_pos';
+        $DB->execute($sql, ['cur_pos' => $cur, 'insert_pos' => $insert]);
+    }
+
+    public static function increment_link_positions($insert, $cur)
+    {
+        global $DB;
+
+        $sql = 'UPDATE {block_onb_w_links}
+            SET position = position +1
+            WHERE position >= :insert_pos and position < :cur_pos';
+        $DB->execute($sql, ['cur_pos' => $cur, 'insert_pos' => $insert]);
+    }
+
+    public static function decrement_link_positions($insert, $cur)
+    {
+        global $DB;
+
+        $sql = 'UPDATE {block_onb_w_links}
+                SET position = position -1
+                WHERE position > :cur_pos and position <= :insert_pos';
+        $DB->execute($sql, ['cur_pos' => $cur, 'insert_pos' => $insert]);
     }
 }

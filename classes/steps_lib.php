@@ -32,14 +32,14 @@ class steps_lib {
 
         // wenn neuer Schritt nicht hinten eingefügt werden soll
         if ($initposition != $insertposition) {
-            \block_onboarding\step_admin_functions::increment_step_positions($insertposition, $initposition);
+            self::increment_step_positions($insertposition, $initposition);
             $step->position = $insertposition;
             $step->timemodified = time();
             $DB->update_record('block_onb_s_steps', $step);
         }
     }
 
-    public static function update_step($step){
+    public static function update_step($step, $fromformposition){
         global $DB;
 
         $paramstep = $DB->get_record('block_onb_s_steps', array('id' => $step->id));
@@ -49,21 +49,21 @@ class steps_lib {
         // Prüfen ob Änderung von anderen pos erforderlich ist
         // wenn gewünschte Einfügeposition weiter hinten als aktuelle Position ist
         if ($insertposition > $curposition) {
-            \block_onboarding\step_admin_functions::decrement_step_positions($insertposition, $curposition);
+            self::decrement_step_positions($insertposition, $curposition);
 
             // wenn gewünschte Einfügeposition weiter vorne als aktuelle Position ist
         } else if ($insertposition < $curposition) {
-            \block_onboarding\step_admin_functions::increment_step_positions($insertposition, $curposition);
+            self::increment_step_positions($insertposition, $curposition);
         }
         // andernfalls ist die Position gleich und es müssen keine anderen Schrittpositionen verändert werden
         
-        $step->position = $fromform->position + 1;
+        $step->position = $fromformposition + 1;
         $step->timemodified = time();
         $DB->update_record('block_onb_s_steps', $step);
     }
 
     public static function delete_step($stepid){
-        global $DB;
+        global $DB, $USER;
         $paramstep = $DB->get_record('block_onb_s_steps', array('id' => $stepid));
         $curposition = $paramstep->position;
         $stepcount = $DB->count_records('block_onb_s_steps');
@@ -85,5 +85,23 @@ class steps_lib {
             }
         }
         $DB->delete_records('block_onb_s_completed', array('stepid' => $stepid));
+    }
+
+    public static function increment_step_positions($insert, $cur) {
+        global $DB;
+
+        $sql = "UPDATE {block_onb_s_steps}
+                SET position = position +1
+                WHERE position >= :insert_pos and position < :cur_pos";
+        $DB->execute($sql, ['cur_pos' => $cur, 'insert_pos' => $insert]);
+    }
+
+    public static function decrement_step_positions($insert, $cur) {
+        global $DB;
+
+        $sql = "UPDATE {block_onb_s_steps}
+                SET position = position -1
+                WHERE position > :cur_pos and position <= :insert_pos";
+        $DB->execute($sql, ['cur_pos' => $cur, 'insert_pos' => $insert]);
     }
 }
