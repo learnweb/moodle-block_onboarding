@@ -33,7 +33,7 @@ if(has_capability('block/onboarding:w_manage_wiki', $context)){
   $PAGE->set_title(get_string('edit_category', 'block_onboarding'));
   $PAGE->set_heading(get_string('edit_category', 'block_onboarding'));
 
-  require_once('./../classes/forms/wiki_category_form.php');
+  require_once($CFG->dirroot . '/blocks/onboarding/classes/forms/wiki_category_form.php');
 
   $categoryid = optional_param('category_id', -1, PARAM_INT);
   $paramcategory = new stdClass;

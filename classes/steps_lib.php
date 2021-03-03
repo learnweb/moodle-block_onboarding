@@ -22,7 +22,7 @@ class steps_lib {
 
     public static function edit_step($fromform){
         // speichere Basis Daten aus der Form ausgenommen der position in dem Objekt step -> weitere Verarbeitung folgt
-        $step = new stdClass();
+        $step = new \stdClass();
         $step->name = $fromform->name;
         $step->description = $fromform->description;
         $step->achievement = isset($fromform->achievement) ? 1 : 0;
@@ -31,11 +31,11 @@ class steps_lib {
         // wenn ein bestehender Schritt editiert wird, aktualisiere den Datensatz
         if ($fromform->id != -1) {
             $step->id = $fromform->id;
-            \block_onboarding\steps_lib::update_step($step);
+            self::update_step($step, $fromform->position);
 
             // andernfalls wird ein neuer Schritt bzw. Datensatz hinzugefügt, dessen position aus der Form übernommen wird
         } else {
-            \block_onboarding\steps_lib::add_step($step);
+            self::add_step($step);
         }
     }
 

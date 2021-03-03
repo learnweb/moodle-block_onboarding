@@ -37,7 +37,7 @@ if (has_capability('block/onboarding:s_manage_steps', $context)) {
     $PAGE->set_title(get_string('edit_step', 'block_onboarding'));
     $PAGE->set_heading(get_string('edit_step', 'block_onboarding'));
 
-    require_once('./../classes/forms/steps_step_form.php');
+    require_once($CFG->dirroot . '/blocks/onboarding/classes/forms/steps_step_form.php');
     /*
      * optional_param speichert die übergebene URL-Variable step_id in step_id
      * (bspw. moodle/blocks/steps/edit_step.php?step_id=8)

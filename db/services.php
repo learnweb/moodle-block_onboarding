@@ -35,7 +35,6 @@ $functions = array(
         'description' => 'BESCHREIBUNG',
         'type'        => 'read',
         'ajax'        => true
-//        'capabilities' => '??????????????????????????????????' -> access.php (?)
     ),
     'block_onboarding_init_step' => array(
         'classname'   => 'block_onboarding_view_external',
@@ -44,7 +43,6 @@ $functions = array(
         'description' => 'BESCHREIBUNG',
         'type'        => 'read',
         'ajax'        => true
-//        'capabilities' => '????????????'
     ),
     'block_onboarding_back_step' => array(
         'classname'   => 'block_onboarding_view_external',
@@ -53,7 +51,6 @@ $functions = array(
         'description' => 'BESCHREIBUNG',
         'type'        => 'read',
         'ajax'        => true
-//        'capabilities' => '??????????????????????????????????' -> access.php (?)
     ),
     'block_onboarding_init_helpful' => array(
         'classname'   => 'block_onboarding_view_external',
@@ -62,7 +59,6 @@ $functions = array(
         'description' => 'BESCHREIBUNG',
         'type'        => 'read',
         'ajax'        => true
-//        'capabilities' => '??????????????????????????????????' -> access.php (?)
     ),
     'block_onboarding_click_helpful' => array(
         'classname'   => 'block_onboarding_view_external',
@@ -71,6 +67,5 @@ $functions = array(
         'description' => 'BESCHREIBUNG',
         'type'        => 'read',
         'ajax'        => true
-//        'capabilities' => '??????????????????????????????????' -> access.php (?)
     )
 );
