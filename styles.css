@@ -1,8 +1,12 @@
+.ul{
+    margin-bottom: 0 !important;
+}
+
 .btn-normal {
     background-color: #03A9F4;
     /* Green */
     border: none;
-    color: white;
+    color: #ffffff;
     padding: 7px 16px;
     text-align: center;
     text-decoration: none;
@@ -10,6 +14,9 @@
     font-size: 16px;
 }
 
+.title {
+    font-size: 1.8em;
+}
 
 /* Home */
 
@@ -58,6 +65,31 @@
     bottom: 0px;
 }
 
+/* Guide */
+
+.admin-title{
+    font-size: 1.8em;
+    padding-bottom: 8px;
+}
+
+.admin-content-title{
+    width: fit-content;
+    font-size: 1.3em;
+    color: #ffffff;
+    background-color: #006784;
+    border-radius: 8px;
+    padding: 7px 9px;
+}
+
+.admin-content-wrapper{
+    font-size: 1.1em;
+    margin-top: 6px;
+    margin-left: 4px;
+}
+
+.admin-edit-btn{
+    padding-left: 12px;
+}
 
 /* Wiki */
 
@@ -67,8 +99,30 @@
     align-items: center;
 }
 
-.wiki_title {
-    font-size: 1.5em;
+.wiki-cat-container{
+    width: calc(100% - 4px);
+    position: relative;
+    background-color: slategray;
+    border-radius: 5px;
+    margin: 5px 2px;
+    padding: 7px;
+}
+
+.wiki-cat-title-wrapper{
+    font-weight: bold;
+    font-size: 1.3em;
+    color: #ffffff;
+    background-color: #006784;
+    border-radius: 8px;
+    padding: 7px;
+}
+
+.wiki-cat-content-wrapper{
+    font-size: 1.1em;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin-top: 4px;
+    padding: 5px 0px 5px 3px;
 }
 
 .custom-tooltip {
@@ -79,8 +133,8 @@
 .custom-tooltip .custom-tooltiptext {
     visibility: hidden;
     width: 480px;
-    background-color: black;
-    color: #fff;
+    background-color: #000000;
+    color: #ffffff;
     padding: 5px 5px;
     border-radius: 6px;
     position: absolute;
@@ -94,35 +148,50 @@
 
 /* Steps */
 
+.steps-container {
+    width: 100%;
+    position: relative;
+    border-radius: 8px;
+    padding: 3px;
+    background-image: url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #ececec;
+}
+
 .steps-title-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.step_container {
-    width: 100%;
-    position: relative;
+.steps-content-wrapper {
+    background-color: rgba(128,128,128,0.8);
+    color: #ffffff;
+    margin: 3px;
+    padding: 7px;
+    border-radius: 6px;
 }
 
-.progress_bar {
+.progress-bar {
     position: relative;
-    width: 100%;
+    width: calc(100% - 6px);
     height: 30px;
-    background: lightgrey;
+    background-color: #868686;
+    margin: 3px;
     border-radius: 8px;
-    border: 3px solid black;
+    border: 3px solid #000000;
 }
 
-.progress_bar_fill {
+.progress-bar-fill {
     height: 100%;
     width: 0%;
-    border-radius: 8px;
-    background: limegreen;
+    border-radius: 5px;
+    background: #32cd32;
     transition: width 1.2s;
 }
 
-.progress_bar_value {
+.progress-bar-value {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -132,35 +201,34 @@
     font-weight: bold;
 }
 
-.step_title_wrapper {}
+.steps-button-wrapper {
+    margin-top: 6px;
+}
 
-.step_title {
+.step-title {
     font-size: 1.5em;
 }
 
-.step_completed {
-    color: white;
-    background-color: limegreen;
+.step-completed {
+    color: #ffffff;
+    background-color: #32cd32;
     padding: 0px 5px 0px 5px;
-    border: 2px solid black;
+    border: 2px solid #000000;
     border-radius: 5px;
     margin-left: 20px;
     visibility: hidden;
 }
 
-.next_btn {
-    background: #008196;
-    color: #ffffff;
+.next-btn {
+    outline: 0 !important;
 }
 
-.back_btn {
-    background: #008196;
-    color: #ffffff;
+.back-btn {
+    outline: 0 !important;
 }
 
-.skip_btn {
-    background: #008196;
-    color: #ffffff;
+.skip-btn {
+    outline: 0 !important;
 }
 
 #achievement-confetti {
@@ -242,9 +310,11 @@
     float: right;
 }
 
-.block-experiences-experience-helpful_btn {}
+.block-experiences-experience-helpful_btn {
+}
 
-.block-experiences-experience-popularity {}
+.block-experiences-experience-popularity {
+}
 
 .block-experiences-overview-experiences {
     height: 35vh;
