@@ -24,7 +24,7 @@ $context = context_system::instance();
 
 if(has_capability('block/onboarding:w_manage_wiki', $context)){
   $linkid = optional_param('link_id', -1, PARAM_INT);
-  block_onboarding\wiki_lib::delete_link($linkid);
+  \block_onboarding\wiki_lib::delete_link($linkid);
   redirect('admin_wiki.php');
 }else{
   $PAGE->set_context($context);

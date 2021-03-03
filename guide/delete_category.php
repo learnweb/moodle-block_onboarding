@@ -24,7 +24,7 @@ $context = context_system::instance();
 
 if(has_capability('block/onboarding:w_manage_wiki', $context)){
   $categoryid = optional_param('category_id', -1, PARAM_INT);
-  block_onboarding\wiki_lib::delete_category($categoryid);
+  \block_onboarding\wiki_lib::delete_category($categoryid);
   redirect('admin_wiki.php');
 }else{
   $PAGE->set_context($context);

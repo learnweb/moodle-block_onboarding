@@ -48,16 +48,7 @@ if(has_capability('block/onboarding:w_manage_wiki', $context)){
   		redirect('admin_wiki.php');
 
   } else if ($fromform = $mform->get_data()) {
-      $category = new stdClass();
-      $category->name = $fromform->name;
-      $category->position = $fromform->position + 1;
-
-      if($fromform->id != -1){
-        $category->id = $fromform->id;
-        block_onboarding\wiki_lib::update_category($category);
-      }else{
-        block_onboarding\wiki_lib::add_category($category);
-      }
+      \block_onboarding\wiki_lib::edit_category($fromform);
       redirect('admin_wiki.php');
   }
 

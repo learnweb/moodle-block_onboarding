@@ -33,8 +33,7 @@ if ($experience_id != -1) {
 if ($experience_id == -1 || $USER->id == $pexperience->user_id ||
     has_capability('block/onboarding:e_manage_experiences', \context_system::instance())) {
     // Delete report and all content written for the categories.
-    $DB->delete_records('block_onb_e_exps_cats', array('experience_id' => $experience_id));
-    $DB->delete_records('block_onb_e_exps', array('id' => $experience_id));
+    block_onboarding\experiences_lib::delete_experience($experience_id);
     redirect('overview.php');
 } else {
     $PAGE->set_context($context);

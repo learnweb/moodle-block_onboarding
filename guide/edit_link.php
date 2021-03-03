@@ -47,6 +47,7 @@ if (has_capability('block/onboarding:w_manage_wiki', $context)) {
   if ($mform->is_cancelled()) {
     redirect('admin_wiki.php');
   } else if ($fromform = $mform->get_data()) {
+<<<<<<< HEAD
     $link = new stdClass();
     $link->name = $fromform->name;
     $link->category_id = $fromform->category_id;
@@ -60,6 +61,9 @@ if (has_capability('block/onboarding:w_manage_wiki', $context)) {
     } else {
       \block_onboarding\wiki_lib::add_link($link);
     }
+=======
+    \block_onboarding\wiki_lib::edit_link($fromform);
+>>>>>>> 8ff0d7a0346192b6527fbec7dc990a6cd4a874ed
     redirect('admin_wiki.php');
   }
 

@@ -25,7 +25,7 @@ $context = context_system::instance();
 if (has_capability('block/onboarding:e_manage_experiences', $context)) {
     $course_id = optional_param('course_id', -1, PARAM_INT);
     // Deletion of the course from the Database.
-    $DB->delete_records('block_onb_e_courses', array('id' => $course_id));
+    block_onboarding\experiences_lib::delete_course($course_id);
     redirect('admin.php');
 } else {
     $PAGE->set_context($context);

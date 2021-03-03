@@ -20,6 +20,19 @@ defined('MOODLE_INTERNAL') || die();
 
 class wiki_lib {
 
+    public static function edit_category($fromform){
+        $category = new \stdClass();
+        $category->name = $fromform->name;
+        $category->position = $fromform->position + 1;
+
+        if($fromform->id != -1){
+            $category->id = $fromform->id;
+            self::update_category($category);
+        }else{
+            self::add_category($category);
+        }
+    }
+
     public static function add_category($category){
         global $DB;
         $initposition = $DB->count_records('block_onb_w_categories') + 1;
@@ -63,6 +76,22 @@ class wiki_lib {
 
         // deleting all links within the category
         $DB->delete_records('block_onb_w_links', array('category_id' => $category_id));
+    }
+
+    public static function edit_link($fromform){
+        $link = new \stdClass();
+        $link->name = $fromform->name;
+        $link->category_id = $fromform->category_id;
+        $link->url = $fromform->url;
+        $link->description = $fromform->description;
+        $link->position = $fromform->position + 1;
+
+        if ($fromform->id != -1) {
+        $link->id = $fromform->id;
+            \block_onboarding\wiki_lib::update_link($link);
+        } else {
+            \block_onboarding\wiki_lib::add_link($link);
+        }
     }
 
     public static function add_link($link){
