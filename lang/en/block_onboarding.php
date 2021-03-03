@@ -163,5 +163,7 @@ $string['newcategory'] = 'New Category';
 $string['notenoughdata'] = 'Not enough data to create an Experience Report';
 $string['selectcategories'] = 'Select Categories';
 
+$string['experience_admin'] = 'Experience Administration';
+
 
 

@@ -29,7 +29,7 @@ $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/overview.php'));
 $PAGE->set_title(get_string('experiences', 'block_onboarding'));
 $PAGE->set_heading(get_string('experiences', 'block_onboarding'));
-$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
+$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
 $PAGE->navbar->add(get_string('experiences', 'block_onboarding'));
 
 require_once('./../classes/forms/experiences_filter_form.php');

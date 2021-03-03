@@ -34,7 +34,7 @@ class experiences_experience_form extends moodleform {
         $mform->setType('user_id', PARAM_INT);
 
         // Experience Name Field.
-        $mform->addElement('text', 'name', get_string('experience_name', 'block_onboarding'));
+        $mform->addElement('textarea', 'name', get_string('experience_name', 'block_onboarding'), array('style="resize:none" wrap="virtual" rows="1" cols="60"'));
         $mform->addRule('name', get_string('experience_name_missing', 'block_onboarding'), 'required', null, 'server');
         $mform->addRule('name', 'Max Length is 30 characters', 'maxlength', 30, 'block_onboarding');
         $mform->setType('name', PARAM_TEXT);
@@ -111,7 +111,8 @@ class experiences_experience_form extends moodleform {
         }
 
         // Contact Field.
-        $mform->addElement('text', 'contact', get_string('experience_contact', 'block_onboarding'));
+        $mform->addElement('textarea', 'contact', get_string('experience_contact', 'block_onboarding'), array('style="resize:none" wrap="virtual" rows="1" cols="60"'));
+        $mform->addRule('contact', 'Max Length is 30 characters', 'maxlength', 30, 'block_onboarding');
         $mform->setType('contact', PARAM_TEXT);
         $mform->setDefault('contact', isset($experience->contact) ? $experience->contact : '');
         $mform->addHelpButton('contact', 'contactinformation', 'block_onboarding');

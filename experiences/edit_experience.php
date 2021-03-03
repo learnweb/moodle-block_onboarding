@@ -24,18 +24,25 @@ $context = context_system::instance();
 
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/edit_experience.php'));
-$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
-$PAGE->navbar->add(get_string('experiences', 'block_onboarding'));
+$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
+$PAGE->navbar->add(get_string('experiences', 'block_onboarding'), new moodle_url('overview.php'));
+$PAGE->navbar->add(get_string('edit_experience', 'block_onboarding'));
 
 $experience_id = optional_param('experience_id', -1, PARAM_INT);
 $pexperience = new stdClass;
 $pexperience->id = -1;
+$sql = "SELECT ec.id as id, e.id as exp_id, e.user_id as u_id FROM {block_onb_e_exps_cats} ec
+        INNER JOIN {block_onb_e_exps} e
+        ON ec.experience_id = e.id
+        WHERE e.user_id = {$USER->id}";
+$checkexperience = $DB->get_records_sql($sql);
 if ($experience_id != -1) {
     // Get the existing data from the Database.
     $pexperience = $DB->get_record('block_onb_e_exps',
         array('id' => $experience_id), $fields = '*', $strictness = IGNORE_MISSING);
-}
-
+} //elseif ($experience_id == -1 && empty($checkexperience) == false) {
+    //redirect('overview.php');
+//}
 $checkcourses = $DB->count_records('block_onb_e_courses');
 $checkcategories = $DB->count_records('block_onb_e_cats');
 
@@ -46,7 +53,7 @@ if ($checkcourses != 0 || $checkcategories != 0) {
         $PAGE->set_title(get_string('edit_experience', 'block_onboarding'));
         $PAGE->set_heading(get_string('edit_experience', 'block_onboarding'));
 
-        require_once('./../classes/forms/experiences_experience_form.php');
+        require_once($CFG->dirroot . '/blocks/onboarding/classes/forms/experiences_experience_form.php');
 
         $mform = new experiences_experience_form(null, array('experience' => $pexperience));
 
@@ -81,7 +88,8 @@ if ($checkcourses != 0 || $checkcategories != 0) {
 
             foreach ($categories as $category) {
                 $formproperty_category_checkbox = 'category_' . $category->id;
-                if (isset($fromform->$formproperty_category_checkbox)) {
+                $formproperty_category_textarea = 'experience_category_' . $category->id . '_description';
+                if (isset($fromform->$formproperty_category_checkbox) && empty($fromform->$formproperty_category_textarea) == false) {
                     $experience_category = new stdClass;
                     $experience_category->experience_id = $experience->id;
                     $experience_category->category_id = $category->id;
@@ -92,6 +100,9 @@ if ($checkcourses != 0 || $checkcategories != 0) {
                     $experience_category->timecreated = time();
                     $experience_category->timemodified = time();
                     $experiences_categories[] = $experience_category;
+                } else {
+                    $DB->delete_records('block_onb_e_exps_cats',
+                        array('experience_id' => $experience->id, 'category_id' => $category->id));
                 }
             }
             $DB->insert_records('block_onb_e_exps_cats', $experiences_categories);
