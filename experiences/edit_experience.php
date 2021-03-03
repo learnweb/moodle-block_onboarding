@@ -92,11 +92,13 @@ if ($checkcourses != 0 || $checkcategories != 0) {
                     $experience_category->timecreated = time();
                     $experience_category->timemodified = time();
                     $experiences_categories[] = $experience_category;
+                }else{
+                    echo "hallo";
                 }
             }
             $DB->insert_records('block_onb_e_exps_cats', $experiences_categories);
 
-            redirect('overview.php');
+            //redirect('overview.php');
         }
 
         echo $OUTPUT->header();
