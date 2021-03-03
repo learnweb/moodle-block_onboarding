@@ -18,25 +18,56 @@ namespace block_onboarding;
 
 defined('MOODLE_INTERNAL') || die();
 
-class steps_lib {
-    public static function add_experience($step){
+class experiences_lib {
+    public static function edit_experience($fromform){
         global $DB;
         
-        $initposition = $DB->count_records('block_onb_s_steps') + 1;
-        $insertposition = $step->position;
+        // Data written in the Database.
+        $experience = new \stdClass();
+        $experience->name = $fromform->name;
+        $experience->contact = $fromform->contact;
+        $experience->user_id = $fromform->user_id;
+        $experience->course_id = $fromform->course_id;
+        $experience->timecreated = time();
+        $experience->timemodified = time();
 
-        $step->position = $initposition;
-        $step->timecreated = time();
-        $step->timemodified = time();
-        $step->id = $DB->insert_record('block_onb_s_steps', $step);
-
-        // wenn neuer Schritt nicht hinten eingefügt werden soll
-        if ($initposition != $insertposition) {
-            \block_onboarding\step_admin_functions::increment_step_positions($insertposition, $initposition);
-            $step->position = $insertposition;
-            $step->timemodified = time();
-            $DB->update_record('block_onb_s_steps', $step);
+        if (isset($fromform->aboutme)) {
+            $experience->aboutme = $fromform->aboutme_text;
+        } else {
+            $experience->aboutme = null;
         }
+
+        if ($fromform->id != -1) {
+            $experience->id = $fromform->id;
+            $DB->update_record('block_onb_e_exps', $experience, $bulk = false);
+        } else {
+            $experience->id = $DB->insert_record('block_onb_e_exps', $experience);
+        }
+
+        $DB->delete_records('block_onb_e_exps_cats', array('experience_id' => $experience->id));
+        $categories = $DB->get_records('block_onb_e_cats');
+        $experiences_categories = array();
+
+        foreach ($categories as $category) {
+            $formproperty_category_checkbox = 'category_' . $category->id;
+            $formproperty_category_textarea = 'experience_category_' . $category->id . '_description';
+            if (isset($fromform->$formproperty_category_checkbox) && empty($fromform->$formproperty_category_textarea) == false) {
+                $experience_category = new \stdClass;
+                $experience_category->experience_id = $experience->id;
+                $experience_category->category_id = $category->id;
+                $formproperty_category_textarea = 'experience_category_' . $category->id . '_description';
+                $experience_category->description = $fromform->$formproperty_category_textarea;
+                $formproperty_category_takeaway = 'experience_category_' . $category->id . '_takeaway';
+                $experience_category->takeaway = $fromform->$formproperty_category_takeaway;
+                $experience_category->timecreated = time();
+                $experience_category->timemodified = time();
+                $experiences_categories[] = $experience_category;
+            } else {
+                $DB->delete_records('block_onb_e_exps_cats',
+                    array('experience_id' => $experience->id, 'category_id' => $category->id));
+            }
+        }
+        $DB->insert_records('block_onb_e_exps_cats', $experiences_categories);
     }
 
     public static function update_experience($step){
@@ -62,28 +93,64 @@ class steps_lib {
         $DB->update_record('block_onb_s_steps', $step);
     }
 
-    public static function delete_experience($stepid){
+    public static function delete_experience($experience_id){
         global $DB;
-        $paramstep = $DB->get_record('block_onb_s_steps', array('id' => $stepid));
-        $curposition = $paramstep->position;
-        $stepcount = $DB->count_records('block_onb_s_steps');
+        $DB->delete_records('block_onb_e_exps_cats', array('experience_id' => $experience_id));
+        $DB->delete_records('block_onb_e_exps', array('id' => $experience_id));
+    }
 
-        // deleting step and adjusting other step positions accordingly
-        \block_onboarding\step_admin_functions::decrement_step_positions($stepcount, $curposition);
-        $DB->delete_records('block_onb_s_steps', array('id' => $stepid));
+    public static function get_category_by_id($category_id){
+        global $DB;
+        return $DB->get_record('block_onb_e_cats', array('id'=>$category_id), $fields='*', $strictness=IGNORE_MISSING);
+    }
 
-        // deleting all user progress for deleted step
-        $step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id, 'stepid' => $stepid));
-        if($step != false){
-            $paramstep = $DB->get_record('block_onb_s_steps', array('position' => 1));
-            // gucken, ob überhaupt nich ein Schritt exisitiert
-            if($paramstep != false){
-                $step->stepid = $paramstep->id;
-                $DB->update_record('block_onb_s_current', $step);
-            }else{
-                $DB->delete_records('block_onb_s_current', array('stepid' => $stepid));
-            }
-        }
-        $DB->delete_records('block_onb_s_completed', array('stepid' => $stepid));
+    public static function add_category($category){
+        global $DB;
+        $DB->insert_record('block_onb_e_cats', $category);
+    }
+
+    public static function update_category($category){
+        global $DB;
+        $DB->update_record('block_onb_e_cats', $category, $bulk = false);
+    }
+
+    public static function delete_category($category_id){
+        global $DB;
+        // Deletion of the category and all content written for it.
+        $DB->delete_records('block_onb_e_exps_cats', array('category_id' => $category_id));
+        $DB->delete_records('block_onb_e_cats', array('id' => $category_id));
+    }
+
+    public static function add_course($course){
+        global $DB;
+        $DB->insert_record('block_onb_e_courses', $course);
+    }
+
+    public static function update_course($course){
+        global $DB;
+        $DB->update_record('block_onb_e_courses', $course, $bulk = false);
+    }
+
+    public static function delete_course($course_id){
+        global $DB;
+        $DB->delete_records('block_onb_e_courses', array('id' => $course_id));
+    }
+
+    public static function get_course_by_id($course_id){
+        global $DB;
+        return $DB->get_record('block_onb_e_courses', array('id' => $course_id), $fields = '*',
+        $strictness = IGNORE_MISSING);
+    }
+
+    public static function add_report($fromform){
+        // Data written in the Database.
+        $report = new stdClass();
+        $report->experience_id = $fromform->experience_id;
+        $report->user_id = $fromform->user_id;
+        $report->type = $fromform->type;
+        $report->description = $fromform->description;
+        $report->timecreated = time();
+
+        $report->id = $DB->insert_record('block_onb_e_report', $report);
     }
 }

@@ -38,8 +38,7 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
     $pcourse->id = -1;
     if ($course_id != -1) {
         // Get the existing data from the Database.
-        $pcourse = $DB->get_record('block_onb_e_courses', array('id' => $course_id), $fields = '*',
-            $strictness = IGNORE_MISSING);
+        $pcourse = block_onboarding\experiences_lib::get_course_by_id($course_id);
     }
     $mform = new experiences_course_form(null, array('course' => $pcourse));
 
@@ -54,9 +53,9 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
 
         if ($fromform->id != -1) {
             $course->id = $fromform->id;
-            $DB->update_record('block_onb_e_courses', $course, $bulk = false);
+            block_onboarding\experiences_lib::update_course($course);
         } else {
-            $course->id = $DB->insert_record('block_onb_e_courses', $course);
+            block_onboarding\experiences_lib::add_course($course);
         }
         redirect('admin.php');
     }

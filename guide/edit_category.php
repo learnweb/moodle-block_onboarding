@@ -58,6 +58,7 @@ if(has_capability('block/onboarding:w_manage_wiki', $context)){
       }else{
         block_onboarding\wiki_lib::add_category($category);
       }
+
       redirect('admin_wiki.php');
   }
 

@@ -38,7 +38,7 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
     $pCategory->id = -1;
     if ($category_id != -1) {
         // Get the existing data from the Database.
-        $pCategory = $DB->get_record('block_onb_e_cats', array('id'=>$category_id), $fields='*', $strictness=IGNORE_MISSING);
+        $pCategory = block_onboarding\experiences_lib::get_category_by_id($category_id);
     }
     $mform = new experiences_category_form(null, array('category' => $pCategory));
 
@@ -54,9 +54,9 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
 
         if ($fromform->id != -1) {
             $category->id = $fromform->id;
-            $DB->update_record('block_onb_e_cats', $category, $bulk = false);
+            block_onboarding\experiences_lib::update_category($category);
         } else {
-            $category->id = $DB->insert_record('block_onb_e_cats', $category);
+            block_onboarding\experiences_lib::add_category($category);
         }
         redirect('admin.php');
     }

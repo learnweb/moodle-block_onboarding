@@ -39,16 +39,7 @@ $mform = new experiences_report_form(null, array('experience_id' => $experience_
 if ($mform->is_cancelled()) {
     redirect('experience.php?experience_id=' . $experience_id);
 } else if ($fromform = $mform->get_data()) {
-    // Data written in the Database.
-    $report = new stdClass();
-    $report->experience_id = $fromform->experience_id;
-    $report->user_id = $fromform->user_id;
-    $report->type = $fromform->type;
-    $report->description = $fromform->description;
-    $report->timecreated = time();
-
-    $report->id = $DB->insert_record('block_onb_e_report', $report);
-
+    block_onboarding\experiences_lib::add_report($fromform);
     redirect('experience.php?experience_id=' . $experience_id);
 }
 

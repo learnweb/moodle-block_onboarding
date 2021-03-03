@@ -60,54 +60,8 @@ if ($checkcourses != 0 || $checkcategories != 0) {
         if ($mform->is_cancelled()) {
             redirect('overview.php');
         } else if ($fromform = $mform->get_data()) {
-            // Data written in the Database.
-            $experience = new stdClass();
-            $experience->name = $fromform->name;
-            $experience->contact = $fromform->contact;
-            $experience->user_id = $fromform->user_id;
-            $experience->course_id = $fromform->course_id;
-            $experience->timecreated = time();
-            $experience->timemodified = time();
-
-            if (isset($fromform->aboutme)) {
-                $experience->aboutme = $fromform->aboutme_text;
-            } else {
-                $experience->aboutme = null;
-            }
-
-            if ($fromform->id != -1) {
-                $experience->id = $fromform->id;
-                $DB->update_record('block_onb_e_exps', $experience, $bulk = false);
-            } else {
-                $experience->id = $DB->insert_record('block_onb_e_exps', $experience);
-            }
-
-            $DB->delete_records('block_onb_e_exps_cats', array('experience_id' => $experience->id));
-            $categories = $DB->get_records('block_onb_e_cats');
-            $experiences_categories = array();
-
-            foreach ($categories as $category) {
-                $formproperty_category_checkbox = 'category_' . $category->id;
-                $formproperty_category_textarea = 'experience_category_' . $category->id . '_description';
-                if (isset($fromform->$formproperty_category_checkbox) && empty($fromform->$formproperty_category_textarea) == false) {
-                    $experience_category = new stdClass;
-                    $experience_category->experience_id = $experience->id;
-                    $experience_category->category_id = $category->id;
-                    $formproperty_category_textarea = 'experience_category_' . $category->id . '_description';
-                    $experience_category->description = $fromform->$formproperty_category_textarea;
-                    $formproperty_category_takeaway = 'experience_category_' . $category->id . '_takeaway';
-                    $experience_category->takeaway = $fromform->$formproperty_category_takeaway;
-                    $experience_category->timecreated = time();
-                    $experience_category->timemodified = time();
-                    $experiences_categories[] = $experience_category;
-                } else {
-                    $DB->delete_records('block_onb_e_exps_cats',
-                        array('experience_id' => $experience->id, 'category_id' => $category->id));
-                }
-            }
-            $DB->insert_records('block_onb_e_exps_cats', $experiences_categories);
-
-            //redirect('overview.php');
+            block_onboarding\experiences_lib::edit_experience($fromform);
+            redirect('overview.php');
         }
 
         echo $OUTPUT->header();
