@@ -19,7 +19,7 @@ namespace block_onboarding;
 defined('MOODLE_INTERNAL') || die();
 
 class wiki_lib {
-    public function add_category($category){
+    public static function add_category($category){
         global $DB;
         $initposition = $DB->count_records('block_onb_w_categories') + 1;
         $insertposition = $category->position;
@@ -37,7 +37,7 @@ class wiki_lib {
         }
     }
 
-    public function update_category($category){
+    public static function update_category($category){
         global $DB;
         $paramcategory = $DB->get_record('block_onb_w_categories', array('id'=>$category->id));
         $curposition = $paramcategory->position;
@@ -52,11 +52,19 @@ class wiki_lib {
         $DB->update_record('block_onb_w_categories', $category);
     }
 
-    public function delete_category($category){
+    public static function delete_category($category_id){
+        global $DB;
+        $paramcategory = $DB->get_record('block_onb_w_categories', array('id'=>$category_id));
+        $curposition = $paramcategory->position;
+        $categorycount = $DB->count_records('block_onb_w_categories');
+        \block_onboarding\wiki_admin_functions::decrement_category_positions($categorycount, $curposition);
+        $DB->delete_records('block_onb_w_categories', array('id' => $category_id));
 
+        // deleting all links within the category
+        $DB->delete_records('block_onb_w_links', array('category_id' => $category_id));
     }
 
-    public function add_link($link){
+    public static function add_link($link){
         global $DB;
         $initposition = $DB->count_records('block_onb_w_links') + 1;
         $insertposition = $link->position;
@@ -73,7 +81,7 @@ class wiki_lib {
         }
     }
 
-    public function update_link($link){
+    public static function update_link($link){
         global $DB;
         $paramlink = $DB->get_record('block_onb_w_links', array('id' => $link->id));
         $curposition = $paramlink->position;
@@ -87,7 +95,12 @@ class wiki_lib {
         $DB->update_record('block_onb_w_links', $link);
     }
 
-    public function delete_link($link){
-
+    public static function delete_link($link_id){
+        global $DB;
+        $paramlink = $DB->get_record('block_onb_w_links', array('id'=>$link_id));
+        $curposition = $paramlink->position;
+        $linkcount = $DB->count_records('block_onb_w_links');
+        \block_onboarding\wiki_admin_functions::decrement_link_positions($linkcount, $curposition);
+        $DB->delete_records('block_onb_w_links', array('id' => $link_id));
     }
 }

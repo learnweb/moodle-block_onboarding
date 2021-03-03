@@ -54,11 +54,9 @@ if(has_capability('block/onboarding:w_manage_wiki', $context)){
 
       if($fromform->id != -1){
         $category->id = $fromform->id;
-        $wiki_lib = new block_onboarding\wiki_lib();
-        $wiki_lib->update_category($category);
+        block_onboarding\wiki_lib::update_category($category);
       }else{
-        $wiki_lib = new block_onboarding\wiki_lib();
-        $wiki_lib->add_category($category);
+        block_onboarding\wiki_lib::add_category($category);
       }
       redirect('admin_wiki.php');
   }

@@ -56,11 +56,9 @@ if (has_capability('block/onboarding:w_manage_wiki', $context)) {
 
     if ($fromform->id != -1) {
       $link->id = $fromform->id;
-      $wiki_lib = new block_onboarding\wiki_lib();
-      $wiki_lib->update_link($link);
+      block_onboarding\wiki_lib::update_link($link);
     } else {
-      $wiki_lib = new block_onboarding\wiki_lib();
-      $wiki_lib->add_link($link);
+      block_onboarding\wiki_lib::add_link($link);
     }
     redirect('admin_wiki.php');
   }
