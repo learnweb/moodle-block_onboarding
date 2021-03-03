@@ -46,15 +46,6 @@ $functions = array(
         'ajax'        => true
 //        'capabilities' => '????????????'
     ),
-    'block_onboarding_skip_step' => array(
-        'classname'   => 'block_onboarding_view_external',
-        'methodname'  => 'skip_step',
-        'classpath'   => 'blocks/onboarding/externallib.php',
-        'description' => 'BESCHREIBUNG',
-        'type'        => 'read',
-        'ajax'        => true
-//        'capabilities' => '??????????????????????????????????' -> access.php (?)
-    ),
     'block_onboarding_back_step' => array(
         'classname'   => 'block_onboarding_view_external',
         'methodname'  => 'back_step',

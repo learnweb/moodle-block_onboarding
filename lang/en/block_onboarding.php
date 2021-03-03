@@ -84,6 +84,8 @@ $string['step_step'] = 'Step';
 $string['step_step_js'] = 'Step ';
 $string['step_number'] = 'Step Position';
 $string['no_steps_available'] = "There are no steps to display at the moment";
+$string['error_nosteps_title'] = "NO STEPS TO DISPLAY!";
+$string['error_nosteps_message'] = "There are currently no steps saved in the database.";
 
 // Experiences.
 $string['overview'] = 'Overview';

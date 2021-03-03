@@ -84,6 +84,8 @@ $string['step_step'] = 'Schritt';
 $string['step_step_js'] = 'Schritt ';
 $string['step_number'] = 'Schritt Position';
 $string['no_steps_available'] = "Im Moment stehen keine Schritte zur Verfügung";
+$string['error_nosteps_title'] = "KEINE SCHRITTE ZUM ANZEIGEN VORHANDEN!";
+$string['error_nosteps_message'] = "Aktuell sind keine Ersten Schritte in der Datenbank hinterlegt.";
 
 // Experiences.
 $string['experience'] = 'Experience';

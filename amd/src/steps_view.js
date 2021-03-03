@@ -36,7 +36,6 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
         });
     };
 
-
     $('.next-btn').on('click', function () {
         var promises = ajax.call([{
             methodname: 'block_onboarding_next_step',
@@ -61,31 +60,6 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
             $('.progress-bar-fill').css('width', (response.progress + '%'));
         }).fail(notification.exception);
     })
-
-
-    $('.skip-btn').on('click', function () {
-        var promises = ajax.call([{
-            methodname: 'block_onboarding_skip_step',
-            args: {}
-        }]);
-        promises[0].done(function (response) {
-            if (response.completed == 1) {
-                $('.step-completed').css('visibility', 'visible');
-            } else {
-                $('.step-completed').css('visibility', 'hidden');
-            }
-            if (response.achievement == 1) {
-                $('.step-title').text('Achievement! ' + response.name);
-                confetti_toogle = true;
-                confetti();
-            } else {
-                $('.step-title').text('Step ' + response.position + ': ' + response.name);
-                confetti_toogle = false;
-            }
-            $('.step_description').text(response.description);
-        }).fail(notification.exception);
-    })
-
 
     $('.back-btn').on('click', function () {
         var promises = ajax.call([{
