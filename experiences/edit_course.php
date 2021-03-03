@@ -47,18 +47,7 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
     if ($mform->is_cancelled()) {
         redirect('admin.php');
     } else if ($fromform = $mform->get_data()) {
-        // Data written in the Database.
-        $course = new stdClass();
-        $course->name = $fromform->name;
-        $course->timecreated = time();
-        $course->timemodified = time();
-
-        if ($fromform->id != -1) {
-            $course->id = $fromform->id;
-            block_onboarding\experiences_lib::update_course($course);
-        } else {
-            block_onboarding\experiences_lib::add_course($course);
-        }
+        \block_onboarding\experiences_lib::edit_course($fromform);
         redirect('admin.php');
     }
 

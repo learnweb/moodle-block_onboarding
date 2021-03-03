@@ -40,26 +40,14 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
     $pCategory->id = -1;
     if ($category_id != -1) {
         // Get the existing data from the Database.
-        $pCategory = block_onboarding\experiences_lib::get_category_by_id($category_id);
+        $pCategory = \block_onboarding\experiences_lib::get_category_by_id($category_id);
     }
     $mform = new experiences_category_form(null, array('category' => $pCategory));
 
     if ($mform->is_cancelled()) {
         redirect('admin.php');
     } else if ($fromform = $mform->get_data()) {
-        // Data written in the Database.
-        $category = new stdClass();
-        $category->name = $fromform->name;
-        $category->questions = $fromform->questions;
-        $category->timecreated = time();
-        $category->timemodified = time();
-
-        if ($fromform->id != -1) {
-            $category->id = $fromform->id;
-            block_onboarding\experiences_lib::update_category($category);
-        } else {
-            block_onboarding\experiences_lib::add_category($category);
-        }
+        \block_onboarding\experiences_lib::edit_category($fromform);
         redirect('admin.php');
     }
 

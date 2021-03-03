@@ -47,19 +47,7 @@ if (has_capability('block/onboarding:w_manage_wiki', $context)) {
   if ($mform->is_cancelled()) {
     redirect('admin_wiki.php');
   } else if ($fromform = $mform->get_data()) {
-    $link = new stdClass();
-    $link->name = $fromform->name;
-    $link->category_id = $fromform->category_id;
-    $link->url = $fromform->url;
-    $link->description = $fromform->description;
-    $link->position = $fromform->position + 1;
-
-    if ($fromform->id != -1) {
-      $link->id = $fromform->id;
-      block_onboarding\wiki_lib::update_link($link);
-    } else {
-      block_onboarding\wiki_lib::add_link($link);
-    }
+    \block_onboarding\wiki_lib::edit_link($fromform);
     redirect('admin_wiki.php');
   }
 

@@ -24,7 +24,7 @@ $context = context_system::instance();
 
 if(has_capability('block/onboarding:s_manage_steps', $context)){
     $stepid = optional_param('step_id', -1, PARAM_INT);
-    block_onboarding\steps_lib::delete_step($stepid);
+    \block_onboarding\steps_lib::delete_step($stepid);
     redirect('admin_steps.php');
 }else{
     $PAGE->set_context($context);

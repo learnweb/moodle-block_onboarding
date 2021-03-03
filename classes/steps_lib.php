@@ -19,6 +19,26 @@ namespace block_onboarding;
 defined('MOODLE_INTERNAL') || die();
 
 class steps_lib {
+
+    public static function edit_step($fromform){
+        // speichere Basis Daten aus der Form ausgenommen der position in dem Objekt step -> weitere Verarbeitung folgt
+        $step = new stdClass();
+        $step->name = $fromform->name;
+        $step->description = $fromform->description;
+        $step->achievement = isset($fromform->achievement) ? 1 : 0;
+        $step->position = $fromform->position + 1;
+
+        // wenn ein bestehender Schritt editiert wird, aktualisiere den Datensatz
+        if ($fromform->id != -1) {
+            $step->id = $fromform->id;
+            \block_onboarding\steps_lib::update_step($step);
+
+            // andernfalls wird ein neuer Schritt bzw. Datensatz hinzugefügt, dessen position aus der Form übernommen wird
+        } else {
+            \block_onboarding\steps_lib::add_step($step);
+        }
+    }
+
     public static function add_step($step){
         global $DB;
         

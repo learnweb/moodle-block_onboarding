@@ -70,38 +70,26 @@ class experiences_lib {
         $DB->insert_records('block_onb_e_exps_cats', $experiences_categories);
     }
 
-    public static function update_experience($step){
-        global $DB;
-
-        $paramstep = $DB->get_record('block_onb_s_steps', array('id' => $step->id));
-        $curposition = $paramstep->position;
-        $insertposition = $step->position;
-
-        // Prüfen ob Änderung von anderen pos erforderlich ist
-        // wenn gewünschte Einfügeposition weiter hinten als aktuelle Position ist
-        if ($insertposition > $curposition) {
-            \block_onboarding\step_admin_functions::decrement_step_positions($insertposition, $curposition);
-
-            // wenn gewünschte Einfügeposition weiter vorne als aktuelle Position ist
-        } else if ($insertposition < $curposition) {
-            \block_onboarding\step_admin_functions::increment_step_positions($insertposition, $curposition);
-        }
-        // andernfalls ist die Position gleich und es müssen keine anderen Schrittpositionen verändert werden
-        
-        $step->position = $fromform->position + 1;
-        $step->timemodified = time();
-        $DB->update_record('block_onb_s_steps', $step);
-    }
-
     public static function delete_experience($experience_id){
         global $DB;
         $DB->delete_records('block_onb_e_exps_cats', array('experience_id' => $experience_id));
         $DB->delete_records('block_onb_e_exps', array('id' => $experience_id));
     }
 
-    public static function get_category_by_id($category_id){
-        global $DB;
-        return $DB->get_record('block_onb_e_cats', array('id'=>$category_id), $fields='*', $strictness=IGNORE_MISSING);
+    public static function edit_category($category){
+        // Data written in the Database.
+        $category = new \stdClass();
+        $category->name = $fromform->name;
+        $category->questions = $fromform->questions;
+        $category->timecreated = time();
+        $category->timemodified = time();
+
+        if ($fromform->id != -1) {
+            $category->id = $fromform->id;
+            \block_onboarding\experiences_lib::update_category($category);
+        } else {
+            \block_onboarding\experiences_lib::add_category($category);
+        }
     }
 
     public static function add_category($category){
@@ -119,6 +107,26 @@ class experiences_lib {
         // Deletion of the category and all content written for it.
         $DB->delete_records('block_onb_e_exps_cats', array('category_id' => $category_id));
         $DB->delete_records('block_onb_e_cats', array('id' => $category_id));
+    }
+
+    public static function get_category_by_id($category_id){
+        global $DB;
+        return $DB->get_record('block_onb_e_cats', array('id'=>$category_id), $fields='*', $strictness=IGNORE_MISSING);
+    }
+
+    public static function edit_course($fromform){
+        // Data written in the Database.
+        $course = new stdClass();
+        $course->name = $fromform->name;
+        $course->timecreated = time();
+        $course->timemodified = time();
+
+        if ($fromform->id != -1) {
+            $course->id = $fromform->id;
+            \block_onboarding\experiences_lib::update_course($course);
+        } else {
+            \block_onboarding\experiences_lib::add_course($course);
+        }
     }
 
     public static function add_course($course){
@@ -142,7 +150,7 @@ class experiences_lib {
         $strictness = IGNORE_MISSING);
     }
 
-    public static function add_report($fromform){
+    public static function edit_report($fromform){
         // Data written in the Database.
         $report = new stdClass();
         $report->experience_id = $fromform->experience_id;
