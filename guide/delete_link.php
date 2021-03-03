@@ -24,12 +24,8 @@ $context = context_system::instance();
 
 if(has_capability('block/onboarding:w_manage_wiki', $context)){
   $linkid = optional_param('link_id', -1, PARAM_INT);
-  $paramlink = $DB->get_record('block_onb_w_links', array('id'=>$linkid));
-  $curposition = $paramlink->position;
-  $linkcount = $DB->count_records('block_onb_w_links');
-  \block_onboarding\wiki_admin_functions::decrement_link_positions($linkcount, $curposition);
-  $DB->delete_records('block_onb_w_links', array('id' => $linkid));
-  redirect('overview.php');
+  block_onboarding\wiki_lib::delete_link($linkid);
+  redirect('admin_wiki.php');
 }else{
   $PAGE->set_context($context);
   $PAGE->set_url(new moodle_url('/blocks/onboarding/wiki/delete_link.php'));

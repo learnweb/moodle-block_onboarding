@@ -30,7 +30,7 @@ class wiki_admin implements renderable, templatable {
   public function export_for_template(renderer_base $output) {
     global $DB;
 
-   $categories = array_values($DB->get_records('block_onb_w_categories'));
+   $categories = array_values($DB->get_records('block_onb_w_categories', $conditions=null, $sort='position ASC'));
     $links = array_values($DB->get_records('block_onb_w_links'));
 
 

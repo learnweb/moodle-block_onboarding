@@ -1,57 +1,59 @@
-define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notification) {
-
-    // TODO: Language Strings übergeben anstatt Step etc.!
-    // TODO: clean code
+define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, ajax, notification, str) {
 
     var confetti_toogle = false;
+    var step_string = 'Step ';
+    var achievement_string = 'Achviement! ';
 
-    var init = function() {
+    var init = function () {
 
-
-        var promises = ajax.call([{
-            methodname: 'block_onboarding_init_step',
-            args: {}
-        }]);
-        promises[0].done(function(response) {
-            if(response.completed == 1){
-                $('.step-completed').css('visibility', 'visible');
-            } else{
-                $('.step-completed').css('visibility', 'hidden');
-            }
-            if(response.achievement == 1){
-                $('.step-title').text('Achievement! ' + response.name);
-                confetti_toogle = true;
-                confetti();
-            } else {
-                $('.step-title').text('Step ' + response.position + ': ' + response.name);
-            }
-            $('.step_description').text(response.description);
-            $('.progress-bar-value').text(response.progress + '%');
-            $('.progress-bar-fill').css('width', (response.progress + '%'));
-        }).fail(notification.exception);
+        // TODO: Ladezeit dauert relativ lange :(
+        var step_promise = str.get_string('step_step_js', 'block_onboarding');
+        var achievement_promise = str.get_string('step_achievement_js', 'block_onboarding');
+        $.when(step_promise, achievement_promise).done(function (step_promise_string, achievement_promise_string) {
+            step_string = step_promise_string;
+            achievement_string = achievement_promise_string;
+            var promises = ajax.call([{
+                methodname: 'block_onboarding_init_step',
+                args: {}
+            }]);
+            promises[0].done(function (response) {
+                if (response.completed == 1) {
+                    $('.step-completed').css('visibility', 'visible');
+                } else {
+                    $('.step-completed').css('visibility', 'hidden');
+                }
+                if (response.achievement == 1) {
+                    $('.step-title').text(achievement_string + response.name);
+                    confetti_toogle = true;
+                    confetti();
+                } else {
+                    $('.step-title').text(step_string + response.position + ': ' + response.name);
+                }
+                $('.step_description').text(response.description);
+                $('.progress-bar-value').text(response.progress + '%');
+                $('.progress-bar-fill').css('width', (response.progress + '%'));
+            }).fail(notification.exception);
+        });
     };
 
-
-    $('.next-btn').on('click', function() {
+    $('.next-btn').on('click', function () {
         var promises = ajax.call([{
             methodname: 'block_onboarding_next_step',
             args: {}
         }]);
-        promises[0].done(function(response) {
-            if(response.achievement == 1){
-                $('.step-title').text('Achievement! ' + response.name);
+        promises[0].done(function (response) {
+            if (response.completed == 1) {
+                $('.step-completed').css('visibility', 'visible');
+            } else {
+                $('.step-completed').css('visibility', 'hidden');
+            }
+            if (response.achievement == 1) {
+                $('.step-title').text(achievement_string + response.name);
                 confetti_toogle = true;
                 confetti();
             } else {
-                $('.step-title').text('Step ' + response.position + ': ' + response.name);
+                $('.step-title').text(step_string + response.position + ': ' + response.name);
                 confetti_toogle = false;
-            }
-            if(response.achievement == 1){
-                $('.steps-container').css('background-color', '');
-                $('.step-title').text('Achievement! ' + response.name);
-            } else {
-                $('.steps-container').css('background-color', '');
-                $('.step-title').text('Step ' + response.position + ': ' + response.name);
             }
             $('.step_description').text(response.description);
             $('.progress-bar-value').text(response.progress + '%');
@@ -59,48 +61,23 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
         }).fail(notification.exception);
     })
 
-
-    $('.skip-btn').on('click', function() {
-        var promises = ajax.call([{
-            methodname: 'block_onboarding_skip_step',
-            args: {}
-        }]);
-        promises[0].done(function(response) {
-            if(response.completed == 1){
-                $('.step-completed').css('visibility', 'visible');
-            } else{
-                $('.step-completed').css('visibility', 'hidden');
-            }
-            if(response.achievement == 1){
-                $('.step-title').text('Achievement! ' + response.name);
-                confetti_toogle = true;
-                confetti();
-            } else {
-                $('.step-title').text('Step ' + response.position + ': ' + response.name);
-                confetti_toogle = false;
-            }
-            $('.step_description').text(response.description);
-        }).fail(notification.exception);
-    })
-
-
-    $('.back-btn').on('click', function() {
+    $('.back-btn').on('click', function () {
         var promises = ajax.call([{
             methodname: 'block_onboarding_back_step',
             args: {}
         }]);
-        promises[0].done(function(response) {
-            if(response.completed == 1){
+        promises[0].done(function (response) {
+            if (response.completed == 1) {
                 $('.step-completed').css('visibility', 'visible');
-            } else{
+            } else {
                 $('.step-completed').css('visibility', 'hidden');
             }
-            if(response.achievement == 1){
-                $('.step-title').text('Achievement! ' + response.name);
+            if (response.achievement == 1) {
+                $('.step-title').text(achievement_string + response.name);
                 confetti_toogle = true;
                 confetti();
             } else {
-                $('.step-title').text('Step ' + response.position + ': ' + response.name);
+                $('.step-title').text(step_string + response.position + ': ' + response.name);
                 confetti_toogle = false;
             }
             $('.step_description').text(response.description);
@@ -115,7 +92,7 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
 
         let context = achievement_canvas.getContext('2d');
         let particle = [];
-        let number_of_particles = 50;
+        let number_of_particles = 45;
         let lastUpdateTime = Date.now();
 
         function randomColor() {
@@ -185,11 +162,6 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
         update();
         draw();
     }
-
-    var stopConfetti = function() {
-        confetti_toogle = false;
-    }
-
 
     return {
         init: init

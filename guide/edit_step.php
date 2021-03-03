@@ -79,44 +79,16 @@ if (has_capability('block/onboarding:s_manage_steps', $context)) {
         $step->name = $fromform->name;
         $step->description = $fromform->description;
         $step->achievement = isset($fromform->achievement) ? 1 : 0;
-        $insertposition = $fromform->position + 1;
+        $step->position = $fromform->position + 1;
 
         // wenn ein bestehender Schritt editiert wird, aktualisiere den Datensatz
         if ($fromform->id != -1) {
-            $paramstep = $DB->get_record('block_onb_s_steps', array('id' => $fromform->id));
-            $curposition = $paramstep->position;
-
-            // Prüfen ob Änderung von anderen pos erforderlich ist
-            // wenn gewünschte Einfügeposition weiter hinten als aktuelle Position ist
-            if ($insertposition > $curposition) {
-                \block_onboarding\step_admin_functions::decrement_step_positions($insertposition, $curposition);
-
-                // wenn gewünschte Einfügeposition weiter vorne als aktuelle Position ist
-            } else if ($insertposition < $curposition) {
-                \block_onboarding\step_admin_functions::increment_step_positions($insertposition, $curposition);
-            }
-            // andernfalls ist die Position gleich und es müssen keine anderen Schrittpositionen verändert werden
             $step->id = $fromform->id;
-            $step->position = $fromform->position + 1;
-            $step->timemodified = time();
-            $DB->update_record('block_onb_s_steps', $step);
+            block_onboarding\steps_lib::update_step($step);
 
             // andernfalls wird ein neuer Schritt bzw. Datensatz hinzugefügt, dessen position aus der Form übernommen wird
         } else {
-            $initposition = $DB->count_records('block_onb_s_steps') + 1;
-
-            $step->position = $initposition;
-            $step->timecreated = time();
-            $step->timemodified = time();
-            $step->id = $DB->insert_record('block_onb_s_steps', $step);
-
-            // wenn neuer Schritt nicht hinten eingefügt werden soll
-            if ($initposition != $insertposition) {
-                \block_onboarding\step_admin_functions::increment_step_positions($insertposition, $initposition);
-                $step->position = $insertposition;
-                $step->timemodified = time();
-                $DB->update_record('block_onb_s_steps', $step);
-            }
+            block_onboarding\steps_lib::add_step($step);
         }
         redirect('admin_steps.php');
     }

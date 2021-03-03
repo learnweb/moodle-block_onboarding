@@ -22,6 +22,17 @@ class block_onboarding extends block_base {
         $this->title = get_string('onboarding', 'block_onboarding');
     }
 
+    public function applicable_formats() {
+        return array(
+            'site-index' => true,
+            'course-view' => true,
+            'course-view-social' => false,
+            'mod' => false,
+            'mod-quiz' => false,
+            'my'=> true
+        );
+    }
+
     public function get_content() {
         global $DB;
 

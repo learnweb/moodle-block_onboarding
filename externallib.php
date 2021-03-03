@@ -85,7 +85,6 @@ class block_onboarding_view_external extends external_api {
      * @return external_description
      */
     public static function init_step_returns() {
-        //return new external_multiple_structure(
         return new external_single_structure(
             array(
                 'name' => new external_value(PARAM_TEXT, 'name of new step'),
@@ -95,10 +94,8 @@ class block_onboarding_view_external extends external_api {
                 'progress' => new external_value(PARAM_INT, 'progress of user'),
                 'completed' => new external_value(PARAM_INT, 'determines whether user already completed step'),
             )
-            //)
         );
     }
-
 
     /* --------------------------------------------------------------------------------------------------------- */
 
@@ -167,7 +164,6 @@ class block_onboarding_view_external extends external_api {
      */
 
     public static function next_step_returns() {
-//        return new external_multiple_structure(
         return new external_single_structure(
             array(
                 'name' => new external_value(PARAM_TEXT, 'name of new step'),
@@ -177,66 +173,6 @@ class block_onboarding_view_external extends external_api {
                 'progress' => new external_value(PARAM_INT, 'progress of user'),
                 'completed' => new external_value(PARAM_INT, 'determines whether user already completed step'),
             )
-//            )
-        );
-    }
-
-    /* --------------------------------------------------------------------------------------------------------- */
-
-    public static function skip_step() {
-        $params = self::validate_parameters(self::skip_step_parameters(),
-            array()
-        );
-
-        // Aktuelle step_id vom User abfragen
-        $curstepid = \block_onboarding\step_view_data_functions::get_current_user_stepid();
-
-        // Wenn kein Schritt in der Datenbank existiert
-        if ($curstepid == -1) {
-            return \block_onboarding\step_view_data_functions::message_no_steps();
-        } else {
-            // Position des aktuellen User Steps abfragen
-            $curposition = \block_onboarding\step_view_data_functions::get_step_position($curstepid);
-            // Daten des nächsten Steps (cur_position + 1) abfragen
-
-            $step = \block_onboarding\step_view_data_functions::get_next_step_data($curposition, 1);
-            if ($step == -1) {
-                $step = \block_onboarding\step_view_data_functions::get_step_data($curposition);
-            } else {
-                // Datenbank-Eintrag für User updaten mit neuem step
-                \block_onboarding\step_view_data_functions::set_current_user_stepid($step->id);
-            }
-            // Prüfen, ob step schon completed wurde
-            $completed = \block_onboarding\step_view_data_functions::get_user_completed_step($step->id);
-
-            // Rückgabe an JavaScript
-            $returnstep['name'] = $step->name;
-            $returnstep['description'] = $step->description;
-            $returnstep['achievement'] = $step->achievement;
-            $returnstep['position'] = $step->position;
-            $returnstep['completed'] = $completed;
-
-            return $returnstep;
-        }
-    }
-
-    public static function skip_step_parameters() {
-        return new external_function_parameters(
-            array()
-        );
-    }
-
-    public static function skip_step_returns() {
-//        return new external_multiple_structure(
-        return new external_single_structure(
-            array(
-                'name' => new external_value(PARAM_TEXT, 'name of new step'),
-                'description' => new external_value(PARAM_TEXT, 'description of new step'),
-                'achievement' => new external_value(PARAM_INT, 'determines whether a step is an achievement'),
-                'position' => new external_value(PARAM_INT, 'position of new step'),
-                'completed' => new external_value(PARAM_INT, 'determines whether user already completed step'),
-            )
-//            )
         );
     }
 
@@ -285,7 +221,6 @@ class block_onboarding_view_external extends external_api {
     }
 
     public static function back_step_returns() {
-//        return new external_multiple_structure(
         return new external_single_structure(
             array(
                 'name' => new external_value(PARAM_TEXT, 'name of new step'),
@@ -294,7 +229,6 @@ class block_onboarding_view_external extends external_api {
                 'position' => new external_value(PARAM_INT, 'position of new step'),
                 'completed' => new external_value(PARAM_INT, 'determines whether user already completed step'),
             )
-//            )
         );
     }
 
@@ -360,13 +294,11 @@ class block_onboarding_view_external extends external_api {
      * @return external_description
      */
     public static function click_helpful_returns() {
-//        return new external_multiple_structure(
         return new external_single_structure(
             array(
                 'exists'      => new external_value(PARAM_INT, 'entry existence'),
                 'popularity'      => new external_value(PARAM_INT, 'popularity of report')
             )
-//            )
         );
     }
 
@@ -424,13 +356,11 @@ class block_onboarding_view_external extends external_api {
      * @return external_description
      */
     public static function init_helpful_returns() {
-//        return new external_multiple_structure(
         return new external_single_structure(
             array(
                 'exists'      => new external_value(PARAM_INT, 'entry existence'),
                 'popularity'      => new external_value(PARAM_INT, 'popularity of report')
             )
-//            )
         );
     }
 }

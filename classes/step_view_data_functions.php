@@ -25,7 +25,6 @@
 namespace block_onboarding;
 defined('MOODLE_INTERNAL') || die();
 
-// TODO: Language Strings bei Messages verwenden!
 // TODO: Funktionen vereinfachen und zusammenfassen
 
 class step_view_data_functions {
@@ -158,15 +157,13 @@ class step_view_data_functions {
         return $returncompleted;
     }
 
-
     public static function message_no_steps() {
-        $returnstep['name'] = 'NO STEPS TO DISPLAY!';
-        $returnstep['description'] =
-            'There are currently no steps saved in the database. 
-            Please add steps in the admin section or contact an administrator.';
+        $returnstep['name'] = get_string('error_nosteps_title', 'block_onboarding');
+        $returnstep['description'] = get_string('error_nosteps_message', 'block_onboarding');
         $returnstep['position'] = 0;
         $returnstep['achievement'] = 0;
         $returnstep['progress'] = 0;
+        $returnstep['completed'] = 0;
 
         return $returnstep;
     }
