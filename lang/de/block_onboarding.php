@@ -88,75 +88,81 @@ $string['error_nosteps_title'] = "KEINE SCHRITTE ZUM ANZEIGEN VORHANDEN!";
 $string['error_nosteps_message'] = "Aktuell sind keine Ersten Schritte in der Datenbank hinterlegt.";
 
 // Experiences.
-$string['experience'] = 'Experience';
-$string['experiences'] = 'Experiences';
-$string['experiences_summary'] = 'Our Experiences Portal gives you the oportunity to find out how other students before you have designed their studies. This is a great chance to learn from others mistakes. You can also find lots of inspiration on how to design your individual studies.';
-$string['edit_category'] = 'Edit Category';
+$string['experience'] = 'Erfahrung';
+$string['experiences'] = 'Erfahrungen';
+
+$string['edit_category'] = 'Kategorie bearbeiten';
 $string['category_name'] = 'Name';
-$string['default_category_name'] = 'Sample Category';
-$string['questions'] = 'Questions';
-$string['edit_course'] = 'Edit Degree Programs';
+$string['default_category_name'] = 'Beispiel Kategorie';
+$string['questions'] = 'Fragen';
+
+$string['edit_course'] = 'Studiengang bearbeiten';
 $string['course_name'] = 'Name';
-$string['course_name_missing'] = 'Please enter a course name.';
-$string['default_course_name'] = 'Sample Degree Program';
-$string['course_select'] = 'Select Degree Program';
-$string['myexperiencearea'] = 'My Experience Area';
-$string['experience_category_missing'] = 'Please enter a name for a category.';
-$string['experience_questions_missing'] = 'Give a few suggestions...';
-$string['edit_experience'] = 'Edit Experience';
-$string['newexperience'] = 'New Experience';
-$string['experience_name'] = 'Name';
-$string['experience_name_missing'] = 'Please enter a name for your report.';
-$string['experience_degreeprogram_missing'] = 'Please select a degree program.';
-$string['experience_category'] = 'Category';
+$string['course_name_missing'] = 'Bitte gebe einen Studiengangnamen an.';
+$string['default_course_name'] = 'Beispiel Studiengang';
+$string['course_select'] = 'Studiengang';
+$string['myexperiencearea'] = 'Mein Erfahrungsbereich';
+
+$string['experience_category_missing'] = 'Bitte gebe einen Namen für die Kategorie an.';
+$string['experience_questions_missing'] = 'Gebe ein paar Vorschläge an.';
+
+$string['edit_experience'] = 'Erfahrungsbericht erstellen';
+$string['newexperience'] = 'Neuen Erfahrungsbericht erstellen';
+$string['experience_name'] = 'Titel';
+$string['experience_name_missing'] = 'Bitte gebe einen Titel für deinen Bericht an.';
+$string['experience_degreeprogram_missing'] = 'Bitte wähle einen Studiengang aus.';
+$string['experience_category'] = 'Kategorie';
 $string['experience_url'] = 'URL';
-$string['experience_description'] = 'Description';
-$string['default_experience_name'] = 'Sample Experience';
+$string['experience_description'] = 'Beschreibung';
+$string['default_experience_name'] = 'Beispiel Erfahrung';
 $string['default_experience_url'] = 'http://www.example.com';
-$string['default_experience_description'] = 'Sample Description';
-$string['experience_contact'] = 'Contact Information';
-$string['contact'] = 'Contact: ';
+$string['default_experience_description'] = 'Beispiel Studiengang';
+$string['experience_contact'] = 'Kontakt Informationen';
+
+$string['contact'] = 'Kontakt: ';
 $string['author'] = 'Author: ';
-$string['date'] = 'Published: ';
-$string['degreeprogram'] = 'Degree Program: ';
-$string['category_missing'] = 'Please enter some thoughts or uncheck the box.';
+$string['date'] = 'Veröffentlicht: ';
+$string['degreeprogram'] = 'Studiengang: ';
+$string['category_missing'] = 'Bitte trage etwas in das Textfeld ein oder unchecke die Checkbox.';
 $string['takeaways'] = 'Key Takeaways';
-$string['takeaways_missing'] = 'Please enter a key takeaway for this category.';
+$string['takeaways_missing'] = 'Bitte trage ein Key Takeaway für diese Kategorie ein.';
 $string['takeaways_required'] = 'Key Takeaway';
-$string['takeaways_default'] = 'Summarize this category in one bullet point';
-$string['degreeprogram_filter'] = 'Degree Programs';
-$string['category_filter'] = 'Categories';
-$string['applyfilter'] = 'Apply Filter Options';
-$string['report_experience'] = 'Report Experience';
-$string['spam'] = 'Spam/Advertisement';
-$string['profanity'] = 'Profanity';
-$string['offensive'] = 'Offensive Content';
-$string['falseinformation'] = 'False Information';
-$string['falsematching'] = 'Content does not fit Category';
-$string['personalinformation'] = 'Disclosure of Personal Information';
-$string['other'] = 'Other';
-$string['types'] = 'Choose an Option';
-$string['report'] = 'Report Experience';
-$string['report_overview'] = 'Report Overview';
-$string['description_missing'] = 'Please enter a description.';
-$string['filter_or'] = 'this filter';
+$string['takeaways_default'] = 'Fasse den Text zu dieser Kategorie in einem Stichpunkt zusammen';
+$string['degreeprogram_filter'] = 'Studiengänge';
+$string['category_filter'] = 'Kategorien';
+$string['applyfilter'] = 'Filter anwenden';
+$string['report_experience'] = 'Erfahrungsbericht melden';
+
+$string['spam'] = 'Spam/Werbung';
+$string['profanity'] = 'Beleidigungen';
+$string['offensive'] = 'Anstößige Inhalte';
+$string['falseinformation'] = 'Falsche Informationen';
+$string['falsematching'] = 'Inhalt passt nicht zur Kategorie';
+$string['personalinformation'] = 'Veröffentlichung persönlicher Informationen';
+$string['other'] = 'Sonstige';
+$string['types'] = 'Wähle eine Option aus';
+$string['report'] = 'Erfahrungsbericht melden';
+$string['report_overview'] = 'Meldeübersicht';
+$string['description_missing'] = 'Bitte tragen Sie eine Beschreibung ein.';
+$string['filter_or'] = 'diese Filter';
 $string['filter_or_help'] =
-    'This filter is OR connected meaning results from all selected categories will be displayed.';
-$string['selectcategory'] = 'this option select';
+    'Diese Filter sind jeweils OR verknüpft, heißt Berichte zu allen ausgewählten Kategorien werden angezeigt (Das Gleiche gilt für die Studiengänge).';
+$string['selectcategory'] = 'diese Kategorieauswahl';
 $string['selectcategory_help'] =
-    'Select Categories you want to write something about.';
-$string['contactinformation'] = 'this text field';
+    'Wähle Kategorien über die du etwas schreiben möchtest.';
+$string['contactinformation'] = 'dieses Textfeld';
 $string['contactinformation_help'] =
-    'If you want to give other students the possibility to contact you, enter your contact information here.';
-$string['aboutme'] = 'About Me';
-$string['aboutme_default'] = 'Write something about yourself. (Age, Semester, etc.)';
-$string['helpful'] = 'Was this helpful?';
-$string['popularity'] = 'Popularity: ';
-$string['filters'] = 'Filter Options';
-$string['newdegreeprogram'] = 'New Degree Program';
-$string['newcategory'] = 'New Category';
-$string['notenoughdata'] = 'Not enough data to create an Experience Report';
-$string['selectcategories'] = 'Select Categories';
+'Wenn du anderen Studierenden die Möglichkeit geben möchtest dich zu kontaktieren, trage deine Kontakdaten hier ein.';
+
+$string['aboutme'] = 'Über Mich';
+$string['aboutme_default'] = 'Schreib etwas über dich. (Alter, Semester, etc.)';
+$string['helpful'] = 'War dieser Bericht hilfreich?';
+$string['popularity'] = 'Beliebtheit: ';
+$string['filters'] = 'Filter Optionen';
+$string['newdegreeprogram'] = 'Neuer Studiengang';
+$string['newcategory'] = 'Neue Kategorie';
+$string['notenoughdata'] = 'Es gibt nicht genug Daten um einen Erfahrungsbericht zu erstellen';
+$string['selectcategories'] = 'Wähle Kategorien';
 
 
 

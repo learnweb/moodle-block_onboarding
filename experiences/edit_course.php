@@ -31,7 +31,7 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
     $PAGE->set_title(get_string('edit_course', 'block_onboarding'));
     $PAGE->set_heading(get_string('edit_course', 'block_onboarding'));
 
-    require_once('./../classes/forms/experiences_course_form.php');
+    require_once($CFG->dirroot . '/blocks/onboarding/classes/forms/experiences_course_form.php');
 
     $course_id = optional_param('course_id', -1, PARAM_INT);
     $pcourse = new stdClass;
