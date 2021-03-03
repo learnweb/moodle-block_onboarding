@@ -190,9 +190,9 @@ class block_onboarding_view_external extends external_api {
             return \block_onboarding\step_view_data_functions::message_no_steps();
         } else {
             // Position des aktuellen User Steps abfragen
-            $cur_position = \block_onboarding\step_view_data_functions::get_step_position($curstepid);
+            $curposition = \block_onboarding\step_view_data_functions::get_step_position($curstepid);
             // Daten des vorherigen Steps (cur_position - 1) abfragen
-            $step = \block_onboarding\step_view_data_functions::get_next_step_data($curstepid, -1);
+            $step = \block_onboarding\step_view_data_functions::get_next_step_data($curposition, -1);
             if ($step == -1) {
                 //step aus if raus?
                 $step = \block_onboarding\step_view_data_functions::get_step_data($curstepid);
