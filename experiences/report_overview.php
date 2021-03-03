@@ -24,29 +24,44 @@ global $DB;
 
 $context = context_system::instance();
 
-$table = new report_table('uniqueid');
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/report_overview.php'));
-$PAGE->set_title(get_string('report_overview', 'block_onboarding'));
-$PAGE->set_heading(get_string('report_overview', 'block_onboarding'));
-$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
-$PAGE->navbar->add(get_string('experiences', 'block_onboarding'));
-$PAGE->requires->css('/blocks/onboarding/style.css');
-$output = $PAGE->get_renderer('block_onboarding');
-echo $output->header();
+$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
+$PAGE->navbar->add(get_string('experiences', 'block_onboarding'), new moodle_url('overview.php'));
+$PAGE->navbar->add(get_string('experience_admin', 'block_onboarding'), new moodle_url('admin.php'));
+$PAGE->navbar->add(get_string('report_overview', 'block_onboarding'));
 
-// SQL Statement for Listview.
-$fields = 'er.id as id, ee.name as experience, er.experience_id as experience_id, er.type as type, er.description as description, 
-u.firstname as author, er.timecreated as timecreated';
-$from = '{block_onb_e_report} er
-INNER JOIN {user} u ON er.user_id=u.id
-INNER JOIN {block_onb_e_exps} ee ON er.experience_id=ee.id';
-$where = '1=1';
+if (has_capability('block/onboarding:e_manage_experiences', \context_system::instance())) {
 
-$table->set_sql($fields, $from, $where);
+    $table = new report_table('uniqueid');
+    $PAGE->set_context($context);
 
-$table->define_baseurl("$CFG->wwwroot/blocks/onboarding/experiences/report_overview.php");
+    $PAGE->set_title(get_string('report_overview', 'block_onboarding'));
+    $PAGE->set_heading(get_string('report_overview', 'block_onboarding'));
+    $PAGE->requires->css('/blocks/onboarding/style.css');
+    $output = $PAGE->get_renderer('block_onboarding');
+    echo $output->header();
 
-$table->out(40, true);
+    // SQL Statement for Listview.
+    $fields = 'er.id as id, ee.name as experience, er.experience_id as experience_id, er.type as type, er.description as description, 
+    u.firstname as author, er.timecreated as timecreated';
+    $from = '{block_onb_e_report} er
+    INNER JOIN {user} u ON er.user_id=u.id
+    INNER JOIN {block_onb_e_exps} ee ON er.experience_id=ee.id';
+    $where = '1=1';
 
-echo $output->footer();
+    $table->set_sql($fields, $from, $where);
+
+    $table->define_baseurl("$CFG->wwwroot/blocks/onboarding/experiences/report_overview.php");
+
+    $table->out(40, true);
+
+    echo $output->footer();
+} else {
+    $PAGE->set_title(get_string('error', 'block_onboarding'));
+    $PAGE->set_heading(get_string('error', 'block_onboarding'));
+
+    echo $OUTPUT->header();
+    echo html_writer::tag('p', get_string('insufficient_permissions', 'block_onboarding'));
+    echo $OUTPUT->footer();
+}
