@@ -33,7 +33,7 @@ if(has_capability('block/onboarding:w_manage_wiki', $context)){
   // deleting all links within the category
   $DB->delete_records('block_onb_w_links', array('category_id' => $categoryid));
 
-  redirect('overview.php');
+  redirect('admin_wiki.php');
 }else{
   $PAGE->set_context($context);
   $PAGE->set_url(new moodle_url('/blocks/onboarding/wiki/delete_category.php'));

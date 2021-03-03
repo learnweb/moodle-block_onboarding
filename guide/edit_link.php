@@ -43,42 +43,24 @@ if (has_capability('block/onboarding:w_manage_wiki', $context)) {
   $mform = new wiki_link_form(null, array('link' => $paramlink));
 
   if ($mform->is_cancelled()) {
-    redirect('overview.php');
+    redirect('admin_wiki.php');
   } else if ($fromform = $mform->get_data()) {
     $link = new stdClass();
     $link->name = $fromform->name;
     $link->category_id = $fromform->category_id;
     $link->url = $fromform->url;
     $link->description = $fromform->description;
-    $insertposition = $fromform->position + 1;
+    $link->position = $fromform->position + 1;
 
     if ($fromform->id != -1) {
-      $paramlink = $DB->get_record('block_onb_w_links', array('id' => $fromform->id));
-      $curposition = $paramlink->position;
-      if ($insertposition > $curposition) {
-        \block_onboarding\wiki_admin_functions::decrement_link_positions($insertposition, $curposition);
-      } else if ($insertposition < $curposition) {
-        \block_onboarding\wiki_admin_functions::increment_link_positions($insertposition, $curposition);
-      }
       $link->id = $fromform->id;
-      $link->position = $fromform->position + 1;
-      $link->timemodified = time();
-      $DB->update_record('block_onb_w_links', $link);
+      $wiki_lib = new block_onboarding\wiki_lib();
+      $wiki_lib->update_link($link);
     } else {
-      $initposition = $DB->count_records('block_onb_w_links') + 1;
-      $link->position = $initposition;
-      $link->timecreated = time();
-      $link->timemodified = time();
-      $link->id = $DB->insert_record('block_onb_w_links', $link);
-
-      if ($initposition != $insertposition) {
-        \block_onboarding\wiki_admin_functions::increment_link_positions($insertposition, $initposition);
-        $link->position = $insertposition;
-        $link->timemodified = time();
-        $DB->update_record('block_onb_w_links', $link);
-      }
+      $wiki_lib = new block_onboarding\wiki_lib();
+      $wiki_lib->add_link($link);
     }
-    redirect('overview.php');
+    redirect('admin_wiki.php');
   }
 
   echo $OUTPUT->header();
