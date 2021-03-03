@@ -69,7 +69,7 @@ if ($checkcourses != 0 || $checkcategories != 0) {
             $experience->timecreated = time();
             $experience->timemodified = time();
 
-            if (isset($fromform->aboutme)) {
+            if (empty($fromform->aboutme_text) == false) {
                 $experience->aboutme = $fromform->aboutme_text;
             } else {
                 $experience->aboutme = null;
