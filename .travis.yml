@@ -52,4 +52,4 @@ script:
  # This step runs the PHPUnit tests of the plugin.
  - moodle-plugin-ci phpunit
  # This step runs the Behat tests of the plugin.
- - moodle-plugin-ci behat --profile chrome
+ # - moodle-plugin-ci behat --profile chrome

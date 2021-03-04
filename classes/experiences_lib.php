@@ -25,9 +25,9 @@ class experiences_lib {
         // Data written in the Database.
         $experience = new \stdClass();
         $experience->name = $fromform->name;
-        $experience->contact = $fromform->contact;
-        $experience->user_id = $fromform->user_id;
-        $experience->course_id = $fromform->course_id;
+        $experience->contact = isset($fromform->contact) ? $fromform->contact : null;
+        $experience->user_id = isset($fromform->user_id) ? $fromform->user_id : null;
+        $experience->course_id = isset($fromform->course_id) ? $fromform->course_id : null;
         $experience->timecreated = time();
         $experience->timemodified = time();
 
@@ -76,7 +76,7 @@ class experiences_lib {
         $DB->delete_records('block_onb_e_exps', array('id' => $experience_id));
     }
 
-    public static function edit_category($category){
+    public static function edit_category($fromform){
         // Data written in the Database.
         $category = new \stdClass();
         $category->name = $fromform->name;
@@ -116,7 +116,7 @@ class experiences_lib {
 
     public static function edit_course($fromform){
         // Data written in the Database.
-        $course = new stdClass();
+        $course = new \stdClass();
         $course->name = $fromform->name;
         $course->timecreated = time();
         $course->timemodified = time();
