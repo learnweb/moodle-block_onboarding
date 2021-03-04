@@ -89,7 +89,7 @@ class steps_lib {
         $stepcount = $DB->count_records('block_onb_s_steps');
 
         // deleting step and adjusting other step positions accordingly
-        \block_onboarding\step_admin_functions::decrement_step_positions($stepcount, $curposition);
+        \block_onboarding\steps_lib::decrement_step_positions($stepcount, $curposition);
         $DB->delete_records('block_onb_s_steps', array('id' => $stepid));
 
         // deleting all user progress for deleted step
