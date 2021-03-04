@@ -151,8 +151,9 @@ class experiences_lib {
     }
 
     public static function edit_report($fromform){
+        global $DB;
         // Data written in the Database.
-        $report = new stdClass();
+        $report = new \stdClass();
         $report->experience_id = $fromform->experience_id;
         $report->user_id = $fromform->user_id;
         $report->type = $fromform->type;
