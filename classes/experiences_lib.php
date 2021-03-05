@@ -31,7 +31,7 @@ class experiences_lib {
         $experience->timecreated = time();
         $experience->timemodified = time();
 
-        if (isset($fromform->aboutme)) {
+        if (isset($fromform->aboutme_text)) {
             $experience->aboutme = $fromform->aboutme_text;
         } else {
             $experience->aboutme = null;

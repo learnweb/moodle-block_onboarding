@@ -31,11 +31,13 @@ $PAGE->navbar->add(get_string('edit_experience', 'block_onboarding'));
 $experience_id = optional_param('experience_id', -1, PARAM_INT);
 $pexperience = new stdClass;
 $pexperience->id = -1;
+/**
 $sql = "SELECT ec.id as id, e.id as exp_id, e.user_id as u_id FROM {block_onb_e_exps_cats} ec
         INNER JOIN {block_onb_e_exps} e
         ON ec.experience_id = e.id
         WHERE e.user_id = {$USER->id}";
 $checkexperience = $DB->get_records_sql($sql);
+**/
 if ($experience_id != -1) {
     // Get the existing data from the Database.
     $pexperience = $DB->get_record('block_onb_e_exps',
@@ -43,6 +45,7 @@ if ($experience_id != -1) {
 } //elseif ($experience_id == -1 && empty($checkexperience) == false) {
     //redirect('overview.php');
 //}
+
 $checkcourses = $DB->count_records('block_onb_e_courses');
 $checkcategories = $DB->count_records('block_onb_e_cats');
 

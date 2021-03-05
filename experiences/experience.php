@@ -31,7 +31,7 @@ $PAGE->set_heading(get_string('experience', 'block_onboarding'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
 $PAGE->navbar->add(get_string('experiences', 'block_onboarding'), new moodle_url('overview.php'));
 $experience = new stdClass();
-$experience = $DB->get_record('block_onb_e_exps', array('user_id' => $USER->id), $fields='*', $strictness=IGNORE_MISSING);
+$experience = $DB->get_record('block_onb_e_exps', array('id' => $experience_id), $fields='*', $strictness=IGNORE_MISSING);
 $PAGE->navbar->add($experience->name);
 
 $output = $PAGE->get_renderer('block_onboarding');
