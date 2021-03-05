@@ -9,7 +9,8 @@ module.exports = function(grunt) {
             my_target: {
                 files: {
                 // 'path/output.min.js' : ['path/input.js']
-                    'amd/build/steps_view.min.js': ['amd/src/steps_view.js']
+                    'amd/build/steps_view.min.js': ['amd/src/steps_view.js'],
+                    'amd/build/experiences_experience.min.js': ['amd/src/experiences_experience.js']
                 }
             }
         },
@@ -22,7 +23,7 @@ module.exports = function(grunt) {
                 },
             },
         }
-    }),
+    });
 
 
     // Plugin-ins laden

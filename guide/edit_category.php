@@ -24,37 +24,32 @@ $context = context_system::instance();
 
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/wiki/edit_category.php'));
-$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
+$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
+$PAGE->navbar->add(get_string('guide', 'block_onboarding'), new moodle_url('overview.php'));
+$PAGE->navbar->add(get_string('wiki_admin', 'block_onboarding'), new moodle_url('admin_wiki.php'));
+$PAGE->navbar->add(get_string('edit_category', 'block_onboarding'));
 
 if(has_capability('block/onboarding:w_manage_wiki', $context)){
   $PAGE->set_title(get_string('edit_category', 'block_onboarding'));
   $PAGE->set_heading(get_string('edit_category', 'block_onboarding'));
 
-  require_once('./../classes/forms/wiki_category_form.php');
+  require_once($CFG->dirroot . '/blocks/onboarding/classes/forms/wiki_category_form.php');
 
-  $category_id = optional_param('category_id', -1, PARAM_INT);
-  $pCategory = new stdClass;
-  $pCategory->id = -1;
-  if($category_id != -1){
-    $pCategory = $DB->get_record('block_onb_w_categories', array('id'=>$category_id), $fields='*', $strictness=IGNORE_MISSING);
+  $categoryid = optional_param('category_id', -1, PARAM_INT);
+  $paramcategory = new stdClass;
+  $paramcategory->id = -1;
+  if($categoryid != -1){
+    $paramcategory = $DB->get_record('block_onb_w_categories', array('id'=>$categoryid));
   }
-  $mform = new wiki_category_form(null, array('category' => $pCategory));
+
+  $mform = new wiki_category_form(null, array('category' => $paramcategory));
 
   if ($mform->is_cancelled()) {
-  		redirect('overview.php');
-  } else if ($fromform = $mform->get_data()) {
-      $category = new stdClass();
-      $category->name = $fromform->name;
-      $category->timecreated = time();
-      $category->timemodified = time();
+  		redirect('admin_wiki.php');
 
-      if($fromform->id != -1){
-        $category->id = $fromform->id;
-        $DB->update_record('block_onb_w_categories', $category, $bulk=false);
-      }else{
-        $category->id = $DB->insert_record('block_onb_w_categories', $category);
-      }
-      redirect('overview.php');
+  } else if ($fromform = $mform->get_data()) {
+      \block_onboarding\wiki_lib::edit_category($fromform);
+      redirect('admin_wiki.php');
   }
 
   echo $OUTPUT->header();

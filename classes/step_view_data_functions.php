@@ -25,7 +25,7 @@
 namespace block_onboarding;
 defined('MOODLE_INTERNAL') || die();
 
-// TODO: Randfälle behandeln, z.B. letzter Schritt in, keine Schritte in Liste, usw.
+// TODO: Funktionen vereinfachen und zusammenfassen
 
 class step_view_data_functions {
 
@@ -36,57 +36,135 @@ class step_view_data_functions {
     // !!! ÜBERGABE DER USERID HIER UND in JS ggf. ÜBERFLÜSSIG WG. $USER->ID ? -> prüfen
     // evtl. Komplikationen wegen Kontexten von verschiedenen Nutzern? -> eher nicht (?)
 
-    public static function get_current_user_stepid($userid) {
-        global $DB;
+    public static function get_current_user_stepid() {
+        global $DB, $USER;
 
-        $step_bool = $DB->record_exists('block_onb_s_current', array('userid' => $userid));
+        $stepbool = $DB->record_exists('block_onb_s_current', array('userid' => $USER->id));
 
         // wenn noch kein Fortschritt gemacht wurde, also kein Datensatz vorhanden ist -> starten bei pos = 1
-        if($step_bool == false){
-            $temp_step = $DB->get_record('block_onb_s_steps', array('position' => 1), $fields = '*', $strictness = IGNORE_MISSING);
+        if ($stepbool == false) {
 
-            $step = new \stdClass();
-            $step->userid = $userid;
-            $step->stepid = $temp_step->id;
-            $step->timecreated = time();
-            $step->timemodified = time();
-            $step->id = $DB->insert_record('block_onb_s_current', $step);
+            // wenn kein step in Liste vorhanden ist
+            if ($DB->count_records('block_onb_s_steps') == 0) {
+                $returnstepid = -1;
+            } else {
+                $tempstep = $DB->get_record('block_onb_s_steps', array('position' => 1));
 
-            $return_stepid = $step->stepid;
+                $step = new \stdClass();
+                $step->userid = $USER->id;
+                $step->stepid = $tempstep->id;
+                $step->timecreated = time();
+                $step->timemodified = time();
+                $step->id = $DB->insert_record('block_onb_s_current', $step);
+
+                $returnstepid = $step->stepid;
+            }
         } else {
-            $step = $DB->get_record('block_onb_s_current', array('userid' => $userid), $fields = '*', $strictness = IGNORE_MISSING);
-            $return_stepid = $step->id;
+            $step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id));
+            $returnstepid = $step->stepid;
         }
 
-        return $return_stepid;
+        return $returnstepid;
     }
 
+    public static function set_current_user_stepid($stepid) {
+        global $DB, $USER;
+
+        // evtl. durch Funktion get_current_user_step (den ganzen Schritt) ersetzen
+        $step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id));
+        $step->stepid = $stepid;
+        $step->timemodified = time();
+
+        $step = $DB->update_record('block_onb_s_current', $step);
+    }
+
+    public static function set_step_id_complete($stepid) {
+        global $DB, $USER;
+
+        // nur wenn Step noch nicht abgeschlossen wurde, wird dieser hinzugefügt, sonst passiert nichts
+        $stepbool = $DB->record_exists('block_onb_s_completed', array('userid' => $USER->id, 'stepid' => $stepid));
+
+        if ($stepbool == false) {
+            $step = new \stdClass();
+            $step->stepid = $stepid;
+            $step->userid = $USER->id;
+            $step->id = $DB->insert_record('block_onb_s_completed', $step);
+        }
+    }
 
     public static function get_step_id($position) {
         global $DB;
 
-        $step = $DB->get_record('block_onb_s_steps', array('position' => $position), $fields = '*', $strictness = IGNORE_MISSING);
-        $return_stepid = $step->id;
+        $step = $DB->get_record('block_onb_s_steps', array('position' => $position));
+        $returnstepid = $step->id;
 
-        return $return_stepid;
+        return $returnstepid;
     }
 
 
     public static function get_step_position($stepid) {
         global $DB;
 
-        $step = $DB->get_record('block_onb_s_steps', array('id' => $stepid), $fields = '*', $strictness = IGNORE_MISSING);
-        $return_step_position = $step->position;
+        $step = $DB->get_record('block_onb_s_steps', array('id' => $stepid));
+        $returnstepposition = $step->position;
 
-        return $return_step_position;
+        return $returnstepposition;
     }
 
+
+    public static function get_next_step_data($position, $direction) {
+        global $DB;
+        $position = $position + $direction;
+        $stepbool = $DB->record_exists('block_onb_s_steps', array('position' => $position));
+        if ($stepbool) {
+            $returnstep = $DB->get_record('block_onb_s_steps', array('position' => $position));
+        } else {
+            $returnstep = -1;
+        }
+        return $returnstep;
+    }
 
     public static function get_step_data($position) {
         global $DB;
 
-        $return_step = $DB->get_record('block_onb_s_steps', array('position' => $position), $fields = '*', $strictness = IGNORE_MISSING);
+        $returnstep = $DB->get_record('block_onb_s_steps', array('position' => $position));
 
-        return $return_step;
+        return $returnstep;
+    }
+
+    public static function get_user_progress() {
+        global $DB, $USER;
+
+        $totalsteps = $DB->count_records('block_onb_s_steps');
+        $usercompletedsteps = $DB->count_records('block_onb_s_completed', array('userid' => $USER->id));
+
+        $returnprogress = (int)round(($usercompletedsteps / $totalsteps) * 100);
+
+        return $returnprogress;
+    }
+
+    public static function get_user_completed_step($stepid) {
+        global $DB, $USER;
+
+        $progress = $DB->get_records('block_onb_s_completed', array('userid' => $USER->id));
+
+        $returncompleted = 0;
+        foreach ($progress as $prostep)
+            if ($prostep->stepid == $stepid){
+                $returncompleted = 1;
+            }
+
+        return $returncompleted;
+    }
+
+    public static function message_no_steps() {
+        $returnstep['name'] = get_string('error_nosteps_title', 'block_onboarding');
+        $returnstep['description'] = get_string('error_nosteps_message', 'block_onboarding');
+        $returnstep['position'] = 0;
+        $returnstep['achievement'] = 0;
+        $returnstep['progress'] = 0;
+        $returnstep['completed'] = 0;
+
+        return $returnstep;
     }
 }

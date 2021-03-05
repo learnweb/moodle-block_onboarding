@@ -35,7 +35,6 @@ $functions = array(
         'description' => 'BESCHREIBUNG',
         'type'        => 'read',
         'ajax'        => true
-//        'capabilities' => '??????????????????????????????????' -> access.php (?)
     ),
     'block_onboarding_init_step' => array(
         'classname'   => 'block_onboarding_view_external',
@@ -44,15 +43,29 @@ $functions = array(
         'description' => 'BESCHREIBUNG',
         'type'        => 'read',
         'ajax'        => true
-//        'capabilities' => '??????????????????????????????????' -> access.php (?)
-//    ),
-//    'blocks_steps_record_step' => array(
-//        'classname'    => 'steps_view_external',
-//        'methodname'   => 'record_step',
-//        'classpath'    => 'blocks/steps/externallib.php',
-//        'description'  => 'Writes step completion to database',
-//        'type'         => 'write',
-//        'ajax'         => true,
-//        'capabilities' => '??????????????????????????????????'
+    ),
+    'block_onboarding_back_step' => array(
+        'classname'   => 'block_onboarding_view_external',
+        'methodname'  => 'back_step',
+        'classpath'   => 'blocks/onboarding/externallib.php',
+        'description' => 'BESCHREIBUNG',
+        'type'        => 'read',
+        'ajax'        => true
+    ),
+    'block_onboarding_init_helpful' => array(
+        'classname'   => 'block_onboarding_view_external',
+        'methodname'  => 'init_helpful',
+        'classpath'   => 'blocks/onboarding/externallib.php',
+        'description' => 'BESCHREIBUNG',
+        'type'        => 'read',
+        'ajax'        => true
+    ),
+    'block_onboarding_click_helpful' => array(
+        'classname'   => 'block_onboarding_view_external',
+        'methodname'  => 'click_helpful',
+        'classpath'   => 'blocks/onboarding/externallib.php',
+        'description' => 'BESCHREIBUNG',
+        'type'        => 'read',
+        'ajax'        => true
     )
 );

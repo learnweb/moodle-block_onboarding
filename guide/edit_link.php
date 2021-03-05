@@ -24,47 +24,37 @@ $context = context_system::instance();
 
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/wiki/edit_link.php'));
-$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
+$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
+$PAGE->navbar->add(get_string('guide', 'block_onboarding'), new moodle_url('overview.php'));
+$PAGE->navbar->add(get_string('wiki_admin', 'block_onboarding'), new moodle_url('admin_wiki.php'));
+$PAGE->navbar->add(get_string('edit_link', 'block_onboarding'));
 
-if(has_capability('block/onboarding:w_manage_wiki', $context)){
+if (has_capability('block/onboarding:w_manage_wiki', $context)) {
   $PAGE->set_title(get_string('edit_link', 'block_onboarding'));
   $PAGE->set_heading(get_string('edit_link', 'block_onboarding'));
 
-  require_once('./../classes/forms/wiki_link_form.php');
+  require_once($CFG->dirroot . '/blocks/onboarding/classes/forms/wiki_link_form.php');
 
-  $link_id = optional_param('link_id', -1, PARAM_INT);
-  $pLink = new stdClass;
-  $pLink->id = -1;
-  if($link_id != -1){
-    $pLink = $DB->get_record('block_onb_w_links', array('id'=>$link_id), $fields='*', $strictness=IGNORE_MISSING);
+  $linkid = optional_param('link_id', -1, PARAM_INT);
+  $paramlink = new stdClass;
+  $paramlink->id = -1;
+  if ($linkid != -1) {
+    $paramlink = $DB->get_record('block_onb_w_links', array('id' => $linkid));
   }
-  $mform = new wiki_link_form(null, array('link' => $pLink));
-    #$mform->addHelpButton('Link', 'link_description', 'block_onboarding');
-   # $this->add_action_buttons();
-  if ($mform->is_cancelled()) {
-  		redirect('overview.php');
-  } else if ($fromform = $mform->get_data()) {
-      $link = new stdClass();
-      $link->name = $fromform->name;
-      $link->category_id = $fromform->category_id;
-      $link->url = $fromform->url;
-      $link->description = $fromform->description;
-      $link->timecreated = time();
-      $link->timemodified = time();
 
-      if($fromform->id != -1){
-        $link->id = $fromform->id;
-        $DB->update_record('block_onb_w_links', $link, $bulk=false);
-      }else{
-        $link->id = $DB->insert_record('block_onb_w_links', $link);
-      }
-      redirect('overview.php');
+  $mform = new wiki_link_form(null, array('link' => $paramlink));
+
+  if ($mform->is_cancelled()) {
+    redirect('admin_wiki.php');
+  } else if ($fromform = $mform->get_data()) {
+    \block_onboarding\wiki_lib::edit_link($fromform);
+    redirect('admin_wiki.php');
   }
 
   echo $OUTPUT->header();
   $mform->display();
   echo $OUTPUT->footer();
-}else{
+} else {
   $PAGE->set_title(get_string('error', 'block_onboarding'));
   $PAGE->set_heading(get_string('error', 'block_onboarding'));
 

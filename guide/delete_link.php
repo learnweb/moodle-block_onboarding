@@ -23,13 +23,12 @@ global $DB;
 $context = context_system::instance();
 
 if(has_capability('block/onboarding:w_manage_wiki', $context)){
-  $category_id = optional_param('category_id', -1, PARAM_INT);
-  $DB->delete_records('block_onb_w_links', array('category_id' => $category_id));
-  $DB->delete_records('block_onb_w_categories', array('id' => $category_id));
-  redirect('overview.php');
+  $linkid = optional_param('link_id', -1, PARAM_INT);
+  \block_onboarding\wiki_lib::delete_link($linkid);
+  redirect('admin_wiki.php');
 }else{
   $PAGE->set_context($context);
-  $PAGE->set_url(new moodle_url('/blocks/onboarding/wiki/delete_category.php'));
+  $PAGE->set_url(new moodle_url('/blocks/onboarding/wiki/delete_link.php'));
   $PAGE->set_title(get_string('error', 'block_onboarding'));
   $PAGE->set_heading(get_string('error', 'block_onboarding'));
   $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));

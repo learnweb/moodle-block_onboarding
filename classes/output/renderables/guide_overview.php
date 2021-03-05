@@ -18,30 +18,36 @@ namespace block_onboarding\output\renderables;
 
 defined('MOODLE_INTERNAL') || die();
 
-use block_onboarding\stepslib;
+use block_onboarding\wikilib;
 use renderable;
 use templatable;
 use renderer_base;
 
-class steps_overview implements renderable, templatable {
+class guide_overview implements renderable, templatable {
   public function __construct() {
   }
-// OBSOLETE -> DATEI UND VERWEISE ENTFERNEN!!!
-//hier werden die von uns erzeugten Daten für das Template bereitgestellt
+
   public function export_for_template(renderer_base $output) {
     global $DB;
-    //hier werden die Steps in ein Array gelegt
-      $steps = array_values($DB->get_records_sql('SELECT * FROM {block_onb_s_steps} ORDER BY position ASC'));
-    $cur = 1;
-    foreach($steps as $step){
-        $step->index = $cur;
-        $cur++;
+
+   $categories = array_values($DB->get_records('block_onb_w_categories', $conditions=null, $sort='position ASC'));
+   $links = array_values($DB->get_records('block_onb_w_links', $conditions=null, $sort='position ASC'));
+
+
+    foreach($categories as $category){
+      foreach($links as $link){
+        if($link->category_id == $category->id){
+          $category->links[] = $link;
+
+        }
+      }
     }
 
-    //dieses Format nimmt das Template entgegen
     return [
-      'can_edit_steps' => has_capability('block/onboarding:s_edit_steps', \context_system::instance()) ? true : false,
-      'steps' => $steps
+      'can_manage_wiki' => has_capability('block/onboarding:w_manage_wiki', \context_system::instance()),
+      'can_manage_steps' => has_capability('block/onboarding:s_manage_steps', \context_system::instance()),
+      'categories_with_links' => $categories
     ];
   }
+
 }

@@ -16,7 +16,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once("$CFG->libdir/formslib.php");
+require_once($CFG->libdir . '/formslib.php');
 
 class wiki_link_form extends moodleform {
 
@@ -30,9 +30,10 @@ class wiki_link_form extends moodleform {
         $mform->addElement('hidden','id', $link->id);
         $mform->setType('id', PARAM_INT);
 
-        $mform->addElement('text', 'name', get_string('link_name', 'block_onboarding'));
+        $mform->addElement('text', 'name', get_string('link_name', 'block_onboarding'), array('maxlength'=>150, 'placeholder'=>get_string('default_link_name', 'block_onboarding')));
         $mform->setType('name', PARAM_TEXT);
-        $mform->setDefault('name', isset($link->name) ? $link->name : get_string('default_link_name', 'block_onboarding'));
+        $mform->setDefault('name', isset($link->name) ? $link->name : '');
+        $mform->addRule('name', get_string('link_name_req', 'block_onboarding'), 'required', null, 'client');
 
         $categories = $DB->get_records('block_onb_w_categories');
         $categories_modified = array();
@@ -43,16 +44,27 @@ class wiki_link_form extends moodleform {
         if(isset($link->category_id)){
           $mform->setDefault('category_id', $link->category_id);
         }
+        $mform->addRule('category_id', get_string('link_category_req', 'block_onboarding'), 'required', null, 'client');
 
-        $mform->addElement('text', 'url', get_string('link_url', 'block_onboarding'), 'size="48"');
+        $mform->addElement('text', 'url', get_string('link_url', 'block_onboarding'), array('maxlength'=>255, 'size'=>48, 'placeholder'=>get_string('default_link_url', 'block_onboarding')));
         $mform->setType('url', PARAM_TEXT);
-        $mform->setDefault('url', isset($link->url) ? $link->url : get_string('default_link_url', 'block_onboarding'));
+        $mform->setDefault('url', isset($link->url) ? $link->url : '');
+        $mform->addRule('url', get_string('link_url_req', 'block_onboarding'), 'required', null, 'client');
 
-        $mform->addElement('textarea', 'description', get_string('link_description', 'block_onboarding'),'wrap="virtual" rows="10" cols="50"');
+        $mform->addElement('textarea', 'description', get_string('link_description', 'block_onboarding'), array('wrap'=>"virtual", 'rows'=>10, 'cols'=>50, 'placeholder'=>get_string('link_description_req', 'block_onboarding')));
         $mform->setType('description', PARAM_TEXT);
-        $mform->setDefault('description', isset($link->description) ? $link->description : get_string('default_link_description', 'block_onboarding'));
-        #$mform->addHelpButton('description', 'link_description', 'block_onboarding');
-        #$mform->addElement('text', 'link_description', get_string('description_help', 'block_onboarding'));
+        $mform->setDefault('description', isset($link->description) ? $link->description : '');
+        $mform->addRule('description', get_string('link_description_req', 'block_onboarding'), 'required', null, 'client');
+
+        $count_positions = $DB->count_records('block_onb_w_links');
+        if($link->id == -1){
+            $position_array = range(1, $count_positions+1);
+        }else{
+            $position_array = range(1, $count_positions);
+        }
+        $mform->addElement('select', 'position',get_string('link_number', 'block_onboarding'),$position_array , array());
+        $mform->setType('position', PARAM_INT);
+        $mform->setDefault('position', isset($link->position) ? $link->position-1 : $count_positions);
 
         $this->add_action_buttons();
     }

@@ -30,18 +30,22 @@ class steps_admin implements renderable, templatable {
   public function export_for_template(renderer_base $output) {
     global $DB;
 
-    $steps = array_values($DB->get_records_sql('SELECT * FROM {block_onb_s_steps} ORDER BY position ASC'));
-    $cur = 1;
+    //$steps = array_values($DB->get_records_sql('SELECT * FROM {block_onb_s_steps} ORDER BY position ASC'));
+
+    $steps = array_values($DB->get_records('block_onb_s_steps', $conditions=null, $sort='position ASC'));
+
     foreach($steps as $step){
-        $step->index = $cur;
-        $cur++;
+        if($step->achievement == 1){
+            $step->achievement = get_string('step_achievement', 'block_onboarding');
+        } else {
+            $step->achievement = get_string('step_step', 'block_onboarding');
+        }
     }
 
-    //alte Funktion
-    //$steps = array_values($DB->get_records('block_onb_s_steps'));
 
     return [
-        'steps' => $steps
+      'can_manage_wiki' => has_capability('block/onboarding:s_manage_steps', \context_system::instance()),
+      'steps' => $steps
     ];
   }
 }

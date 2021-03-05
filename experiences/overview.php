@@ -15,36 +15,99 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 require(__DIR__ . '/../../../config.php');
-require "$CFG->libdir/tablelib.php";
+require($CFG->libdir . '/tablelib.php');
 require($CFG->dirroot . '/blocks/onboarding/classes/output/experience_table.php');
 
 require_login();
+
+global $DB;
 
 $context = context_system::instance();
 
 $table = new experience_table('uniqueid');
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/overview.php'));
-$PAGE->set_title(get_string('overview', 'block_onboarding'));
-$PAGE->set_heading(get_string('overview', 'block_onboarding'));
-$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
-$PAGE->requires->css('/blocks/onboarding/style.css');
+$PAGE->set_title(get_string('experiences', 'block_onboarding'));
+$PAGE->set_heading(get_string('experiences', 'block_onboarding'));
+$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
+$PAGE->navbar->add(get_string('experiences', 'block_onboarding'));
+
+require_once('./../classes/forms/experiences_filter_form.php');
+$mform = new experiences_filter_form(null, null);
+$form = $mform->render();
 
 $output = $PAGE->get_renderer('block_onboarding');
 echo $output->header();
 echo $output->container_start('experiences-overview');
-$renderable = new \block_onboarding\output\renderables\experiences_overview();
+$renderable = new \block_onboarding\output\renderables\experiences_overview($form);
 echo $output->render($renderable);
 echo $output->container_end();
 
-// Work out the sql for the table.
-$fields = 'ee.id as id, ee.name as name, u.firstname as author, ec.name as degreeprogram, ee.timecreated as published, ee.popularity as popularity';
+//$mform->display();
 
-$from = '{block_onb_e_exps} ee 
+// SQL Statement for Listview.
+$fields = 'ee.id as id, ee.name as name, u.firstname as author, ec.name as degreeprogram, ee.timecreated as published,
+ee.popularity as popularity';
+$from = '{block_onb_e_exps} ee
 INNER JOIN {user} u ON ee.user_id=u.id
 INNER JOIN {block_onb_e_courses} ec ON ee.course_id=ec.id';
+$where = '1=1';
 
-$table->set_sql($fields, $from, '1=1');
+$skip = false;
+if ($fromform = $mform->get_data()) {
+    $cats = '(' . implode(',', $fromform->category_filter) . ')';
+    $crs = '(' . implode(',', $fromform->course_filter) . ')';
+
+    if (empty($fromform->category_filter) != true) {
+        // Category Filter applied.
+        $sql = "SELECT experience_id
+        FROM {block_onb_e_exps_cats} matching WHERE category_id IN $cats";
+        $firstresult = $DB->get_fieldset_sql($sql);
+        $sqlfirstresult = '(' . implode(',', $firstresult) . ')';
+        if (empty($firstresult) != true) {
+            // Results for Category Filter.
+            $w = "WHERE id IN $sqlfirstresult";
+            if (empty($fromform->course_filter) != true) {
+                // Category and Course Filter applied.
+                $w = $w . "AND course_id IN $crs";
+            }
+        } else {
+            // No Results for Category Filter.
+            if (empty($fromform->course_filter) != true) {
+                // No Results for Category Filter + Course Filter applied.
+                $w = "WHERE course_id IN $crs";
+            } else {
+                // No Results for Category Filter + Course Filter empty.
+                $where = '1=0';
+                $skip = true;
+            }
+        }
+    } else {
+        // Category Filter empty.
+        if (empty($fromform->course_filter) != true) {
+            // Category Filter empty + Course Filter applied.
+            $w = "WHERE course_id IN $crs";
+        } else {
+            // Category and Course Filter empty.
+            $skip = true;
+        }
+    }
+    if ($skip != true) {
+        $sql = "SELECT id
+        FROM {block_onb_e_exps} experiences $w";
+        $result = $DB->get_fieldset_sql($sql);
+        $sqlresult = '(' . implode(',', $result) . ')';
+        if (empty($result) != true) {
+            // Results.
+            $where = 'ee.id IN' . $sqlresult;
+        } else {
+            // No Results.
+            $where = '1=0';
+        }
+    }
+}
+
+$table->set_sql($fields, $from, $where);
 
 $table->define_baseurl("$CFG->wwwroot/blocks/onboarding/experiences/overview.php");
 

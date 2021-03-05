@@ -23,14 +23,27 @@ $url = new moodle_url('/blocks/onboarding/experiences/admin.php');
 
 $PAGE->set_url($url);
 $PAGE->set_context($context);
-$PAGE->set_title(get_string('admin', 'block_onboarding'));
-$PAGE->set_heading(get_string('admin', 'block_onboarding'));
-$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
 
-$output = $PAGE->get_renderer('block_onboarding');
-echo $output->header();
-echo $output->container_start('experiences-admin');
-$renderable = new \block_onboarding\output\renderables\admin();
-echo $output->render($renderable);
-echo $output->container_end();
-echo $output->footer();
+if(has_capability('block/onboarding:w_manage_wiki', $context)){
+    $PAGE->set_title(get_string('experiences', 'block_onboarding'));
+    $PAGE->set_heading(get_string('experiences', 'block_onboarding'));
+    $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
+    $PAGE->navbar->add(get_string('experiences', 'block_onboarding'), new moodle_url('overview.php'));
+    $PAGE->navbar->add(get_string('experience_admin', 'block_onboarding'));
+    
+    $output = $PAGE->get_renderer('block_onboarding');
+    echo $output->header();
+    echo $output->container_start('experiences-admin');
+    $renderable = new \block_onboarding\output\renderables\experiences_admin();
+    echo $output->render($renderable);
+    echo $output->container_end();
+    echo $output->footer();
+}else{
+    $PAGE->set_title(get_string('error', 'block_onboarding'));
+    $PAGE->set_heading(get_string('error', 'block_onboarding'));
+    $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
+
+    echo $OUTPUT->header();
+    echo html_writer::tag('p', get_string('insufficient_permissions', 'block_onboarding'));
+    echo $OUTPUT->footer();
+}

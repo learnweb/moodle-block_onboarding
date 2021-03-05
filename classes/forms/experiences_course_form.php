@@ -16,7 +16,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once("$CFG->libdir/formslib.php");
+require_once($CFG->libdir . '/formslib.php');
 
 class experiences_course_form extends moodleform {
 
@@ -27,12 +27,15 @@ class experiences_course_form extends moodleform {
 
         $course = $this->_customdata['course'];
 
-        $mform->addElement('hidden','id', $course->id);
+        $mform->addElement('hidden', 'id', $course->id);
         $mform->setType('id', PARAM_INT);
 
-        $mform->addElement('text', 'name', get_string('course_name', 'block_onboarding'), 'required');
+        // Course Name Field.
+        $mform->addElement('text', 'name', get_string('course_name', 'block_onboarding'));
+        $mform->addRule('name', get_string('course_name_missing', 'block_onboarding'), 'required', null, 'server');
         $mform->setType('name', PARAM_TEXT);
-        $mform->setDefault('name', isset($course->name) ? $course->name : get_string('default_course_name', 'block_onboarding'));
+        $mform->setDefault('name', isset($course->name) ? $course->name :
+            get_string('default_course_name', 'block_onboarding'));
 
         $this->add_action_buttons();
     }

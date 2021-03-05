@@ -23,38 +23,42 @@ use templatable;
 use renderer_base;
 
 class experiences_experience implements renderable, templatable {
-  private $experience_id;
+    private $experience_id;
 
-  public function __construct($experience_id) {
-    $this->experience_id = $experience_id;
-  }
+    public function __construct($experience_id) {
+        $this->experience_id = $experience_id;
+    }
 
-  public function export_for_template(renderer_base $output) {
-    global $DB;
+    public function export_for_template(renderer_base $output) {
+        global $DB;
 
-    $experience = $DB->get_record('block_onb_e_exps', array('id' => $this->experience_id));
-    //$categories = $DB->get_records('block_onb_e_cats');
-    //$experiences_categories = $DB->get_records('block_onb_e_exps_cats', array('experience_id' => $experience_id));
+        $experience = $DB->get_record('block_onb_e_exps', array('id' => $this->experience_id));
+        // $categories = $DB->get_records('block_onb_e_cats');
+        // $experiences_categories = $DB->get_records('block_onb_e_exps_cats', array('experience_id' => $experience_id));
 
-    $sql = "SELECT * FROM {block_onb_e_exps_cats} block_onb_e_exps_cats
-    INNER JOIN {block_onb_e_cats} block_onb_e_cats
-    ON block_onb_e_exps_cats.category_id = block_onb_e_cats.id
-    WHERE block_onb_e_exps_cats.experience_id = {$this->experience_id}";
-    $experiences_categories_joined_categories = $DB->get_records_sql($sql);
+        // SQL Query to get Category content written by the User.
+        $sql = "SELECT * FROM {block_onb_e_exps_cats} block_onb_e_exps_cats
+        INNER JOIN {block_onb_e_cats} block_onb_e_cats
+        ON block_onb_e_exps_cats.category_id = block_onb_e_cats.id
+        WHERE block_onb_e_exps_cats.experience_id = {$this->experience_id}";
+        $experiences_categories_joined_categories = $DB->get_records_sql($sql);
 
-    $moresql= "SELECT ee.id, ec.name as degreeprogram, u.firstname as author
-    FROM {block_onb_e_exps} ee
-    INNER JOIN {block_onb_e_courses} ec
-    ON ee.course_id = ec.id
-    INNER JOIN {user} u
-    ON u.id = ee.user_id
-    WHERE ee.id = {$this->experience_id}";
-    $degreeprogram_author = $DB->get_record_sql($moresql);
+        // SQL Query to get Degree Program and Authors Firstname.
+        $moresql = "SELECT ee.id, ec.name as degreeprogram, u.firstname as author
+        FROM {block_onb_e_exps} ee
+        INNER JOIN {block_onb_e_courses} ec
+        ON ee.course_id = ec.id
+        INNER JOIN {user} u
+        ON u.id = ee.user_id
+        WHERE ee.id = {$this->experience_id}";
+        $degreeprogram_author = $DB->get_record_sql($moresql);
 
-    return [
-        'experience' => $experience,
-        'experiences_categories_joined_categories' => array_values($experiences_categories_joined_categories),
-        'degreeprogram_author' => $degreeprogram_author
-    ];
-  }
+        return [
+            'can_manage_experiences' => has_capability('block/onboarding:e_manage_experiences',
+                \context_system::instance()),
+            'experience' => $experience,
+            'experiences_categories_joined_categories' => array_values($experiences_categories_joined_categories),
+            'degreeprogram_author' => $degreeprogram_author
+        ];
+    }
 }
