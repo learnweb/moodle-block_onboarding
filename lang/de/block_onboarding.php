@@ -164,5 +164,7 @@ $string['newcategory'] = 'Neue Kategorie';
 $string['notenoughdata'] = 'Es gibt nicht genug Daten um einen Erfahrungsbericht zu erstellen';
 $string['selectcategories'] = 'Wähle Kategorien';
 
-
+$string['experience_admin'] = 'Experience Administration';
+$string['experience_questions_missing'] = 'Bitte trage hier Fragen ein, die Anstoß zum Schreiben geben.';
+$string['experience_category_missing'] = 'Bitte trage einen Kategorienamen ein.';
 

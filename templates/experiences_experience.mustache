@@ -29,8 +29,10 @@
 {{/experiences_categories_joined_categories}}
 </ul>
 {{#experience}}
-    <h4>{{# str }} aboutme, block_onboarding {{/ str }}</h4>
-    <p>{{{aboutme}}}</p>
+    {{#aboutme}}
+        <h4>{{# str }} aboutme, block_onboarding {{/ str }}</h4>
+        <p>{{{aboutme}}}</p>
+    {{/aboutme}}
 {{/experience}}
 {{#experiences_categories_joined_categories}}
 <h4>{{{name}}}</h4>
