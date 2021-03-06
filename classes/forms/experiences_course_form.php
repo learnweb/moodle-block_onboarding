@@ -33,6 +33,7 @@ class experiences_course_form extends moodleform {
         // Course Name Field.
         $mform->addElement('text', 'name', get_string('course_name', 'block_onboarding'));
         $mform->addRule('name', get_string('course_name_missing', 'block_onboarding'), 'required', null, 'server');
+        $mform->addRule('name', 'Max Length is 30 characters', 'maxlength', 30, 'block_onboarding');
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($course->name) ? $course->name :
             get_string('default_course_name', 'block_onboarding'));

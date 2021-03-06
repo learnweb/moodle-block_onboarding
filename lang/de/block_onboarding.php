@@ -143,7 +143,7 @@ $string['other'] = 'Sonstige';
 $string['types'] = 'Wähle eine Option aus';
 $string['report'] = 'Erfahrungsbericht melden';
 $string['report_overview'] = 'Meldeübersicht';
-$string['description_missing'] = 'Bitte tragen Sie eine Beschreibung ein.';
+$string['experience_description_missing'] = 'Bitte tragen Sie eine Beschreibung ein.';
 $string['filter_or'] = 'diese Filter';
 $string['filter_or_help'] =
     'Diese Filter sind jeweils OR verknüpft, heißt Berichte zu allen ausgewählten Kategorien werden angezeigt (Das Gleiche gilt für die Studiengänge).';
@@ -167,4 +167,5 @@ $string['selectcategories'] = 'Wähle Kategorien';
 $string['experience_admin'] = 'Experience Administration';
 $string['experience_questions_missing'] = 'Bitte trage hier Fragen ein, die Anstoß zum Schreiben geben.';
 $string['experience_category_missing'] = 'Bitte trage einen Kategorienamen ein.';
+$string['experience_type_missing'] = 'Bitte klicken Sie eine der Optionen an.';
 

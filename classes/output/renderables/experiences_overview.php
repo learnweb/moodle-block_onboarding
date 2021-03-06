@@ -64,12 +64,15 @@ class experiences_overview implements renderable, templatable {
             $courses_mapped[$course->id] = $course;
         }
 
+        $experience = $DB->get_record('block_onb_e_exps', array('user_id' => $USER->id));
+
         return [
             'can_manage_experiences' => has_capability('block/onboarding:e_manage_experiences', \context_system::instance()),
             'categories_general' => $categories,
             'courses_general' => $courses,
             'experiences_with_categories' => array_values($experiences_mapped),
-            'form' => $this->form
+            'form' => $this->form,
+            'experience' => $experience
         ];
     }
 }
