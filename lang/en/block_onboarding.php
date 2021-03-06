@@ -136,7 +136,7 @@ $string['other'] = 'Other';
 $string['types'] = 'Choose an Option';
 $string['report'] = 'Report Experience';
 $string['report_overview'] = 'Report Overview';
-$string['description_missing'] = 'Please enter a description.';
+$string['experience_description_missing'] = 'Please enter a description.';
 $string['filter_or'] = 'this filter';
 $string['filter_or_help'] =
     'This filter is OR connected meaning results from all selected categories will be displayed.';
@@ -159,5 +159,6 @@ $string['selectcategories'] = 'Select Categories';
 $string['experience_admin'] = 'Experience Administration';
 $string['experience_questions_missing'] = 'Please enter suggestive questions for this category.';
 $string['experience_category_missing'] = 'Please enter a category name.';
+$string['experience_type_missing'] = 'Please click one of the Options.';
 
 
