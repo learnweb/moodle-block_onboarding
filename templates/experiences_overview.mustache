@@ -11,7 +11,9 @@
 <aside>
     <div class="block-experiences-overview-experiences-actions">
         <h2>{{# str }} myexperiencearea, block_onboarding {{/ str }}</h2>
-        <a href="edit_experience.php">{{# str }} newexperience, block_onboarding {{/ str }}</a>
+        {{^experience}}
+            <a href="edit_experience.php">{{# str }} newexperience, block_onboarding {{/ str }}</a>
+        {{/experience}}
         <br></br>
         {{#experiences_with_categories}}
             <h3><a href="experience.php?experience_id={{{id}}}">{{{name}}}</a> {{#editable}} <a href="edit_experience.php?experience_id={{{id}}}">{{#pix}}t/editstring, core, Edit Experience{{/pix}}</a><a href="delete_experience.php?experience_id={{{id}}}">{{#pix}}t/delete, core, Delete Experience{{/pix}}</a>{{/editable}}</h3>

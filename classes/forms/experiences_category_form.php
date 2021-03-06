@@ -34,6 +34,7 @@ class experiences_category_form extends moodleform {
         $mform->addElement('text', 'name', get_string('category_name', 'block_onboarding'));
         $mform->addRule('name', get_string('experience_category_missing', 'block_onboarding'),
             'required', null, 'server');
+        $mform->addRule('name', 'Max Length is 30 characters', 'maxlength', 30, 'block_onboarding');
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($category->name) ? $category->name : get_string('default_category_name',
             'block_onboarding'));
