@@ -1,12 +1,12 @@
-.ul{
+.ul {
     margin-bottom: 0 !important;
 }
 
 .btn-normal {
-    background-color: #03A9F4;
-    /* Green */
+    background-color: #578014 !important;
     border: none;
-    color: #ffffff;
+    color: #ffffff !important;
+    outline-color: #ffffff !important;
     padding: 7px 16px;
     text-align: center;
     text-decoration: none;
@@ -17,6 +17,7 @@
 .title {
     font-size: 1.8em;
 }
+
 
 /* Home */
 
@@ -65,14 +66,15 @@
     bottom: 0px;
 }
 
+
 /* Guide */
 
-.admin-title{
+.admin-title {
     font-size: 1.8em;
     padding-bottom: 12px;
 }
 
-.admin-content-title{
+.admin-content-title {
     width: fit-content;
     font-size: 1.3em;
     color: #ffffff;
@@ -81,15 +83,16 @@
     padding: 7px 9px;
 }
 
-.admin-content-wrapper{
+.admin-content-wrapper {
     font-size: 1.1em;
     margin-top: 6px;
     margin-left: 4px;
 }
 
-.admin-edit-btn{
+.admin-edit-btn {
     padding-left: 12px;
 }
+
 
 /* Wiki */
 
@@ -99,7 +102,7 @@
     align-items: center;
 }
 
-.wiki-cat-container{
+.wiki-cat-container {
     width: calc(100% - 4px);
     position: relative;
     background-color: slategray;
@@ -108,7 +111,7 @@
     padding: 7px;
 }
 
-.wiki-cat-title-wrapper{
+.wiki-cat-title-wrapper {
     font-weight: bold;
     font-size: 1.3em;
     color: #ffffff;
@@ -117,7 +120,7 @@
     padding: 7px;
 }
 
-.wiki-cat-content-wrapper{
+.wiki-cat-content-wrapper {
     font-size: 1.1em;
     background-color: #f8f9fa;
     border-radius: 8px;
@@ -166,7 +169,7 @@
 }
 
 .steps-content-wrapper {
-    background-color: rgba(128,128,128,0.8);
+    background-color: rgba(128, 128, 128, 0.8);
     color: #ffffff;
     margin: 3px;
     padding: 7px;
@@ -310,11 +313,9 @@
     float: right;
 }
 
-.block-experiences-experience-helpful_btn {
-}
+.block-experiences-experience-helpful_btn {}
 
-.block-experiences-experience-popularity {
-}
+.block-experiences-experience-popularity {}
 
 .block-experiences-overview-experiences {
     height: 35vh;
