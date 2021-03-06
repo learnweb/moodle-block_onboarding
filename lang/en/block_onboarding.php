@@ -68,6 +68,8 @@ $string['manage_steps'] = 'Manage Steps';
 
 $string['button_done'] = 'Done';
 $string['button_back'] = 'Back';
+$string['button_reset'] = 'Reset Progress';
+$string['button_reset_message_js'] = 'Do you really want to reset your progress? All progress will be lost permanently.';
 
 $string['completed'] = 'Completed';
 $string['new_step'] = 'New Step';

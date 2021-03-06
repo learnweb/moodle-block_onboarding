@@ -146,13 +146,19 @@ class step_view_data_functions {
     public static function get_user_completed_step($stepid) {
         global $DB, $USER;
 
+        $step = $DB->get_record('block_onb_s_steps', array('id' => $stepid));
+        $totalsteps = $DB->count_records('block_onb_s_steps');
         $progress = $DB->get_records('block_onb_s_completed', array('userid' => $USER->id));
 
-        $returncompleted = 0;
-        foreach ($progress as $prostep)
-            if ($prostep->stepid == $stepid){
-                $returncompleted = 1;
+        if($step->position == $totalsteps and count($progress) == $totalsteps){
+            $returncompleted = 2;
+        } else{
+            $returncompleted = 0;
+            foreach ($progress as $prostep)
+                if ($prostep->stepid == $stepid){
+                    $returncompleted = 1;
             }
+        }
 
         return $returncompleted;
     }

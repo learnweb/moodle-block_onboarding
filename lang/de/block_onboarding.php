@@ -68,6 +68,8 @@ $string['manage_steps'] = 'Erste Schritte bearbeiten';
 
 $string['button_done'] = 'Erledigt!';
 $string['button_back'] = 'Zurück';
+$string['button_reset'] = 'Fortschritt zurücksetzen';
+$string['button_reset_message_js'] = 'Möchtest du deinen Fortschritt wirklich dauerhaft löschen?';
 
 $string['completed'] = 'Abgeschlossen';
 $string['new_step'] = 'Neuer Schritt';

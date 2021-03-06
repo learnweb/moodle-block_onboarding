@@ -1,5 +1,5 @@
 .ul {
-    margin-bottom: 0 !important;
+    margin-bottom: 0em !important;
 }
 
 .btn-normal {
@@ -230,8 +230,9 @@
     outline: 0 !important;
 }
 
-.skip-btn {
+.reset-btn {
     outline: 0 !important;
+    visibility: hidden;
 }
 
 #achievement-confetti {

@@ -231,6 +231,52 @@ class block_onboarding_view_external extends external_api {
             )
         );
     }
+    /* --------------------------------------------------------------------------------------------------------- */
+
+    /**
+     * The function itself
+     * Parameter erklären!
+     * @return string welcome message
+     */
+    public static function reset_progress() {
+        global $DB, $USER;
+
+        $params = self::validate_parameters(self::reset_progress_parameters(),
+            array()
+        );
+
+        // Lösche alle steps und current step
+        $DB->delete_records('block_onb_s_completed', array('userid' => $USER->id));
+        $DB->delete_records('block_onb_s_current', array('userid' => $USER->id));
+
+        $returnvalue['confirmation'] = 1;
+        return $returnvalue;
+    }
+
+    /**
+     * Returns description of method parameters
+     * Parameter erklären!
+     * @return external_function_parameters
+     */
+    public static function reset_progress_parameters() {
+        return new external_function_parameters(
+            array()
+        );
+    }
+
+    /**
+     * Returns description of method result value
+     * Parameter erklären!
+     * @return external_description
+     */
+
+    public static function reset_progress_returns() {
+        return new external_single_structure(
+            array(
+                'confirmation' => new external_value(PARAM_INT, 'confirmation of deletion'),
+            )
+        );
+    }
 
     /* --------------------------------------------------------------------------------------------------------- */
 

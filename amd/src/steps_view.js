@@ -3,37 +3,44 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
     var confetti_toogle = false;
     var step_string = 'Step ';
     var achievement_string = 'Achviement! ';
+    var reset_message_string = 'Do you really want to reset your progress?\nAll progress will be lost permanently.'
 
     var init = function () {
-
         // TODO: Ladezeit dauert relativ lange :(
         var step_promise = str.get_string('step_step_js', 'block_onboarding');
         var achievement_promise = str.get_string('step_achievement_js', 'block_onboarding');
-        $.when(step_promise, achievement_promise).done(function (step_promise_string, achievement_promise_string) {
-            step_string = step_promise_string;
-            achievement_string = achievement_promise_string;
-            var promises = ajax.call([{
-                methodname: 'block_onboarding_init_step',
-                args: {}
-            }]);
-            promises[0].done(function (response) {
-                if (response.completed == 1) {
-                    $('.step-completed').css('visibility', 'visible');
-                } else {
-                    $('.step-completed').css('visibility', 'hidden');
-                }
-                if (response.achievement == 1) {
-                    $('.step-title').text(achievement_string + response.name);
-                    confetti_toogle = true;
-                    confetti();
-                } else {
-                    $('.step-title').text(step_string + response.position + ': ' + response.name);
-                }
-                $('.step_description').text(response.description);
-                $('.progress-bar-value').text(response.progress + '%');
-                $('.progress-bar-fill').css('width', (response.progress + '%'));
-            }).fail(notification.exception);
-        });
+        var reset_message_promise = str.get_string('button_reset_message_js', 'block_onboarding');
+        $.when(step_promise, achievement_promise, reset_message_promise)
+            .done(function (step_promise_string, achievement_promise_string, reset_message_promise_string) {
+                step_string = step_promise_string;
+                achievement_string = achievement_promise_string;
+                reset_message_string = reset_message_promise_string;
+                var promises = ajax.call([{
+                    methodname: 'block_onboarding_init_step',
+                    args: {}
+                }]);
+                promises[0].done(function (response) {
+                    if (response.completed == 2) {
+                        $('.step-completed').css('visibility', 'visible');
+                        $('.next-btn').css('display', 'none');
+                        $('.reset-btn').css('visibility', 'visible');
+                    } else if (response.completed == 1) {
+                        $('.step-completed').css('visibility', 'visible');
+                    } else {
+                        $('.step-completed').css('visibility', 'hidden');
+                    }
+                    if (response.achievement == 1) {
+                        $('.step-title').text(achievement_string + response.name);
+                        confetti_toogle = true;
+                        confetti();
+                    } else {
+                        $('.step-title').text(step_string + response.position + ': ' + response.name);
+                    }
+                    $('.step_description').text(response.description);
+                    $('.progress-bar-value').text(response.progress + '%');
+                    $('.progress-bar-fill').css('width', (response.progress + '%'));
+                }).fail(notification.exception);
+            });
     };
 
     $('.next-btn').on('click', function () {
@@ -42,7 +49,11 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
             args: {}
         }]);
         promises[0].done(function (response) {
-            if (response.completed == 1) {
+            if (response.completed == 2) {
+                $('.step-completed').css('visibility', 'visible');
+                $('.next-btn').css('display', 'none');
+                $('.reset-btn').css('visibility', 'visible');
+            } else if (response.completed == 1) {
                 $('.step-completed').css('visibility', 'visible');
             } else {
                 $('.step-completed').css('visibility', 'hidden');
@@ -67,7 +78,9 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
             args: {}
         }]);
         promises[0].done(function (response) {
-            if (response.completed == 1) {
+            $('.reset-btn').css('visibility', 'hidden');
+            $('.next-btn').css('display', 'inline');
+            if (response.completed == 1 || response.completed == 2) {
                 $('.step-completed').css('visibility', 'visible');
             } else {
                 $('.step-completed').css('visibility', 'hidden');
@@ -82,6 +95,20 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
             }
             $('.step_description').text(response.description);
         }).fail(notification.exception);
+    })
+
+    $('.reset-btn').on('click', function () {
+        var reset_confirmation = confirm(reset_message_string);
+        if (reset_confirmation == true) {
+            var promises = ajax.call([{
+                methodname: 'block_onboarding_reset_progress',
+                args: {}
+            }]);
+            promises[0].done(function (response) {
+                location.reload();
+                return false;
+            }).fail(notification.exception);
+        }
     })
 
     var confetti = function () {

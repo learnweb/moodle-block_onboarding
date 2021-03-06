@@ -52,6 +52,14 @@ $functions = array(
         'type'        => 'read',
         'ajax'        => true
     ),
+    'block_onboarding_reset_progress' => array(
+        'classname'   => 'block_onboarding_view_external',
+        'methodname'  => 'reset_progress',
+        'classpath'   => 'blocks/onboarding/externallib.php',
+        'description' => 'BESCHREIBUNG',
+        'type'        => 'read',
+        'ajax'        => true
+    ),
     'block_onboarding_init_helpful' => array(
         'classname'   => 'block_onboarding_view_external',
         'methodname'  => 'init_helpful',
