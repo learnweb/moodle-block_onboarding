@@ -118,7 +118,13 @@ class experiences_experience_form extends moodleform {
         $mform->setDefault('contact', isset($experience->contact) ? $experience->contact : '');
         $mform->addHelpButton('contact', 'contactinformation', 'block_onboarding');
 
-        $this->add_action_buttons();
+        $buttonarray=array();
+        $buttonarray[] = $mform->createElement('submit', 'publish', get_string('publish', 'block_onboarding'));
+        $buttonarray[] = $mform->createElement('submit', 'draft', get_string('savedraft', 'block_onboarding'));
+        $buttonarray[] = $mform->createElement('cancel');
+        $mform->addGroup($buttonarray, 'buttonar', '', ' ', false);
+
+        // $this->add_action_buttons($cancel = true, get_string('publish', 'block_onboarding'));
     }
 
     public function validation($data, $files) {

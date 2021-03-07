@@ -155,10 +155,13 @@ $string['newdegreeprogram'] = 'New Degree Program';
 $string['newcategory'] = 'New Category';
 $string['notenoughdata'] = 'Not enough data to create an Experience Report';
 $string['selectcategories'] = 'Select Categories';
-
 $string['experience_admin'] = 'Experience Administration';
 $string['experience_questions_missing'] = 'Please enter suggestive questions for this category.';
 $string['experience_category_missing'] = 'Please enter a category name.';
 $string['experience_type_missing'] = 'Please click one of the Options.';
+
+$string['publish'] = 'Publish';
+$string['savedraft'] = 'Save as Draft';
+$string['draft'] = 'Draft';
 
 

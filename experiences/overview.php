@@ -36,15 +36,6 @@ require_once('./../classes/forms/experiences_filter_form.php');
 $mform = new experiences_filter_form(null, null);
 $form = $mform->render();
 
-$output = $PAGE->get_renderer('block_onboarding');
-echo $output->header();
-echo $output->container_start('experiences-overview');
-$renderable = new \block_onboarding\output\renderables\experiences_overview($form);
-echo $output->render($renderable);
-echo $output->container_end();
-
-//$mform->display();
-
 // SQL Statement for Listview.
 $fields = 'ee.id as id, ee.name as name, u.firstname as author, ec.name as degreeprogram, ee.timecreated as published,
 ee.popularity as popularity';
@@ -60,22 +51,23 @@ if ($fromform = $mform->get_data()) {
 
     if (empty($fromform->category_filter) != true) {
         // Category Filter applied.
-        $sql = "SELECT experience_id
-        FROM {block_onb_e_exps_cats} matching WHERE category_id IN $cats";
+        $sql = 'SELECT experience_id
+        FROM {block_onb_e_exps_cats} matching WHERE category_id IN' . $cats;
         $firstresult = $DB->get_fieldset_sql($sql);
         $sqlfirstresult = '(' . implode(',', $firstresult) . ')';
         if (empty($firstresult) != true) {
             // Results for Category Filter.
-            $w = "WHERE id IN $sqlfirstresult";
+            $w = 'WHERE id IN ' . $sqlfirstresult;
             if (empty($fromform->course_filter) != true) {
                 // Category and Course Filter applied.
-                $w = $w . "AND course_id IN $crs";
+                $w = $w . ' AND course_id IN' . $crs;
             }
+            $w = $w . ' AND published = 1';
         } else {
             // No Results for Category Filter.
             if (empty($fromform->course_filter) != true) {
                 // No Results for Category Filter + Course Filter applied.
-                $w = "WHERE course_id IN $crs";
+                $w = 'WHERE course_id IN ' . $crs . ' AND published = 1';
             } else {
                 // No Results for Category Filter + Course Filter empty.
                 $where = '1=0';
@@ -86,15 +78,15 @@ if ($fromform = $mform->get_data()) {
         // Category Filter empty.
         if (empty($fromform->course_filter) != true) {
             // Category Filter empty + Course Filter applied.
-            $w = "WHERE course_id IN $crs";
+            $w = 'WHERE course_id IN ' . $crs . ' AND published = 1';
         } else {
             // Category and Course Filter empty.
             $skip = true;
         }
     }
     if ($skip != true) {
-        $sql = "SELECT id
-        FROM {block_onb_e_exps} experiences $w";
+        $sql = 'SELECT id
+        FROM {block_onb_e_exps} experiences ' . $w;
         $result = $DB->get_fieldset_sql($sql);
         $sqlresult = '(' . implode(',', $result) . ')';
         if (empty($result) != true) {
@@ -106,11 +98,17 @@ if ($fromform = $mform->get_data()) {
         }
     }
 }
-
+$where = $where . ' AND ee.published = 1';
 $table->set_sql($fields, $from, $where);
-
 $table->define_baseurl("$CFG->wwwroot/blocks/onboarding/experiences/overview.php");
 
-$table->out(40, true);
+// $list = $table->out(40, true);
 
+$output = $PAGE->get_renderer('block_onboarding');
+echo $output->header();
+echo $output->container_start('experiences-overview');
+$renderable = new \block_onboarding\output\renderables\experiences_overview($form);
+echo $output->render($renderable);
+echo $output->container_end();
+$table->out(40, true);
 echo $output->footer();

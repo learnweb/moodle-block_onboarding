@@ -163,9 +163,11 @@ $string['newdegreeprogram'] = 'Neuer Studiengang';
 $string['newcategory'] = 'Neue Kategorie';
 $string['notenoughdata'] = 'Es gibt nicht genug Daten um einen Erfahrungsbericht zu erstellen';
 $string['selectcategories'] = 'Wähle Kategorien';
-
 $string['experience_admin'] = 'Experience Administration';
 $string['experience_questions_missing'] = 'Bitte trage hier Fragen ein, die Anstoß zum Schreiben geben.';
 $string['experience_category_missing'] = 'Bitte trage einen Kategorienamen ein.';
 $string['experience_type_missing'] = 'Bitte klicken Sie eine der Optionen an.';
+$string['publish'] = 'Veröffentltlichen';
+$string['savedraft'] = 'Als Entwurf speichern';
+$string['draft'] = 'Entwurf';
 

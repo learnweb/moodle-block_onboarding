@@ -21,13 +21,18 @@ defined('MOODLE_INTERNAL') || die();
 class experiences_lib {
     public static function edit_experience($fromform){
         global $DB;
-        
+
         // Data written in the Database.
         $experience = new \stdClass();
         $experience->name = $fromform->name;
         $experience->contact = isset($fromform->contact) ? $fromform->contact : null;
         $experience->user_id = isset($fromform->user_id) ? $fromform->user_id : null;
         $experience->course_id = isset($fromform->course_id) ? $fromform->course_id : null;
+        if (!empty($fromform->publish)) {
+            $experience->published = 1;
+        } elseif (!empty($fromform->draft)) {
+            $experience->published = null;
+        }
         $experience->timecreated = time();
         $experience->timemodified = time();
 

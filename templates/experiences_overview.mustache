@@ -1,25 +1,25 @@
 <div class="block-experiences-overview-experiences">
-<navigation>
-    <a href="../index.php">{{#pix}}t/left, core, Back{{/pix}}{{# str }} backtohome, block_onboarding {{/ str }}</a>
-    <div class="experiences-title-wrapper">
-        {{#can_manage_experiences}}<a href="admin.php">{{#pix}}i/settings, core, Settings{{/pix}}{{# str }} settings, block_onboarding {{/ str }}</a>{{/can_manage_experiences}}
-    </div>
-</navigation>
-<filter>
-    {{#form}}{{{form}}}{{/form}}
-</filter>
-<aside>
-    <div class="block-experiences-overview-experiences-actions">
-        <h2>{{# str }} myexperiencearea, block_onboarding {{/ str }}</h2>
-        {{^experience}}
-            <a href="edit_experience.php">{{# str }} newexperience, block_onboarding {{/ str }}</a>
-        {{/experience}}
-        <br></br>
-        {{#experiences_with_categories}}
-            <h3><a href="experience.php?experience_id={{{id}}}">{{{name}}}</a> {{#editable}} <a href="edit_experience.php?experience_id={{{id}}}">{{#pix}}t/editstring, core, Edit Experience{{/pix}}</a><a href="delete_experience.php?experience_id={{{id}}}">{{#pix}}t/delete, core, Delete Experience{{/pix}}</a>{{/editable}}</h3>
-            <!--{{#categories_general}}<p class="block-experiences-overview-category-badge">{{{name}}}</p> {{/categories_general}}-->
-        {{/experiences_with_categories}}
-    </div>
-</aside>
+    <navigation>
+        <a href="../index.php">{{#pix}}t/left, core, Back{{/pix}}{{# str }} backtohome, block_onboarding {{/ str }}</a>
+        <div class="experiences-title-wrapper">
+            {{#can_manage_experiences}}<a href="admin.php">{{#pix}}i/settings, core, Settings{{/pix}}{{# str }} settings, block_onboarding {{/ str }}</a>{{/can_manage_experiences}}
+        </div>
+    </navigation>
+    <filter>
+        {{#form}}{{{form}}}{{/form}}
+    </filter>
+    <aside>
+        <div class="block-experiences-overview-experiences-actions">
+            <h2>{{# str }} myexperiencearea, block_onboarding {{/ str }}</h2>
+            {{^experience}}
+                <a href="edit_experience.php">{{# str }} newexperience, block_onboarding {{/ str }}</a>
+            {{/experience}}
+            <br></br>
+            {{#experiences_with_categories}}
+                <h3><a href="experience.php?experience_id={{{id}}}">{{{name}}} {{^published}}[{{# str }} draft, block_onboarding {{/ str }}]{{/published}}</a> {{#editable}} <a href="edit_experience.php?experience_id={{{id}}}">{{#pix}}t/editstring, core, Edit Experience{{/pix}}</a><a href="delete_experience.php?experience_id={{{id}}}">{{#pix}}t/delete, core, Delete Experience{{/pix}}</a>{{/editable}}</h3>
+                <!--{{#categories_general}}<p class="block-experiences-overview-category-badge">{{{name}}}</p> {{/categories_general}}-->
+            {{/experiences_with_categories}}
+        </div>
+    </aside>
 </div>
 <br>

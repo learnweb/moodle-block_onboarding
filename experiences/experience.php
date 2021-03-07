@@ -26,18 +26,31 @@ $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/experience.php'));
 $experience_id = optional_param('experience_id', -1, PARAM_INT);
 $PAGE->requires->js_call_amd('block_onboarding/experiences_experience', 'init', array($experience_id));
-$PAGE->set_title(get_string('experience', 'block_onboarding'));
-$PAGE->set_heading(get_string('experience', 'block_onboarding'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
 $PAGE->navbar->add(get_string('experiences', 'block_onboarding'), new moodle_url('overview.php'));
 $experience = new stdClass();
 $experience = $DB->get_record('block_onb_e_exps', array('id' => $experience_id), $fields='*', $strictness=IGNORE_MISSING);
-$PAGE->navbar->add($experience->name);
 
-$output = $PAGE->get_renderer('block_onboarding');
-echo $output->header();
-echo $output->container_start('experiences-experience');
-$renderable = new \block_onboarding\output\renderables\experiences_experience($experience_id);
-echo $output->render($renderable);
-echo $output->container_end();
-echo $output->footer();
+if ($experience->user_id == $USER->id ||
+    has_capability('block/onboarding:e_manage_experiences', \context_system::instance())) {
+    $PAGE->set_title(get_string('experience', 'block_onboarding'));
+    $PAGE->set_heading(get_string('experience', 'block_onboarding'));
+    $PAGE->navbar->add($experience->name);
+
+    $output = $PAGE->get_renderer('block_onboarding');
+    echo $output->header();
+    echo $output->container_start('experiences-experience');
+    $renderable = new \block_onboarding\output\renderables\experiences_experience($experience_id);
+    echo $output->render($renderable);
+    echo $output->container_end();
+    echo $output->footer();
+} else {
+    $PAGE->set_title(get_string('error', 'block_onboarding'));
+    $PAGE->set_heading(get_string('error', 'block_onboarding'));
+    $PAGE->navbar->add(get_string('error', 'block_onboarding'));
+
+    echo $OUTPUT->header();
+    echo html_writer::tag('p', get_string('insufficient_permissions', 'block_onboarding'));
+    echo $OUTPUT->footer();
+}
+
