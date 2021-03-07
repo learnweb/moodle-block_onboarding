@@ -25,6 +25,7 @@ $PAGE->set_url($url);
 $PAGE->set_context($context);
 
 if(has_capability('block/onboarding:e_manage_experiences', $context)){
+    $PAGE->requires->js_call_amd('block_onboarding/delete_confirmation', 'init');
     $PAGE->set_title(get_string('experiences', 'block_onboarding'));
     $PAGE->set_heading(get_string('experiences', 'block_onboarding'));
     $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));

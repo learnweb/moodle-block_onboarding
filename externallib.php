@@ -445,9 +445,11 @@ class block_onboarding_view_external extends external_api {
         switch ($context) {
             case 'wiki-category':
                 $affected = $DB->count_records('block_onb_w_links', array('category_id' => $id));
-                $returnmessage['text'] = "Möchten Sie die Kategorie wirklich Löschen? " . $affected . " entries will be deleted.";
+                $returnmessage['text'] = get_string('msg_delete_steps_cats_warning', 'block_onboarding') . $affected . get_string('msg_delete_steps_cats_lost', 'block_onboarding');
                 break;
-            case 'experience-category':
+            case 'exp-category':
+                $affected = $DB->count_records('block_onb_e_exps_cats', array('category_id' => $id));
+                $returnmessage['text'] = get_string('msg_delete_exp_cats_warning', 'block_onboarding') . $affected . get_string('msg_delete_exp_cats_lost', 'block_onboarding');
                 break;
         }
         return $returnmessage;
@@ -503,7 +505,9 @@ class block_onboarding_view_external extends external_api {
                 \block_onboarding\wiki_lib::delete_category($id);
                 $returnvalue['confirmation'] = 1;
                 break;
-            case 'experience-category':
+            case 'exp-category':
+                \block_onboarding\experiences_lib::delete_category($id);
+                $returnvalue['confirmation'] = 1;
                 break;
         }
         return $returnvalue;

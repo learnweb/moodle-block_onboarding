@@ -22,6 +22,8 @@ global $DB;
 
 $context = context_system::instance();
 
+// TODO: Obsolete Datei -> potentiell löschen!
+
 if (has_capability('block/onboarding:e_manage_experiences', $context)) {
     $category_id = optional_param('category_id', -1, PARAM_INT);
     block_onboarding\experiences_lib::delete_category($category_id);

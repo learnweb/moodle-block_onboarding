@@ -60,6 +60,8 @@ $string['default_link_name'] = 'Beispiel Link';
 $string['default_link_name'] = 'Beispiel Name';
 $string['default_link_url'] = 'https://www.example.com';
 $string['default_link_description'] = 'Beispiel Beschreibung';
+$string['msg_delete_steps_cats_warning'] = 'WARNUNG: Links in dieser Kategorie: ';
+$string['msg_delete_steps_cats_lost'] = '. In dieser Kategorie enthaltene Links werden dauerhaft gelöscht. Möchtest du die Kategorie wirklich löschen?';
 
 // -> Steps
 $string['steps'] = 'Erste Schritte';
@@ -169,5 +171,6 @@ $string['selectcategories'] = 'Wähle Kategorien';
 $string['experience_admin'] = 'Experience Administration';
 $string['experience_questions_missing'] = 'Bitte trage hier Fragen ein, die Anstoß zum Schreiben geben.';
 $string['experience_category_missing'] = 'Bitte trage einen Kategorienamen ein.';
-$string['experience_type_missing'] = 'Bitte klicken Sie eine der Optionen an.';
+$string['msg_delete_exp_cats_warning'] = 'WARNUNG: Berichte mit Einträgen zu dieser Kategorie: ';
+$string['msg_delete_exp_cats_lost'] = '. Die Bericht-Einträge zu dieser Kategorie werden dauerhaft gelöscht. Möchtest du die Kategorie wirklich löschen?';
 
