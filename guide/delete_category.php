@@ -22,6 +22,8 @@ global $DB;
 
 $context = context_system::instance();
 
+// TODO: Obsolete Datei -> Löschen!
+
 if(has_capability('block/onboarding:w_manage_wiki', $context)){
   $categoryid = optional_param('category_id', -1, PARAM_INT);
   \block_onboarding\wiki_lib::delete_category($categoryid);

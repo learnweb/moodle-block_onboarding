@@ -16,7 +16,7 @@
         {{/experience}}
         <br></br>
         {{#experiences_with_categories}}
-            <h3><a href="experience.php?experience_id={{{id}}}">{{{name}}}</a> {{#editable}} <a href="edit_experience.php?experience_id={{{id}}}">{{#pix}}t/editstring, core, Edit Experience{{/pix}}</a><a href="delete_experience.php?experience_id={{{id}}}">{{#pix}}t/delete, core, Delete Experience{{/pix}}</a>{{/editable}}</h3>
+            <h3><a href="experience.php?experience_id={{{id}}}">{{{name}}}</a> {{#editable}} <a href="edit_experience.php?experience_id={{{id}}}">{{#pix}}t/editstring, core, Edit Experience{{/pix}}</a><span  class="delete-btn">{{#pix}}t/delete, core, Delete Experience{{/pix}}</span>{{/editable}}</h3>
             <!--{{#categories_general}}<p class="block-experiences-overview-category-badge">{{{name}}}</p> {{/categories_general}}-->
         {{/experiences_with_categories}}
     </div>

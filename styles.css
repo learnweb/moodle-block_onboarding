@@ -18,6 +18,14 @@
     font-size: 1.8em;
 }
 
+.delete-btn{
+    color: #ca3120;
+}
+
+.delete-btn:hover{
+    color: #852116;
+}
+
 
 /* Home */
 

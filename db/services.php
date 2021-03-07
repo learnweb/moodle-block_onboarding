@@ -25,7 +25,7 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-// TODO: Array-Informationen der Funktionen prüfen und überarbeiten!
+// TODO: Array-Informationen der Funktionen prüfen und überarbeiten! READ / WRTIE!! CAPABILITIES BEI LÖSCHEN
 
 $functions = array(
     'block_onboarding_next_step' => array(
@@ -71,6 +71,22 @@ $functions = array(
     'block_onboarding_click_helpful' => array(
         'classname'   => 'block_onboarding_view_external',
         'methodname'  => 'click_helpful',
+        'classpath'   => 'blocks/onboarding/externallib.php',
+        'description' => 'BESCHREIBUNG',
+        'type'        => 'read',
+        'ajax'        => true
+    ),
+    'block_onboarding_delete_confirmation' => array(
+        'classname'   => 'block_onboarding_view_external',
+        'methodname'  => 'delete_confirmation',
+        'classpath'   => 'blocks/onboarding/externallib.php',
+        'description' => 'BESCHREIBUNG',
+        'type'        => 'read',
+        'ajax'        => true
+    ),
+    'block_onboarding_delete_entry' => array(
+        'classname'   => 'block_onboarding_view_external',
+        'methodname'  => 'delete_entry',
         'classpath'   => 'blocks/onboarding/externallib.php',
         'description' => 'BESCHREIBUNG',
         'type'        => 'read',

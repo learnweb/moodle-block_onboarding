@@ -273,7 +273,7 @@ class block_onboarding_view_external extends external_api {
     public static function reset_progress_returns() {
         return new external_single_structure(
             array(
-                'confirmation' => new external_value(PARAM_INT, 'confirmation of deletion'),
+                'confirmation' => new external_value(PARAM_INT, 'confirmation of deletion')
             )
         );
     }
@@ -406,6 +406,118 @@ class block_onboarding_view_external extends external_api {
             array(
                 'exists'      => new external_value(PARAM_INT, 'entry existence'),
                 'popularity'      => new external_value(PARAM_INT, 'popularity of report')
+            )
+        );
+    }
+
+    /* --------------------------------------------------------------------------------------------------------- */
+
+    /**
+     * Returns description of method parameters
+     * Parameter erklären!
+     * @return external_function_parameters
+     */
+    public static function delete_confirmation_parameters() {
+        return new external_function_parameters(
+            array(
+                'context' => new external_value(PARAM_TEXT, 'object type which is to be deleted'),
+                'id' => new external_value(PARAM_INT, 'data id which is to be deleted'),
+            )
+        );
+    }
+
+    /**
+     * The function itself
+     * Parameter erklären!
+     * @return string welcome message
+     */
+
+    public static function delete_confirmation($context, $id) {
+        global $DB, $USER;
+
+        $params = self::validate_parameters(self::delete_confirmation_parameters(),
+            array(
+                'context' => $context,
+                'id' => $id
+            )
+        );
+
+        switch ($context) {
+            case 'wiki-category':
+                $affected = $DB->count_records('block_onb_w_links', array('category_id' => $id));
+                $returnmessage['text'] = "Möchten Sie die Kategorie wirklich Löschen? " . $affected . " entries will be deleted.";
+                break;
+            case 'experience-category':
+                break;
+        }
+        return $returnmessage;
+    }
+
+    /**
+     * Returns description of method result value
+     * Parameter erklären!
+     * @return external_description
+     */
+    public static function delete_confirmation_returns() {
+        return new external_single_structure(
+            array(
+                'text'      => new external_value(PARAM_TEXT, 'information about number of data entries that will be deleted')
+            )
+        );
+    }
+
+    /* --------------------------------------------------------------------------------------------------------- */
+
+    /**
+     * Returns description of method parameters
+     * Parameter erklären!
+     * @return external_function_parameters
+     */
+    public static function delete_entry_parameters() {
+        return new external_function_parameters(
+            array(
+                'context' => new external_value(PARAM_TEXT, 'object type which is to be deleted'),
+                'id' => new external_value(PARAM_INT, 'data id which is to be deleted'),
+            )
+        );
+    }
+
+    /**
+     * The function itself
+     * Parameter erklären!
+     * @return string welcome message
+     */
+
+    public static function delete_entry($context, $id) {
+        global $DB, $USER;
+
+        $params = self::validate_parameters(self::delete_entry_parameters(),
+            array(
+                'context' => $context,
+                'id' => $id
+            )
+        );
+
+        switch ($context) {
+            case 'wiki-category':
+                \block_onboarding\wiki_lib::delete_category($id);
+                $returnvalue['confirmation'] = 1;
+                break;
+            case 'experience-category':
+                break;
+        }
+        return $returnvalue;
+    }
+
+    /**
+     * Returns description of method result value
+     * Parameter erklären!
+     * @return external_description
+     */
+    public static function delete_entry_returns() {
+        return new external_single_structure(
+            array(
+                'confirmation' => new external_value(PARAM_INT, 'confirmation of deletion')
             )
         );
     }
