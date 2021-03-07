@@ -188,7 +188,7 @@ class step_view_data_functions {
         $returnstep['achievement'] = 0;
         $returnstep['progress'] = 0;
         $returnstep['completed'] = 0;
-        $returnstep['visibility'] = 1;
+        $returnstep['visibility'] = -1;
 
         return $returnstep;
     }

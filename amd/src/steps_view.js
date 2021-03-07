@@ -22,11 +22,13 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
                     args: {}
                 }]);
                 promises[0].done(function (response) {
-                    if(response.visibility == 1){
+                    if(response.visibility == 0){
+                        $('.show-btn').css('display', 'inline');
+                    } else if(response.visibility == 1){
                         $('.hide-btn').css('display', 'inline');
                         $('.steps-container').css('display', 'block');
                     } else {
-                        $('.show-btn').css('display', 'inline');
+                        $('.steps-container').css('display', 'block');
                     }
                     if (response.completed == 2) {
                         $('.step-completed').css('visibility', 'visible');
