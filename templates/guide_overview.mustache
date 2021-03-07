@@ -1,16 +1,26 @@
 <a href="../index.php">
-    {{#pix}}t/left, core, {{# str }}back, block_onboarding{{/ str }}
-    {{/pix}}{{# str }}backtohome, block_onboarding{{/ str }}
+    {{#pix}}t/left, core, {{# str }}back, block_onboarding{{/ str }}{{/pix}}
+    {{# str }}backtohome, block_onboarding{{/ str }}
 </a>
 <br>
 <div class="steps-title-wrapper">
     <span class="title">{{# str }}steps, block_onboarding{{/ str }}</span>
-    {{#can_manage_steps}}
-        <a href="admin_steps.php">
-            {{#pix}}i/settings, core, {{# str }}manage_steps, block_onboarding{{/ str }}
-            {{/pix}}{{# str }}settings, block_onboarding{{/ str }}
-        </a>
-    {{/can_manage_steps}}
+    <span class="steps-title-button-wrapper">
+        <span class="hide-btn">
+            {{#pix}}i/show, core, {{# str }}hide_steps, block_onboarding{{/ str }}{{/pix}}
+            {{# str }}hide, block_onboarding{{/ str }}
+        </span>
+        <span class="show-btn">
+            {{#pix}}i/hide, core, {{# str }}show_steps, block_onboarding{{/ str }}{{/pix}}
+            {{# str }}show, block_onboarding{{/ str }}
+        </span>
+        {{#can_manage_steps}}
+            <a href="admin_steps.php">
+                {{#pix}}i/settings, core, {{# str }}manage_steps, block_onboarding{{/ str }}{{/pix}}
+                {{# str }}settings, block_onboarding{{/ str }}
+            </a>
+        {{/can_manage_steps}}
+    </span>
 </div>
 <div class="steps-container">
     <canvas id="achievement-confetti"></canvas>
@@ -31,6 +41,9 @@
             <button class="next-btn btn btn-primary" type=button>
                 {{# str }}button_done, block_onboarding{{/ str }}
             </button>
+            <button class="reset-btn btn btn-danger" type=button>
+                {{# str }}button_reset, block_onboarding{{/ str }}
+            </button>
         </div>
     </div>
 </div>
@@ -40,8 +53,8 @@
     <div class="title">{{# str }}wiki, block_onboarding{{/ str }}</div>
     {{#can_manage_wiki}}
         <a href="admin_wiki.php" class="admin-link">
-            {{#pix}}i/settings, core, {{# str }}manage_wiki, block_onboarding
-            {{/ str }}{{/pix}}{{# str }}settings, block_onboarding{{/ str }}
+            {{#pix}}i/settings, core, {{# str }}manage_wiki, block_onboarding{{/ str }}{{/pix}}
+            {{# str }}settings, block_onboarding{{/ str }}
         </a>
     {{/can_manage_wiki}}
 </div>
