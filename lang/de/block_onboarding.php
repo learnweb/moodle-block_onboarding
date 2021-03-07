@@ -72,6 +72,10 @@ $string['button_done'] = 'Erledigt!';
 $string['button_back'] = 'Zurück';
 $string['button_reset'] = 'Fortschritt zurücksetzen';
 $string['button_reset_message_js'] = 'Möchtest du deinen Fortschritt wirklich dauerhaft löschen?';
+$string['hide'] = 'Ausblenden';
+$string['show'] = 'Einblenden';
+$string['hide_steps'] = 'Erste Schritte ausblenden';
+$string['show_steps'] = 'Erste Schritte einblenden';
 
 $string['completed'] = 'Abgeschlossen';
 $string['new_step'] = 'Neuer Schritt';

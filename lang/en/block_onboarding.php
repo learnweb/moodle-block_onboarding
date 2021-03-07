@@ -72,6 +72,10 @@ $string['button_done'] = 'Done';
 $string['button_back'] = 'Back';
 $string['button_reset'] = 'Reset Progress';
 $string['button_reset_message_js'] = 'Do you really want to reset your progress? All progress will be lost permanently.';
+$string['hide'] = 'Hide';
+$string['show'] = 'Show';
+$string['hide_steps'] = 'Hide First Steps';
+$string['show_steps'] = 'Show First Steps';
 
 $string['completed'] = 'Completed';
 $string['new_step'] = 'New Step';

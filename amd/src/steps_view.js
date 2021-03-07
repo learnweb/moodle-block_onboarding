@@ -10,16 +10,24 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
         var step_promise = str.get_string('step_step_js', 'block_onboarding');
         var achievement_promise = str.get_string('step_achievement_js', 'block_onboarding');
         var reset_message_promise = str.get_string('button_reset_message_js', 'block_onboarding');
+
         $.when(step_promise, achievement_promise, reset_message_promise)
             .done(function (step_promise_string, achievement_promise_string, reset_message_promise_string) {
                 step_string = step_promise_string;
                 achievement_string = achievement_promise_string;
                 reset_message_string = reset_message_promise_string;
+
                 var promises = ajax.call([{
                     methodname: 'block_onboarding_init_step',
                     args: {}
                 }]);
                 promises[0].done(function (response) {
+                    if(response.visibility == 1){
+                        $('.hide-btn').css('display', 'inline');
+                        $('.steps-container').css('display', 'block');
+                    } else {
+                        $('.show-btn').css('display', 'inline');
+                    }
                     if (response.completed == 2) {
                         $('.step-completed').css('visibility', 'visible');
                         $('.next-btn').css('display', 'none');
@@ -33,6 +41,9 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
                         $('.step-title').text(achievement_string + response.name);
                         confetti_toogle = true;
                         confetti();
+                        setTimeout(function () {
+                            confetti_toogle = false;
+                        }, 4000);
                     } else {
                         $('.step-title').text(step_string + response.position + ': ' + response.name);
                     }
@@ -62,6 +73,9 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
                 $('.step-title').text(achievement_string + response.name);
                 confetti_toogle = true;
                 confetti();
+                setTimeout(function () {
+                    confetti_toogle = false;
+                }, 4000);
             } else {
                 $('.step-title').text(step_string + response.position + ': ' + response.name);
                 confetti_toogle = false;
@@ -89,6 +103,9 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
                 $('.step-title').text(achievement_string + response.name);
                 confetti_toogle = true;
                 confetti();
+                setTimeout(function () {
+                    confetti_toogle = false;
+                }, 4000);
             } else {
                 $('.step-title').text(step_string + response.position + ': ' + response.name);
                 confetti_toogle = false;
@@ -109,6 +126,36 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
                 return false;
             }).fail(notification.exception);
         }
+    })
+
+    $('.hide-btn').on('click', function () {
+        var visibility = 0;
+        var promises = ajax.call([{
+            methodname: 'block_onboarding_toggle_visibility',
+            args: {
+                visibility: visibility
+            }
+        }]);
+        promises[0].done(function (response) {
+            $('.hide-btn').css('display', 'none');
+            $('.show-btn').css('display', 'inline');
+            $('.steps-container').css('display', 'none');
+        }).fail(notification.exception);
+    })
+
+    $('.show-btn').on('click', function () {
+        var visibility = 1;
+        var promises = ajax.call([{
+            methodname: 'block_onboarding_toggle_visibility',
+            args: {
+                visibility: visibility
+            }
+        }]);
+        promises[0].done(function (response) {
+            $('.hide-btn').css('display', 'inline');
+            $('.show-btn').css('display', 'none');
+            $('.steps-container').css('display', 'block');
+        }).fail(notification.exception);
     })
 
     var confetti = function () {

@@ -60,6 +60,14 @@ $functions = array(
         'type'        => 'read',
         'ajax'        => true
     ),
+    'block_onboarding_toggle_visibility' => array(
+        'classname'   => 'block_onboarding_view_external',
+        'methodname'  => 'toggle_visibility',
+        'classpath'   => 'blocks/onboarding/externallib.php',
+        'description' => 'BESCHREIBUNG',
+        'type'        => 'read',
+        'ajax'        => true
+    ),
     'block_onboarding_init_helpful' => array(
         'classname'   => 'block_onboarding_view_external',
         'methodname'  => 'init_helpful',

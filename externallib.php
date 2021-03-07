@@ -36,6 +36,7 @@ class block_onboarding_view_external extends external_api {
      */
 
     public static function init_step() {
+        global $DB, $USER;
 
         $params = self::validate_parameters(self::init_step_parameters(),
             array()
@@ -56,6 +57,8 @@ class block_onboarding_view_external extends external_api {
             $progress = \block_onboarding\step_view_data_functions::get_user_progress();
             // Prüfen, ob step schon completed wurde
             $completed = \block_onboarding\step_view_data_functions::get_user_completed_step($step->id);
+            // visibility prüfen
+            $visibility = $DB->get_record('block_onb_s_current', array('userid' => $USER->id))->showsteps;
 
             $returnstep['name'] = $step->name;
             $returnstep['description'] = $step->description;
@@ -63,6 +66,7 @@ class block_onboarding_view_external extends external_api {
             $returnstep['achievement'] = $step->achievement;
             $returnstep['progress'] = $progress;
             $returnstep['completed'] = $completed;
+            $returnstep['visibility'] = $visibility;
 
             return $returnstep;
         }
@@ -93,6 +97,7 @@ class block_onboarding_view_external extends external_api {
                 'achievement' => new external_value(PARAM_INT, 'determines whether a step is an achievement'),
                 'progress' => new external_value(PARAM_INT, 'progress of user'),
                 'completed' => new external_value(PARAM_INT, 'determines whether user already completed step'),
+                'visibility' => new external_value(PARAM_INT, 'indicates visibility of First Steps section')
             )
         );
     }
@@ -231,6 +236,7 @@ class block_onboarding_view_external extends external_api {
             )
         );
     }
+
     /* --------------------------------------------------------------------------------------------------------- */
 
     /**
@@ -274,6 +280,65 @@ class block_onboarding_view_external extends external_api {
         return new external_single_structure(
             array(
                 'confirmation' => new external_value(PARAM_INT, 'confirmation of deletion')
+            )
+        );
+    }
+
+    /* --------------------------------------------------------------------------------------------------------- */
+
+    /**
+     * The function itself
+     * Parameter erklären!
+     * @return string welcome message
+     */
+    public static function toggle_visibility($visibility) {
+        global $DB, $USER;
+
+        $params = self::validate_parameters(self::toggle_visibility_parameters(),
+            array(
+                'visibility' => $visibility
+            )
+        );
+
+        $record = $DB->get_record('block_onb_s_current', array('userid' => $USER->id));
+        $record->timemodified = time();
+
+        if($visibility == 0) {
+            $record->showsteps = 0;
+            $DB->update_record('block_onb_s_current', $record);
+        } else if($visibility == 1) {
+            $record->showsteps = 1;
+            $DB->update_record('block_onb_s_current', $record);
+        }
+
+        // all other inputs just return visibility
+        $returnvalue['return_visibility'] = $record->showsteps;
+        return $returnvalue;
+    }
+
+    /**
+     * Returns description of method parameters
+     * Parameter erklären!
+     * @return external_function_parameters
+     */
+    public static function toggle_visibility_parameters() {
+        return new external_function_parameters(
+            array(
+                'visibility' => new external_value(PARAM_INT, 'visibility = 0 -> hide, visibility = 1 -> show')
+            )
+        );
+    }
+
+    /**
+     * Returns description of method result value
+     * Parameter erklären!
+     * @return external_description
+     */
+
+    public static function toggle_visibility_returns() {
+        return new external_single_structure(
+            array(
+                'return_visibility' => new external_value(PARAM_INT, 'indicates visibility of First Steps section')
             )
         );
     }
@@ -433,7 +498,7 @@ class block_onboarding_view_external extends external_api {
      */
 
     public static function delete_confirmation($context, $id) {
-        global $DB, $USER;
+        global $DB;
 
         $params = self::validate_parameters(self::delete_confirmation_parameters(),
             array(
@@ -491,7 +556,6 @@ class block_onboarding_view_external extends external_api {
      */
 
     public static function delete_entry($context, $id) {
-        global $DB, $USER;
 
         $params = self::validate_parameters(self::delete_entry_parameters(),
             array(
