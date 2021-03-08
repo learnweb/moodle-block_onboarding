@@ -56,16 +56,6 @@ class wiki_link_form extends moodleform {
         $mform->setDefault('description', isset($link->description) ? $link->description : '');
         $mform->addRule('description', get_string('link_description_req', 'block_onboarding'), 'required', null, 'client');
 
-        $count_positions = $DB->count_records('block_onb_w_links');
-        if($link->id == -1){
-            $position_array = range(1, $count_positions+1);
-        }else{
-            $position_array = range(1, $count_positions);
-        }
-        $mform->addElement('select', 'position',get_string('link_number', 'block_onboarding'),$position_array , array());
-        $mform->setType('position', PARAM_INT);
-        $mform->setDefault('position', isset($link->position) ? $link->position-1 : $count_positions);
-
         $this->add_action_buttons();
     }
 
