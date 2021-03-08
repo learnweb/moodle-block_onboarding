@@ -33,7 +33,7 @@ $PAGE->set_heading(get_string('experiences', 'block_onboarding'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
 $PAGE->navbar->add(get_string('experiences', 'block_onboarding'));
 
-require_once('./../classes/forms/experiences_filter_form.php');
+require_once($CFG->dirroot . '/blocks/onboarding/classes/forms/experiences_filter_form.php');
 $mform = new experiences_filter_form(null, null);
 $form = $mform->render();
 

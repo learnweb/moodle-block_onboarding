@@ -347,7 +347,7 @@
 .block-experiences-experience-popularity {}
 
 .block-experiences-overview-experiences {
-    height: 35vh;
+    height: 45vh;
     display: grid;
     grid-template-rows: 40px 1fr;
     grid-template-columns: 25% 25% 25% 25%;
