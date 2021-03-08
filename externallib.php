@@ -516,6 +516,14 @@ class block_onboarding_view_external extends external_api {
                 $affected = $DB->count_records('block_onb_e_exps_cats', array('category_id' => $id));
                 $returnmessage['text'] = get_string('msg_delete_exp_cats_warning', 'block_onboarding') . $affected . get_string('msg_delete_exp_cats_lost', 'block_onboarding');
                 break;
+            case 'exp-course':
+                $affected = $DB->count_records('block_onb_e_exps', array('course_id' => $id));
+                $returnmessage['text'] = get_string('msg_delete_exp_course_warning', 'block_onboarding') . $affected . get_string('msg_delete_exp_course_lost', 'block_onboarding');
+                break;
+            case 'exp-exp':
+                $affected = $DB->count_records('block_onb_e_exps_cats', array('experience_id' => $id));
+                $returnmessage['text'] = get_string('msg_delete_exp_exp_student_warning', 'block_onboarding');
+                break;
         }
         return $returnmessage;
     }
@@ -571,6 +579,14 @@ class block_onboarding_view_external extends external_api {
                 break;
             case 'exp-category':
                 \block_onboarding\experiences_lib::delete_category($id);
+                $returnvalue['confirmation'] = 1;
+                break;
+            case 'exp-course':
+                \block_onboarding\experiences_lib::delete_course($id);
+                $returnvalue['confirmation'] = 1;
+                break;
+            case 'exp-exp':
+                block_onboarding\experiences_lib::delete_experience($id);
                 $returnvalue['confirmation'] = 1;
                 break;
         }

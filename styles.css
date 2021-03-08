@@ -18,6 +18,11 @@
     font-size: 1.8em;
 }
 
+.title-2-light {
+    font-weight: lighter;
+    font-size: 1.6em;
+}
+
 .delete-btn{
     color: #ca3120;
 }
@@ -256,10 +261,9 @@
     cursor:pointer;
     color:var(--primary);
     display: none;
-    margin-right: 25px;
 }
 
-.hide-btn, .show-btn + span {
+.hide-btn + a, .show-btn + a {
     margin-left: 25px;
 }
 
@@ -294,6 +298,8 @@
 }
 
 .block-experiences-overview-category-text {
+    font-weight: lighter;
+    font-size: 1.3em;
     display: inline-block;
     background: #008196;
     padding: 5px 10px 5px 10px;
@@ -303,6 +309,7 @@
 .block-experiences-overview-category {
     display: inline-block;
     padding: 0px 10px 0px 0px;
+    margin-bottom: .7rem;
 }
 
 .block-experiences-overview-experiences-actions {
@@ -319,6 +326,8 @@
 }
 
 .block-experiences-overview-course-text {
+    font-weight: lighter;
+    font-size: 1.3em;
     display: inline-block;
     background: #008196;
     padding: 5px 10px 5px 10px;
@@ -328,6 +337,7 @@
 .block-experiences-overview-course {
     display: inline-block;
     padding: 0px 10px 0px 0px;
+    margin-bottom: .7rem;
 }
 
 .block-experiences-overview-report {
