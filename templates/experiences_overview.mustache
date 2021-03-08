@@ -15,10 +15,8 @@
                 <a href="edit_experience.php">{{# str }} newexperience, block_onboarding {{/ str }}</a>
             {{/experience}}
             <br></br>
-            {{#experiences_with_categories}}
-                <h3><a href="experience.php?experience_id={{{id}}}">{{{name}}} {{^published}}[{{# str }} draft, block_onboarding {{/ str }}]{{/published}}</a> {{#editable}} <a href="edit_experience.php?experience_id={{{id}}}">{{#pix}}t/editstring, core, Edit Experience{{/pix}}</a><a href="delete_experience.php?experience_id={{{id}}}">{{#pix}}t/delete, core, Delete Experience{{/pix}}</a>{{/editable}}</h3>
+                <h3>{{#experience}}<a href="experience.php?experience_id={{{id}}}">{{{name}}} {{^published}}[{{# str }} draft, block_onboarding {{/ str }}]{{/published}}</a> {{/experience}} {{#experiences_with_categories}}{{#editable}} <a href="edit_experience.php?experience_id={{{id}}}">{{#pix}}t/editstring, core, Edit Experience{{/pix}}</a><a href="delete_experience.php?experience_id={{{id}}}">{{#pix}}t/delete, core, Delete Experience{{/pix}}</a>{{/editable}}{{/experiences_with_categories}}</h3>
                 <!--{{#categories_general}}<p class="block-experiences-overview-category-badge">{{{name}}}</p> {{/categories_general}}-->
-            {{/experiences_with_categories}}
         </div>
     </aside>
 </div>
