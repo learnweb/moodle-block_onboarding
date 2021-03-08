@@ -36,6 +36,7 @@ class block_onboarding_view_external extends external_api {
      */
 
     public static function init_step() {
+        global $DB, $USER;
 
         $params = self::validate_parameters(self::init_step_parameters(),
             array()
@@ -56,6 +57,8 @@ class block_onboarding_view_external extends external_api {
             $progress = \block_onboarding\step_view_data_functions::get_user_progress();
             // Prüfen, ob step schon completed wurde
             $completed = \block_onboarding\step_view_data_functions::get_user_completed_step($step->id);
+            // visibility prüfen
+            $visibility = $DB->get_record('block_onb_s_current', array('userid' => $USER->id))->showsteps;
 
             $returnstep['name'] = $step->name;
             $returnstep['description'] = $step->description;
@@ -63,6 +66,7 @@ class block_onboarding_view_external extends external_api {
             $returnstep['achievement'] = $step->achievement;
             $returnstep['progress'] = $progress;
             $returnstep['completed'] = $completed;
+            $returnstep['visibility'] = $visibility;
 
             return $returnstep;
         }
@@ -93,6 +97,7 @@ class block_onboarding_view_external extends external_api {
                 'achievement' => new external_value(PARAM_INT, 'determines whether a step is an achievement'),
                 'progress' => new external_value(PARAM_INT, 'progress of user'),
                 'completed' => new external_value(PARAM_INT, 'determines whether user already completed step'),
+                'visibility' => new external_value(PARAM_INT, 'indicates visibility of First Steps section')
             )
         );
     }
@@ -235,6 +240,112 @@ class block_onboarding_view_external extends external_api {
     /* --------------------------------------------------------------------------------------------------------- */
 
     /**
+     * The function itself
+     * Parameter erklären!
+     * @return string welcome message
+     */
+    public static function reset_progress() {
+        global $DB, $USER;
+
+        $params = self::validate_parameters(self::reset_progress_parameters(),
+            array()
+        );
+
+        // Lösche alle steps und current step
+        $DB->delete_records('block_onb_s_completed', array('userid' => $USER->id));
+        $DB->delete_records('block_onb_s_current', array('userid' => $USER->id));
+
+        $returnvalue['confirmation'] = 1;
+        return $returnvalue;
+    }
+
+    /**
+     * Returns description of method parameters
+     * Parameter erklären!
+     * @return external_function_parameters
+     */
+    public static function reset_progress_parameters() {
+        return new external_function_parameters(
+            array()
+        );
+    }
+
+    /**
+     * Returns description of method result value
+     * Parameter erklären!
+     * @return external_description
+     */
+
+    public static function reset_progress_returns() {
+        return new external_single_structure(
+            array(
+                'confirmation' => new external_value(PARAM_INT, 'confirmation of deletion')
+            )
+        );
+    }
+
+    /* --------------------------------------------------------------------------------------------------------- */
+
+    /**
+     * The function itself
+     * Parameter erklären!
+     * @return string welcome message
+     */
+    public static function toggle_visibility($visibility) {
+        global $DB, $USER;
+
+        $params = self::validate_parameters(self::toggle_visibility_parameters(),
+            array(
+                'visibility' => $visibility
+            )
+        );
+
+        $record = $DB->get_record('block_onb_s_current', array('userid' => $USER->id));
+        $record->timemodified = time();
+
+        if($visibility == 0) {
+            $record->showsteps = 0;
+            $DB->update_record('block_onb_s_current', $record);
+        } else if($visibility == 1) {
+            $record->showsteps = 1;
+            $DB->update_record('block_onb_s_current', $record);
+        }
+
+        // all other inputs just return visibility
+        $returnvalue['return_visibility'] = $record->showsteps;
+        return $returnvalue;
+    }
+
+    /**
+     * Returns description of method parameters
+     * Parameter erklären!
+     * @return external_function_parameters
+     */
+    public static function toggle_visibility_parameters() {
+        return new external_function_parameters(
+            array(
+                'visibility' => new external_value(PARAM_INT, 'visibility = 0 -> hide, visibility = 1 -> show')
+            )
+        );
+    }
+
+    /**
+     * Returns description of method result value
+     * Parameter erklären!
+     * @return external_description
+     */
+
+    public static function toggle_visibility_returns() {
+        return new external_single_structure(
+            array(
+                'return_visibility' => new external_value(PARAM_INT, 'indicates visibility of First Steps section')
+            )
+        );
+    }
+
+    /* --------------------------------------------------------------------------------------------------------- */
+
+    /**
      * Returns description of method parameters
      * Parameter erklären!
      * @return external_function_parameters
@@ -360,6 +471,121 @@ class block_onboarding_view_external extends external_api {
             array(
                 'exists'      => new external_value(PARAM_INT, 'entry existence'),
                 'popularity'      => new external_value(PARAM_INT, 'popularity of report')
+            )
+        );
+    }
+
+    /* --------------------------------------------------------------------------------------------------------- */
+
+    /**
+     * Returns description of method parameters
+     * Parameter erklären!
+     * @return external_function_parameters
+     */
+    public static function delete_confirmation_parameters() {
+        return new external_function_parameters(
+            array(
+                'context' => new external_value(PARAM_TEXT, 'object type which is to be deleted'),
+                'id' => new external_value(PARAM_INT, 'data id which is to be deleted'),
+            )
+        );
+    }
+
+    /**
+     * The function itself
+     * Parameter erklären!
+     * @return string welcome message
+     */
+
+    public static function delete_confirmation($context, $id) {
+        global $DB;
+
+        $params = self::validate_parameters(self::delete_confirmation_parameters(),
+            array(
+                'context' => $context,
+                'id' => $id
+            )
+        );
+
+        switch ($context) {
+            case 'wiki-category':
+                $affected = $DB->count_records('block_onb_w_links', array('category_id' => $id));
+                $returnmessage['text'] = get_string('msg_delete_steps_cats_warning', 'block_onboarding') . $affected . get_string('msg_delete_steps_cats_lost', 'block_onboarding');
+                break;
+            case 'exp-category':
+                $affected = $DB->count_records('block_onb_e_exps_cats', array('category_id' => $id));
+                $returnmessage['text'] = get_string('msg_delete_exp_cats_warning', 'block_onboarding') . $affected . get_string('msg_delete_exp_cats_lost', 'block_onboarding');
+                break;
+        }
+        return $returnmessage;
+    }
+
+    /**
+     * Returns description of method result value
+     * Parameter erklären!
+     * @return external_description
+     */
+    public static function delete_confirmation_returns() {
+        return new external_single_structure(
+            array(
+                'text'      => new external_value(PARAM_TEXT, 'information about number of data entries that will be deleted')
+            )
+        );
+    }
+
+    /* --------------------------------------------------------------------------------------------------------- */
+
+    /**
+     * Returns description of method parameters
+     * Parameter erklären!
+     * @return external_function_parameters
+     */
+    public static function delete_entry_parameters() {
+        return new external_function_parameters(
+            array(
+                'context' => new external_value(PARAM_TEXT, 'object type which is to be deleted'),
+                'id' => new external_value(PARAM_INT, 'data id which is to be deleted'),
+            )
+        );
+    }
+
+    /**
+     * The function itself
+     * Parameter erklären!
+     * @return string welcome message
+     */
+
+    public static function delete_entry($context, $id) {
+
+        $params = self::validate_parameters(self::delete_entry_parameters(),
+            array(
+                'context' => $context,
+                'id' => $id
+            )
+        );
+
+        switch ($context) {
+            case 'wiki-category':
+                \block_onboarding\wiki_lib::delete_category($id);
+                $returnvalue['confirmation'] = 1;
+                break;
+            case 'exp-category':
+                \block_onboarding\experiences_lib::delete_category($id);
+                $returnvalue['confirmation'] = 1;
+                break;
+        }
+        return $returnvalue;
+    }
+
+    /**
+     * Returns description of method result value
+     * Parameter erklären!
+     * @return external_description
+     */
+    public static function delete_entry_returns() {
+        return new external_single_structure(
+            array(
+                'confirmation' => new external_value(PARAM_INT, 'confirmation of deletion')
             )
         );
     }

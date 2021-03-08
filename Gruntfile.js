@@ -10,7 +10,8 @@ module.exports = function(grunt) {
                 files: {
                 // 'path/output.min.js' : ['path/input.js']
                     'amd/build/steps_view.min.js': ['amd/src/steps_view.js'],
-                    'amd/build/experiences_experience.min.js': ['amd/src/experiences_experience.js']
+                    'amd/build/experiences_experience.min.js': ['amd/src/experiences_experience.js'],
+                    'amd/build/delete_confirmation.min.js': ['amd/src/delete_confirmation.js']
                 }
             }
         },

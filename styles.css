@@ -1,5 +1,5 @@
 .ul {
-    margin-bottom: 0 !important;
+    margin-bottom: 0em !important;
 }
 
 .btn-normal {
@@ -16,6 +16,15 @@
 
 .title {
     font-size: 1.8em;
+}
+
+.delete-btn{
+    color: #ca3120;
+}
+
+.delete-btn:hover{
+    color: #852116;
+    cursor: pointer;
 }
 
 
@@ -160,11 +169,19 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-color: #ececec;
+    display: none;
+    transition: display 0.7s;
 }
 
 .steps-title-wrapper {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.steps-title-button-wrapper{
+    display: flex;
+    justify-content: flex-end;
     align-items: center;
 }
 
@@ -230,8 +247,20 @@
     outline: 0 !important;
 }
 
-.skip-btn {
+.reset-btn {
     outline: 0 !important;
+    visibility: hidden;
+}
+
+.hide-btn, .show-btn {
+    cursor:pointer;
+    color:var(--primary);
+    display: none;
+    margin-right: 25px;
+}
+
+.hide-btn, .show-btn + span {
+    margin-left: 25px;
 }
 
 #achievement-confetti {

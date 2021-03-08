@@ -53,6 +53,7 @@ class step_view_data_functions {
                 $step = new \stdClass();
                 $step->userid = $USER->id;
                 $step->stepid = $tempstep->id;
+                $step->showsteps = 1;
                 $step->timecreated = time();
                 $step->timemodified = time();
                 $step->id = $DB->insert_record('block_onb_s_current', $step);
@@ -75,7 +76,7 @@ class step_view_data_functions {
         $step->stepid = $stepid;
         $step->timemodified = time();
 
-        $step = $DB->update_record('block_onb_s_current', $step);
+        $DB->update_record('block_onb_s_current', $step);
     }
 
     public static function set_step_id_complete($stepid) {
@@ -146,16 +147,39 @@ class step_view_data_functions {
     public static function get_user_completed_step($stepid) {
         global $DB, $USER;
 
+        $step = $DB->get_record('block_onb_s_steps', array('id' => $stepid));
+        $totalsteps = $DB->count_records('block_onb_s_steps');
         $progress = $DB->get_records('block_onb_s_completed', array('userid' => $USER->id));
 
-        $returncompleted = 0;
-        foreach ($progress as $prostep)
-            if ($prostep->stepid == $stepid){
-                $returncompleted = 1;
+        if($step->position == $totalsteps and count($progress) == $totalsteps){
+            $returncompleted = 2;
+        } else{
+            $returncompleted = 0;
+            foreach ($progress as $prostep)
+                if ($prostep->stepid == $stepid){
+                    $returncompleted = 1;
             }
+        }
 
         return $returncompleted;
     }
+
+//    public static function get_set_user_showstep($visibility) {
+//        global $DB, $USER;
+//
+//        $record = $DB->get_record('block_onb_s_current', array('userid' => $USER->id));
+//        $record->timemodified = time();
+//
+//        if($visibility == 0) {
+//            $record->showsteps = 0;
+//            $DB->update_record('block_onb_s_current', $record);
+//        } else if($visibility == 1) {
+//            $record->showsteps = 1;
+//            $DB->update_record('block_onb_s_current', $record);
+//        }
+//
+//        return $record->showsteps;
+//    }
 
     public static function message_no_steps() {
         $returnstep['name'] = get_string('error_nosteps_title', 'block_onboarding');
@@ -164,6 +188,7 @@ class step_view_data_functions {
         $returnstep['achievement'] = 0;
         $returnstep['progress'] = 0;
         $returnstep['completed'] = 0;
+        $returnstep['visibility'] = -1;
 
         return $returnstep;
     }

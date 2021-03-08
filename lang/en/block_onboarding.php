@@ -60,6 +60,8 @@ $string['link_number'] = 'Link Position';
 $string['default_link_name'] = 'Default Name';
 $string['default_link_url'] = 'http://www.example.com';
 $string['default_link_description'] = 'Sample Description';
+$string['msg_delete_steps_cats_warning'] = 'WARNING: Links within this category: ';
+$string['msg_delete_steps_cats_lost'] = '. The links within this category will be lost permanently. Are you sure you want to delete this category?';
 
 // -> Steps
 $string['steps'] = 'First Steps';
@@ -68,6 +70,12 @@ $string['manage_steps'] = 'Manage Steps';
 
 $string['button_done'] = 'Done';
 $string['button_back'] = 'Back';
+$string['button_reset'] = 'Reset Progress';
+$string['button_reset_message_js'] = 'Do you really want to reset your progress? All progress will be lost permanently.';
+$string['hide'] = 'Hide';
+$string['show'] = 'Show';
+$string['hide_steps'] = 'Hide First Steps';
+$string['show_steps'] = 'Show First Steps';
 
 $string['completed'] = 'Completed';
 $string['new_step'] = 'New Step';
@@ -159,9 +167,9 @@ $string['experience_admin'] = 'Experience Administration';
 $string['experience_questions_missing'] = 'Please enter suggestive questions for this category.';
 $string['experience_category_missing'] = 'Please enter a category name.';
 $string['experience_type_missing'] = 'Please click one of the Options.';
-
 $string['publish'] = 'Publish';
 $string['savedraft'] = 'Save as Draft';
 $string['draft'] = 'Draft';
-
+$string['msg_delete_exp_cats_warning'] = 'WARNING: Reports containing data entries for this category: ';
+$string['msg_delete_exp_cats_lost'] = '. The category data entries will be lost permanently. Are you sure you want to delete this category?';
 
