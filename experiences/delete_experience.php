@@ -20,6 +20,8 @@ require_login();
 
 global $DB;
 
+//TODO: file obsolete??
+
 $context = context_system::instance();
 
 $experience_id = optional_param('experience_id', -1, PARAM_INT);

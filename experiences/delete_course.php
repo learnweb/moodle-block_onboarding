@@ -20,6 +20,8 @@ require_login();
 
 global $DB;
 
+// TODO: Obsolete file, delete eventually
+
 $context = context_system::instance();
 
 if (has_capability('block/onboarding:e_manage_experiences', $context)) {
