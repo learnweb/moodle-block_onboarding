@@ -163,11 +163,13 @@ $string['newdegreeprogram'] = 'New Degree Program';
 $string['newcategory'] = 'New Category';
 $string['notenoughdata'] = 'Not enough data to create an Experience Report';
 $string['selectcategories'] = 'Select Categories';
-
 $string['experience_admin'] = 'Experience Administration';
 $string['experience_questions_missing'] = 'Please enter suggestive questions for this category.';
 $string['experience_category_missing'] = 'Please enter a category name.';
 $string['experience_type_missing'] = 'Please click one of the Options.';
+$string['publish'] = 'Publish';
+$string['savedraft'] = 'Save as Draft';
+$string['draft'] = 'Draft';
 $string['msg_delete_exp_cats_warning'] = 'WARNING: Reports containing data entries for this category: ';
 $string['msg_delete_exp_cats_lost'] = '. The category data entries will be lost permanently. Are you sure you want to delete this category?';
 

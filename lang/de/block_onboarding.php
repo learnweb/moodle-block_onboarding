@@ -177,4 +177,7 @@ $string['experience_questions_missing'] = 'Bitte trage hier Fragen ein, die Anst
 $string['experience_category_missing'] = 'Bitte trage einen Kategorienamen ein.';
 $string['msg_delete_exp_cats_warning'] = 'WARNUNG: Berichte mit Einträgen zu dieser Kategorie: ';
 $string['msg_delete_exp_cats_lost'] = '. Die Bericht-Einträge zu dieser Kategorie werden dauerhaft gelöscht. Möchtest du die Kategorie wirklich löschen?';
+$string['publish'] = 'Veröffentltlichen';
+$string['savedraft'] = 'Als Entwurf speichern';
+$string['draft'] = 'Entwurf';
 

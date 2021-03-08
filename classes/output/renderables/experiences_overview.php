@@ -24,9 +24,11 @@ use renderer_base;
 
 class experiences_overview implements renderable, templatable {
     var $form = null;
+    // var $list = null;
 
     public function __construct($form) {
         $this->form = $form;
+        // $this->list = $list;
     }
 
     public function export_for_template(renderer_base $output) {
@@ -72,6 +74,7 @@ class experiences_overview implements renderable, templatable {
             'courses_general' => $courses,
             'experiences_with_categories' => array_values($experiences_mapped),
             'form' => $this->form,
+            // 'list' => $this->list,
             'experience' => $experience
         ];
     }
