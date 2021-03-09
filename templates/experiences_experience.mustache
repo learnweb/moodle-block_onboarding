@@ -16,9 +16,7 @@
     {{/can_manage_experiences}}
 {{/experience}}
 </h2>
-{{#degreeprogram_author}}
-<h6>{{{author}}} - {{{degreeprogram}}}</h6>
-{{/degreeprogram_author}}
+    <h6>{{#author}}{{{author}}}{{/author}}{{#degreeprogram}} - {{{degreeprogram}}}{{/degreeprogram}}</h6>
 {{#experience}}
 <h6>{{#userdate}}{{{timecreated}}}, {{#str}} strftimedatetimeshort {{/str}}{{/userdate}}</h6>
 {{/experience}}

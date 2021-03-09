@@ -131,9 +131,6 @@ $string['default_experience_description'] = 'Beispiel Studiengang';
 $string['experience_contact'] = 'Kontakt Informationen';
 
 $string['contact'] = 'Kontakt: ';
-$string['author'] = 'Author: ';
-$string['date'] = 'Veröffentlicht: ';
-$string['degreeprogram'] = 'Studiengang: ';
 $string['category_missing'] = 'Bitte trage etwas in das Textfeld ein oder unchecke die Checkbox.';
 $string['takeaways'] = 'Key Takeaways';
 $string['takeaways_missing'] = 'Bitte trage ein Key Takeaway für diese Kategorie ein.';
@@ -168,7 +165,6 @@ $string['contactinformation_help'] =
 $string['aboutme'] = 'Über Mich';
 $string['aboutme_default'] = 'Schreib etwas über dich. (Alter, Semester, etc.)';
 $string['helpful'] = 'War dieser Bericht hilfreich?';
-$string['popularity'] = 'Beliebtheit: ';
 $string['filters'] = 'Filter Optionen';
 $string['newdegreeprogram'] = 'Neuer Studiengang';
 $string['newcategory'] = 'Neue Kategorie';
@@ -178,6 +174,9 @@ $string['selectcategories'] = 'Wähle Kategorien';
 $string['experience_admin'] = 'Experience Administration';
 $string['experience_questions_missing'] = 'Bitte trage hier Fragen ein, die Anstoß zum Schreiben geben.';
 $string['experience_category_missing'] = 'Bitte trage einen Kategorienamen ein.';
+$string['publish'] = 'Veröffentlichen';
+$string['savedraft'] = 'Als Entwurf speichern';
+$string['draft'] = 'Entwurf';
 
 $string['msg_delete_exp_cats_warning'] = 'WARNUNG: Berichte mit Einträgen zu dieser Kategorie: ';
 $string['msg_delete_exp_cats_lost'] = '. Die Bericht-Einträge zu dieser Kategorie werden dauerhaft gelöscht. Möchtest du die Kategorie wirklich löschen?';
@@ -185,8 +184,3 @@ $string['msg_delete_exp_course_warning'] = 'WARNUNG: Berichte mit Einträgen zu 
 $string['msg_delete_exp_course_lost'] = '. Die Bericht-Einträge zu diesem Studiengang werden dauerhaft gelöscht. Möchtest du den Studiengang wirklich löschen?';
 $string['msg_delete_exp_exp_student_warning'] = 'WARNUNG: Beim Löschen deines Erfahrungsberichts gehen die Daten dauerhaft verloren. Du kannst deinen Bericht auch bearbeiten und \'Als Entwurf speichern\' klicken, um deinen Bericht aus der öffentlichen Bericht-Anzeige zu entfernen. Möchtest du deinen Bericht wirklich dauerhaft löschen?';
 $string['msg_delete_exp_exp_admin_warning'] = 'WARNUNG: Beim Löschen dieses Erfahrungsberichts gehen die Daten dauerhaft verloren. Möchtest du den Bericht wirklich dauerhaft löschen?';
-
-$string['publish'] = 'Veröffentlichen';
-$string['savedraft'] = 'Als Entwurf speichern';
-$string['draft'] = 'Entwurf';
-

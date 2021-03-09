@@ -44,8 +44,8 @@ $from = '{block_onb_e_exps} ee
 INNER JOIN {user} u ON ee.user_id=u.id
 INNER JOIN {block_onb_e_courses} ec ON ee.course_id=ec.id';
 $where = '1=1';
-
 $skip = false;
+
 if ($fromform = $mform->get_data()) {
     $cats = '(' . implode(',', $fromform->category_filter) . ')';
     $crs = '(' . implode(',', $fromform->course_filter) . ')';
