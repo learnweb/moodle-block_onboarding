@@ -169,6 +169,7 @@ $string['experience_type_missing'] = 'Please click one of the Options.';
 $string['publish'] = 'Publish';
 $string['savedraft'] = 'Save as Draft';
 $string['draft'] = 'Draft';
+$string['delete'] = 'Delete';
 
 $string['msg_delete_exp_cats_warning'] = 'WARNING: Experience Reports containing data entries for this report category: ';
 $string['msg_delete_exp_cats_lost'] = '. The category data entries will be lost permanently. Are you sure you want to delete this category?';
