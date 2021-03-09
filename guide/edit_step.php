@@ -73,16 +73,16 @@ if (has_capability('block/onboarding:s_manage_steps', $context)) {
          * andernfalls wenn der Save-Changes-Button geklickt wurde und die Daten validiert werden konnten,
          * lade die Daten aus der form und speichere diese in der form fromform
          */
-    } else if ($fromform = $mform->get_data()) {
-        \block_onboarding\steps_lib::edit_step($fromform);
-        redirect('admin_steps.php');
+    } else {
+        if ($fromform = $mform->get_data()) {
+            \block_onboarding\steps_lib::edit_step($fromform);
+            redirect('admin_steps.php');
+        }
     }
 
     echo $OUTPUT->header();
-    // form wird angezeigt (hier nicht über renderable)
     $mform->display();
     echo $OUTPUT->footer();
-// andernfalls konnten die Daten nicht validiert werden und es wird ein Fehlerhinweis angezeigt
 } else {
     $PAGE->set_title(get_string('error', 'block_onboarding'));
     $PAGE->set_heading(get_string('error', 'block_onboarding'));

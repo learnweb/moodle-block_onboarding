@@ -34,7 +34,8 @@ class experiences_experience_form extends moodleform {
         $mform->setType('user_id', PARAM_INT);
 
         // Experience Name Field.
-        $mform->addElement('textarea', 'name', get_string('experience_name', 'block_onboarding'), array('style="resize:none" wrap="virtual" rows="1" cols="60"'));
+        $mform->addElement('textarea', 'name', get_string('experience_name', 'block_onboarding'),
+            array('style="resize:none" wrap="virtual" rows="1" cols="60"'));
         $mform->addRule('name', get_string('experience_name_missing', 'block_onboarding'), 'required', null, 'server');
         $mform->addRule('name', 'Max Length is 30 characters', 'maxlength', 30, 'block_onboarding');
         $mform->setType('name', PARAM_TEXT);
@@ -45,18 +46,18 @@ class experiences_experience_form extends moodleform {
         $courses = $DB->get_records('block_onb_e_courses');
         $link = $DB->get_record('block_onb_e_exps', array('user_id' => $USER->id));
         $coursesmodified = array();
-        foreach ($courses as $course){
+        foreach ($courses as $course) {
             $coursesmodified[$course->id] = $course->name;
         }
         $mform->addElement('select', 'course_id', get_string('course_select', 'block_onboarding'),
             $coursesmodified);
         $mform->setDefault('course_id', isset($link->course_id) ? $link->course_id : '');
-        $mform->addRule('course_id', get_string('experience_degreeprogram_missing', 'block_onboarding'), 'required', null, 'server');
+        $mform->addRule('course_id', get_string('experience_degreeprogram_missing', 'block_onboarding'), 'required', null,
+            'server');
 
         // About Me Checkbox
         // $mform->addElement('checkbox', 'aboutme', get_string('aboutme', 'block_onboarding'));
         // $mform->setDefault('aboutme', true);
-
 
         // Category Checkboxes.
         $categorygroup = array();
@@ -88,7 +89,8 @@ class experiences_experience_form extends moodleform {
         }
         foreach ($categories as $category) {
             $mform->addElement('textarea', 'experience_category_' . $category->id . '_description', $category->name,
-                array('wrap="virtual" rows="10" cols="100"', 'placeholder' => $category->questions));
+                array('wrap="virtual" rows="10" cols="100"',
+                    'placeholder' => $category->questions));
             $mform->setType('experience_category_' . $category->id . '_description', PARAM_TEXT);
             // $mform->addRule('experience_category_' . $category->id . '_description',
             //    get_string('category_missing', 'block_onboarding'), 'required', null, 'server');
@@ -112,19 +114,18 @@ class experiences_experience_form extends moodleform {
         }
 
         // Contact Field.
-        $mform->addElement('textarea', 'contact', get_string('experience_contact', 'block_onboarding'), array('style="resize:none" wrap="virtual" rows="1" cols="60"'));
+        $mform->addElement('textarea', 'contact', get_string('experience_contact', 'block_onboarding'),
+            array('style="resize:none" wrap="virtual" rows="1" cols="60"'));
         $mform->addRule('contact', 'Max Length is 30 characters', 'maxlength', 30, 'block_onboarding');
         $mform->setType('contact', PARAM_TEXT);
         $mform->setDefault('contact', isset($experience->contact) ? $experience->contact : '');
         $mform->addHelpButton('contact', 'contactinformation', 'block_onboarding');
 
-        $buttonarray=array();
+        $buttonarray = array();
         $buttonarray[] = $mform->createElement('submit', 'publish', get_string('publish', 'block_onboarding'));
         $buttonarray[] = $mform->createElement('submit', 'draft', get_string('savedraft', 'block_onboarding'));
         $buttonarray[] = $mform->createElement('cancel');
         $mform->addGroup($buttonarray, 'buttonar', '', ' ', false);
-
-        // $this->add_action_buttons($cancel = true, get_string('publish', 'block_onboarding'));
     }
 
     public function validation($data, $files) {

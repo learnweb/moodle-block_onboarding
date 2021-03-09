@@ -26,11 +26,21 @@ class report_table extends table_sql {
     public function __construct($uniqueid) {
         parent::__construct($uniqueid);
         // Define the list of columns to show.
-        $columns = array('experience', 'experience_id', 'type', 'description', 'author', 'timecreated');
+        $columns = array('experience',
+            'experience_id',
+            'type',
+            'description',
+            'author',
+            'timecreated');
         $this->define_columns($columns);
 
         // Define the titles of columns to show in header.
-        $headers = array('Experience', 'Id', 'Type', 'Description', 'Author', 'Date');
+        $headers = array('Experience',
+            'Id',
+            'Type',
+            'Description',
+            'Author',
+            'Date');
         $this->define_headers($headers);
 
         // Table configuration.
@@ -40,7 +50,6 @@ class report_table extends table_sql {
 
         $this->initialbars(false);
         $this->collapsible(false);
-
     }
 
     /**
@@ -54,7 +63,7 @@ class report_table extends table_sql {
 
     // Configure Column Content.
     public function col_experience($values) {
-        return '<a href="experience.php?experience_id='.$values->experience_id.'">'.$values->experience.'</a>';
+        return '<a href="experience.php?experience_id=' . $values->experience_id . '">' . $values->experience . '</a>';
     }
 
     public function col_experience_id($values) {

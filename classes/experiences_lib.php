@@ -19,7 +19,7 @@ namespace block_onboarding;
 defined('MOODLE_INTERNAL') || die();
 
 class experiences_lib {
-    public static function edit_experience($fromform){
+    public static function edit_experience($fromform) {
         global $DB;
 
         // Data written in the Database.
@@ -30,8 +30,10 @@ class experiences_lib {
         $experience->course_id = isset($fromform->course_id) ? $fromform->course_id : null;
         if (!empty($fromform->publish)) {
             $experience->published = 1;
-        } elseif (!empty($fromform->draft)) {
-            $experience->published = null;
+        } else {
+            if (!empty($fromform->draft)) {
+                $experience->published = null;
+            }
         }
         $experience->timecreated = time();
         $experience->timemodified = time();
@@ -51,37 +53,38 @@ class experiences_lib {
 
         $DB->delete_records('block_onb_e_exps_cats', array('experience_id' => $experience->id));
         $categories = $DB->get_records('block_onb_e_cats');
-        $experiences_categories = array();
+        $experiencecategories = array();
 
         foreach ($categories as $category) {
             $formproperty_category_checkbox = 'category_' . $category->id;
-            $formproperty_category_textarea = 'experience_category_' . $category->id . '_description';
-            if (isset($fromform->$formproperty_category_checkbox) && empty($fromform->$formproperty_category_textarea) == false) {
-                $experience_category = new \stdClass;
-                $experience_category->experience_id = $experience->id;
-                $experience_category->category_id = $category->id;
-                $formproperty_category_textarea = 'experience_category_' . $category->id . '_description';
-                $experience_category->description = $fromform->$formproperty_category_textarea;
-                $formproperty_category_takeaway = 'experience_category_' . $category->id . '_takeaway';
-                $experience_category->takeaway = $fromform->$formproperty_category_takeaway;
-                $experience_category->timecreated = time();
-                $experience_category->timemodified = time();
-                $experiences_categories[] = $experience_category;
+            $formpropertycategorytextarea = 'experience_category_' . $category->id . '_description';
+            if (isset($fromform->$formproperty_category_checkbox) && empty($fromform->$formpropertycategorytextarea) == false) {
+                $experiencecategory = new \stdClass;
+                $experiencecategory->experience_id = $experience->id;
+                $experiencecategory->category_id = $category->id;
+                $formpropertycategorytextarea = 'experience_category_' . $category->id . '_description';
+                $experiencecategory->description = $fromform->$formpropertycategorytextarea;
+                $formpropertycategorytakeaway = 'experience_category_' . $category->id . '_takeaway';
+                $experiencecategory->takeaway = $fromform->$formpropertycategorytakeaway;
+                $experiencecategory->timecreated = time();
+                $experiencecategory->timemodified = time();
+                $experiencecategories[] = $experiencecategory;
             } else {
                 $DB->delete_records('block_onb_e_exps_cats',
-                    array('experience_id' => $experience->id, 'category_id' => $category->id));
+                    array('experience_id' => $experience->id,
+                        'category_id' => $category->id));
             }
         }
-        $DB->insert_records('block_onb_e_exps_cats', $experiences_categories);
+        $DB->insert_records('block_onb_e_exps_cats', $experiencecategories);
     }
 
-    public static function delete_experience($experience_id){
+    public static function delete_experience($experience_id) {
         global $DB;
         $DB->delete_records('block_onb_e_exps_cats', array('experience_id' => $experience_id));
         $DB->delete_records('block_onb_e_exps', array('id' => $experience_id));
     }
 
-    public static function edit_category($fromform){
+    public static function edit_category($fromform) {
         // Data written in the Database.
         $category = new \stdClass();
         $category->name = $fromform->name;
@@ -91,35 +94,35 @@ class experiences_lib {
 
         if ($fromform->id != -1) {
             $category->id = $fromform->id;
-            \block_onboarding\experiences_lib::update_category($category);
+            self::update_category($category);
         } else {
-            \block_onboarding\experiences_lib::add_category($category);
+            self::add_category($category);
         }
     }
 
-    public static function add_category($category){
+    public static function add_category($category) {
         global $DB;
         $DB->insert_record('block_onb_e_cats', $category);
     }
 
-    public static function update_category($category){
+    public static function update_category($category) {
         global $DB;
         $DB->update_record('block_onb_e_cats', $category, $bulk = false);
     }
 
-    public static function delete_category($category_id){
+    public static function delete_category($categoryid) {
         global $DB;
         // Deletion of the category and all content written for it.
-        $DB->delete_records('block_onb_e_exps_cats', array('category_id' => $category_id));
-        $DB->delete_records('block_onb_e_cats', array('id' => $category_id));
+        $DB->delete_records('block_onb_e_exps_cats', array('category_id' => $categoryid));
+        $DB->delete_records('block_onb_e_cats', array('id' => $categoryid));
     }
 
-    public static function get_category_by_id($category_id){
+    public static function get_category_by_id($categoryid) {
         global $DB;
-        return $DB->get_record('block_onb_e_cats', array('id'=>$category_id), $fields='*', $strictness=IGNORE_MISSING);
+        return $DB->get_record('block_onb_e_cats', array('id' => $categoryid), $fields = '*', $strictness = IGNORE_MISSING);
     }
 
-    public static function edit_course($fromform){
+    public static function edit_course($fromform) {
         // Data written in the Database.
         $course = new \stdClass();
         $course->name = $fromform->name;
@@ -128,34 +131,34 @@ class experiences_lib {
 
         if ($fromform->id != -1) {
             $course->id = $fromform->id;
-            \block_onboarding\experiences_lib::update_course($course);
+            self::update_course($course);
         } else {
-            \block_onboarding\experiences_lib::add_course($course);
+            self::add_course($course);
         }
     }
 
-    public static function add_course($course){
+    public static function add_course($course) {
         global $DB;
         $DB->insert_record('block_onb_e_courses', $course);
     }
 
-    public static function update_course($course){
+    public static function update_course($course) {
         global $DB;
         $DB->update_record('block_onb_e_courses', $course, $bulk = false);
     }
 
-    public static function delete_course($course_id){
+    public static function delete_course($courseid) {
         global $DB;
-        $DB->delete_records('block_onb_e_courses', array('id' => $course_id));
+        $DB->delete_records('block_onb_e_courses', array('id' => $courseid));
     }
 
-    public static function get_course_by_id($course_id){
+    public static function get_course_by_id($courseid) {
         global $DB;
-        return $DB->get_record('block_onb_e_courses', array('id' => $course_id), $fields = '*',
-        $strictness = IGNORE_MISSING);
+        return $DB->get_record('block_onb_e_courses', array('id' => $courseid), $fields = '*',
+            $strictness = IGNORE_MISSING);
     }
 
-    public static function edit_report($fromform){
+    public static function edit_report($fromform) {
         global $DB;
         // Data written in the Database.
         $report = new \stdClass();

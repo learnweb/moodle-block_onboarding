@@ -17,7 +17,7 @@ class block_onboarding_wiki_testcase extends advanced_testcase {
         $this->assertTrue($DB->record_exists('block_onb_w_categories', array('name' => 'Test Category')));
     }
 
-    public function test_update_category(){
+    public function test_update_category() {
         global $DB;
         $this->resetAfterTest(true);
 
@@ -70,7 +70,7 @@ class block_onboarding_wiki_testcase extends advanced_testcase {
         $this->assertTrue($DB->record_exists('block_onb_w_links', array('name' => 'Test Link')));
     }
 
-    public function test_update_link(){
+    public function test_update_link() {
         global $DB;
         $this->resetAfterTest(true);
 

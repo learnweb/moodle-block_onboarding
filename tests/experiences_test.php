@@ -27,7 +27,7 @@ class block_onboarding_experiences_testcase extends advanced_testcase {
         $this->assertTrue($DB->record_exists('block_onb_e_exps', array('name' => 'Test Experience')));
     }
 
-    public function test_update_experience(){
+    public function test_update_experience() {
         global $DB;
         $this->resetAfterTest(true);
 

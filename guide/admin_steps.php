@@ -23,7 +23,7 @@ $url = new moodle_url('/blocks/onboarding/steps/admin.php');
 $PAGE->set_url($url);
 $PAGE->set_context($context);
 
-if(has_capability('block/onboarding:w_manage_wiki', $context)){
+if (has_capability('block/onboarding:w_manage_wiki', $context)) {
     $PAGE->set_title(get_string('steps_admin', 'block_onboarding'));
     $PAGE->set_heading(get_string('steps_admin', 'block_onboarding'));
     $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
@@ -37,11 +37,11 @@ if(has_capability('block/onboarding:w_manage_wiki', $context)){
     echo $output->render($renderable);
     echo $output->container_end();
     echo $output->footer();
-}else{
+} else {
     $PAGE->set_title(get_string('error', 'block_onboarding'));
     $PAGE->set_heading(get_string('error', 'block_onboarding'));
     $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
-  
+
     echo $OUTPUT->header();
     echo html_writer::tag('p', get_string('insufficient_permissions', 'block_onboarding'));
     echo $OUTPUT->footer();

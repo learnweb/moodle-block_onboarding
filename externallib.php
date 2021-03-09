@@ -15,10 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * PLUGIN external file
+ * External block_onboarding API
  *
  * @package    block_onboarding
- * @category   external
  * @copyright  2021 Westfälische Wilhelms-Universität Münster
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -27,6 +26,13 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/externallib.php');
 
+/**
+ * Class implementing the external API, esp. for AJAX functions.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class block_onboarding_view_external extends external_api {
 
     /**
@@ -34,7 +40,6 @@ class block_onboarding_view_external extends external_api {
      * Parameter erklären!
      * @return string welcome message
      */
-
     public static function init_step() {
         global $DB, $USER;
 
@@ -43,20 +48,20 @@ class block_onboarding_view_external extends external_api {
         );
 
         // Aktuelle step_id vom User abfragen
-        $curstepid = \block_onboarding\step_view_data_functions::get_current_user_stepid();
+        $curstepid = \block_onboarding\steps_interaction_lib::get_current_user_stepid();
 
         // Wenn kein Schritt in der Datenbank existiert
         if ($curstepid == -1) {
-            return \block_onboarding\step_view_data_functions::message_no_steps();
+            return \block_onboarding\steps_interaction_lib::message_no_steps();
         } else {
             // Position des aktuellen User Steps abfragen
-            $curposition = \block_onboarding\step_view_data_functions::get_step_position($curstepid);
+            $curposition = \block_onboarding\steps_interaction_lib::get_step_position($curstepid);
             // Daten des aktuellen Steps abfragen
-            $step = \block_onboarding\step_view_data_functions::get_step_data($curposition);
+            $step = \block_onboarding\steps_interaction_lib::get_step_data($curposition);
             // Progress des Users abfragen
-            $progress = \block_onboarding\step_view_data_functions::get_user_progress();
+            $progress = \block_onboarding\steps_interaction_lib::get_user_progress();
             // Prüfen, ob step schon completed wurde
-            $completed = \block_onboarding\step_view_data_functions::get_user_completed_step($step->id);
+            $completed = \block_onboarding\steps_interaction_lib::get_user_completed_step($step->id);
             // visibility prüfen
             $visibility = $DB->get_record('block_onb_s_current', array('userid' => $USER->id))->showsteps;
 
@@ -116,28 +121,28 @@ class block_onboarding_view_external extends external_api {
         );
 
         // Aktuelle step_id vom User abfragen
-        $curstepid = \block_onboarding\step_view_data_functions::get_current_user_stepid();
+        $curstepid = \block_onboarding\steps_interaction_lib::get_current_user_stepid();
 
         // Wenn kein Schritt in der Datenbank existiert
         if ($curstepid == -1) {
-            return \block_onboarding\step_view_data_functions::message_no_steps();
+            return \block_onboarding\steps_interaction_lib::message_no_steps();
         } else {
             // Position des aktuellen User Steps abfragen
-            $curposition = \block_onboarding\step_view_data_functions::get_step_position($curstepid);
+            $curposition = \block_onboarding\steps_interaction_lib::get_step_position($curstepid);
             // Daten des nächsten Steps (cur_position + 1) abfragen
-            $step = \block_onboarding\step_view_data_functions::get_next_step_data($curposition, 1);
+            $step = \block_onboarding\steps_interaction_lib::get_next_step_data($curposition, 1);
             if ($step == -1) {
-                $step = \block_onboarding\step_view_data_functions::get_step_data($curposition);
+                $step = \block_onboarding\steps_interaction_lib::get_step_data($curposition);
             } else {
                 // Datenbank-Eintrag für User updaten mit neuem step
-                \block_onboarding\step_view_data_functions::set_current_user_stepid($step->id);
+                \block_onboarding\steps_interaction_lib::set_current_user_stepid($step->id);
             }
             //Markiert den vorherigen Step als completed
-            \block_onboarding\step_view_data_functions::set_step_id_complete($curposition);
+            \block_onboarding\steps_interaction_lib::set_user_step_completed($curposition);
             // Prüfen, ob step schon completed wurde
-            $completed = \block_onboarding\step_view_data_functions::get_user_completed_step($step->id);
+            $completed = \block_onboarding\steps_interaction_lib::get_user_completed_step($step->id);
             // berechnet Fortschritt des Nutzers
-            $progress = \block_onboarding\step_view_data_functions::get_user_progress();
+            $progress = \block_onboarding\steps_interaction_lib::get_user_progress();
 
             // Rückgabe an JavaScript
             $returnstep['name'] = $step->name;
@@ -188,25 +193,25 @@ class block_onboarding_view_external extends external_api {
             array()
         );
         // Aktuelle step_id vom User abfragen
-        $curstepid = \block_onboarding\step_view_data_functions::get_current_user_stepid();
+        $curstepid = \block_onboarding\steps_interaction_lib::get_current_user_stepid();
 
         // Wenn kein Schritt in der Datenbank existiert
         if ($curstepid == -1) {
-            return \block_onboarding\step_view_data_functions::message_no_steps();
+            return \block_onboarding\steps_interaction_lib::message_no_steps();
         } else {
             // Position des aktuellen User Steps abfragen
-            $curposition = \block_onboarding\step_view_data_functions::get_step_position($curstepid);
+            $curposition = \block_onboarding\steps_interaction_lib::get_step_position($curstepid);
             // Daten des vorherigen Steps (cur_position - 1) abfragen
-            $step = \block_onboarding\step_view_data_functions::get_next_step_data($curposition, -1);
+            $step = \block_onboarding\steps_interaction_lib::get_next_step_data($curposition, -1);
             if ($step == -1) {
                 //step aus if raus?
-                $step = \block_onboarding\step_view_data_functions::get_step_data($curstepid);
+                $step = \block_onboarding\steps_interaction_lib::get_step_data($curstepid);
             } else {
                 // Datenbank-Eintrag für User updaten mit neuem step
-                \block_onboarding\step_view_data_functions::set_current_user_stepid($step->id);
+                \block_onboarding\steps_interaction_lib::set_current_user_stepid($step->id);
             }
             // Prüfen, ob step schon completed wurde
-            $completed = \block_onboarding\step_view_data_functions::get_user_completed_step($step->id);
+            $completed = \block_onboarding\steps_interaction_lib::get_user_completed_step($step->id);
 
             // Rückgabe an JavaScript
             $returnstep['name'] = $step->name;
@@ -303,12 +308,14 @@ class block_onboarding_view_external extends external_api {
         $record = $DB->get_record('block_onb_s_current', array('userid' => $USER->id));
         $record->timemodified = time();
 
-        if($visibility == 0) {
+        if ($visibility == 0) {
             $record->showsteps = 0;
             $DB->update_record('block_onb_s_current', $record);
-        } else if($visibility == 1) {
-            $record->showsteps = 1;
-            $DB->update_record('block_onb_s_current', $record);
+        } else {
+            if ($visibility == 1) {
+                $record->showsteps = 1;
+                $DB->update_record('block_onb_s_current', $record);
+            }
         }
 
         // all other inputs just return visibility
@@ -379,10 +386,12 @@ class block_onboarding_view_external extends external_api {
 
         // prüfen ob Report bereits markiert ist
         $already_helpful =
-            $DB->record_exists('block_onb_e_helpful', array('user_id' => $USER->id, 'experience_id' => $experience_id));
+            $DB->record_exists('block_onb_e_helpful', array('user_id' => $USER->id,
+                'experience_id' => $experience_id));
 
         if ($already_helpful) {
-            $DB->delete_records('block_onb_e_helpful', array('user_id' => $USER->id, 'experience_id' => $experience_id));
+            $DB->delete_records('block_onb_e_helpful', array('user_id' => $USER->id,
+                'experience_id' => $experience_id));
 
             $return_helpful['exists'] = 0;
             $return_helpful['popularity'] = $popularity - 1;
@@ -407,8 +416,8 @@ class block_onboarding_view_external extends external_api {
     public static function click_helpful_returns() {
         return new external_single_structure(
             array(
-                'exists'      => new external_value(PARAM_INT, 'entry existence'),
-                'popularity'      => new external_value(PARAM_INT, 'popularity of report')
+                'exists' => new external_value(PARAM_INT, 'entry existence'),
+                'popularity' => new external_value(PARAM_INT, 'popularity of report')
             )
         );
     }
@@ -450,7 +459,8 @@ class block_onboarding_view_external extends external_api {
 
         // prüfen ob Report bereits markiert ist
         $already_helpful =
-            $DB->record_exists('block_onb_e_helpful', array('user_id' => $USER->id, 'experience_id' => $experience_id));
+            $DB->record_exists('block_onb_e_helpful', array('user_id' => $USER->id,
+                'experience_id' => $experience_id));
 
         if ($already_helpful) {
             $return_helpful['exists'] = 1;
@@ -469,8 +479,8 @@ class block_onboarding_view_external extends external_api {
     public static function init_helpful_returns() {
         return new external_single_structure(
             array(
-                'exists'      => new external_value(PARAM_INT, 'entry existence'),
-                'popularity'      => new external_value(PARAM_INT, 'popularity of report')
+                'exists' => new external_value(PARAM_INT, 'entry existence'),
+                'popularity' => new external_value(PARAM_INT, 'popularity of report')
             )
         );
     }
@@ -496,7 +506,6 @@ class block_onboarding_view_external extends external_api {
      * Parameter erklären!
      * @return string welcome message
      */
-
     public static function delete_confirmation($context, $id) {
         global $DB;
 
@@ -510,15 +519,18 @@ class block_onboarding_view_external extends external_api {
         switch ($context) {
             case 'wiki-category':
                 $affected = $DB->count_records('block_onb_w_links', array('category_id' => $id));
-                $returnmessage['text'] = get_string('msg_delete_steps_cats_warning', 'block_onboarding') . $affected . get_string('msg_delete_steps_cats_lost', 'block_onboarding');
+                $returnmessage['text'] = get_string('msg_delete_steps_cats_warning', 'block_onboarding') . $affected .
+                    get_string('msg_delete_steps_cats_lost', 'block_onboarding');
                 break;
             case 'exp-category':
                 $affected = $DB->count_records('block_onb_e_exps_cats', array('category_id' => $id));
-                $returnmessage['text'] = get_string('msg_delete_exp_cats_warning', 'block_onboarding') . $affected . get_string('msg_delete_exp_cats_lost', 'block_onboarding');
+                $returnmessage['text'] = get_string('msg_delete_exp_cats_warning', 'block_onboarding') . $affected .
+                    get_string('msg_delete_exp_cats_lost', 'block_onboarding');
                 break;
             case 'exp-course':
                 $affected = $DB->count_records('block_onb_e_exps', array('course_id' => $id));
-                $returnmessage['text'] = get_string('msg_delete_exp_course_warning', 'block_onboarding') . $affected . get_string('msg_delete_exp_course_lost', 'block_onboarding');
+                $returnmessage['text'] = get_string('msg_delete_exp_course_warning', 'block_onboarding') . $affected .
+                    get_string('msg_delete_exp_course_lost', 'block_onboarding');
                 break;
             case 'exp-exp':
                 $returnmessage['text'] = get_string('msg_delete_exp_exp_admin_warning', 'block_onboarding');
@@ -538,7 +550,7 @@ class block_onboarding_view_external extends external_api {
     public static function delete_confirmation_returns() {
         return new external_single_structure(
             array(
-                'text'      => new external_value(PARAM_TEXT, 'information about number of data entries that will be deleted')
+                'text' => new external_value(PARAM_TEXT, 'information about number of data entries that will be deleted')
             )
         );
     }

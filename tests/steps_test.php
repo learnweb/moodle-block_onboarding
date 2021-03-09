@@ -19,7 +19,7 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $this->assertTrue($DB->record_exists('block_onb_s_steps', array('name' => 'Test Step')));
     }
 
-    public function test_update_step(){
+    public function test_update_step() {
         global $DB;
         $this->resetAfterTest(true);
 
@@ -50,7 +50,7 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $this->assertTrue($DB->record_exists('block_onb_s_steps', array('name' => 'Test Step New')));
     }
 
-    public function test_update_step_position(){
+    public function test_update_step_position() {
         global $DB;
         $this->resetAfterTest(true);
 

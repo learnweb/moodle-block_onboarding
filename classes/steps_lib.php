@@ -20,7 +20,7 @@ defined('MOODLE_INTERNAL') || die();
 
 class steps_lib {
 
-    public static function edit_step($fromform){
+    public static function edit_step($fromform) {
         // speichere Basis Daten aus der Form ausgenommen der position in dem Objekt step -> weitere Verarbeitung folgt
         $step = new \stdClass();
         $step->name = $fromform->name;
@@ -39,9 +39,9 @@ class steps_lib {
         }
     }
 
-    public static function add_step($step){
+    public static function add_step($step) {
         global $DB;
-        
+
         $initposition = $DB->count_records('block_onb_s_steps') + 1;
         $insertposition = $step->position;
 
@@ -59,7 +59,7 @@ class steps_lib {
         }
     }
 
-    public static function update_step($step, $fromformposition){
+    public static function update_step($step, $fromformposition) {
         global $DB;
 
         $paramstep = $DB->get_record('block_onb_s_steps', array('id' => $step->id));
@@ -72,35 +72,38 @@ class steps_lib {
             self::decrement_step_positions($insertposition, $curposition);
 
             // wenn gewünschte Einfügeposition weiter vorne als aktuelle Position ist
-        } else if ($insertposition < $curposition) {
-            self::increment_step_positions($insertposition, $curposition);
+        } else {
+            if ($insertposition < $curposition) {
+                self::increment_step_positions($insertposition, $curposition);
+            }
         }
         // andernfalls ist die Position gleich und es müssen keine anderen Schrittpositionen verändert werden
-        
+
         $step->position = $fromformposition + 1;
         $step->timemodified = time();
         $DB->update_record('block_onb_s_steps', $step);
     }
 
-    public static function delete_step($stepid){
+    public static function delete_step($stepid) {
         global $DB, $USER;
         $paramstep = $DB->get_record('block_onb_s_steps', array('id' => $stepid));
         $curposition = $paramstep->position;
         $stepcount = $DB->count_records('block_onb_s_steps');
 
         // deleting step and adjusting other step positions accordingly
-        \block_onboarding\steps_lib::decrement_step_positions($stepcount, $curposition);
+        self::decrement_step_positions($stepcount, $curposition);
         $DB->delete_records('block_onb_s_steps', array('id' => $stepid));
 
         // deleting all user progress for deleted step
-        $step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id, 'stepid' => $stepid));
-        if($step != false){
+        $step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id,
+            'stepid' => $stepid));
+        if ($step != false) {
             $paramstep = $DB->get_record('block_onb_s_steps', array('position' => 1));
             // gucken, ob überhaupt nich ein Schritt exisitiert
-            if($paramstep != false){
+            if ($paramstep != false) {
                 $step->stepid = $paramstep->id;
                 $DB->update_record('block_onb_s_current', $step);
-            }else{
+            } else {
                 $DB->delete_records('block_onb_s_current', array('stepid' => $stepid));
             }
         }
@@ -110,18 +113,16 @@ class steps_lib {
     public static function increment_step_positions($insert, $cur) {
         global $DB;
 
-        $sql = "UPDATE {block_onb_s_steps}
-                SET position = position +1
-                WHERE position >= :insert_pos and position < :cur_pos";
-        $DB->execute($sql, ['cur_pos' => $cur, 'insert_pos' => $insert]);
+        $sql = "UPDATE {block_onb_s_steps} SET position = position +1 WHERE position >= :insert_pos and position < :cur_pos";
+        $DB->execute($sql, ['cur_pos' => $cur,
+            'insert_pos' => $insert]);
     }
 
     public static function decrement_step_positions($insert, $cur) {
         global $DB;
 
-        $sql = "UPDATE {block_onb_s_steps}
-                SET position = position -1
-                WHERE position > :cur_pos and position <= :insert_pos";
-        $DB->execute($sql, ['cur_pos' => $cur, 'insert_pos' => $insert]);
+        $sql = "UPDATE {block_onb_s_steps} SET position = position -1 WHERE position > :cur_pos and position <= :insert_pos";
+        $DB->execute($sql, ['cur_pos' => $cur,
+            'insert_pos' => $insert]);
     }
 }
