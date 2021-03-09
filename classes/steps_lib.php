@@ -89,7 +89,7 @@ class steps_lib {
      * Calls {@see decrement_step_positions()} or {@see increment_step_positions()} to update positions of other steps if necessary.
      *
      * @param object $step
-     * @param integer $fromformposition
+     * @param int $fromformposition
      */
     public static function update_step($step, $fromformposition) {
         global $DB;
@@ -112,39 +112,40 @@ class steps_lib {
 
     /**
      * Deletes an existing step from the database.
-     * Calls {@see decrement_step_positions()} to update positions of other steps.
+     * Calls {@see decrement_step_positions()} to update positions of remaining steps.
      *
-     * @param integer $stepid
+     * @param int $stepid
      */
     public static function delete_step($stepid) {
-        global $DB, $USER;
+        global $DB;
         $paramstep = $DB->get_record('block_onb_s_steps', array('id' => $stepid));
         $curposition = $paramstep->position;
         $stepcount = $DB->count_records('block_onb_s_steps');
         self::decrement_step_positions($stepcount, $curposition);
         $DB->delete_records('block_onb_s_steps', array('id' => $stepid));
 
-        // TODO: Issue! Progress für ALLE USER MUSS GELÖSCHT WERDEN!!
-        $step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id, 'stepid' => $stepid));
-        if ($step != false) {
-            $paramstep = $DB->get_record('block_onb_s_steps', array('position' => 1));
-            // Checks whether step data table is now empty and updates or deletes current user steps accordingly.
-            if ($paramstep != false) {
-                $step->stepid = $paramstep->id;
-                $DB->update_record('block_onb_s_current', $step);
-            } else {
-                $DB->delete_records('block_onb_s_current', array('stepid' => $stepid));
+        // Get all data entries of users whose current step position was set to the now deleted step.
+        $affectedusers = $DB->get_records('block_onb_s_current', array('stepid' => $stepid));
+        $paramstep = $DB->get_record('block_onb_s_steps', array('position' => 1));
+        // Checks whether step data table is now empty and updates affected user step positions to 1
+        // or deletes all current user steps when no steps remain in the step data table.
+        if ($paramstep != false) {
+            foreach ($affectedusers as $currentuserstep) {
+                $currentuserstep->stepid = $paramstep->id;
+                $DB->update_record('block_onb_s_current', $currentuserstep);
             }
+        } else {
+            $DB->delete_records('block_onb_s_current', array('stepid' => $stepid));
         }
         // Deletes all completed steps user progress for deleted step.
         $DB->delete_records('block_onb_s_completed', array('stepid' => $stepid));
     }
 
     /**
-     * Increments step positions between the insert and current step position, excluding the passed current position.
+     * Increments step positions between the $insert and $current step position, excluding the passed $current position.
      *
-     * @param integer $insert
-     * @param integer $cur
+     * @param int $insert
+     * @param int $cur
      */
     public static function increment_step_positions($insert, $cur) {
         global $DB;
@@ -154,10 +155,10 @@ class steps_lib {
     }
 
     /**
-     * Decrements step positions between the current step and insert position, excluding the passed current position.
+     * Decrements step positions between the $current step and $insert position, excluding the passed $current position.
      *
-     * @param integer $insert
-     * @param integer $cur
+     * @param int $insert
+     * @param int $cur
      */
     public static function decrement_step_positions($insert, $cur) {
         global $DB;
