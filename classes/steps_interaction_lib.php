@@ -108,8 +108,7 @@ class steps_interaction_lib {
         return $returncompleted;
     }
 
-    // TODO: wird nur von einer Funktion genutzt
-    public static function set_user_step_completed($stepid) {
+    public static function set_user_completed_step($stepid) {
         global $DB, $USER;
         // nur wenn Step noch nicht abgeschlossen wurde, wird dieser hinzugefügt, sonst passiert nichts
         $stepbool = $DB->record_exists('block_onb_s_completed', array('userid' => $USER->id, 'stepid' => $stepid));

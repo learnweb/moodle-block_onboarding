@@ -138,7 +138,7 @@ class block_onboarding_view_external extends external_api {
                 \block_onboarding\steps_interaction_lib::set_current_user_stepid($step->id);
             }
             //Markiert den vorherigen Step als completed
-            \block_onboarding\steps_interaction_lib::set_user_step_completed($curposition);
+            \block_onboarding\steps_interaction_lib::set_user_completed_step($curposition);
             // Prüfen, ob step schon completed wurde
             $completed = \block_onboarding\steps_interaction_lib::get_user_completed_step($step->id);
             // berechnet Fortschritt des Nutzers
