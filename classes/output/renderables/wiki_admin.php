@@ -31,7 +31,7 @@ class wiki_admin implements renderable, templatable {
     global $DB;
 
    $categories = array_values($DB->get_records('block_onb_w_categories', $conditions=null, $sort='position ASC'));
-    $links = array_values($DB->get_records('block_onb_w_links'));
+   $links = array_values($DB->get_records('block_onb_w_links'));
 
 
     foreach($categories as $category){

@@ -31,7 +31,7 @@ class guide_overview implements renderable, templatable {
     global $DB;
 
    $categories = array_values($DB->get_records('block_onb_w_categories', $conditions=null, $sort='position ASC'));
-   $links = array_values($DB->get_records('block_onb_w_links', $conditions=null, $sort='position ASC'));
+   $links = array_values($DB->get_records('block_onb_w_links', $conditions=null));
 
 
     foreach($categories as $category){
