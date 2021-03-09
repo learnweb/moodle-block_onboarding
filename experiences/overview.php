@@ -33,7 +33,7 @@ $PAGE->set_heading(get_string('experiences', 'block_onboarding'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
 $PAGE->navbar->add(get_string('experiences', 'block_onboarding'));
 
-require_once('./../classes/forms/experiences_filter_form.php');
+require_once($CFG->dirroot . '/blocks/onboarding/classes/forms/experiences_filter_form.php');
 $mform = new experiences_filter_form(null, null);
 $form = $mform->render();
 
@@ -44,8 +44,8 @@ $from = '{block_onb_e_exps} ee
 INNER JOIN {user} u ON ee.user_id=u.id
 INNER JOIN {block_onb_e_courses} ec ON ee.course_id=ec.id';
 $where = '1=1';
-
 $skip = false;
+
 if ($fromform = $mform->get_data()) {
     $cats = '(' . implode(',', $fromform->category_filter) . ')';
     $crs = '(' . implode(',', $fromform->course_filter) . ')';

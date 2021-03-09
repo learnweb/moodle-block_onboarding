@@ -2,9 +2,6 @@
 <br></br>
 <div class="block-experiences-experience-helpful">
     <p>
-        <!-- {{# str }} popularity, block_onboarding {{/ str }}
-        <span class="block-experiences-experience-popularity"></span>
-        <br></br> -->
         {{# str }} helpful, block_onboarding {{/ str }}
         <button class="block-experiences-experience-helpful_btn" type=button>Yes</button>
     </p>
@@ -17,9 +14,7 @@
     {{/can_manage_experiences}}
 {{/experience}}
 </h2>
-{{#degreeprogram_author}}
-<h6>{{{author}}} - {{{degreeprogram}}}</h6>
-{{/degreeprogram_author}}
+    <h6>{{#author}}{{{author}}}{{/author}}{{#degreeprogram}} - {{{degreeprogram}}}{{/degreeprogram}}</h6>
 {{#experience}}
 <h6>{{#userdate}}{{{timecreated}}}, {{#str}} strftimedatetimeshort {{/str}}{{/userdate}}</h6>
 {{/experience}}
