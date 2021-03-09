@@ -171,4 +171,10 @@ class experiences_lib {
 
         $report->id = $DB->insert_record('block_onb_e_report', $report);
     }
+
+    public static function delete_report($report_id){
+        global $DB;
+        // Deletion of the report.
+        $DB->delete_records('block_onb_e_report', array('id' => $report_id));
+    }
 }
