@@ -25,12 +25,14 @@ $string['settings'] = 'Settings';
 $string['back'] = 'Back';
 $string['backtohome'] = 'Back to Home';
 $string['backtooverview'] = 'Back to Overview';
+$string['backtodashboard'] = 'Back to Dashboard';
 $string['overview'] = 'Overview';
 $string['admin'] = 'Administration';
 $string['settings'] = 'Settings';
 
 // Guide
 $string['guide'] = 'Guide';
+$string['guide_link'] = 'To the Guide';
 $string['guide_summary'] = 'In our Guide you can find useful Links along with a handy "First Steps" - Programm, which will get you ready right away.';
 
 // -> Wiki

@@ -24,12 +24,14 @@ $string['settings'] = 'Einstellungen';
 $string['back'] = 'Zurück';
 $string['backtohome'] = 'Zurück zu Home';
 $string['backtooverview'] = 'Zurück zum Überblick';
+$string['backtodashboard'] = 'Zurück zum Dashboard';
 $string['overview'] = 'Überblick';
 $string['admin'] = 'Administration';
 $string['settings'] = 'Einstellungen';
 
 // Guide
 $string['guide'] = 'Guide';
+$string['guide_link'] = 'Gehe zum Guide';
 $string['guide_summary'] = 'Im Guide findest du nützliche organisatorische Informationen rund um dein Studium. Außerdem hilft dir das "Erste Schritte" - Programm dich zurechtzufinden.';
 
 // -> Wiki
@@ -101,7 +103,7 @@ $string['msg_delete_step_warning'] = 'WARNING: Beim Löschen dieses Schrittes we
 
 // Experiences.
 $string['experience'] = 'Erfahrung';
-$string['experiences'] = 'Erfahrungen';
+$string['experiences'] = 'Erfahrungsberichte';
 
 $string['edit_category'] = 'Kategorie bearbeiten';
 $string['delete_category'] = 'Kategorie löschen';

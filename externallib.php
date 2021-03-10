@@ -516,6 +516,11 @@ class block_onboarding_view_external extends external_api {
             )
         );
 
+        // Security checks.
+//        $context =  context_??::instance(???);
+//        self::validate_context($context);
+//        require_capability('block/onboarding:???', $context);
+
         switch ($context) {
             case 'step':
                 $returnmessage['text'] = get_string('msg_delete_step_warning', 'block_onboarding');

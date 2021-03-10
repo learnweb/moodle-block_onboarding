@@ -38,7 +38,17 @@
 .home-container {
     display: flex;
     justify-content: space-between;
-    margin: 0 -1em;
+    margin-top: 1em;
+}
+
+.home-title {
+    font-weight: lighter;
+    font-size: 1.3em;
+    margin-bottom: 0.25em;
+}
+
+.home-description {
+    vertical-align: top;
 }
 
 .onboarding-card {
