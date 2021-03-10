@@ -24,14 +24,14 @@ use templatable;
 use renderer_base;
 
 class home implements renderable, templatable {
-  public function __construct() {
-  }
 
-  public function export_for_template(renderer_base $output) {
-    return [
-      'base_plugin_url' => new \moodle_url('/blocks/onboarding/'),
-      'dashboard_url' => new \moodle_url('/')
-    ];
-  }
+    public function __construct() {
+    }
 
+    public function export_for_template(renderer_base $output) {
+        return [
+            'base_plugin_url' => new \moodle_url('/blocks/onboarding/'),
+            'dashboard_url' => new \moodle_url('/')
+        ];
+    }
 }

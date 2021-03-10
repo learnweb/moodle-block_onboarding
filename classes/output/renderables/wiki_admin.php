@@ -24,28 +24,26 @@ use templatable;
 use renderer_base;
 
 class wiki_admin implements renderable, templatable {
-  public function __construct() {
-  }
 
-  public function export_for_template(renderer_base $output) {
-    global $DB;
-
-   $categories = array_values($DB->get_records('block_onb_w_categories', $conditions=null, $sort='position ASC'));
-   $links = array_values($DB->get_records('block_onb_w_links'));
-
-
-    foreach($categories as $category){
-      foreach($links as $link){
-        if($link->category_id == $category->id){
-          $category->links[] = $link;
-
-        }
-      }
+    public function __construct() {
     }
 
-    return [
-      'can_manage_wiki' => has_capability('block/onboarding:w_manage_wiki', \context_system::instance()),
-      'categories_with_links' => $categories
-    ];
-  }
+    public function export_for_template(renderer_base $output) {
+        global $DB;
+
+        $categories = array_values($DB->get_records('block_onb_w_categories', $conditions = null, $sort = 'position ASC'));
+        $links = array_values($DB->get_records('block_onb_w_links'));
+        foreach ($categories as $category) {
+            foreach ($links as $link) {
+                if ($link->category_id == $category->id) {
+                    $category->links[] = $link;
+                }
+            }
+        }
+
+        return [
+            'can_manage_wiki' => has_capability('block/onboarding:w_manage_wiki', \context_system::instance()),
+            'categories_with_links' => $categories
+        ];
+    }
 }

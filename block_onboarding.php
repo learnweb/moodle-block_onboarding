@@ -29,22 +29,20 @@ class block_onboarding extends block_base {
             'course-view-social' => false,
             'mod' => false,
             'mod-quiz' => false,
-            'my'=> true
+            'my' => true
         );
     }
 
     public function get_content() {
-        global $DB;
 
-      if ($this->content !== null) {
+        if ($this->content !== null) {
+            return $this->content;
+        }
+        $this->content = new stdClass;
+        $renderer = $this->page->get_renderer('block_onboarding');
+        $block = new \block_onboarding\output\renderables\block();
+        $this->content->text = $renderer->render($block);
         return $this->content;
-      }
-
-      $this->content = new stdClass;
-      $renderer = $this->page->get_renderer('block_onboarding');
-      $block = new \block_onboarding\output\renderables\block();
-      $this->content->text = $renderer->render($block);
-      return $this->content;
     }
 
     public function has_config() {

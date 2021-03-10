@@ -18,6 +18,8 @@ require(__DIR__ . '/../../../config.php');
 
 require_login();
 
+// TODO: file now obsolete
+
 global $DB;
 
 $context = context_system::instance();

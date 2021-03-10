@@ -46,6 +46,7 @@ $string['category_number'] = 'Kategorie Position';
 $string['default_category_name'] = 'Beispiel Kategorie';
 $string['new_link'] = 'Neuer Link';
 $string['edit_link'] = 'Link bearbeiten';
+$string['delete_link'] = 'Link löschen';
 $string['link_name'] = 'Name';
 $string['link_name_req'] = 'Bitte gib einen Namen für den Link an';
 $string['link_category'] = 'Kategorie';
@@ -60,8 +61,9 @@ $string['default_link_name'] = 'Beispiel Link';
 $string['default_link_name'] = 'Beispiel Name';
 $string['default_link_url'] = 'https://www.example.com';
 $string['default_link_description'] = 'Beispiel Beschreibung';
-$string['msg_delete_steps_cats_warning'] = 'WARNUNG: Links in dieser Kategorie: ';
-$string['msg_delete_steps_cats_lost'] = '. In dieser Kategorie enthaltene Links werden dauerhaft gelöscht. Möchtest du die Kategorie wirklich löschen?';
+$string['msg_delete_wiki_cat_warning'] = 'WARNUNG: Links in dieser Kategorie: ';
+$string['msg_delete_wiki_cat_lost'] = '. In dieser Kategorie enthaltene Links werden dauerhaft gelöscht. Möchtest du die Kategorie wirklich löschen?';
+$string['msg_delete_wiki_link_warning'] = 'WARNUNG: Beim Löschen dieses Links gehen die Daten dauerhaft verloren. Möchtest du den Link wirklich dauerhaft löschen?';
 
 // -> Steps
 $string['steps'] = 'Erste Schritte';
@@ -80,6 +82,7 @@ $string['show_steps'] = 'Erste Schritte einblenden';
 $string['completed'] = 'Abgeschlossen';
 $string['new_step'] = 'Neuer Schritt';
 $string['edit_step'] = 'Schritt bearbeiten';
+$string['delete_step'] = 'Schritt löschen';
 $string['step_name'] = 'Name';
 $string['step_name_req'] = 'Bitte gib einen Namen für den Schritt an';
 $string['step_description'] = 'Beschreibung';
@@ -94,6 +97,7 @@ $string['step_number'] = 'Schritt Position';
 $string['no_steps_available'] = "Im Moment stehen keine Schritte zur Verfügung";
 $string['error_nosteps_title'] = "KEINE SCHRITTE ZUM ANZEIGEN VORHANDEN!";
 $string['error_nosteps_message'] = "Aktuell sind keine Ersten Schritte in der Datenbank hinterlegt.";
+$string['msg_delete_step_warning'] = 'WARNING: Beim Löschen dieses Schrittes werden alle Daten zu diesem Schritt permanent gelöscht und der Nutzerfortschritt zu diesem Schritt wird entfernt. Möchtest du den Schritt wirklich dauerhaft löschen?';
 
 // Experiences.
 $string['experience'] = 'Erfahrung';

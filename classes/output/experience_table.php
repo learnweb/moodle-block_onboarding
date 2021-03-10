@@ -54,7 +54,7 @@ class experience_table extends table_sql {
 
     // Configure Column Content.
     public function col_name($values) {
-        return '<a href="experience.php?experience_id='.$values->id.'">'.$values->name.'</a>';
+        return '<a href="experience.php?experience_id=' . $values->id . '">' . $values->name . '</a>';
     }
 
     public function col_author($values) {
@@ -82,6 +82,5 @@ class experience_table extends table_sql {
      *     been made.
      */
     function other_cols($colname, $value) {
-
     }
 }

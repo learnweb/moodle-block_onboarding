@@ -35,12 +35,9 @@ class report_table extends table_sql {
 
         // Table configuration.
         $this->set_attribute('cellspacing', '0');
-
         $this->sortable(true, 'timecreated', SORT_DESC);
-
         $this->initialbars(false);
         $this->collapsible(false);
-
     }
 
     /**
@@ -54,7 +51,7 @@ class report_table extends table_sql {
 
     // Configure Column Content.
     public function col_experience($values) {
-        return '<a href="experience.php?experience_id='.$values->experience_id.'">'.$values->experience.'</a>';
+        return '<a href="experience.php?experience_id=' . $values->experience_id . '">' . $values->experience . '</a>';
     }
 
     public function col_experience_id($values) {
