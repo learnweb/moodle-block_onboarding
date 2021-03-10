@@ -26,28 +26,16 @@ class report_table extends table_sql {
     public function __construct($uniqueid) {
         parent::__construct($uniqueid);
         // Define the list of columns to show.
-        $columns = array('experience',
-            'experience_id',
-            'type',
-            'description',
-            'author',
-            'timecreated');
+        $columns = array('experience', 'experience_id', 'type', 'description', 'author', 'timecreated', 'actions');
         $this->define_columns($columns);
 
         // Define the titles of columns to show in header.
-        $headers = array('Experience',
-            'Id',
-            'Type',
-            'Description',
-            'Author',
-            'Date');
+        $headers = array('Experience', 'Id', 'Type', 'Description', 'Author', 'Date', 'Actions');
         $this->define_headers($headers);
 
         // Table configuration.
         $this->set_attribute('cellspacing', '0');
-
         $this->sortable(true, 'timecreated', SORT_DESC);
-
         $this->initialbars(false);
         $this->collapsible(false);
     }
@@ -85,6 +73,10 @@ class report_table extends table_sql {
     public function col_timecreated($values) {
         $date = userdate($values->timecreated, get_string('strftimedatetimeshort', 'core_langconfig'));
         return $date;
+    }
+
+    public function col_actions($values) {
+        return '<a href="delete_report.php?report_id='.$values->id.'">' . get_string('delete', 'block_onboarding') . '</a>';
     }
 
     /**

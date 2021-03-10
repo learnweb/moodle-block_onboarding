@@ -26,7 +26,10 @@ class experiences_lib {
         $experience = new \stdClass();
         $experience->name = $fromform->name;
         $experience->contact = isset($fromform->contact) ? $fromform->contact : null;
-        $experience->user_id = isset($fromform->user_id) ? $fromform->user_id : null;
+        if ($fromform->id == -1){
+            $experience->user_id = isset($fromform->user_id) ? $fromform->user_id : null;
+            $experience->timecreated = time();
+        }
         $experience->course_id = isset($fromform->course_id) ? $fromform->course_id : null;
         if (!empty($fromform->publish)) {
             $experience->published = 1;
@@ -35,7 +38,6 @@ class experiences_lib {
                 $experience->published = null;
             }
         }
-        $experience->timecreated = time();
         $experience->timemodified = time();
 
         if (isset($fromform->aboutme_text)) {
@@ -149,7 +151,9 @@ class experiences_lib {
 
     public static function delete_course($courseid) {
         global $DB;
-        $DB->delete_records('block_onb_e_courses', array('id' => $courseid));
+        $DB->delete_records('block_onb_e_courses', array('id' => $course_id));
+        $DB->set_field('block_onb_e_exps', 'published', null, array('course_id' => $course_id));
+        $DB->set_field('block_onb_e_exps', 'course_id', null, array('course_id' => $course_id));
     }
 
     public static function get_course_by_id($courseid) {
@@ -169,5 +173,11 @@ class experiences_lib {
         $report->timecreated = time();
 
         $report->id = $DB->insert_record('block_onb_e_report', $report);
+    }
+
+    public static function delete_report($report_id) {
+        global $DB;
+        // Deletion of the report.
+        $DB->delete_records('block_onb_e_report', array('id' => $report_id));
     }
 }
