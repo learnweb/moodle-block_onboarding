@@ -517,10 +517,16 @@ class block_onboarding_view_external extends external_api {
         );
 
         switch ($context) {
+            case 'step':
+                $returnmessage['text'] = get_string('msg_delete_step_warning', 'block_onboarding');
+                break;
             case 'wiki-category':
                 $affected = $DB->count_records('block_onb_w_links', array('category_id' => $id));
-                $returnmessage['text'] = get_string('msg_delete_steps_cats_warning', 'block_onboarding') . $affected .
-                    get_string('msg_delete_steps_cats_lost', 'block_onboarding');
+                $returnmessage['text'] = get_string('msg_delete_wiki_cat_warning', 'block_onboarding') . $affected .
+                    get_string('msg_delete_wiki_cat_lost', 'block_onboarding');
+                break;
+            case 'wiki-link':
+                $returnmessage['text'] = get_string('msg_delete_wiki_link_warning', 'block_onboarding');
                 break;
             case 'exp-category':
                 $affected = $DB->count_records('block_onb_e_exps_cats', array('category_id' => $id));
@@ -587,8 +593,16 @@ class block_onboarding_view_external extends external_api {
         );
 
         switch ($context) {
+            case 'step':
+                \block_onboarding\steps_lib::delete_step($id);
+                $returnvalue['confirmation'] = 1;
+                break;
             case 'wiki-category':
                 \block_onboarding\wiki_lib::delete_category($id);
+                $returnvalue['confirmation'] = 1;
+                break;
+            case 'wiki-link':
+                \block_onboarding\wiki_lib::delete_link($id);
                 $returnvalue['confirmation'] = 1;
                 break;
             case 'exp-category':

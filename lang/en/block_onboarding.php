@@ -47,6 +47,7 @@ $string['category_number'] = 'Category Position';
 $string['default_category_name'] = 'Sample Category';
 $string['new_link'] = 'New Link';
 $string['edit_link'] = 'Edit Link';
+$string['delete_link'] = 'Delete Link';
 $string['link_name'] = 'Name';
 $string['link_name_req'] = 'Please enter a name for the link.';
 $string['link_category'] = 'Category';
@@ -60,8 +61,9 @@ $string['link_number'] = 'Link Position';
 $string['default_link_name'] = 'Default Name';
 $string['default_link_url'] = 'http://www.example.com';
 $string['default_link_description'] = 'Sample Description';
-$string['msg_delete_steps_cats_warning'] = 'WARNING: Links within this category: ';
-$string['msg_delete_steps_cats_lost'] = '. The links within this category will be lost permanently. Are you sure you want to delete this category?';
+$string['msg_delete_wiki_cat_warning'] = 'WARNING: Links within this category: ';
+$string['msg_delete_wiki_cat_lost'] = '. The links within this category will be lost permanently. Are you sure you want to delete this category?';
+$string['msg_delete_wiki_link_warning'] = 'WARNING: This will permanently delete this link from the Wiki. Are you sure you want to proceed?';
 
 // -> Steps
 $string['steps'] = 'First Steps';
@@ -80,6 +82,7 @@ $string['show_steps'] = 'Show First Steps';
 $string['completed'] = 'Completed';
 $string['new_step'] = 'New Step';
 $string['edit_step'] = 'Edit Step';
+$string['delete_step'] = 'Delete Step';
 $string['step_name'] = 'Name';
 $string['step_name_req'] = 'Please enter a name for the step.';
 $string['step_description'] = 'Description';
@@ -94,6 +97,7 @@ $string['step_number'] = 'Step Position';
 $string['no_steps_available'] = "There are no steps to display at the moment";
 $string['error_nosteps_title'] = "NO STEPS TO DISPLAY!";
 $string['error_nosteps_message'] = "There are currently no steps saved in the database.";
+$string['msg_delete_step_warning'] = 'WARNING: This will permanently delete this step and remove all user progress for this step. Are you sure you want to proceed?';
 
 // Experiences.
 $string['experience'] = 'Experience';
