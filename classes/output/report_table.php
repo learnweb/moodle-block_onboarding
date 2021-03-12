@@ -36,6 +36,7 @@ class report_table extends table_sql {
         // Table configuration.
         $this->set_attribute('cellspacing', '0');
         $this->sortable(true, 'timecreated', SORT_DESC);
+        $this->no_sorting('actions');
         $this->initialbars(false);
         $this->collapsible(false);
     }

@@ -5,7 +5,7 @@
             {{#experience}}
                 <span class="experiences-experience-title-title">{{{name}}}</span>
                 {{#can_manage_experiences}}
-                    <a href="edit_experience.php?experience_id={{{id}}}" class="experiences-experience-title-edit-btn">{{#pix}}t/editstring, core, {{# str }}edit_experience, block_onboarding{{/ str }}{{/pix}}</a>
+                    <a href="edit_experience.php?experience_id={{{id}}}" class="experiences-experience-title-edit-btn">{{#pix}}t/editstring, core, {{# str }}edit_experience, block_onboarding{{/ str }}{{/pix}}</a><a href="suspend_experience.php?experience_id={{{id}}}">{{#suspended}}{{#pix}}i/hide, core, {{# str }}unsuspend_experience, block_onboarding{{/ str }}{{/pix}}{{/suspended}}{{^suspended}}{{#pix}}i/show, core, {{# str }}suspend_experience, block_onboarding{{/ str }}{{/pix}}{{/suspended}}</a>
                     <span onb-data-id="{{{id}}}" onb-data-context="exp-exp" class="delete-btn">{{#pix}}t/delete, core, {{# str }}delete_experience, block_onboarding{{/ str }}{{/pix}}</span>
                 {{/can_manage_experiences}}
             {{/experience}}
