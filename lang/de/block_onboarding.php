@@ -28,6 +28,7 @@ $string['backtodashboard'] = 'Zurück zum Dashboard';
 $string['overview'] = 'Überblick';
 $string['admin'] = 'Administration';
 $string['settings'] = 'Einstellungen';
+$string['yes'] = 'Ja';
 
 // Guide
 $string['guide'] = 'Guide';
@@ -129,6 +130,7 @@ $string['experience_name'] = 'Titel';
 $string['experience_name_missing'] = 'Bitte gebe einen Titel für deinen Bericht an.';
 $string['experience_degreeprogram_missing'] = 'Bitte wähle einen Studiengang aus.';
 $string['experience_category'] = 'Kategorie';
+$string['experience_course'] = 'Studiengang';
 $string['experience_url'] = 'URL';
 $string['experience_description'] = 'Beschreibung';
 $string['default_experience_name'] = 'Beispiel Erfahrung';
@@ -181,8 +183,10 @@ $string['experience_admin'] = 'Experience Administration';
 $string['experience_questions_missing'] = 'Bitte trage hier Fragen ein, die Anstoß zum Schreiben geben.';
 $string['experience_category_missing'] = 'Bitte trage einen Kategorienamen ein.';
 $string['publish'] = 'Veröffentlichen';
+$string['published'] = 'Veröffentlicht am';
 $string['savedraft'] = 'Als Entwurf speichern';
 $string['draft'] = 'Entwurf';
+$string['author'] = 'Autor';
 
 $string['msg_delete_exp_cats_warning'] = 'WARNUNG: Berichte mit Einträgen zu dieser Kategorie: ';
 $string['msg_delete_exp_cats_lost'] = '. Die Bericht-Einträge zu dieser Kategorie werden dauerhaft gelöscht. Möchtest du die Kategorie wirklich löschen?';

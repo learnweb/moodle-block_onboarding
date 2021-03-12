@@ -29,6 +29,7 @@ $string['backtodashboard'] = 'Back to Dashboard';
 $string['overview'] = 'Overview';
 $string['admin'] = 'Administration';
 $string['settings'] = 'Settings';
+$string['yes'] = 'Yes';
 
 // Guide
 $string['guide'] = 'Guide';
@@ -124,6 +125,7 @@ $string['experience_name'] = 'Name';
 $string['experience_name_missing'] = 'Please enter a name for your report.';
 $string['experience_degreeprogram_missing'] = 'Please select a degree program.';
 $string['experience_category'] = 'Category';
+$string['experience_course'] = 'Course';
 $string['experience_url'] = 'URL';
 $string['experience_description'] = 'Description';
 $string['default_experience_name'] = 'Sample Experience';
@@ -173,9 +175,11 @@ $string['experience_questions_missing'] = 'Please enter suggestive questions for
 $string['experience_category_missing'] = 'Please enter a category name.';
 $string['experience_type_missing'] = 'Please click one of the Options.';
 $string['publish'] = 'Publish';
+$string['published'] = 'Published';
 $string['savedraft'] = 'Save as Draft';
 $string['draft'] = 'Draft';
 $string['delete'] = 'Delete';
+$string['author'] = 'Author';
 
 $string['msg_delete_exp_cats_warning'] = 'WARNING: Experience Reports containing data entries for this report category: ';
 $string['msg_delete_exp_cats_lost'] = '. The category data entries will be lost permanently. Are you sure you want to delete this category?';
