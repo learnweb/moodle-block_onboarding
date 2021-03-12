@@ -24,12 +24,15 @@ $string['settings'] = 'Einstellungen';
 $string['back'] = 'Zurück';
 $string['backtohome'] = 'Zurück zu Home';
 $string['backtooverview'] = 'Zurück zum Überblick';
+$string['backtodashboard'] = 'Zurück zum Dashboard';
 $string['overview'] = 'Überblick';
 $string['admin'] = 'Administration';
 $string['settings'] = 'Einstellungen';
+$string['yes'] = 'Ja';
 
 // Guide
 $string['guide'] = 'Guide';
+$string['guide_link'] = 'Gehe zum Guide';
 $string['guide_summary'] = 'Im Guide findest du nützliche organisatorische Informationen rund um dein Studium. Außerdem hilft dir das "Erste Schritte" - Programm dich zurechtzufinden.';
 
 // -> Wiki
@@ -46,6 +49,7 @@ $string['category_number'] = 'Kategorie Position';
 $string['default_category_name'] = 'Beispiel Kategorie';
 $string['new_link'] = 'Neuer Link';
 $string['edit_link'] = 'Link bearbeiten';
+$string['delete_link'] = 'Link löschen';
 $string['link_name'] = 'Name';
 $string['link_name_req'] = 'Bitte gib einen Namen für den Link an';
 $string['link_category'] = 'Kategorie';
@@ -60,8 +64,9 @@ $string['default_link_name'] = 'Beispiel Link';
 $string['default_link_name'] = 'Beispiel Name';
 $string['default_link_url'] = 'https://www.example.com';
 $string['default_link_description'] = 'Beispiel Beschreibung';
-$string['msg_delete_steps_cats_warning'] = 'WARNUNG: Links in dieser Kategorie: ';
-$string['msg_delete_steps_cats_lost'] = '. In dieser Kategorie enthaltene Links werden dauerhaft gelöscht. Möchtest du die Kategorie wirklich löschen?';
+$string['msg_delete_wiki_cat_warning'] = 'WARNUNG: Links in dieser Kategorie: ';
+$string['msg_delete_wiki_cat_lost'] = '. In dieser Kategorie enthaltene Links werden dauerhaft gelöscht. Möchtest du die Kategorie wirklich löschen?';
+$string['msg_delete_wiki_link_warning'] = 'WARNUNG: Beim Löschen dieses Links gehen die Daten dauerhaft verloren. Möchtest du den Link wirklich dauerhaft löschen?';
 
 // -> Steps
 $string['steps'] = 'Erste Schritte';
@@ -80,6 +85,7 @@ $string['show_steps'] = 'Erste Schritte einblenden';
 $string['completed'] = 'Abgeschlossen';
 $string['new_step'] = 'Neuer Schritt';
 $string['edit_step'] = 'Schritt bearbeiten';
+$string['delete_step'] = 'Schritt löschen';
 $string['step_name'] = 'Name';
 $string['step_name_req'] = 'Bitte gib einen Namen für den Schritt an';
 $string['step_description'] = 'Beschreibung';
@@ -94,10 +100,11 @@ $string['step_number'] = 'Schritt Position';
 $string['no_steps_available'] = "Im Moment stehen keine Schritte zur Verfügung";
 $string['error_nosteps_title'] = "KEINE SCHRITTE ZUM ANZEIGEN VORHANDEN!";
 $string['error_nosteps_message'] = "Aktuell sind keine Ersten Schritte in der Datenbank hinterlegt.";
+$string['msg_delete_step_warning'] = 'WARNING: Beim Löschen dieses Schrittes werden alle Daten zu diesem Schritt permanent gelöscht und der Nutzerfortschritt zu diesem Schritt wird entfernt. Möchtest du den Schritt wirklich dauerhaft löschen?';
 
 // Experiences.
 $string['experience'] = 'Erfahrung';
-$string['experiences'] = 'Erfahrungen';
+$string['experiences'] = 'Erfahrungsberichte';
 
 $string['edit_category'] = 'Kategorie bearbeiten';
 $string['delete_category'] = 'Kategorie löschen';
@@ -123,6 +130,7 @@ $string['experience_name'] = 'Titel';
 $string['experience_name_missing'] = 'Bitte gebe einen Titel für deinen Bericht an.';
 $string['experience_degreeprogram_missing'] = 'Bitte wähle einen Studiengang aus.';
 $string['experience_category'] = 'Kategorie';
+$string['experience_course'] = 'Studiengang';
 $string['experience_url'] = 'URL';
 $string['experience_description'] = 'Beschreibung';
 $string['default_experience_name'] = 'Beispiel Erfahrung';
@@ -175,8 +183,10 @@ $string['experience_admin'] = 'Experience Administration';
 $string['experience_questions_missing'] = 'Bitte trage hier Fragen ein, die Anstoß zum Schreiben geben.';
 $string['experience_category_missing'] = 'Bitte trage einen Kategorienamen ein.';
 $string['publish'] = 'Veröffentlichen';
+$string['published'] = 'Veröffentlicht am';
 $string['savedraft'] = 'Als Entwurf speichern';
 $string['draft'] = 'Entwurf';
+$string['author'] = 'Autor';
 
 $string['msg_delete_exp_cats_warning'] = 'WARNUNG: Berichte mit Einträgen zu dieser Kategorie: ';
 $string['msg_delete_exp_cats_lost'] = '. Die Bericht-Einträge zu dieser Kategorie werden dauerhaft gelöscht. Möchtest du die Kategorie wirklich löschen?';

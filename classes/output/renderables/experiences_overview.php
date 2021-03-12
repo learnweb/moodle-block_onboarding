@@ -24,11 +24,9 @@ use renderer_base;
 
 class experiences_overview implements renderable, templatable {
     var $form = null;
-    // var $list = null;
 
     public function __construct($form) {
         $this->form = $form;
-        // $this->list = $list;
     }
 
     public function export_for_template(renderer_base $output) {
@@ -42,21 +40,21 @@ class experiences_overview implements renderable, templatable {
         $courses = array_values($DB->get_records('block_onb_e_courses'));
 
         $experiences_mapped = array();
-        foreach($experiences as $experience){
+        foreach ($experiences as $experience) {
             $experience->popularity = $DB->count_records('block_onb_e_helpful', array('experience_id' => $experience->id));
-            if($USER->id == $experience->user_id || has_capability('block/onboarding:e_manage_experiences',
-                    \context_system::instance())){
+            if ($USER->id == $experience->user_id || has_capability('block/onboarding:e_manage_experiences',
+                    \context_system::instance())) {
                 $experience->editable = true;
             }
             $experiences_mapped[$experience->id] = $experience;
         }
 
         $categories_mapped = array();
-        foreach($categories as $category){
+        foreach ($categories as $category) {
             $categories_mapped[$category->id] = $category;
         }
 
-        foreach($experiences_categories as $experience_category){
+        foreach ($experiences_categories as $experience_category) {
             $experiences_mapped[$experience_category->experience_id]->categories[] =
                 $categories_mapped[$experience_category->category_id];
         }

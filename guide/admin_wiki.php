@@ -25,7 +25,7 @@ global $USER, $DB;
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/wiki/admin_wiki.php'));
 
-if(has_capability('block/onboarding:w_manage_wiki', $context)){
+if (has_capability('block/onboarding:w_manage_wiki', $context)) {
     $PAGE->requires->js_call_amd('block_onboarding/delete_confirmation', 'init');
     $PAGE->set_title(get_string('wiki_admin', 'block_onboarding'));
     $PAGE->set_heading(get_string('wiki_admin', 'block_onboarding'));
@@ -33,17 +33,18 @@ if(has_capability('block/onboarding:w_manage_wiki', $context)){
     $PAGE->navbar->add(get_string('guide', 'block_onboarding'), new moodle_url('overview.php'));
     $PAGE->navbar->add(get_string('wiki_admin', 'block_onboarding'));
     $output = $PAGE->get_renderer('block_onboarding');
+
     echo $output->header();
     echo $output->container_start('wiki-overview');
     $renderable = new \block_onboarding\output\renderables\wiki_admin();
     echo $output->render($renderable);
     echo $output->container_end();
     echo $output->footer();
-}else{
+} else {
     $PAGE->set_title(get_string('error', 'block_onboarding'));
     $PAGE->set_heading(get_string('error', 'block_onboarding'));
     $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
-  
+
     echo $OUTPUT->header();
     echo html_writer::tag('p', get_string('insufficient_permissions', 'block_onboarding'));
     echo $OUTPUT->footer();

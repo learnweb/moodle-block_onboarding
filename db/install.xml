@@ -58,6 +58,7 @@
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="primary key for steps_current"/>
+        <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="mdl_user" REFFIELDS="id"/>
         <KEY NAME="stepid" TYPE="foreign" FIELDS="stepid" REFTABLE="block_onb_s_steps" REFFIELDS="id"/>
       </KEYS>
     </TABLE>

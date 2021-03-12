@@ -12,15 +12,15 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
         promises[0].done(function (response) {
             if(response.exists === 1) {
                 $('.block-experiences-experience-popularity').text(response.popularity);
-                $('.block-experiences-experience-helpful_btn').css({'background-color': '#008196', 'color': '#ffffff'});
+                $('.experiences-experience-helpful-btn').css({'background-color': '#32cd32', 'color': '#ffffff'});
             } else {
                 $('.block-experiences-experience-popularity').text(response.popularity);
-                $('.block-experiences-experience-helpful_btn').css({'background': 'none', 'color': '#000000'});
+                $('.experiences-experience-helpful-btn').css({'background': 'rgba(128, 128, 128, 0.8)', 'color': '#ffffff'});
             }
         }).fail(notification.exception);
 
 
-        $('.block-experiences-experience-helpful_btn').on('click', function () {
+        $('.experiences-experience-helpful-btn').on('click', function () {
             var promises = ajax.call([{
                 methodname: 'block_onboarding_click_helpful',
                 args: {experience_id: experience_id}
@@ -29,10 +29,10 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
             promises[0].done(function (response) {
                 if(response.exists === 1) {
                     $('.block-experiences-experience-popularity').text(response.popularity);
-                    $('.block-experiences-experience-helpful_btn').css({'background-color': '#008196', 'color': '#ffffff'});
+                    $('.experiences-experience-helpful-btn').css({'background-color': '#32cd32', 'color': '#ffffff'});
                 } else {
                     $('.block-experiences-experience-popularity').text(response.popularity);
-                    $('.block-experiences-experience-helpful_btn').css({'background': 'none', 'color': '#000000'});
+                    $('.experiences-experience-helpful-btn').css({'background': 'rgba(128, 128, 128, 0.8)', 'color': '#ffffff'});
                 }
             }).fail(notification.exception);
         })

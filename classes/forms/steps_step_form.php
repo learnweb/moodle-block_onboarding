@@ -24,24 +24,22 @@ class steps_step_form extends moodleform {
         global $CFG, $DB;
 
         $mform = $this->_form;
-
-        /*
-         * _customdata erlaubt die Übergabe von weiteren Parametern beim Erstellen einer Instanz einer Moodle Form,
-         * hier lässt sich zusätzlich der step als Variable übergeben
-         */
         $step = $this->_customdata['step'];
 
         $mform->addElement('hidden', 'id', $step->id);
         $mform->setType('id', PARAM_INT);
 
         $mform->addElement('text', 'name', get_string('step_name', 'block_onboarding'),
-            array('maxlength' => 150, 'placeholder' => get_string('default_step_name', 'block_onboarding')));
+            array('maxlength' => 150,
+                'placeholder' => get_string('default_step_name', 'block_onboarding')));
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($step->name) ? $step->name : '');
         $mform->addRule('name', get_string('step_name_req', 'block_onboarding'), 'required', null, 'client');
 
         $mform->addElement('textarea', 'description', get_string('step_description', 'block_onboarding'),
-            array('wrap' => "virtual", 'rows' => 10, 'cols' => 50,
+            array('wrap' => "virtual",
+                'rows' => 10,
+                'cols' => 50,
                 'placeholder' => get_string('step_description_req', 'block_onboarding')));
         $mform->setType('description', PARAM_TEXT);
         $mform->setDefault('description', isset($step->description) ? $step->description : '');

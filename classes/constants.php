@@ -19,7 +19,6 @@ namespace block_onboarding;
 defined('MOODLE_INTERNAL') || die();
 
 class constants {
-
     /** @var string */
     const SPAM = 'spam/advertisement';
     /** @var string */
@@ -34,5 +33,4 @@ class constants {
     const PERSONALINFO = 'disclosure of personal information';
     /** @var string */
     const OTHER = 'other';
-
 }

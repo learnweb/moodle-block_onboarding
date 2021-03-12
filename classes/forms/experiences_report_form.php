@@ -17,6 +17,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/formslib.php');
+
 use block_onboarding\constants;
 
 class experiences_report_form extends moodleform {
@@ -34,7 +35,7 @@ class experiences_report_form extends moodleform {
         $mform->addElement('hidden', 'user_id', $USER->id);
         $mform->setType('user_id', PARAM_INT);
 
-        $radioarray=array();
+        $radioarray = array();
         $radioarray[] = $mform->createElement('radio', 'type', '',
             get_string('spam', 'block_onboarding'), constants::SPAM, '');
         $radioarray[] = $mform->createElement('radio', 'type', '',
@@ -55,7 +56,8 @@ class experiences_report_form extends moodleform {
 
         $mform->addElement('textarea', 'description', get_string('experience_description', 'block_onboarding'),
             array('wrap="virtual" rows="5" cols="50"'));
-        $mform->addRule('description', get_string('experience_description_missing', 'block_onboarding'), 'required', null, 'server');
+        $mform->addRule('description', get_string('experience_description_missing', 'block_onboarding'), 'required', null,
+            'server');
         $mform->setType('description', PARAM_TEXT);
 
         $this->add_action_buttons();

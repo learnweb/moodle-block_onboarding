@@ -1,5 +1,5 @@
-.ul {
-    margin-bottom: 0em !important;
+ul {
+    margin-bottom: 0 !important;
 }
 
 .btn-normal {
@@ -38,7 +38,17 @@
 .home-container {
     display: flex;
     justify-content: space-between;
-    margin: 0 -1em;
+    margin-top: 1em;
+}
+
+.home-title {
+    font-weight: lighter;
+    font-size: 1.3em;
+    margin-bottom: 0.25em;
+}
+
+.home-description {
+    vertical-align: top;
 }
 
 .onboarding-card {
@@ -175,7 +185,6 @@
     background-size: cover;
     background-color: #ececec;
     display: none;
-    transition: display 0.7s;
 }
 
 .steps-title-wrapper {
@@ -257,13 +266,23 @@
     visibility: hidden;
 }
 
-.hide-btn, .show-btn {
-    cursor:pointer;
-    color:var(--primary);
+.hide-btn {
+    cursor: pointer;
+    color: var(--primary);
     display: none;
 }
 
-.hide-btn + a, .show-btn + a {
+.show-btn {
+    cursor: pointer;
+    color: var(--primary);
+    display: none;
+}
+
+.hide-btn + a {
+    margin-left: 25px;
+}
+
+.show-btn + a {
     margin-left: 25px;
 }
 
@@ -271,6 +290,8 @@
     height: 100%;
     width: 100%;
     position: absolute;
+    left: 0;
+    right: 0;
     opacity: 0.7;
     pointer-events: none;
 }
@@ -348,13 +369,111 @@
     margin-bottom: 20px;
 }
 
-.block-experiences-experience-helpful {
-    float: right;
+.experiences-experience-container {
 }
 
-.block-experiences-experience-helpful_btn {}
+.experiences-experience-header-container {
+    margin: .5em .5em;
+    border-radius: 8px;
+    padding: 3px;
+    background-image: url([[pix:block_onboarding|library]]);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #ececec;
+}
 
-.block-experiences-experience-popularity {}
+.experiences-experience-title-wrapper {
+    color: #ffffff;
+    background-color: #006784;
+    margin: .25em;
+    padding: 7px;
+    border-radius: 6px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+.experiences-experience-title-title {
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+.experiences-experience-title-edit-btn {
+    color: rgba(153, 153, 153, 0.8);
+    margin-left: 0.7em;
+}
+
+.experiences-experience-title-helpful {
+    float: right;
+    margin-bottom: 0;
+}
+
+.experiences-experience-helpful-btn {
+    margin-left: 0.5em;
+    background-color: rgba(128, 128, 128, 0.8);
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 3px;
+}
+
+.experiences-experience-helpful-btn:hover {
+    background-color: rgba(128, 128, 128, 1);
+}
+
+.experiences-experience-title-info {
+    background-color: rgba(128, 128, 128, 0.8);
+    color: #ffffff;
+    margin: 0.25em;
+    padding: 7px;
+    border-radius: 6px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+.experiences-experience-title-info-p {
+    margin-bottom: 0;
+}
+
+.experiences-experience-title-takeaways-title {
+    font-weight: bold;
+    width: fit-content;
+    margin-top: 0.5em;
+    margin-bottom: 0.4em;
+    padding: 0.1em 0.2em;
+    background-color: #ffffff;
+    color: rgba(0, 0, 0, 0.8);
+    border-radius: 3px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+.experiences-experience-title-takeaways-list{
+    margin-bottom: 0.25em;
+}
+
+.experiences-experience-title-takeaways-cat{
+    background-color: #ffffff;
+    color: rgba(0, 0, 0, 0.8);
+    padding: 0.1em 0.2em;
+    border-radius: 3px;
+    font-weight: bold;
+    margin-left: 0.6em;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+.experiences-experience-content-container {
+    margin: .5em .5em;
+    border-radius: 8px;
+    padding: 3px;
+    background-color: #656565;
+}
+
+.experiences-experience-content-cat {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000000;
+    margin: 0.25em 0.25em 0.5em 0.25em;
+    padding: 7px;
+    border-radius: 6px;
+}
+.experiences-experience-footer {
+    margin: 0.5em;
+}
 
 .block-experiences-overview-experiences {
     display: grid;
@@ -383,6 +502,5 @@ aside {
     grid-row-start: 2;
     grid-row-end: 3;
 }
-
 
 /* General */

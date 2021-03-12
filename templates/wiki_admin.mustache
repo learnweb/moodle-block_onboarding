@@ -1,7 +1,4 @@
-<a href="overview.php">
-    {{#pix}}t/left, core, {{# str }}back, block_onboarding {{/ str }}
-    {{/pix}}{{# str }}backtooverview, block_onboarding {{/ str }}
-</a>
+<a href="overview.php">{{#pix}}t/left, core, {{# str }}back, block_onboarding{{/ str }}{{/pix}}{{# str }}backtooverview, block_onboarding{{/ str }}</a>
 <br>
 <br>
 <div class="admin-title">{{# str }}wiki_admin, block_onboarding{{/ str }}</div>
@@ -9,8 +6,8 @@
     <span class="admin-content-title">{{{name}}}</span>
     <span class="admin-edit-btn">
         {{#can_manage_wiki}}
-            <a href="edit_category.php?category_id={{{id}}}">{{#pix}}t/editstring, core, Edit Link{{/pix}}</a>
-            <span onb-data-id="{{{id}}}" onb-data-context="wiki-category" class="delete-btn">{{#pix}}t/delete, core, Delete Link{{/pix}}</span>
+            <a href="edit_category.php?category_id={{{id}}}">{{#pix}}t/editstring, core, {{# str }}edit_category, block_onboarding{{/ str }}{{/pix}}</a>
+            <span onb-data-id="{{{id}}}" onb-data-context="wiki-category" class="delete-btn">{{#pix}}t/delete, core, {{# str }}delete_category, block_onboarding{{/ str }}{{/pix}}</span>
         {{/can_manage_wiki}}
     </span>
     <ul class="admin-content-wrapper">
@@ -19,11 +16,11 @@
                 <a target="_blank" rel="noopener noreferrer" href="{{{url}}}">{{{name}}}</a>
                 <span class="admin-edit-btn">
                     {{#can_manage_wiki}}
-                        <a href="edit_link.php?link_id={{{id}}}">{{#pix}}t/editstring, core, Edit Link{{/pix}}</a>
-                        <a href="delete_link.php?link_id={{{id}}}">{{#pix}}t/delete, core, Delete Link{{/pix}}</a>
+                        <a href="edit_link.php?link_id={{{id}}}">{{#pix}}t/editstring, core, {{# str }}edit_link, block_onboarding{{/ str }}{{/pix}}</a>
+                        <span onb-data-id="{{{id}}}" onb-data-context="wiki-link" class="delete-btn">{{#pix}}t/delete, core, {{# str }}delete_link, block_onboarding{{/ str }}{{/pix}}</a>
                     {{/can_manage_wiki}}
                 </span>
-                <div class="custom-tooltip">{{#pix}}i/info, core,{{/pix}}
+                <div class="custom-tooltip">{{#pix}}i/info, core{{/pix}}
                     <span class="custom-tooltiptext">{{{description}}}</span>
                 </div>
             </li>

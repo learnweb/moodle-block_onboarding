@@ -25,12 +25,15 @@ $string['settings'] = 'Settings';
 $string['back'] = 'Back';
 $string['backtohome'] = 'Back to Home';
 $string['backtooverview'] = 'Back to Overview';
+$string['backtodashboard'] = 'Back to Dashboard';
 $string['overview'] = 'Overview';
 $string['admin'] = 'Administration';
 $string['settings'] = 'Settings';
+$string['yes'] = 'Yes';
 
 // Guide
 $string['guide'] = 'Guide';
+$string['guide_link'] = 'To the Guide';
 $string['guide_summary'] = 'In our Guide you can find useful Links along with a handy "First Steps" - Programm, which will get you ready right away.';
 
 // -> Wiki
@@ -47,6 +50,7 @@ $string['category_number'] = 'Category Position';
 $string['default_category_name'] = 'Sample Category';
 $string['new_link'] = 'New Link';
 $string['edit_link'] = 'Edit Link';
+$string['delete_link'] = 'Delete Link';
 $string['link_name'] = 'Name';
 $string['link_name_req'] = 'Please enter a name for the link.';
 $string['link_category'] = 'Category';
@@ -60,8 +64,9 @@ $string['link_number'] = 'Link Position';
 $string['default_link_name'] = 'Default Name';
 $string['default_link_url'] = 'http://www.example.com';
 $string['default_link_description'] = 'Sample Description';
-$string['msg_delete_steps_cats_warning'] = 'WARNING: Links within this category: ';
-$string['msg_delete_steps_cats_lost'] = '. The links within this category will be lost permanently. Are you sure you want to delete this category?';
+$string['msg_delete_wiki_cat_warning'] = 'WARNING: Links within this category: ';
+$string['msg_delete_wiki_cat_lost'] = '. The links within this category will be lost permanently. Are you sure you want to delete this category?';
+$string['msg_delete_wiki_link_warning'] = 'WARNING: This will permanently delete this link from the Wiki. Are you sure you want to proceed?';
 
 // -> Steps
 $string['steps'] = 'First Steps';
@@ -80,6 +85,7 @@ $string['show_steps'] = 'Show First Steps';
 $string['completed'] = 'Completed';
 $string['new_step'] = 'New Step';
 $string['edit_step'] = 'Edit Step';
+$string['delete_step'] = 'Delete Step';
 $string['step_name'] = 'Name';
 $string['step_name_req'] = 'Please enter a name for the step.';
 $string['step_description'] = 'Description';
@@ -94,6 +100,7 @@ $string['step_number'] = 'Step Position';
 $string['no_steps_available'] = "There are no steps to display at the moment";
 $string['error_nosteps_title'] = "NO STEPS TO DISPLAY!";
 $string['error_nosteps_message'] = "There are currently no steps saved in the database.";
+$string['msg_delete_step_warning'] = 'WARNING: This will permanently delete this step and remove all user progress for this step. Are you sure you want to proceed?';
 
 // Experiences.
 $string['experience'] = 'Experience';
@@ -104,13 +111,13 @@ $string['delete_category'] = 'Delete Category';
 $string['category_name'] = 'Name';
 $string['default_category_name'] = 'Sample Category';
 $string['questions'] = 'Questions';
-$string['degreeprograms'] = 'Degree Programs';
 $string['edit_course'] = 'Edit Degree Program';
 $string['delete_course'] = 'Delete Degree Program';
 $string['course_name'] = 'Name';
 $string['course_name_missing'] = 'Please enter a course name.';
 $string['default_course_name'] = 'Sample Degree Program';
 $string['course_select'] = 'Select Degree Program';
+$string['degreeprograms'] = 'Degree Programs';
 $string['myexperiencearea'] = 'My Experience Area';
 $string['edit_experience'] = 'Edit Experience';
 $string['delete_experience'] = 'Delete Experience';
@@ -119,6 +126,7 @@ $string['experience_name'] = 'Name';
 $string['experience_name_missing'] = 'Please enter a name for your report.';
 $string['experience_degreeprogram_missing'] = 'Please select a degree program.';
 $string['experience_category'] = 'Category';
+$string['experience_course'] = 'Course';
 $string['experience_url'] = 'URL';
 $string['experience_description'] = 'Description';
 $string['default_experience_name'] = 'Sample Experience';
@@ -168,10 +176,11 @@ $string['experience_questions_missing'] = 'Please enter suggestive questions for
 $string['experience_category_missing'] = 'Please enter a category name.';
 $string['experience_type_missing'] = 'Please click one of the Options.';
 $string['publish'] = 'Publish';
+$string['published'] = 'Published';
 $string['savedraft'] = 'Save as Draft';
 $string['draft'] = 'Draft';
-
 $string['delete'] = 'Delete';
+$string['author'] = 'Author';
 $string['unsuspend_experience'] = 'Unsuspend';
 $string['suspend_experience'] = 'Suspend';
 $string['suspend_mail'] = 'Suspend Mail';
