@@ -51,36 +51,66 @@ class experiences_lib {
             $experience->id = $DB->insert_record('block_onb_e_exps', $experience);
         }
 
-        $DB->delete_records('block_onb_e_exps_cats', array('experience_id' => $experience->id));
+        // $DB->delete_records('block_onb_e_exps_cats', array('experience_id' => $experience->id));
         $categories = $DB->get_records('block_onb_e_cats');
-        $experiences_categories = array();
+        $insert_categories = array();
+        $update_categories = array();
 
         foreach ($categories as $category) {
             $formproperty_category_checkbox = 'category_' . $category->id;
             $formproperty_category_textarea = 'experience_category_' . $category->id . '_description';
             if (isset($fromform->$formproperty_category_checkbox) && empty($fromform->$formproperty_category_textarea) == false) {
                 $experience_category = new \stdClass;
-                $experience_category->experience_id = $experience->id;
-                $experience_category->category_id = $category->id;
                 $formproperty_category_textarea = 'experience_category_' . $category->id . '_description';
                 $experience_category->description = $fromform->$formproperty_category_textarea;
                 $formproperty_category_takeaway = 'experience_category_' . $category->id . '_takeaway';
                 $experience_category->takeaway = $fromform->$formproperty_category_takeaway;
-                $experience_category->timecreated = time();
                 $experience_category->timemodified = time();
-                $experiences_categories[] = $experience_category;
+
+
+                $contentcheck = $DB->get_record('block_onb_e_exps_cats',
+                    array('experience_id' => $experience->id, 'category_id' => $category->id));
+
+                if (empty($contentcheck)) {
+                    $experience_category->experience_id = $experience->id;
+                    $experience_category->category_id = $category->id;
+                    $experience_category->timecreated = time();
+                    $insert_categories[] = $experience_category;
+                } else {
+                    $experience_category->id = $contentcheck->id;
+                    $DB->update_record('block_onb_e_exps_cats', $experience_category);
+                }
+
             } else {
                 $DB->delete_records('block_onb_e_exps_cats',
                     array('experience_id' => $experience->id, 'category_id' => $category->id));
             }
         }
-        $DB->insert_records('block_onb_e_exps_cats', $experiences_categories);
+        $DB->insert_records('block_onb_e_exps_cats', $insert_categories);
     }
-
     public static function delete_experience($experience_id){
         global $DB;
         $DB->delete_records('block_onb_e_exps_cats', array('experience_id' => $experience_id));
         $DB->delete_records('block_onb_e_exps', array('id' => $experience_id));
+    }
+
+    public static function suspend_experience($fromform){
+        global $USER, $DB;
+        $sql = 'SELECT * FROM {user} u
+                INNER JOIN {block_onb_e_exps} ee ON u.id = ee.user_id
+                WHERE ee.id = ' . $fromform->experience_id;
+
+        $recipient = $DB->get_record_sql($sql);
+
+        $toUser = $recipient;
+        $fromUser = $USER;
+        $subject = get_string('mail_title', 'block_onboarding');
+        $messageText = $fromform->comment;
+        $messageHtml = $fromform->comment;
+
+        email_to_user($toUser, $fromUser, $subject, $messageText, $messageHtml, '', '', true);
+        $DB->set_field('block_onb_e_exps', 'suspended', 1, array('id' => $fromform->experience_id));
+        redirect('experience.php?experience_id=' . $fromform->experience_id);
     }
 
     public static function edit_category($fromform){
@@ -88,13 +118,13 @@ class experiences_lib {
         $category = new \stdClass();
         $category->name = $fromform->name;
         $category->questions = $fromform->questions;
-        $category->timecreated = time();
         $category->timemodified = time();
 
         if ($fromform->id != -1) {
             $category->id = $fromform->id;
             \block_onboarding\experiences_lib::update_category($category);
         } else {
+            $category->timecreated = time();
             \block_onboarding\experiences_lib::add_category($category);
         }
     }

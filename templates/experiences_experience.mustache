@@ -9,7 +9,7 @@
 <h2>
 {{#experience}}{{{name}}}
     {{#can_manage_experiences}}
-        <a href="edit_experience.php?experience_id={{{id}}}">{{#pix}}t/editstring, core, Edit Experience{{/pix}}</a><span onb-data-id="{{{id}}}" onb-data-context="exp-exp" class="delete-btn">{{#pix}}t/delete, core, Delete Experience{{/pix}}</span>
+        <a href="edit_experience.php?experience_id={{{id}}}">{{#pix}}t/editstring, core, Edit Experience{{/pix}}</a><a href="suspend_experience.php?experience_id={{{id}}}">{{#suspended}}{{#pix}}i/hide, core, {{# str }}unsuspend_experience, block_onboarding{{/ str }}{{/pix}}{{/suspended}}{{^suspended}}{{#pix}}i/show, core, {{# str }}suspend_experience, block_onboarding{{/ str }}{{/pix}}{{/suspended}}</a><span onb-data-id="{{{id}}}" onb-data-context="exp-exp" class="delete-btn">{{#pix}}t/delete, core, Delete Experience{{/pix}}</span>
     {{/can_manage_experiences}}
 {{/experience}}
 </h2>

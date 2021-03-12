@@ -104,6 +104,7 @@ $string['delete_category'] = 'Delete Category';
 $string['category_name'] = 'Name';
 $string['default_category_name'] = 'Sample Category';
 $string['questions'] = 'Questions';
+$string['degreeprograms'] = 'Degree Programs';
 $string['edit_course'] = 'Edit Degree Program';
 $string['delete_course'] = 'Delete Degree Program';
 $string['course_name'] = 'Name';
@@ -169,7 +170,17 @@ $string['experience_type_missing'] = 'Please click one of the Options.';
 $string['publish'] = 'Publish';
 $string['savedraft'] = 'Save as Draft';
 $string['draft'] = 'Draft';
+
 $string['delete'] = 'Delete';
+$string['unsuspend_experience'] = 'Unsuspend';
+$string['suspend_experience'] = 'Suspend';
+$string['suspend_mail'] = 'Suspend Mail';
+$string['title_missing'] = 'Please enter a title.';
+$string['mail_title'] = 'Correction Experience Report';
+$string['mail_comment'] = "Hello,\r\nWe received reports regarding your Experience submission. We'd like you to correct the following issue:\r\n \r\n \r\n \r\nAs long as this issue is not resolved your submission can not be viewed by other students. \r\nThank you for your understanding. \r\n \r\nKind Regards, \r\nYour Digital Onboarding Team";
+$string['submit_mail'] = 'Send Mail and Suspend';
+$string['reports'] = 'Reports';
+$string['suspended_experiences'] = 'Suspended Experiences';
 
 $string['msg_delete_exp_cats_warning'] = 'WARNING: Experience Reports containing data entries for this report category: ';
 $string['msg_delete_exp_cats_lost'] = '. The category data entries will be lost permanently. Are you sure you want to delete this category?';

@@ -104,7 +104,7 @@ $string['delete_category'] = 'Kategorie löschen';
 $string['category_name'] = 'Name';
 $string['default_category_name'] = 'Beispiel Kategorie';
 $string['questions'] = 'Fragen';
-
+$string['degreeprograms'] = 'Studiengänge';
 $string['edit_course'] = 'Studiengang bearbeiten';
 $string['delete_course'] = 'Studiengang löschen';
 $string['course_name'] = 'Name';

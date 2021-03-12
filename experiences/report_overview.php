@@ -17,6 +17,7 @@
 require(__DIR__ . '/../../../config.php');
 require($CFG->libdir . '/tablelib.php');
 require($CFG->dirroot . '/blocks/onboarding/classes/output/report_table.php');
+require($CFG->dirroot . '/blocks/onboarding/classes/output/experience_table.php');
 
 require_login();
 
@@ -33,8 +34,11 @@ $PAGE->navbar->add(get_string('report_overview', 'block_onboarding'));
 
 if (has_capability('block/onboarding:e_manage_experiences', \context_system::instance())) {
 
-    $table = new report_table('uniqueid');
-    $PAGE->set_context($context);
+
+
+    $table_report = new report_table('uniqueid');
+    $table_suspended = new experience_table('uniqueid');
+    // $PAGE->set_context($context);
 
     $PAGE->set_title(get_string('report_overview', 'block_onboarding'));
     $PAGE->set_heading(get_string('report_overview', 'block_onboarding'));
@@ -42,6 +46,7 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
     $output = $PAGE->get_renderer('block_onboarding');
     echo $output->header();
 
+    echo "<div class='title'>" . get_string('reports', 'block_onboarding') . "</div><br>";
     // SQL Statement for Listview.
     $fields = 'er.id as id, ee.name as experience, er.experience_id as experience_id, er.type as type, er.description as description, 
     u.firstname as author, er.timecreated as timecreated';
@@ -50,11 +55,22 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
     INNER JOIN {block_onb_e_exps} ee ON er.experience_id=ee.id';
     $where = '1=1';
 
-    $table->set_sql($fields, $from, $where);
+    $table_report->set_sql($fields, $from, $where);
+    $table_report->define_baseurl("$CFG->wwwroot/blocks/onboarding/experiences/report_overview.php");
+    $table_report->out(5, true);
 
-    $table->define_baseurl("$CFG->wwwroot/blocks/onboarding/experiences/report_overview.php");
+    echo "<br></br><div class='title'>" . get_string('suspended_experiences', 'block_onboarding') . "</div><br>";
+    // SQL Statement for Listview.
+    $fields = 'ee.id as id, ee.name as name, u.firstname as author, ec.name as degreeprogram, ee.timecreated as published,
+    ee.popularity as popularity';
+    $from = '{block_onb_e_exps} ee
+    INNER JOIN {user} u ON ee.user_id=u.id
+    INNER JOIN {block_onb_e_courses} ec ON ee.course_id=ec.id';
+    $where = 'ee.suspended = 1';
 
-    $table->out(40, true);
+    $table_suspended->set_sql($fields, $from, $where);
+    $table_suspended->define_baseurl("$CFG->wwwroot/blocks/onboarding/experiences/report_overview.php");
+    $table_suspended->out(5, true);
 
     echo $output->footer();
 } else {

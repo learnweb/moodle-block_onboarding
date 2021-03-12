@@ -63,12 +63,12 @@ if ($fromform = $mform->get_data()) {
                 // Category and Course Filter applied.
                 $w = $w . ' AND course_id IN' . $crs;
             }
-            $w = $w . ' AND published = 1';
+            $w = $w . ' AND published = 1 AND suspended IS NULL';
         } else {
             // No Results for Category Filter.
             if (empty($fromform->course_filter) != true) {
                 // No Results for Category Filter + Course Filter applied.
-                $w = 'WHERE course_id IN ' . $crs . ' AND published = 1';
+                $w = 'WHERE course_id IN ' . $crs . ' AND published = 1 AND suspended IS NULL';
             } else {
                 // No Results for Category Filter + Course Filter empty.
                 $where = '1=0';
@@ -79,7 +79,7 @@ if ($fromform = $mform->get_data()) {
         // Category Filter empty.
         if (empty($fromform->course_filter) != true) {
             // Category Filter empty + Course Filter applied.
-            $w = 'WHERE course_id IN ' . $crs . ' AND published = 1';
+            $w = 'WHERE course_id IN ' . $crs . ' AND published = 1 AND suspended IS NULL';
         } else {
             // Category and Course Filter empty.
             $skip = true;
@@ -99,7 +99,7 @@ if ($fromform = $mform->get_data()) {
         }
     }
 }
-$where = $where . ' AND ee.published = 1';
+$where = $where . ' AND ee.published = 1 AND ee.suspended IS NULL';
 $table->set_sql($fields, $from, $where);
 $table->define_baseurl("$CFG->wwwroot/blocks/onboarding/experiences/overview.php");
 
@@ -111,5 +111,5 @@ echo $output->container_start('experiences-overview');
 $renderable = new \block_onboarding\output\renderables\experiences_overview($form);
 echo $output->render($renderable);
 echo $output->container_end();
-$table->out(40, true);
+$table->out(10, true);
 echo $output->footer();
