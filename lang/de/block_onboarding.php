@@ -203,10 +203,11 @@ $string['rep_mail_description'] = "Beschreibung: ";
 $string['unsus_mail_title'] = 'Dein Erfahrungsbericht ist wieder sichtbar!';
 $string['unsus_mail_comment'] = "Hallo,\r\nDanke, dass du das Problem behoben hast. Dein Erfahrungsbericht ist wieder sichtbar.\r\n \r\nBeste Grüße, \r\nDein Digital Onboarding Team";
 
-
 $string['msg_delete_exp_cats_warning'] = 'WARNUNG: Berichte mit Einträgen zu dieser Kategorie: ';
 $string['msg_delete_exp_cats_lost'] = '. Die Bericht-Einträge zu dieser Kategorie werden dauerhaft gelöscht. Möchtest du die Kategorie wirklich löschen?';
 $string['msg_delete_exp_course_warning'] = 'WARNUNG: Berichte mit Einträgen zu diesem Studiengang: ';
 $string['msg_delete_exp_course_lost'] = '. Die Bericht-Einträge zu diesem Studiengang werden dauerhaft gelöscht. Möchtest du den Studiengang wirklich löschen?';
 $string['msg_delete_exp_exp_student_warning'] = 'WARNUNG: Beim Löschen deines Erfahrungsberichts gehen die Daten dauerhaft verloren. Du kannst deinen Bericht auch bearbeiten und \'Als Entwurf speichern\' klicken, um deinen Bericht aus der öffentlichen Bericht-Anzeige zu entfernen. Möchtest du deinen Bericht wirklich dauerhaft löschen?';
 $string['msg_delete_exp_exp_admin_warning'] = 'WARNUNG: Beim Löschen dieses Erfahrungsberichts gehen die Daten dauerhaft verloren. Möchtest du den Bericht wirklich dauerhaft löschen?';
+
+$string['blocked_overview'] = 'Geblockte Nutzer';
