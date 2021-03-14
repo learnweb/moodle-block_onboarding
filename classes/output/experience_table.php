@@ -26,11 +26,11 @@ class experience_table extends table_sql {
     public function __construct($uniqueid) {
         parent::__construct($uniqueid);
         // Define the list of columns to show.
-        $columns = array('name', 'author', 'degreeprogram', 'published', 'popularity');
+        $columns = array('name', 'author', 'degreeprogram', 'published', 'lastmodified', 'popularity');
         $this->define_columns($columns);
 
         // Define the titles of columns to show in header.
-        $headers = array('Name', 'Author', 'Degree Program', 'Published', 'Popularity');
+        $headers = array('Name', 'Author', 'Degree Program', 'Published', 'Last Modified', 'Popularity');
         $this->define_headers($headers);
 
         // Table configuration.
@@ -67,6 +67,11 @@ class experience_table extends table_sql {
 
     public function col_published($values) {
         $date = userdate($values->published, get_string('strftimedatetimeshort', 'core_langconfig'));
+        return $date;
+    }
+
+    public function col_lastmodified($values) {
+        $date = userdate($values->lastmodified, get_string('strftimedatetimeshort', 'core_langconfig'));
         return $date;
     }
 

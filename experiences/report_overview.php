@@ -61,8 +61,8 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
 
     echo "<br></br><div class='title'>" . get_string('suspended_experiences', 'block_onboarding') . "</div><br>";
     // SQL Statement for Listview.
-    $fields = 'ee.id as id, ee.name as name, u.firstname as author, ec.name as degreeprogram, ee.timecreated as published,
-    ee.popularity as popularity';
+    $fields = 'ee.id as id, ee.name as name, u.firstname as author, ec.name as degreeprogram, 
+    ee.timecreated as published, ee.timemodified as lastmodified, ee.popularity as popularity';
     $from = '{block_onb_e_exps} ee
     INNER JOIN {user} u ON ee.user_id=u.id
     INNER JOIN {block_onb_e_courses} ec ON ee.course_id=ec.id';

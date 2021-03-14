@@ -36,13 +36,13 @@ class experiences_mail_form extends moodleform {
         $mform->addRule('title', get_string('title_missing', 'block_onboarding'), 'required', null, 'server');
         $mform->addRule('title', 'Max Length is 30 characters', 'maxlength', 30, 'block_onboarding');
         $mform->setType('title', PARAM_TEXT);
-        $mform->setDefault('title', get_string('mail_title', 'block_onboarding'));
+        $mform->setDefault('title', get_string('sus_mail_title', 'block_onboarding'));
 
         $mform->addElement('textarea', 'comment', get_string('experience_description', 'block_onboarding'),
             array('wrap="virtual" rows="10" cols="100"'));
         $mform->addRule('comment', get_string('experience_description_missing', 'block_onboarding'), 'required', null, 'server');
         $mform->setType('comment', PARAM_TEXT);
-        $mform->setDefault('comment', get_string('mail_comment', 'block_onboarding'));
+        $mform->setDefault('comment', get_string('sus_mail_comment', 'block_onboarding'));
 
         $this->add_action_buttons($cancel = true, $submitlabel=get_string('submit_mail', 'block_onboarding'));
     }
