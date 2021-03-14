@@ -31,7 +31,7 @@ class block_onboarding_wiki_testcase extends advanced_testcase {
         $this->assertTrue($DB->record_exists('block_onb_w_categories', array('name' => 'Test Category')));
     }
 
-    public function test_add_category_without_name() {
+    public function test_add_category_without_position() {
         global $DB;
         $this->resetAfterTest(true);
 
@@ -39,7 +39,7 @@ class block_onboarding_wiki_testcase extends advanced_testcase {
 
         $fromform = new \stdClass();
         $fromform->id = -1;
-        $fromform->position = 1;
+        $fromform->name = "Test Category";
 
         $errorthrown = false;
         try{
@@ -49,7 +49,7 @@ class block_onboarding_wiki_testcase extends advanced_testcase {
         }
         $this->assertTrue($errorthrown);
 
-        //$this->assertTrue($DB->record_exists('block_onb_w_categories', array('name' => 'Test Category')));
+        $this->assertFalse($DB->record_exists('block_onb_w_categories', array('name' => 'Test Category')));
     }
 
     public function test_update_category() {
@@ -105,7 +105,7 @@ class block_onboarding_wiki_testcase extends advanced_testcase {
         $this->assertTrue($DB->record_exists('block_onb_w_links', array('name' => 'Test Link')));
     }
 
-    public function test_add_link_without_name() {
+    public function test_add_link_without_description() {
         global $DB;
         $this->resetAfterTest(true);
 
@@ -120,14 +120,19 @@ class block_onboarding_wiki_testcase extends advanced_testcase {
         $fromform = new \stdClass();
         $fromform->id = -1;
         $fromform->position = 1;
-        $fromform->description = "Test Description";
         $fromform->category_id = 1;
         $fromform->url = "Test URL";
         $fromform->name = "Test Link";
 
-        \block_onboarding\wiki_lib::edit_link($fromform);
+        $errorthrown = false;
+        try{
+            \block_onboarding\wiki_lib::edit_link($fromform);
+        }catch(\Exception $e){
+            $errorthrown = true;
+        }
+        $this->assertTrue($errorthrown);
 
-        $this->assertTrue($DB->record_exists('block_onb_w_links', array('name' => 'Test Link')));
+        $this->assertFalse($DB->record_exists('block_onb_w_links', array('name' => 'Test Link')));
     }
 
     public function test_update_link() {
