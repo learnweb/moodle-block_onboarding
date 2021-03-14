@@ -206,3 +206,6 @@ $string['msg_delete_exp_course_lost'] = '. The course data entries will be lost 
 $string['msg_delete_exp_exp_student_warning'] = 'WARNING: This will permanently delete your experience report. You can also edit your report and click \'Save as Draft\' to remove you report from the public overview section. Are you sure you want to permanently delete your experience report?';
 $string['msg_delete_exp_exp_admin_warning'] = 'WARNING: This will permanently delete this experience report. Are you sure you want to delete this report?';
 
+$string['blocked_overview'] = 'Blocked Users';
+$string['unblock'] = 'Unblock';
+

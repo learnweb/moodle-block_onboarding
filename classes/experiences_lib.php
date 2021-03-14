@@ -259,6 +259,12 @@ class experiences_lib {
         $DB->delete_records('block_onb_e_report', array('id' => $report_id));
     }
 
+    public static function unblock_user($user_id) {
+        global $DB;
+        // Deletion of the report.
+        $DB->delete_records('block_onb_e_blocked', array('user_id' => $user_id));
+    }
+
     public static function block_user($experience_id) {
         global $DB;
         // Insert User Id into Blacklist table.
@@ -268,6 +274,7 @@ class experiences_lib {
 
         $user = new \stdClass();
         $user->user_id = $DB->get_field_sql($sql);
+        $user->blockedsince = time();
         $DB->insert_record('block_onb_e_blacklist', $user);
     }
 }
