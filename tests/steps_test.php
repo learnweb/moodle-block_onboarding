@@ -33,6 +33,24 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $this->assertTrue($DB->record_exists('block_onb_s_steps', array('name' => 'Test Step')));
     }
 
+    public function test_add_step_without_name() {
+        global $DB;
+        $this->resetAfterTest(true);
+
+        $this->assertEquals(0, $DB->count_records('block_onb_s_steps'));
+
+        $fromform = new \stdClass();
+        $fromform->id = -1;
+        $fromform->position = 0;
+        $fromform->name = "Test Step";
+        $fromform->description = "Test Description";
+        $fromform->achievement = False;
+
+        \block_onboarding\steps_lib::edit_step($fromform);
+
+        $this->assertTrue($DB->record_exists('block_onb_s_steps', array('name' => 'Test Step')));
+    }
+
     public function test_update_step() {
         global $DB;
         $this->resetAfterTest(true);
