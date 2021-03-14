@@ -23,8 +23,7 @@ global $CFG, $DB;
 $experience_id = optional_param('experience_id', -1, PARAM_INT);
 $suspended = $DB->get_field('block_onb_e_exps', 'suspended', array('id' => $experience_id), $strictness=IGNORE_MISSING);
 if ($suspended == 1){
-    $DB->set_field('block_onb_e_exps', 'suspended', null, array('id' => $experience_id));
-    redirect('experience.php?experience_id=' . $experience_id);
+    block_onboarding\experiences_lib::unsuspend_experience($experience_id);
 } else {
     $context = context_system::instance();
 

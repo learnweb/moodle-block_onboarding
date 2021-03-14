@@ -99,6 +99,8 @@ class experiences_lib {
 
     public static function suspend_experience($fromform) {
         global $USER, $DB;
+
+        // TODO Mail function has to be tested
         $sql = 'SELECT * FROM {user} u
                 INNER JOIN {block_onb_e_exps} ee ON u.id = ee.user_id
                 WHERE ee.id = ' . $fromform->experience_id;
@@ -107,7 +109,7 @@ class experiences_lib {
 
         $toUser = $recipient;
         $fromUser = $USER;
-        $subject = get_string('mail_title', 'block_onboarding');
+        $subject = $fromform->title;
         $messageText = $fromform->comment;
         $messageHtml = $fromform->comment;
 
@@ -194,7 +196,7 @@ class experiences_lib {
     }
 
     public static function edit_report($fromform) {
-        global $DB;
+        global $USER, $DB;
         // Data written in the Database.
         $report = new \stdClass();
         $report->experience_id = $fromform->experience_id;
@@ -204,11 +206,68 @@ class experiences_lib {
         $report->timecreated = time();
 
         $report->id = $DB->insert_record('block_onb_e_report', $report);
+
+        // TODO Mail function has to be tested
+        // TODO: define receiving user
+        $sql = 'SELECT * FROM {user} u
+                INNER JOIN {block_onb_e_exps} ee ON u.id = ee.user_id
+                WHERE ee.id = ' . $fromform->experience_id;
+
+        $recipient = $DB->get_record_sql($sql);
+
+        $toUser = $recipient;
+        $fromUser = $USER;
+        $subject = get_string('rep_mail_title', 'block_onboarding');
+        $title = $DB->get_field('block_onb_e_exps', 'name', array('id'=>$report->experience_id));
+        $message = get_string('rep_mail_comment', 'block_onboarding') . $title .
+            get_string('rep_mail_exps_id', 'block_onboarding') . $report->experience_id .
+            get_string('rep_mail_option', 'block_onboarding') . $report->type .
+            get_string('rep_mail_description', 'block_onboarding') . $report->description;
+        $messageText = $message;
+        $messageHtml = $message;
+
+        email_to_user($toUser, $fromUser, $subject, $messageText, $messageHtml, '', '', true);
+    }
+
+    public static function unsuspend_experience($experience_id) {
+        global $USER, $DB;
+
+        // TODO Mail function has to be tested
+        $sql = 'SELECT * FROM {user} u
+                INNER JOIN {block_onb_e_exps} ee ON u.id = ee.user_id
+                WHERE ee.id = ' . $experience_id;
+
+        $recipient = $DB->get_record_sql($sql);
+
+        $toUser = $recipient;
+        $fromUser = $USER;
+        $subject = get_string('unsus_mail_title', 'block_onboarding');
+        $message = get_string('unsus_mail_comment', 'block_onboarding');
+        $messageText = $message;
+        $messageHtml = $message;
+
+        email_to_user($toUser, $fromUser, $subject, $messageText, $messageHtml, '', '', true);
+
+        $DB->set_field('block_onb_e_exps', 'suspended', null, array('id' => $experience_id));
+        redirect('experience.php?experience_id=' . $experience_id);
+
     }
 
     public static function delete_report($report_id) {
         global $DB;
         // Deletion of the report.
         $DB->delete_records('block_onb_e_report', array('id' => $report_id));
+    }
+
+    public static function block_user($experience_id) {
+        global $DB;
+        // Insert User Id into Blacklist table.
+        $sql = 'SELECT u.id FROM {user} u
+                INNER JOIN {block_onb_e_exps} ee ON u.id = ee.user_id
+                WHERE ee.id = ' . $experience_id;
+
+        $user = new \stdClass();
+        $user->user_id = $DB->get_field_sql($sql);
+        $DB->insert_record('block_onb_e_blacklist', $user);
     }
 }

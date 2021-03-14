@@ -34,46 +34,16 @@ class experiences_overview implements renderable, templatable {
         global $DB, $USER;
 
         // Get Database Entries for display on the Start Page.
-        $experiences = array_values($DB->get_records('block_onb_e_exps', array('user_id' => $USER->id)));
-        $categories = array_values($DB->get_records('block_onb_e_cats'));
-        $experiences_categories = array_values($DB->get_records('block_onb_e_exps_cats'));
-        $courses = array_values($DB->get_records('block_onb_e_courses'));
-
-        $experiences_mapped = array();
-        foreach ($experiences as $experience) {
-            $experience->popularity = $DB->count_records('block_onb_e_helpful', array('experience_id' => $experience->id));
-            if ($USER->id == $experience->user_id || has_capability('block/onboarding:e_manage_experiences',
-                    \context_system::instance())) {
-                $experience->editable = true;
-            }
-            $experiences_mapped[$experience->id] = $experience;
-        }
-
-        $categories_mapped = array();
-        foreach ($categories as $category) {
-            $categories_mapped[$category->id] = $category;
-        }
-
-        foreach ($experiences_categories as $experience_category) {
-            $experiences_mapped[$experience_category->experience_id]->categories[] =
-                $categories_mapped[$experience_category->category_id];
-        }
-
-        $courses_mapped = array();
-        foreach ($courses as $course) {
-            $courses_mapped[$course->id] = $course;
-        }
 
         $experience = $DB->get_record('block_onb_e_exps', array('user_id' => $USER->id));
 
+        $blocked = $DB->record_exists('block_onb_e_blocked', array('user_id' => $USER->id));
+
         return [
             'can_manage_experiences' => has_capability('block/onboarding:e_manage_experiences', \context_system::instance()),
-            'categories_general' => $categories,
-            'courses_general' => $courses,
-            'experiences_with_categories' => array_values($experiences_mapped),
             'form' => $this->form,
-            // 'list' => $this->list,
-            'experience' => $experience
+            'experience' => $experience,
+            'blocked' => $blocked
         ];
     }
 }

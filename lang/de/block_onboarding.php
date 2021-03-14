@@ -147,8 +147,6 @@ $string['takeaways_default'] = 'Fasse den Text zu dieser Kategorie in einem Stic
 $string['degreeprogram_filter'] = 'Studiengänge';
 $string['category_filter'] = 'Kategorien';
 $string['applyfilter'] = 'Filter anwenden';
-$string['report_experience'] = 'Erfahrungsbericht melden';
-
 $string['spam'] = 'Spam/Werbung';
 $string['profanity'] = 'Beleidigungen';
 $string['offensive'] = 'Anstößige Inhalte';
@@ -157,7 +155,7 @@ $string['falsematching'] = 'Inhalt passt nicht zur Kategorie';
 $string['personalinformation'] = 'Veröffentlichung persönlicher Informationen';
 $string['other'] = 'Sonstige';
 $string['types'] = 'Wähle eine Option aus';
-$string['report'] = 'Erfahrungsbericht melden';
+$string['report_experience'] = 'Erfahrungsbericht melden';
 $string['report_overview'] = 'Meldeübersicht';
 $string['experience_description_missing'] = 'Bitte tragen Sie eine Beschreibung ein.';
 $string['filter_or'] = 'diese Filter';
@@ -168,7 +166,7 @@ $string['selectcategory_help'] =
     'Wähle Kategorien über die du etwas schreiben möchtest.';
 $string['contactinformation'] = 'dieses Textfeld';
 $string['contactinformation_help'] =
-'Wenn du anderen Studierenden die Möglichkeit geben möchtest dich zu kontaktieren, trage deine Kontakdaten hier ein.';
+'Wenn du anderen Studierenden die Möglichkeit geben möchtest dich zu kontaktieren, trage hier deine Kontakdaten ein.';
 
 $string['aboutme'] = 'Über Mich';
 $string['aboutme_default'] = 'Schreib etwas über dich. (Alter, Semester, etc.)';
@@ -187,6 +185,24 @@ $string['published'] = 'Veröffentlicht am';
 $string['savedraft'] = 'Als Entwurf speichern';
 $string['draft'] = 'Entwurf';
 $string['author'] = 'Autor';
+
+$string['unsuspend_experience'] = 'Sichtbar schalten';
+$string['suspend_experience'] = 'Unsichtbar schalten';
+$string['suspend_mail'] = 'Suspend Mail';
+$string['title_missing'] = 'Bitte vergebe einen Titel.';
+$string['sus_mail_title'] = 'Korrektur deines Berichtes erforderlich';
+$string['sus_mail_comment'] = "Hallo,\r\nWir haben eine Meldung bezüglich deines veröffentlichten Erfahrungsberichtes erhalten.\r\nWir würden dich darum bitten, das folgende Problem zu korrigieren:\r\n \r\n \r\n \r\nSolange dieses Problem besteht, können andere Studenten deinen Bericht nicht ansehen. \r\nVielen Dank für dein Verständnis. \r\n \r\nBeste Grüße, \r\nDein Digital Onboarding Team";
+$string['submit_mail'] = 'Sende E-Mail und schalte unsichtbar';
+$string['reports'] = 'Meldungen';
+$string['suspended_experiences'] = 'Unsichtbare Erfahrungsberichte';
+$string['rep_mail_title'] = 'Neue Meldung';
+$string['rep_mail_comment'] = "Lieber Administrator, \r\nEine neue Meldung wurde soeben erstellt. \r\nBitte überprüfe folgende Informationen:\r\nErfahrungsbericht Titel: ";
+$string['rep_mail_exps_id'] = "Erfahrungsbericht Id: ";
+$string['rep_mail_option'] = "Option: ";
+$string['rep_mail_description'] = "Beschreibung: ";
+$string['unsus_mail_title'] = 'Dein Erfahrungsbericht ist wieder sichtbar!';
+$string['unsus_mail_comment'] = "Hallo,\r\nDanke, dass du das Problem behoben hast. Dein Erfahrungsbericht ist wieder sichtbar.\r\n \r\nBeste Grüße, \r\nDein Digital Onboarding Team";
+
 
 $string['msg_delete_exp_cats_warning'] = 'WARNUNG: Berichte mit Einträgen zu dieser Kategorie: ';
 $string['msg_delete_exp_cats_lost'] = '. Die Bericht-Einträge zu dieser Kategorie werden dauerhaft gelöscht. Möchtest du die Kategorie wirklich löschen?';

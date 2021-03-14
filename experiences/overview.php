@@ -39,7 +39,7 @@ $form = $mform->render();
 
 // SQL Statement for Listview.
 $fields = 'ee.id as id, ee.name as name, u.firstname as author, ec.name as degreeprogram, ee.timecreated as published,
-ee.popularity as popularity';
+ee.timemodified as lastmodified, ee.popularity as popularity';
 $from = '{block_onb_e_exps} ee
 INNER JOIN {user} u ON ee.user_id=u.id
 INNER JOIN {block_onb_e_courses} ec ON ee.course_id=ec.id';
