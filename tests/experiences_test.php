@@ -42,7 +42,7 @@ class block_onboarding_experiences_testcase extends advanced_testcase {
         $this->assertTrue($DB->record_exists('block_onb_e_exps', array('name' => 'Test Experience')));
     }
 
-    public function test_add_experience_without_course_id() {
+    public function test_add_experience_without_name() {
         global $DB;
         $this->resetAfterTest(true);
 
@@ -60,7 +60,7 @@ class block_onboarding_experiences_testcase extends advanced_testcase {
         $fromform = new \stdClass();
         $fromform->id = -1;
         $fromform->user_id = $USER->id;
-        $fromform->name = "Test Experience";
+        $fromform->course_id = $course_id;
 
         $errorthrown = false;
         try{
@@ -70,7 +70,7 @@ class block_onboarding_experiences_testcase extends advanced_testcase {
         }
         $this->assertTrue($errorthrown);
 
-        $this->assertFalse($DB->record_exists('block_onb_e_exps', array('name' => 'Test Experience')));
+        $this->assertEquals(0, $DB->count_records('block_onb_e_exps'));
     }
 
     public function test_update_experience() {

@@ -114,6 +114,7 @@ class block_onboarding_wiki_testcase extends advanced_testcase {
         $fromform = new \stdClass();
         $fromform->id = -1;
         $fromform->position = 1;
+        $fromform->name = "Test Category";
 
         \block_onboarding\wiki_lib::edit_category($fromform);
 
