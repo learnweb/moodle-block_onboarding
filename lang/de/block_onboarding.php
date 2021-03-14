@@ -211,3 +211,4 @@ $string['msg_delete_exp_exp_student_warning'] = 'WARNUNG: Beim Löschen deines E
 $string['msg_delete_exp_exp_admin_warning'] = 'WARNUNG: Beim Löschen dieses Erfahrungsberichts gehen die Daten dauerhaft verloren. Möchtest du den Bericht wirklich dauerhaft löschen?';
 
 $string['blocked_overview'] = 'Geblockte Nutzer';
+$string['unblock'] = 'Unblock';
