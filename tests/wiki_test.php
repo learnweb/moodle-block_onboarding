@@ -43,7 +43,7 @@ class block_onboarding_wiki_testcase extends advanced_testcase {
         $fromform->id = -1;
         $fromform->position = 1;
 
-        $this->expectException(true);
+        $this->expectException('moodle_exception');
         \block_onboarding\wiki_lib::edit_category($fromform);
 
         //$this->assertTrue($DB->record_exists('block_onb_w_categories', array('name' => 'Test Category')));
