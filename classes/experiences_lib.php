@@ -365,6 +365,6 @@ class experiences_lib {
         $user = new \stdClass();
         $user->user_id = $DB->get_field_sql($sql);
         $user->blockedsince = time();
-        $DB->insert_record('block_onb_e_blacklist', $user);
+        $DB->insert_record('block_onb_e_blocked', $user);
     }
 }
