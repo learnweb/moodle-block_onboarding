@@ -29,6 +29,24 @@ class block_onboarding_wiki_testcase extends advanced_testcase {
         \block_onboarding\wiki_lib::edit_category($fromform);
 
         $this->assertTrue($DB->record_exists('block_onb_w_categories', array('name' => 'Test Category')));
+        
+        $this->expectException(true);
+    }
+
+    public function test_add_category_without_name() {
+        global $DB;
+        $this->resetAfterTest(true);
+
+        $this->assertEquals(0, $DB->count_records('block_onb_w_categories'));
+
+        $fromform = new \stdClass();
+        $fromform->id = -1;
+        $fromform->position = 1;
+
+        $this->expectException(true);
+        \block_onboarding\wiki_lib::edit_category($fromform);
+
+        //$this->assertTrue($DB->record_exists('block_onb_w_categories', array('name' => 'Test Category')));
     }
 
     public function test_update_category() {
