@@ -29,8 +29,6 @@ class block_onboarding_wiki_testcase extends advanced_testcase {
         \block_onboarding\wiki_lib::edit_category($fromform);
 
         $this->assertTrue($DB->record_exists('block_onb_w_categories', array('name' => 'Test Category')));
-        
-        $this->expectException(\Exception::class);
     }
 
     public function test_add_category_without_name() {
@@ -43,11 +41,13 @@ class block_onboarding_wiki_testcase extends advanced_testcase {
         $fromform->id = -1;
         $fromform->position = 1;
 
+        $errorthrown = false;
         try{
-            $this->expectException(\Exception::class);
             \block_onboarding\wiki_lib::edit_category($fromform);
         }catch(\Exception $e){
+            $errorthrown = true;
         }
+        $this->assertTrue($errorthrown);
 
         //$this->assertTrue($DB->record_exists('block_onb_w_categories', array('name' => 'Test Category')));
     }
