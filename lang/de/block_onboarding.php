@@ -125,12 +125,13 @@ $string['experience_questions_missing'] = 'Gebe ein paar Vorschläge an.';
 
 $string['edit_experience'] = 'Erfahrungsbericht erstellen';
 $string['delete_experience'] = 'Erfahrungsbericht löschen';
+$string['delete_experience_blacklist'] = 'Erfahrungsbericht löschen & Nutzer blockieren';
 $string['newexperience'] = 'Neuen Erfahrungsbericht erstellen';
 $string['experience_name'] = 'Titel';
 $string['experience_name_missing'] = 'Bitte gebe einen Titel für deinen Bericht an.';
 $string['experience_degreeprogram_missing'] = 'Bitte wähle einen Studiengang aus.';
 $string['experience_category'] = 'Kategorie';
-$string['experience_course'] = 'Studiengang';
+$string['experience_degreeprogram'] = 'Studiengang';
 $string['experience_url'] = 'URL';
 $string['experience_description'] = 'Beschreibung';
 $string['default_experience_name'] = 'Beispiel Erfahrung';
@@ -209,5 +210,6 @@ $string['msg_delete_exp_course_warning'] = 'WARNUNG: Berichte mit Einträgen zu 
 $string['msg_delete_exp_course_lost'] = '. Die Bericht-Einträge zu diesem Studiengang werden dauerhaft gelöscht. Möchtest du den Studiengang wirklich löschen?';
 $string['msg_delete_exp_exp_student_warning'] = 'WARNUNG: Beim Löschen deines Erfahrungsberichts gehen die Daten dauerhaft verloren. Du kannst deinen Bericht auch bearbeiten und \'Als Entwurf speichern\' klicken, um deinen Bericht aus der öffentlichen Bericht-Anzeige zu entfernen. Möchtest du deinen Bericht wirklich dauerhaft löschen?';
 $string['msg_delete_exp_exp_admin_warning'] = 'WARNUNG: Beim Löschen dieses Erfahrungsberichts gehen die Daten dauerhaft verloren. Möchtest du den Bericht wirklich dauerhaft löschen?';
+$string['msg_delete_exp_exp_blacklist_warning'] = 'WARNUNG: Diese Aktion führt zum Löschen des Erfahrungsberichts und sperrt den Autor, sodass dieser keine weiteren Berichte verfassen kann. Autoren können in der "Geblockte Nutzer"-Ansicht in den Einstellungen wieder freigeschaltet werden. Möchtest du wirklich fortfahren?';
 
 $string['blocked_overview'] = 'Geblockte Nutzer';

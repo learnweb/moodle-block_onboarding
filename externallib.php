@@ -516,7 +516,7 @@ class block_onboarding_view_external extends external_api {
             )
         );
 
-        // Security checks.
+//        // Security checks.
 //        $context =  context_??::instance(???);
 //        self::validate_context($context);
 //        require_capability('block/onboarding:???', $context);
@@ -543,11 +543,14 @@ class block_onboarding_view_external extends external_api {
                 $returnmessage['text'] = get_string('msg_delete_exp_course_warning', 'block_onboarding') . $affected .
                     get_string('msg_delete_exp_course_lost', 'block_onboarding');
                 break;
+            case 'exp-my-exp':
+                $returnmessage['text'] = get_string('msg_delete_exp_exp_student_warning', 'block_onboarding');
+                break;
             case 'exp-exp':
                 $returnmessage['text'] = get_string('msg_delete_exp_exp_admin_warning', 'block_onboarding');
                 break;
-            case 'exp-my-exp':
-                $returnmessage['text'] = get_string('msg_delete_exp_exp_student_warning', 'block_onboarding');
+            case 'exp-exp-blacklist':
+                $returnmessage['text'] = get_string('msg_delete_exp_exp_blacklist_warning', 'block_onboarding');
                 break;
         }
         return $returnmessage;
@@ -618,12 +621,17 @@ class block_onboarding_view_external extends external_api {
                 \block_onboarding\experiences_lib::delete_course($id);
                 $returnvalue['confirmation'] = 1;
                 break;
+            case 'exp-my-exp':
+                block_onboarding\experiences_lib::delete_experience($id);
+                $returnvalue['confirmation'] = 1;
+                break;
             case 'exp-exp':
                 block_onboarding\experiences_lib::delete_experience($id);
                 $returnvalue['confirmation'] = 1;
                 break;
-            case 'exp-my-exp':
+            case 'exp-exp-blacklist':
                 block_onboarding\experiences_lib::delete_experience($id);
+                block_onboarding\experiences_lib::block_user($id);
                 $returnvalue['confirmation'] = 1;
                 break;
         }

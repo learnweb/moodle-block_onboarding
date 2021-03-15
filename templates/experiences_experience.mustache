@@ -4,12 +4,13 @@
         <div class="experiences-experience-title-wrapper">
             {{#experience}}
                 <span class="experiences-experience-title-title">{{{name}}}</span>
-                {{#can_edit_experiences}}
+                {{#can_edit_experience}}
                     <a href="edit_experience.php?experience_id={{{id}}}" class="experiences-experience-title-edit-btn">{{#pix}}t/editstring, core, {{# str }}edit_experience, block_onboarding{{/ str }}{{/pix}}</a>
-                    <span onb-data-id="{{{id}}}" onb-data-context="exp-exp" class="delete-btn">{{#pix}}t/delete, core, {{# str }}delete_experience, block_onboarding{{/ str }}{{/pix}}</span>
-                {{/can_edit_experiences}}
+                    <span onb-data-id="{{{id}}}" onb-data-context="exp-exp" class="confirm-btn">{{#pix}}t/delete, core, {{# str }}delete_experience, block_onboarding{{/ str }}{{/pix}}</span>
+                {{/can_edit_experience}}
                 {{#can_manage_experiences}}
-                    <a href="suspend_experience.php?experience_id={{{id}}}">{{#suspended}}{{#pix}}i/hide, core, {{# str }}unsuspend_experience, block_onboarding{{/ str }}{{/pix}}{{/suspended}}{{^suspended}}{{#pix}}i/show, core, {{# str }}suspend_experience, block_onboarding{{/ str }}{{/pix}}{{/suspended}}</a>
+                    <span onb-data-id="{{{id}}}" onb-data-context="exp-exp-blacklist" class="confirm-btn">{{#pix}}i/permissionlock, core, {{# str }}delete_experience_blacklist, block_onboarding{{/ str }}{{/pix}}</span>
+                    <a href="suspend_experience.php?experience_id={{{id}}}" class="confirm-btn">{{#suspended}}{{#pix}}i/hide, core, {{# str }}unsuspend_experience, block_onboarding{{/ str }}{{/pix}}{{/suspended}}{{^suspended}}{{#pix}}i/show, core, {{# str }}suspend_experience, block_onboarding{{/ str }}{{/pix}}{{/suspended}}</a>
                 {{/can_manage_experiences}}
             {{/experience}}
             <span class="experiences-experience-title-helpful">
@@ -21,8 +22,8 @@
             {{#experience}}
                 <p class="experiences-experience-title-info-p">{{# str }}published, block_onboarding{{/ str }}: {{#userdate}}{{{timecreated}}}, {{#str}}strftimedatetimeshort {{/str}}{{/userdate}}</p>
             {{/experience}}
-            <p class="experiences-experience-title-info-p">{{#author}}{{# str }}author, block_onboarding{{/ str }}: {{{author}}}{{/author}}</p>
-            <p class="experiences-experience-title-info-p">{{#degreeprogram}}{{# str }}experience_course, block_onboarding{{/ str }}: {{{degreeprogram}}}{{/degreeprogram}}</p>
+            <p class="experiences-experience-title-info-p">{{#author}}{{# str }}author, block_onboarding{{/ str }}: {{{author}}}{{/author}}{{#experience}}{{#contact}} - "{{{contact}}}"{{/contact}}{{/experience}}</p>
+            <p class="experiences-experience-title-info-p">{{#degreeprogram}}{{# str }}experience_degreeprogram, block_onboarding{{/ str }}: {{{degreeprogram}}}{{/degreeprogram}}</p>
             <div class="experiences-experience-title-takeaways">
                 <h4 class="experiences-experience-title-takeaways-title">{{# str }}takeaways, block_onboarding{{/ str }}</h4>
                 <ul>
@@ -39,23 +40,20 @@
         {{#experience}}
             {{#aboutme}}
                 <div class="experiences-experience-content-cat">
-                    <h4>{{# str }}aboutme, block_onboarding{{/ str }}</h4>
+                    <h4 class="experiences-experience-content-title">{{# str }}aboutme, block_onboarding{{/ str }}</h4>
                     <p>{{{aboutme}}}</p>
                 </div>
             {{/aboutme}}
         {{/experience}}
         {{#experiences_categories_joined_categories}}
             <div class="experiences-experience-content-cat">
-                <h4>{{{name}}}</h4>
+                <h4 class="experiences-experience-content-title">{{{name}}}</h4>
                 <p>{{{description}}}</p>
             </div>
         {{/experiences_categories_joined_categories}}
     </div>
     <div class="experiences-experience-footer">
         {{#experience}}
-            {{#contact}}
-                <h6>{{# str }}contact, block_onboarding{{/ str }}{{{contact}}}</h6>
-            {{/contact}}
             {{^report}}
                 <a href="report_experience.php?experience_id={{{id}}}">{{# str }}report_experience, block_onboarding{{/ str }}</a>
             {{/report}}

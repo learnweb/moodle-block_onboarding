@@ -11,7 +11,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
         //         reset_message_string = reset_message_promise_string;
 
 
-        $('.delete-btn').on('click', function () {
+        $('.confirm-btn').on('click', function () {
             // holt Attribute von delete button
             var context = $(this).attr('onb-data-context');
             var id = $(this).attr('onb-data-id');

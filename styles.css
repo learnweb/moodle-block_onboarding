@@ -23,11 +23,11 @@ ul {
     font-size: 1.6em;
 }
 
-.delete-btn{
+.confirm-btn{
     color: #ca3120;
 }
 
-.delete-btn:hover{
+.confirm-btn:hover{
     color: #852116;
     cursor: pointer;
 }
@@ -109,6 +109,13 @@ ul {
 
 .admin-content-wrapper {
     font-size: 1.1em;
+    margin-top: 6px;
+    margin-left: 4px;
+}
+
+.admin-content-wrapper-list {
+    font-size: 1.1em;
+    padding-bottom: 12px;
     margin-top: 6px;
     margin-left: 4px;
 }
@@ -397,7 +404,7 @@ ul {
 }
 
 .experiences-experience-title-edit-btn {
-    color: rgba(153, 153, 153, 0.8);
+    color: #ffffff;
     margin-left: 0.7em;
 }
 
@@ -436,11 +443,8 @@ ul {
     width: fit-content;
     margin-top: 0.5em;
     margin-bottom: 0.4em;
-    padding: 0.1em 0.2em;
-    background-color: #ffffff;
-    color: rgba(0, 0, 0, 0.8);
-    border-radius: 3px;
-    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    text-shadow: 2px 2px 5px #555;
 }
 
 .experiences-experience-title-takeaways-list{
@@ -461,7 +465,7 @@ ul {
     margin: .5em .5em;
     border-radius: 8px;
     padding: 3px;
-    background-color: #656565;
+    background-color: #d5d7da;
 }
 
 .experiences-experience-content-cat {
@@ -470,7 +474,13 @@ ul {
     margin: 0.25em 0.25em 0.5em 0.25em;
     padding: 7px;
     border-radius: 6px;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
 }
+
+.experiences-experience-content-title {
+    font-weight: bold;
+}
+
 .experiences-experience-footer {
     margin: 0.5em;
 }

@@ -26,7 +26,7 @@ $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/wiki/admin_wiki.php'));
 
 if (has_capability('block/onboarding:w_manage_wiki', $context)) {
-    $PAGE->requires->js_call_amd('block_onboarding/delete_confirmation', 'init');
+    $PAGE->requires->js_call_amd('block_onboarding/confirmation_popup', 'init');
     $PAGE->set_title(get_string('wiki_admin', 'block_onboarding'));
     $PAGE->set_heading(get_string('wiki_admin', 'block_onboarding'));
     $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));

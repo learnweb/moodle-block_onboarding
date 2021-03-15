@@ -63,7 +63,7 @@ class experiences_experience implements renderable, templatable {
             array('experience_id' => $this->experience_id, 'user_id' => $USER->id));
 
         return [
-            'can_edit_experiences' => has_capability('block/onboarding:e_manage_experiences',
+            'can_edit_experience' => has_capability('block/onboarding:e_manage_experiences',
                 \context_system::instance()) || $USER->id == $experience->user_id,
             'can_manage_experiences' => has_capability('block/onboarding:e_manage_experiences',
                     \context_system::instance()),

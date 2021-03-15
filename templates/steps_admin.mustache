@@ -9,7 +9,7 @@
     <span class="admin-edit-btn">
         {{#can_manage_wiki}}
             <a href="edit_step.php?step_id={{{id}}}">{{#pix}}t/editstring, core, {{# str }}edit_step, block_onboarding {{/ str }}{{/pix}}</a>
-            <span onb-data-id="{{{id}}}" onb-data-context="step" class="delete-btn">{{#pix}}t/delete, core, {{# str }}delete_step, block_onboarding {{/ str }}{{/pix}}</a>
+            <span onb-data-id="{{{id}}}" onb-data-context="step" class="confirm-btn">{{#pix}}t/delete, core, {{# str }}delete_step, block_onboarding {{/ str }}{{/pix}}</a>
         {{/can_manage_wiki}}
     </span>
     <p class="admin-content-wrapper">{{{description}}}</p>

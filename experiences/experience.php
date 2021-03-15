@@ -38,7 +38,7 @@ if ($experience->user_id == $USER->id ||
     $PAGE->navbar->add($experience->name);
 
     $output = $PAGE->get_renderer('block_onboarding');
-    $PAGE->requires->js_call_amd('block_onboarding/delete_confirmation', 'init');
+    $PAGE->requires->js_call_amd('block_onboarding/confirmation_popup', 'init');
     echo $output->header();
     echo $output->container_start('experiences-experience');
     $renderable = new \block_onboarding\output\renderables\experiences_experience($experience_id);

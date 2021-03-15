@@ -27,7 +27,7 @@ $context = context_system::instance();
 $table = new experience_table('uniqueid');
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/overview.php'));
-$PAGE->requires->js_call_amd('block_onboarding/delete_confirmation', 'init');
+$PAGE->requires->js_call_amd('block_onboarding/confirmation_popup', 'init');
 $PAGE->set_title(get_string('experiences', 'block_onboarding'));
 $PAGE->set_heading(get_string('experiences', 'block_onboarding'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));

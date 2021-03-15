@@ -34,7 +34,8 @@ $functions = array(
         'classpath'   => 'blocks/onboarding/externallib.php',
         'description' => 'BESCHREIBUNG',
         'type'        => 'read',
-        'ajax'        => true
+        'ajax'        => true,
+        'capabilities' => '',
     ),
     'block_onboarding_init_step' => array(
         'classname'   => 'block_onboarding_view_external',
