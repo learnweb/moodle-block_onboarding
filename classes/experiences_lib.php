@@ -262,15 +262,33 @@ class experiences_lib {
         }
     }
 
+    /**
+     * Inserts a new course into the database.
+     *
+     * @param object $course
+     */
+
     public static function add_course($course) {
         global $DB;
         $DB->insert_record('block_onb_e_courses', $course);
     }
 
+    /**
+     * Updates an existing course in the database.
+     *
+     * @param object $course
+     */
+
     public static function update_course($course) {
         global $DB;
         $DB->update_record('block_onb_e_courses', $course, $bulk = false);
     }
+
+    /**
+     * Deletes an existing course from the database.
+     *
+     * @param int $courseid
+     */
 
     public static function delete_course($courseid) {
         global $DB;
@@ -279,15 +297,28 @@ class experiences_lib {
         $DB->set_field('block_onb_e_exps', 'course_id', null, array('course_id' => $courseid));
     }
 
+    /**
+     * Returns Course Object.
+     *
+     * @param int $courseid
+     * @return object Course.
+     */
+
     public static function get_course_by_id($courseid) {
         global $DB;
         return $DB->get_record('block_onb_e_courses', array('id' => $courseid), $fields = '*',
             $strictness = IGNORE_MISSING);
     }
 
+    /**
+     * Creates a report and sends a notification email to the administrator.
+     *
+     * @param object $fromform
+     */
+
     public static function edit_report($fromform) {
         global $USER, $DB;
-        // Data written in the Database.
+        // Translates form data to new object for further processing.
         $report = new \stdClass();
         $report->experience_id = $fromform->experience_id;
         $report->user_id = $fromform->user_id;
@@ -299,12 +330,14 @@ class experiences_lib {
 
         // TODO Mail function has to be tested
         // TODO: define receiving user
+        // Get the database entry for the recipient.
         $sql = 'SELECT * FROM {user} u
                 INNER JOIN {block_onb_e_exps} ee ON u.id = ee.user_id
                 WHERE ee.id = ' . $fromform->experience_id;
 
         $recipient = $DB->get_record_sql($sql);
 
+        // Define necessary parameters for "email_to_user" function.
         $toUser = $recipient;
         $fromUser = $USER;
         $subject = get_string('rep_mail_title', 'block_onboarding');
@@ -316,13 +349,21 @@ class experiences_lib {
         $messageText = $message;
         $messageHtml = $message;
 
+        // Sends email to administrator.
         email_to_user($toUser, $fromUser, $subject, $messageText, $messageHtml, '', '', true);
     }
+
+    /**
+     * Sets the experience to visible and sends a notification mail to the author.
+     *
+     * @param object $experience_id
+     */
 
     public static function unsuspend_experience($experience_id) {
         global $USER, $DB;
 
         // TODO Mail function has to be tested
+        // Get the database entry for the recipient.
         $sql = 'SELECT * FROM {user} u
                 INNER JOIN {block_onb_e_exps} ee ON u.id = ee.user_id
                 WHERE ee.id = ' . $experience_id;
@@ -336,12 +377,20 @@ class experiences_lib {
         $messageText = $message;
         $messageHtml = $message;
 
+        // Sends email to the author.
         email_to_user($toUser, $fromUser, $subject, $messageText, $messageHtml, '', '', true);
 
+        // sets "suspended" for the experience in question to "null".
         $DB->set_field('block_onb_e_exps', 'suspended', null, array('id' => $experience_id));
         redirect('experience.php?experience_id=' . $experience_id);
 
     }
+
+    /**
+     * Deletes an existing report from the database.
+     *
+     * @param int $report_id
+     */
 
     public static function delete_report($report_id) {
         global $DB;
@@ -349,18 +398,30 @@ class experiences_lib {
         $DB->delete_records('block_onb_e_report', array('id' => $report_id));
     }
 
+    /**
+     * Reinstates the users ability to create an experience.
+     *
+     * @param int $user_id
+     */
+
     public static function unblock_user($user_id) {
         global $DB;
         // Deletion of the report.
         $DB->delete_records('block_onb_e_blocked', array('user_id' => $user_id));
     }
 
+    /**
+     * Takes the users ability to create an experience.
+     *
+     * @param int $experience_id
+     */
+
     public static function block_user($experience_id) {
         global $DB;
-        // Insert User Id into Blacklist table.
-        $sql = 'SELECT u.id FROM {user} u
+
+        $sql = "SELECT u.id FROM {user} u
                 INNER JOIN {block_onb_e_exps} ee ON u.id = ee.user_id
-                WHERE ee.id = ' . $experience_id;
+                WHERE ee.id = $experience_id";
 
         $user = new \stdClass();
         $user->user_id = $DB->get_field_sql($sql);
