@@ -213,3 +213,4 @@ $string['msg_delete_exp_exp_admin_warning'] = 'WARNUNG: Beim Löschen dieses Erf
 $string['msg_delete_exp_exp_blacklist_warning'] = 'WARNUNG: Diese Aktion führt zum Löschen des Erfahrungsberichts und sperrt den Autor, sodass dieser keine weiteren Berichte verfassen kann. Autoren können in der "Geblockte Nutzer"-Ansicht in den Einstellungen wieder freigeschaltet werden. Möchtest du wirklich fortfahren?';
 
 $string['blocked_overview'] = 'Geblockte Nutzer';
+$string['unblock'] = 'Unblock';
