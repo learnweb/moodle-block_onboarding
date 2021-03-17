@@ -54,10 +54,12 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
 
     if ($mform->is_cancelled()) {
         redirect('admin.php');
-    } else if ($fromform = $mform->get_data()) {
-        // Processing of data submitted in the form.
-        block_onboarding\experiences_lib::edit_course($fromform);
-        redirect('admin.php');
+    } else {
+        if ($fromform = $mform->get_data()) {
+            // Processing of data submitted in the form.
+            block_onboarding\experiences_lib::edit_course($fromform);
+            redirect('admin.php');
+        }
     }
 
     // Display of the form.

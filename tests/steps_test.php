@@ -46,9 +46,9 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $fromform->achievement = False;
 
         $errorthrown = false;
-        try{
+        try {
             \block_onboarding\steps_lib::edit_step($fromform);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             $errorthrown = true;
         }
         $this->assertTrue($errorthrown);

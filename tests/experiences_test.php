@@ -79,9 +79,9 @@ class block_onboarding_experiences_testcase extends advanced_testcase {
         $fromform->course_id = $course_id;
 
         $errorthrown = false;
-        try{
+        try {
             \block_onboarding\experiences_lib::edit_experience($fromform);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             $errorthrown = true;
         }
         $this->assertTrue($errorthrown);

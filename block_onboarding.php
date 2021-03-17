@@ -14,14 +14,32 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * The File for the block_onboarding class.
+ *
+ * Displays an onboarding block.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 defined('MOODLE_INTERNAL') || die();
 
 class block_onboarding extends block_base {
 
+    /**
+     * Initializes the block.
+     */
     public function init() {
         $this->title = get_string('onboarding', 'block_onboarding');
     }
 
+    /**
+     * Defines applicable formats for the block.
+     *
+     * @return array Applicable formats.
+     */
     public function applicable_formats() {
         return array(
             'site-index' => true,
@@ -33,6 +51,11 @@ class block_onboarding extends block_base {
         );
     }
 
+    /**
+     * Returns the content object.
+     *
+     * @return object Content object.
+     */
     public function get_content() {
 
         if ($this->content !== null) {
@@ -45,6 +68,11 @@ class block_onboarding extends block_base {
         return $this->content;
     }
 
+    /**
+     * Enables global configuration for block.
+     *
+     * @return boolean Global configuration is enabled.
+     */
     public function has_config() {
         return true;
     }

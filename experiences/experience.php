@@ -36,7 +36,7 @@ $PAGE->requires->js_call_amd('block_onboarding/experiences_experience', 'init', 
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
 $PAGE->navbar->add(get_string('experiences', 'block_onboarding'), new moodle_url('overview.php'));
 $experience = new stdClass();
-$experience = $DB->get_record('block_onb_e_exps', array('id' => $experience_id), $fields='*', $strictness=IGNORE_MISSING);
+$experience = $DB->get_record('block_onb_e_exps', array('id' => $experience_id));
 
 if ($experience->user_id == $USER->id ||
     has_capability('block/onboarding:e_manage_experiences', \context_system::instance())) {

@@ -28,7 +28,7 @@ $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/report_experience.php'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
 $PAGE->navbar->add(get_string('experiences', 'block_onboarding'), new moodle_url('overview.php'));
-$experience = $DB->get_field('block_onb_e_exps', 'name', array('id' => $experience_id), $strictness=IGNORE_MISSING);
+$experience = $DB->get_field('block_onb_e_exps', 'name', array('id' => $experience_id));
 $PAGE->navbar->add($experience, new moodle_url('experience.php?experience_id=' . $experience_id));
 $PAGE->navbar->add(get_string('report_experience', 'block_onboarding'));
 
@@ -41,10 +41,12 @@ $mform = new experiences_report_form(null, array('experience_id' => $experience_
 
 if ($mform->is_cancelled()) {
     redirect('experience.php?experience_id=' . $experience_id);
-} else if ($fromform = $mform->get_data()) {
-    // Processing of data submitted in the form.
-    block_onboarding\experiences_lib::edit_report($fromform);
-    redirect('experience.php?experience_id=' . $experience_id);
+} else {
+    if ($fromform = $mform->get_data()) {
+        // Processing of data submitted in the form.
+        block_onboarding\experiences_lib::edit_report($fromform);
+        redirect('experience.php?experience_id=' . $experience_id);
+    }
 }
 
 // Display of the form.

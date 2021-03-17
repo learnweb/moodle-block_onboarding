@@ -42,9 +42,9 @@ class block_onboarding_wiki_testcase extends advanced_testcase {
         $fromform->name = "Test Category";
 
         $errorthrown = false;
-        try{
+        try {
             \block_onboarding\wiki_lib::edit_category($fromform);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             $errorthrown = true;
         }
         $this->assertTrue($errorthrown);
@@ -126,9 +126,9 @@ class block_onboarding_wiki_testcase extends advanced_testcase {
         $fromform->name = "Test Link";
 
         $errorthrown = false;
-        try{
+        try {
             \block_onboarding\wiki_lib::edit_link($fromform);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             $errorthrown = true;
         }
         $this->assertTrue($errorthrown);

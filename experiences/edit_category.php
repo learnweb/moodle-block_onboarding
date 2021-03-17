@@ -54,16 +54,18 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
 
     if ($mform->is_cancelled()) {
         redirect('admin.php');
-    } else if ($fromform = $mform->get_data()) {
-        block_onboarding\experiences_lib::edit_category($fromform);
-        redirect('admin.php');
+    } else {
+        if ($fromform = $mform->get_data()) {
+            block_onboarding\experiences_lib::edit_category($fromform);
+            redirect('admin.php');
+        }
     }
 
     // Display of the form.
     echo $OUTPUT->header();
     $mform->display();
     echo $OUTPUT->footer();
-}else{
+} else {
     // If the user doesn't have the capability needed an error page is displayed.
     $PAGE->set_title(get_string('error', 'block_onboarding'));
     $PAGE->set_heading(get_string('error', 'block_onboarding'));

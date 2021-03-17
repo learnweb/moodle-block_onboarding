@@ -63,9 +63,9 @@ if ($checkblocked == true) {
             array('id' => $experience_id), $fields = '*', $strictness = IGNORE_MISSING);
     }
 
-//elseif ($experience_id == -1 && empty($checkexperience) == false) {
+    //elseif ($experience_id == -1 && empty($checkexperience) == false) {
     //redirect('overview.php');
-//}
+    //}
 
     // Check if there are existing categories and courses.
     $checkcourses = $DB->count_records('block_onb_e_courses');
@@ -85,10 +85,12 @@ if ($checkblocked == true) {
 
             if ($mform->is_cancelled()) {
                 redirect('overview.php');
-            } else if ($fromform = $mform->get_data()) {
-                // Processing of data submitted in the form.
-                block_onboarding\experiences_lib::edit_experience($fromform);
-                redirect('overview.php');
+            } else {
+                if ($fromform = $mform->get_data()) {
+                    // Processing of data submitted in the form.
+                    block_onboarding\experiences_lib::edit_experience($fromform);
+                    redirect('overview.php');
+                }
             }
 
             // Display of the form.

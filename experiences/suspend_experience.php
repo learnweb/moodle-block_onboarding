@@ -33,8 +33,8 @@ global $CFG, $DB;
 $experience_id = optional_param('experience_id', -1, PARAM_INT);
 
 // Checking whether experience is suspended or not.
-$suspended = $DB->get_field('block_onb_e_exps', 'suspended', array('id' => $experience_id), $strictness=IGNORE_MISSING);
-if ($suspended == 1){
+$suspended = $DB->get_field('block_onb_e_exps', 'suspended', array('id' => $experience_id));
+if ($suspended == 1) {
     \block_onboarding\experiences_lib::unsuspend_experience($experience_id);
     redirect('experience.php?experience_id=' . $experience_id);
 } else {
@@ -45,7 +45,7 @@ if ($suspended == 1){
     $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
     $PAGE->navbar->add(get_string('experiences', 'block_onboarding'), new moodle_url('overview.php'));
     $PAGE->navbar->add(get_string('experience_admin', 'block_onboarding'), new moodle_url('admin.php'));
-    $experience = $DB->get_field('block_onb_e_exps', 'name', array('id' => $experience_id), $strictness=IGNORE_MISSING);
+    $experience = $DB->get_field('block_onb_e_exps', 'name', array('id' => $experience_id));
     $PAGE->navbar->add($experience, new moodle_url('experience.php?experience_id=' . $experience_id));
 
     if (has_capability('block/onboarding:e_manage_experiences', $context)) {
@@ -59,10 +59,12 @@ if ($suspended == 1){
 
         if ($mform->is_cancelled()) {
             redirect('experience.php?experience_id=' . $experience_id);
-        } else if ($fromform = $mform->get_data()) {
-            // Processing of data submitted in the form.
-            \block_onboarding\experiences_lib::suspend_experience($fromform);
-            redirect('experience.php?experience_id=' . $fromform->experience_id);
+        } else {
+            if ($fromform = $mform->get_data()) {
+                // Processing of data submitted in the form.
+                \block_onboarding\experiences_lib::suspend_experience($fromform);
+                redirect('experience.php?experience_id=' . $fromform->experience_id);
+            }
         }
 
         // Display of the form.
