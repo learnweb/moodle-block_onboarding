@@ -14,6 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * This file contains the structure of the blocked user overview block_overview.php.
+ *
+ * On this page blocked users are displayed in a table format with the possibility to unblock them.
+ * This page can only be viewed by the administrator.
+ *
+ * @package    block_onboarding
+ * @category
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 require(__DIR__ . '/../../../config.php');
 require($CFG->libdir . '/tablelib.php');
 require($CFG->dirroot . '/blocks/onboarding/classes/output/blocked_table.php');

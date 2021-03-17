@@ -14,6 +14,16 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * This file contains the structure of the overview page overview.php.
+ *
+ * This page contains two form elements that function as filters for the displayed table.
+ * Additionally there is an area where the user can see their created experience or create a new one.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 require(__DIR__ . '/../../../config.php');
 require($CFG->libdir . '/tablelib.php');
 require($CFG->dirroot . '/blocks/onboarding/classes/output/experience_table.php');
@@ -33,6 +43,7 @@ $PAGE->set_heading(get_string('experiences', 'block_onboarding'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
 $PAGE->navbar->add(get_string('experiences', 'block_onboarding'));
 
+// Passing the form to the mustache file
 require_once($CFG->dirroot . '/blocks/onboarding/classes/forms/experiences_filter_form.php');
 $mform = new experiences_filter_form(null, null);
 $form = $mform->render();
@@ -103,12 +114,10 @@ $where = $where . ' AND ee.published = 1 AND ee.suspended IS NULL';
 $table->set_sql($fields, $from, $where);
 $table->define_baseurl("$CFG->wwwroot/blocks/onboarding/experiences/overview.php");
 
-// $list = $table->out(40, true);
-
 $output = $PAGE->get_renderer('block_onboarding');
 echo $output->header();
 echo $output->container_start('experiences-overview');
-$renderable = new \block_onboarding\output\renderables\experiences_overview($form);
+$renderable = new block_onboarding\output\renderables\experiences_overview($form);
 echo $output->render($renderable);
 echo $output->container_end();
 $table->out(10, true);

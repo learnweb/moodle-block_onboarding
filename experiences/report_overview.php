@@ -32,9 +32,8 @@ $PAGE->navbar->add(get_string('experiences', 'block_onboarding'), new moodle_url
 $PAGE->navbar->add(get_string('experience_admin', 'block_onboarding'), new moodle_url('admin.php'));
 $PAGE->navbar->add(get_string('report_overview', 'block_onboarding'));
 
+// Check if the user has the necessary capability.
 if (has_capability('block/onboarding:e_manage_experiences', \context_system::instance())) {
-
-
 
     $table_report = new report_table('uniqueid');
     $table_suspended = new experience_table('uniqueid');
@@ -46,8 +45,9 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
     $output = $PAGE->get_renderer('block_onboarding');
     echo $output->header();
 
+    // TODO good practice?
     echo "<div class='title'>" . get_string('reports', 'block_onboarding') . "</div><br>";
-    // SQL Statement for Listview.
+    // SQL statement for report listview.
     $fields = 'er.id as id, ee.name as experience, er.experience_id as experience_id, er.type as type, er.description as description, 
     u.firstname as author, er.timecreated as timecreated';
     $from = '{block_onb_e_report} er
@@ -59,8 +59,9 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
     $table_report->define_baseurl("$CFG->wwwroot/blocks/onboarding/experiences/report_overview.php");
     $table_report->out(5, true);
 
+    // TODO good practice?
     echo "<br></br><div class='title'>" . get_string('suspended_experiences', 'block_onboarding') . "</div><br>";
-    // SQL Statement for Listview.
+    // SQL statement for suspended listview.
     $fields = 'ee.id as id, ee.name as name, u.firstname as author, ec.name as degreeprogram, 
     ee.timecreated as published, ee.timemodified as lastmodified, ee.popularity as popularity';
     $from = '{block_onb_e_exps} ee
@@ -74,6 +75,7 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
 
     echo $output->footer();
 } else {
+    // If the user doesn't have the capability needed an error page is displayed.
     $PAGE->set_title(get_string('error', 'block_onboarding'));
     $PAGE->set_heading(get_string('error', 'block_onboarding'));
 

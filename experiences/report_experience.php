@@ -42,10 +42,12 @@ $mform = new experiences_report_form(null, array('experience_id' => $experience_
 if ($mform->is_cancelled()) {
     redirect('experience.php?experience_id=' . $experience_id);
 } else if ($fromform = $mform->get_data()) {
+    // Processing of data submitted in the form.
     block_onboarding\experiences_lib::edit_report($fromform);
     redirect('experience.php?experience_id=' . $experience_id);
 }
 
+// Display of the form.
 echo $OUTPUT->header();
 $mform->display();
 echo $OUTPUT->footer();

@@ -14,6 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * File to display an experience.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 require(__DIR__ . '/../../../config.php');
 
 global $DB, $USER;
@@ -41,7 +48,7 @@ if ($experience->user_id == $USER->id ||
     $PAGE->requires->js_call_amd('block_onboarding/confirmation_popup', 'init');
     echo $output->header();
     echo $output->container_start('experiences-experience');
-    $renderable = new \block_onboarding\output\renderables\experiences_experience($experience_id);
+    $renderable = new block_onboarding\output\renderables\experiences_experience($experience_id);
     echo $output->render($renderable);
     echo $output->container_end();
     echo $output->footer();

@@ -15,14 +15,13 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The file for the steps_lib class.
- * Contains static methods for steps administration.
+ * The file for the experience_lib class.
+ * Contains static methods for experience administration.
  *
  * @package    block_onboarding
  * @copyright  2021 Westfälische Wilhelms-Universität Münster
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 namespace block_onboarding;
 
 defined('MOODLE_INTERNAL') || die();
@@ -34,7 +33,6 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright  2021 Westfälische Wilhelms-Universität Münster
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 class experiences_lib {
 
     /**
@@ -42,7 +40,6 @@ class experiences_lib {
      *
      * @param object $fromform
      */
-
     public static function edit_experience($fromform){
         global $DB;
 
@@ -131,7 +128,6 @@ class experiences_lib {
      *
      * @param int $experience_id
      */
-
     public static function delete_experience($experience_id) {
         global $DB;
         $DB->delete_records('block_onb_e_exps_cats', array('experience_id' => $experience_id));
@@ -143,7 +139,6 @@ class experiences_lib {
      *
      * @param object $fromform
      */
-
     public static function suspend_experience($fromform) {
         global $USER, $DB;
 
@@ -165,7 +160,6 @@ class experiences_lib {
 
         // sets "suspended" for the experience in question to "1".
         $DB->set_field('block_onb_e_exps', 'suspended', 1, array('id' => $fromform->experience_id));
-        redirect('experience.php?experience_id=' . $fromform->experience_id);
     }
 
     /**
@@ -174,7 +168,6 @@ class experiences_lib {
      *
      * @param object $fromform
      */
-
     public static function edit_category($fromform) {
         // Translates form data to new object for further processing.
         $category = new \stdClass();
@@ -198,7 +191,6 @@ class experiences_lib {
      *
      * @param object $category
      */
-
     public static function add_category($category) {
         global $DB;
         $DB->insert_record('block_onb_e_cats', $category);
@@ -209,7 +201,6 @@ class experiences_lib {
      *
      * @param object $category
      */
-
     public static function update_category($category) {
         global $DB;
         $DB->update_record('block_onb_e_cats', $category, $bulk = false);
@@ -220,7 +211,6 @@ class experiences_lib {
      *
      * @param int $categoryid
      */
-
     public static function delete_category($categoryid) {
         global $DB;
         // Deletion of the category and all content written for it.
@@ -234,7 +224,6 @@ class experiences_lib {
      * @param int $categoryid
      * @return object Category.
      */
-
     public static function get_category_by_id($categoryid) {
         global $DB;
         return $DB->get_record('block_onb_e_cats', array('id' => $categoryid), $fields = '*', $strictness = IGNORE_MISSING);
@@ -246,7 +235,6 @@ class experiences_lib {
      *
      * @param object $fromform
      */
-
     public static function edit_course($fromform) {
         // Data written in the Database.
         $course = new \stdClass();
@@ -267,7 +255,6 @@ class experiences_lib {
      *
      * @param object $course
      */
-
     public static function add_course($course) {
         global $DB;
         $DB->insert_record('block_onb_e_courses', $course);
@@ -278,7 +265,6 @@ class experiences_lib {
      *
      * @param object $course
      */
-
     public static function update_course($course) {
         global $DB;
         $DB->update_record('block_onb_e_courses', $course, $bulk = false);
@@ -289,7 +275,6 @@ class experiences_lib {
      *
      * @param int $courseid
      */
-
     public static function delete_course($courseid) {
         global $DB;
         $DB->delete_records('block_onb_e_courses', array('id' => $courseid));
@@ -303,7 +288,6 @@ class experiences_lib {
      * @param int $courseid
      * @return object Course.
      */
-
     public static function get_course_by_id($courseid) {
         global $DB;
         return $DB->get_record('block_onb_e_courses', array('id' => $courseid), $fields = '*',
@@ -315,7 +299,6 @@ class experiences_lib {
      *
      * @param object $fromform
      */
-
     public static function edit_report($fromform) {
         global $USER, $DB;
         // Translates form data to new object for further processing.
@@ -358,7 +341,6 @@ class experiences_lib {
      *
      * @param object $experience_id
      */
-
     public static function unsuspend_experience($experience_id) {
         global $USER, $DB;
 
@@ -382,8 +364,6 @@ class experiences_lib {
 
         // sets "suspended" for the experience in question to "null".
         $DB->set_field('block_onb_e_exps', 'suspended', null, array('id' => $experience_id));
-        redirect('experience.php?experience_id=' . $experience_id);
-
     }
 
     /**
@@ -391,7 +371,6 @@ class experiences_lib {
      *
      * @param int $report_id
      */
-
     public static function delete_report($report_id) {
         global $DB;
         // Deletion of the report.
@@ -403,7 +382,6 @@ class experiences_lib {
      *
      * @param int $user_id
      */
-
     public static function unblock_user($user_id) {
         global $DB;
         // Deletion of the report.
@@ -415,7 +393,6 @@ class experiences_lib {
      *
      * @param int $experience_id
      */
-
     public static function block_user($experience_id) {
         global $DB;
 
