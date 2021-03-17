@@ -14,6 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * File to display the experience form and process the input.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 require(__DIR__ . '/../../../config.php');
 
 require_login();
@@ -38,8 +45,10 @@ $pexperience->id = -1;
 //        WHERE e.user_id = {$USER->id}";
 //$checkexperience = $DB->get_records_sql($sql);
 
+// Check if the user is blocked.
 $checkblocked = $DB->record_exists('block_onb_e_blocked', array('user_id' => $USER->id));
 if ($checkblocked == true) {
+    // If blocked the user gets an error page.
     $PAGE->set_title(get_string('error', 'block_onboarding'));
     $PAGE->set_heading(get_string('error', 'block_onboarding'));
 
@@ -58,11 +67,13 @@ if ($checkblocked == true) {
     //redirect('overview.php');
 //}
 
+    // Check if there are existing categories and courses.
     $checkcourses = $DB->count_records('block_onb_e_courses');
     $checkcategories = $DB->count_records('block_onb_e_cats');
 
     if ($checkcourses != 0 || $checkcategories != 0) {
 
+        // Check if the user is allowed to edit the experience.
         if ($experience_id == -1 || $USER->id == $pexperience->user_id ||
             has_capability('block/onboarding:e_manage_experiences', \context_system::instance())) {
             $PAGE->set_title(get_string('edit_experience', 'block_onboarding'));
@@ -75,15 +86,17 @@ if ($checkblocked == true) {
             if ($mform->is_cancelled()) {
                 redirect('overview.php');
             } else if ($fromform = $mform->get_data()) {
-
+                // Processing of data submitted in the form.
                 block_onboarding\experiences_lib::edit_experience($fromform);
                 redirect('overview.php');
             }
 
+            // Display of the form.
             echo $OUTPUT->header();
             $mform->display();
             echo $OUTPUT->footer();
         } else {
+            // If not allowed to edit the user gets an error page.
             $PAGE->set_title(get_string('error', 'block_onboarding'));
             $PAGE->set_heading(get_string('error', 'block_onboarding'));
 
@@ -92,6 +105,7 @@ if ($checkblocked == true) {
             echo $OUTPUT->footer();
         }
     } else {
+        // If either no courses or no categories the user gets an error page.
         $PAGE->set_title(get_string('error', 'block_onboarding'));
         $PAGE->set_heading(get_string('error', 'block_onboarding'));
 

@@ -14,6 +14,16 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * This file contains manages the suspension of unfitting experiences.
+ *
+ * When suspending an experience the administrator can edit the notification mail to the author via a form.
+ * When unsuspending an experience the author receives an automatic mail.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 require(__DIR__ . '/../../../config.php');
 
 require_login();
@@ -21,9 +31,12 @@ require_login();
 global $CFG, $DB;
 
 $experience_id = optional_param('experience_id', -1, PARAM_INT);
+
+// Checking whether experience is suspended or not.
 $suspended = $DB->get_field('block_onb_e_exps', 'suspended', array('id' => $experience_id), $strictness=IGNORE_MISSING);
 if ($suspended == 1){
     block_onboarding\experiences_lib::unsuspend_experience($experience_id);
+    redirect('experience.php?experience_id=' . $experience_id);
 } else {
     $context = context_system::instance();
 
@@ -47,9 +60,12 @@ if ($suspended == 1){
         if ($mform->is_cancelled()) {
             redirect('experience.php?experience_id=' . $experience_id);
         } else if ($fromform = $mform->get_data()) {
+            // Processing of data submitted in the form.
             block_onboarding\experiences_lib::suspend_experience($fromform);
+            redirect('experience.php?experience_id=' . $fromform->experience_id);
         }
 
+        // Display of the form.
         echo $OUTPUT->header();
         $mform->display();
         echo $OUTPUT->footer();
