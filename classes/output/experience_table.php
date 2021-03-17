@@ -30,7 +30,9 @@ class experience_table extends table_sql {
         $this->define_columns($columns);
 
         // Define the titles of columns to show in header.
-        $headers = array('Name', 'Author', 'Degree Program', 'Published', 'Last Modified', 'Popularity');
+        $headers = array(get_string('experience_name', 'block_onboarding'), get_string('author', 'block_onboarding'),
+            get_string('experience_degreeprogram', 'block_onboarding'), get_string('published', 'block_onboarding'),
+            get_string('lastmodified', 'block_onboarding'), get_string('popularity', 'block_onboarding'));
         $this->define_headers($headers);
 
         // Table configuration.

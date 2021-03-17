@@ -10,7 +10,7 @@
                 {{/can_edit_experience}}
                 {{#can_manage_experiences}}
                     <span onb-data-id="{{{id}}}" onb-data-context="exp-exp-blacklist" class="confirm-btn">{{#pix}}i/permissionlock, core, {{# str }}delete_experience_blacklist, block_onboarding{{/ str }}{{/pix}}</span>
-                    <a href="suspend_experience.php?experience_id={{{id}}}" class="confirm-btn">{{#suspended}}{{#pix}}i/hide, core, {{# str }}unsuspend_experience, block_onboarding{{/ str }}{{/pix}}{{/suspended}}{{^suspended}}{{#pix}}i/show, core, {{# str }}suspend_experience, block_onboarding{{/ str }}{{/pix}}{{/suspended}}</a>
+                    <a href="suspend_experience.php?experience_id={{{id}}}">{{#suspended}}{{#pix}}i/hide, core, {{# str }}unsuspend_experience, block_onboarding{{/ str }}{{/pix}}{{/suspended}}{{^suspended}}{{#pix}}i/show, core, {{# str }}suspend_experience, block_onboarding{{/ str }}{{/pix}}{{/suspended}}</a>
                 {{/can_manage_experiences}}
             {{/experience}}
             <span class="experiences-experience-title-helpful">

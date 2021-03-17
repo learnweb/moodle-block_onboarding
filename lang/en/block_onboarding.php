@@ -14,11 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-// General
+// General.
 $string['pluginname'] = 'Onboarding';
 $string['onboarding'] = 'Onboarding';
 $string['onboarding:addinstance'] = 'Add a new Onboarding block';
-
 $string['error'] = 'Error';
 $string['insufficient_permissions'] = 'Sorry, insufficient permissions';
 $string['blocked'] = 'Sorry, you are blocked from accessing this content';
@@ -32,18 +31,18 @@ $string['admin'] = 'Administration';
 $string['settings'] = 'Settings';
 $string['yes'] = 'Yes';
 
-// Guide
+// Guide.
 $string['guide'] = 'Guide';
 $string['guide_link'] = 'To the Guide';
 $string['guide_summary'] = 'In our Guide you can find useful Links along with a handy "First Steps" - Programm, which will get you ready right away.';
 
-// -> Wiki
+// Wiki.
 $string['wiki'] = 'Wiki';
 $string['wiki_admin'] = 'Wiki Administration';
 $string['manage_wiki'] = 'Manage Wiki';
-
 $string['new_category'] = 'New Category';
 $string['edit_category'] = 'Edit Category';
+$string['delete_category'] = 'Delete Category';
 $string['category_name'] = 'Name';
 $string['category_name_req'] = 'Please enter a name for the category.';
 $string['default_category_name_wiki'] = 'Default Category';
@@ -69,11 +68,10 @@ $string['msg_delete_wiki_cat_warning'] = 'WARNING: Links within this category: '
 $string['msg_delete_wiki_cat_lost'] = '. The links within this category will be lost permanently. Are you sure you want to delete this category?';
 $string['msg_delete_wiki_link_warning'] = 'WARNING: This will permanently delete this link from the Wiki. Are you sure you want to proceed?';
 
-// -> Steps
+// Steps.
 $string['steps'] = 'First Steps';
 $string['steps_admin'] = 'Steps Administration';
 $string['manage_steps'] = 'Manage Steps';
-
 $string['button_done'] = 'Done';
 $string['button_back'] = 'Back';
 $string['button_reset'] = 'Reset Progress';
@@ -82,7 +80,6 @@ $string['hide'] = 'Hide';
 $string['show'] = 'Show';
 $string['hide_steps'] = 'Hide First Steps';
 $string['show_steps'] = 'Show First Steps';
-
 $string['completed'] = 'Completed';
 $string['new_step'] = 'New Step';
 $string['edit_step'] = 'Edit Step';
@@ -106,10 +103,7 @@ $string['msg_delete_step_warning'] = 'WARNING: This will permanently delete this
 // Experiences.
 $string['experience'] = 'Experience';
 $string['experiences'] = 'Experiences';
-$string['experiences_summary'] = 'Our Experiences Portal gives you the oportunity to find out how other students, before you have designed their studies. This is a great chance to learn from others mistakes. You can also find lots of inspiration on how to design your individual studies.';
-$string['edit_category'] = 'Edit Category';
-$string['delete_category'] = 'Delete Category';
-$string['category_name'] = 'Name';
+$string['experiences_summary'] = 'Our Experiences Portal gives you the opportunity to find out how other students, before you have designed their studies. This is a great chance to learn from others mistakes. You can also find lots of inspiration on how to design your individual studies.';
 $string['default_category_name'] = 'Sample Category';
 $string['questions'] = 'Questions';
 $string['edit_course'] = 'Edit Degree Program';
@@ -120,6 +114,8 @@ $string['default_course_name'] = 'Sample Degree Program';
 $string['course_select'] = 'Select Degree Program';
 $string['degreeprograms'] = 'Degree Programs';
 $string['myexperiencearea'] = 'My Experience Area';
+$string['experience_questions_missing'] = 'Please enter suggestive questions for this category.';
+$string['experience_category_missing'] = 'Please enter a category name.';
 $string['edit_experience'] = 'Edit Experience';
 $string['delete_experience'] = 'Delete Experience';
 $string['delete_experience_blacklist'] = 'Delete Experience & Blacklist User';
@@ -169,12 +165,9 @@ $string['aboutme_default'] = 'Write something about yourself. (Age, Semester, et
 $string['helpful'] = 'Was this helpful?';
 $string['filters'] = 'Filter Options';
 $string['newdegreeprogram'] = 'New Degree Program';
-$string['newcategory'] = 'New Category';
 $string['notenoughdata'] = 'Not enough data to create an Experience Report';
 $string['selectcategories'] = 'Select Categories';
 $string['experience_admin'] = 'Experience Administration';
-$string['experience_questions_missing'] = 'Please enter suggestive questions for this category.';
-$string['experience_category_missing'] = 'Please enter a category name.';
 $string['experience_type_missing'] = 'Please click one of the Options.';
 $string['publish'] = 'Publish';
 $string['published'] = 'Published';
@@ -182,7 +175,6 @@ $string['savedraft'] = 'Save as Draft';
 $string['draft'] = 'Draft';
 $string['delete'] = 'Delete';
 $string['author'] = 'Author';
-
 $string['unsuspend_experience'] = 'Unsuspend';
 $string['suspend_experience'] = 'Suspend';
 $string['suspend_mail'] = 'Suspend Mail';
@@ -199,7 +191,17 @@ $string['rep_mail_option'] = "Option: ";
 $string['rep_mail_description'] = "Description: ";
 $string['unsus_mail_title'] = 'Your Report is public again!';
 $string['unsus_mail_comment'] = "Hello,\r\nThank you for resolving the issue. Your Experience report is public again.\r\n \r\nKind Regards, \r\nYour Digital Onboarding Team";
-
+$string['blocked_overview'] = 'Blocked Users';
+$string['unblock'] = 'Unblock';
+$string['popularity'] = 'Popularity';
+$string['lastmodified'] = 'Last Modified';
+$string['id'] = 'Id';
+$string['option'] = 'Option';
+$string['submitted'] = 'Submitted';
+$string['actions'] = 'Actions';
+$string['firstname'] = 'Firstname';
+$string['lastname'] = 'Lastname';
+$string['blockedsince'] = 'Blocked Since';
 $string['msg_delete_exp_cats_warning'] = 'WARNING: Experience Reports containing data entries for this report category: ';
 $string['msg_delete_exp_cats_lost'] = '. The category data entries will be lost permanently. Are you sure you want to delete this category?';
 $string['msg_delete_exp_course_warning'] = 'WARNING: Experience Reports containing data entries for this course: ';
@@ -207,7 +209,4 @@ $string['msg_delete_exp_course_lost'] = '. The course data entries will be lost 
 $string['msg_delete_exp_exp_student_warning'] = 'WARNING: This will permanently delete your experience report. You can also edit your report and click \'Save as Draft\' to remove you report from the public overview section. Are you sure you want to permanently delete your experience report?';
 $string['msg_delete_exp_exp_admin_warning'] = 'WARNING: This will permanently delete this experience report. Are you sure you want to delete this report?';
 $string['msg_delete_exp_exp_blacklist_warning'] = 'WARNING: This will delete the report and also blacklist the author, meaning the author will not be able to submit further experience reports. Blacklisted users can always be unblocked in the "Blocked Users" section in the Administrator Settings. Are you sure you want to proceed?';
-
-$string['blocked_overview'] = 'Blocked Users';
-$string['unblock'] = 'Unblock';
 

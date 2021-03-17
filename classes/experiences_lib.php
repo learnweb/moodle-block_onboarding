@@ -119,7 +119,7 @@ class experiences_lib {
                         'category_id' => $category->id));
             }
         }
-        // Creating new database entries for all filled out categories.
+        // Creates new database entries for all filled out categories.
         $DB->insert_records('block_onb_e_exps_cats', $insertcategories);
     }
 
@@ -158,7 +158,7 @@ class experiences_lib {
 
         email_to_user($toUser, $fromUser, $subject, $messageText, $messageHtml, '', '', true);
 
-        // sets "suspended" for the experience in question to "1".
+        // Sets "suspended" for the experience in question to "1".
         $DB->set_field('block_onb_e_exps', 'suspended', 1, array('id' => $fromform->experience_id));
     }
 
@@ -362,7 +362,7 @@ class experiences_lib {
         // Sends email to the author.
         email_to_user($toUser, $fromUser, $subject, $messageText, $messageHtml, '', '', true);
 
-        // sets "suspended" for the experience in question to "null".
+        // Sets "suspended" for the experience in question to "null".
         $DB->set_field('block_onb_e_exps', 'suspended', null, array('id' => $experience_id));
     }
 

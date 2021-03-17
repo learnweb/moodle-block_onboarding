@@ -30,7 +30,10 @@ class report_table extends table_sql {
         $this->define_columns($columns);
 
         // Define the titles of columns to show in header.
-        $headers = array('Experience', 'Id', 'Type', 'Description', 'Author', 'Date', 'Actions');
+        $headers = array(get_string('experience', 'block_onboarding'), get_string('id', 'block_onboarding'),
+            get_string('option', 'block_onboarding'), get_string('experience_description', 'block_onboarding'),
+            get_string('author', 'block_onboarding'), get_string('submitted', 'block_onboarding'),
+            get_string('actions', 'block_onboarding'));
         $this->define_headers($headers);
 
         // Table configuration.
