@@ -14,13 +14,25 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * This file contains the English language strings used by the onbaording block.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 // General.
 $string['pluginname'] = 'Onboarding';
 $string['onboarding'] = 'Onboarding';
 $string['onboarding:addinstance'] = 'Add a new Onboarding block';
+$string['onboarding:myaddinstance'] = 'Add a new Onboarding block to the MyMoodle area';
+$string['onboarding:w_manage_wiki'] = 'Manage Wiki content';
+$string['onboarding:s_manage_steps'] = 'Manage Steps content';
+$string['onboarding:e_manage_experiences'] = 'Manage experience reports';
 $string['error'] = 'Error';
-$string['insufficient_permissions'] = 'Sorry, insufficient permissions';
-$string['blocked'] = 'Sorry, you are blocked from accessing this content';
+$string['insufficient_permissions'] = 'Sorry, insufficient permissions.';
+$string['blocked'] = 'Sorry, you are blocked from accessing this content.';
 $string['settings'] = 'Settings';
 $string['back'] = 'Back';
 $string['backtohome'] = 'Back to Home';
@@ -209,4 +221,3 @@ $string['msg_delete_exp_course_lost'] = '. The course data entries will be lost 
 $string['msg_delete_exp_exp_student_warning'] = 'WARNING: This will permanently delete your experience report. You can also edit your report and click \'Save as Draft\' to remove you report from the public overview section. Are you sure you want to permanently delete your experience report?';
 $string['msg_delete_exp_exp_admin_warning'] = 'WARNING: This will permanently delete this experience report. Are you sure you want to delete this report?';
 $string['msg_delete_exp_exp_blacklist_warning'] = 'WARNING: This will delete the report and also blacklist the author, meaning the author will not be able to submit further experience reports. Blacklisted users can always be unblocked in the "Blocked Users" section in the Administrator Settings. Are you sure you want to proceed?';
-

@@ -14,12 +14,25 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * This file contains the German language strings used by the onbaording block.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 // General.
 $string['pluginname'] = 'Onboarding';
 $string['onboarding'] = 'Onboarding';
 $string['onboarding:addinstance'] = 'Einen neuen Onboarding Block hinzufügen';
+$string['onboarding:myaddinstance'] = 'Einen neuen Onboarding Block zur MyMoodle Sektion hinzufügen';
+$string['onboarding:w_manage_wiki'] = 'Wiki Inhalte verwalten';
+$string['onboarding:s_manage_steps'] = 'Steps Inhalte verwalten';
+$string['onboarding:e_manage_experiences'] = 'Erfahrungsberichte verwalten';
 $string['error'] = "Error";
 $string['insufficient_permissions'] = 'Sorry, ungenügende Berechtigungen';
+$string['blocked'] = 'Sorry, du bist nicht berechtigt auf diesen Inhalt zuzugreifen.';
 $string['settings'] = 'Einstellungen';
 $string['back'] = 'Zurück';
 $string['backtohome'] = 'Zurück zu Home';
@@ -61,7 +74,6 @@ $string['link_description_req'] = 'Bitte gib eine Beschreibung für den Link an'
 $string['link_description_help'] = 'Lass mich dir helfen';
 $string['link_number'] = 'Link Position';
 $string['default_link_name'] = 'Beispiel Link';
-$string['default_link_name'] = 'Beispiel Name';
 $string['default_link_url'] = 'https://www.example.com';
 $string['default_link_description'] = 'Beispiel Beschreibung';
 $string['msg_delete_wiki_cat_warning'] = 'WARNUNG: Links in dieser Kategorie: ';
@@ -193,6 +205,8 @@ $string['unsus_mail_title'] = 'Dein Erfahrungsbericht ist wieder sichtbar!';
 $string['unsus_mail_comment'] = "Hallo,\r\nDanke, dass du das Problem behoben hast. Dein Erfahrungsbericht ist wieder sichtbar.\r\n \r\nBeste Grüße, \r\nDein Digital Onboarding Team";
 $string['blocked_overview'] = 'Geblockte Nutzer';
 $string['unblock'] = 'Unblock';
+$string['popularity'] = 'Beliebtheit';
+$string['lastmodified'] = 'Zuletzt bearbeitet';
 $string['id'] = 'Id';
 $string['option'] = 'Option';
 $string['submitted'] = 'Versendet';
