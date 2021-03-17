@@ -290,8 +290,7 @@ class experiences_lib {
      */
     public static function get_course_by_id($courseid) {
         global $DB;
-        return $DB->get_record('block_onb_e_courses', array('id' => $courseid), $fields = '*',
-            $strictness = IGNORE_MISSING);
+        return $DB->get_record('block_onb_e_courses', array('id' => $courseid));
     }
 
     /**
@@ -396,12 +395,10 @@ class experiences_lib {
     public static function block_user($experience_id) {
         global $DB;
 
-        $sql = "SELECT u.id FROM {user} u
-                INNER JOIN {block_onb_e_exps} ee ON u.id = ee.user_id
-                WHERE ee.id = $experience_id";
+        $experience = $DB->get_record('block_onb_e_exps', array('id' => $experience_id));
 
         $user = new \stdClass();
-        $user->user_id = $DB->get_field_sql($sql);
+        $user->user_id = $experience->user_id;
         $user->blockedsince = time();
         $DB->insert_record('block_onb_e_blocked', $user);
     }

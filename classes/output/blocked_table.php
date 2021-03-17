@@ -70,7 +70,7 @@ class blocked_table extends table_sql {
     }
 
     public function col_actions($values) {
-        return '<a href="unblock_user.php?user_id='.$values->id.'">' . get_string('unblock', 'block_onboarding') . '</a>';
+        return '<span onb-data-id='.$values->id.' onb-data-context="exp-admin-unblock" class="confirm-btn link-btn">' . get_string('unblock', 'block_onboarding') . '</span>';
     }
 
     /**

@@ -555,6 +555,9 @@ class block_onboarding_view_external extends external_api {
             case 'exp-admin-report':
                 $returnmessage['text'] = get_string('msg_delete_exp_admin_report_warning', 'block_onboarding');
                 break;
+            case 'exp-admin-unblock':
+                $returnmessage['text'] = get_string('msg_delete_exp_admin_unblock_warning', 'block_onboarding');
+                break;
         }
         return $returnmessage;
     }
@@ -633,12 +636,16 @@ class block_onboarding_view_external extends external_api {
                 $returnvalue['redirect'] = '../experiences/overview.php';
                 break;
             case 'exp-exp-blacklist':
-                block_onboarding\experiences_lib::delete_experience($id);
                 block_onboarding\experiences_lib::block_user($id);
+                block_onboarding\experiences_lib::delete_experience($id);
                 $returnvalue['redirect'] = '../experiences/overview.php';
                 break;
             case 'exp-admin-report':
                 block_onboarding\experiences_lib::delete_report($id);
+                $returnvalue['redirect'] = 'reload';
+                break;
+            case 'exp-admin-unblock':
+                block_onboarding\experiences_lib::unblock_user($id);
                 $returnvalue['redirect'] = 'reload';
                 break;
         }

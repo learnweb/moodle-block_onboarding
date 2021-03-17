@@ -222,3 +222,4 @@ $string['msg_delete_exp_exp_student_warning'] = 'WARNING: This will permanently 
 $string['msg_delete_exp_exp_admin_warning'] = 'WARNING: This will permanently delete this experience report. Are you sure you want to delete this report?';
 $string['msg_delete_exp_exp_blacklist_warning'] = 'WARNING: This will delete the report and also blacklist the author, meaning the author will not be able to submit further experience reports. Blacklisted users can always be unblocked in the "Blocked Users" section in the Administrator Settings. Are you sure you want to proceed?';
 $string['msg_delete_exp_admin_report_warning'] = 'WARNING: This will permanently delete the reported issue. Are you sure you want to proceed?';
+$string['msg_delete_exp_admin_unblock_warning'] = 'WARNING: This will unblock the user, allowing the user to sumbit experience reports again. Are you sure you want to proceed?';
