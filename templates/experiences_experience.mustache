@@ -6,11 +6,11 @@
                 <span class="experiences-experience-title-title">{{{name}}}</span>
                 {{#can_edit_experience}}
                     <a href="edit_experience.php?experience_id={{{id}}}" class="experiences-experience-title-edit-btn">{{#pix}}t/editstring, core, {{# str }}edit_experience, block_onboarding{{/ str }}{{/pix}}</a>
-                    <span onb-data-id="{{{id}}}" onb-data-context="exp-exp" class="confirm-btn">{{#pix}}t/delete, core, {{# str }}delete_experience, block_onboarding{{/ str }}{{/pix}}</span>
+                    <span onb-data-id="{{{id}}}" onb-data-context="exp-exp" class="confirm-btn experiences-experience-title-btn">{{#pix}}t/delete, core, {{# str }}delete_experience, block_onboarding{{/ str }}{{/pix}}</span>
                 {{/can_edit_experience}}
                 {{#can_manage_experiences}}
-                    <span onb-data-id="{{{id}}}" onb-data-context="exp-exp-blacklist" class="confirm-btn">{{#pix}}i/permissionlock, core, {{# str }}delete_experience_blacklist, block_onboarding{{/ str }}{{/pix}}</span>
-                    <a href="suspend_experience.php?experience_id={{{id}}}">{{#suspended}}{{#pix}}i/hide, core, {{# str }}unsuspend_experience, block_onboarding{{/ str }}{{/pix}}{{/suspended}}{{^suspended}}{{#pix}}i/show, core, {{# str }}suspend_experience, block_onboarding{{/ str }}{{/pix}}{{/suspended}}</a>
+                    <span onb-data-id="{{{id}}}" onb-data-context="exp-exp-blacklist" class="confirm-btn experiences-experience-title-btn">{{#pix}}i/permissionlock, core, {{# str }}delete_experience_blacklist, block_onboarding{{/ str }}{{/pix}}</span>
+                    <a href="suspend_experience.php?experience_id={{{id}}}" class="experiences-experience-title-btn">{{#suspended}}{{#pix}}i/hide, core, {{# str }}unsuspend_experience, block_onboarding{{/ str }}{{/pix}}{{/suspended}}{{^suspended}}{{#pix}}i/show, core, {{# str }}suspend_experience, block_onboarding{{/ str }}{{/pix}}{{/suspended}}</a>
                 {{/can_manage_experiences}}
             {{/experience}}
             <span class="experiences-experience-title-helpful">

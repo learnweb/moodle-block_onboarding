@@ -42,6 +42,7 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
     $PAGE->set_title(get_string('report_overview', 'block_onboarding'));
     $PAGE->set_heading(get_string('report_overview', 'block_onboarding'));
     $PAGE->requires->css('/blocks/onboarding/style.css');
+    $PAGE->requires->js_call_amd('block_onboarding/confirmation_popup', 'init');
     $output = $PAGE->get_renderer('block_onboarding');
     echo $output->header();
 

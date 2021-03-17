@@ -27,7 +27,11 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
                         }
                     }]);
                     promises[0].done(function (response) {
-                        location.reload();
+                        if (response.redirect == "reload"){
+                            location.reload();
+                        } else {
+                            window.location.href = response.redirect;
+                        }
                         return false;
                     }).fail(notification.exception);
                 }

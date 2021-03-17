@@ -80,7 +80,7 @@ class report_table extends table_sql {
     }
 
     public function col_actions($values) {
-        return '<a href="delete_report.php?report_id='.$values->id.'">' . get_string('delete', 'block_onboarding') . '</a>';
+        return '<span onb-data-id='.$values->id.' onb-data-context="exp-admin-report" class="confirm-btn link-btn">' . get_string('delete', 'block_onboarding') . '</span>';
     }
 
     /**

@@ -32,6 +32,10 @@ ul {
     cursor: pointer;
 }
 
+.link-btn{
+    color: var(--primary) !important;
+}
+
 
 /* Home */
 
@@ -401,6 +405,10 @@ ul {
 .experiences-experience-title-title {
     font-weight: bold;
     font-size: 1.3em;
+}
+
+.experiences-experience-title-btn{
+    color: #ffffff !important;
 }
 
 .experiences-experience-title-edit-btn {

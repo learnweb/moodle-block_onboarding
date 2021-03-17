@@ -552,6 +552,9 @@ class block_onboarding_view_external extends external_api {
             case 'exp-exp-blacklist':
                 $returnmessage['text'] = get_string('msg_delete_exp_exp_blacklist_warning', 'block_onboarding');
                 break;
+            case 'exp-admin-report':
+                $returnmessage['text'] = get_string('msg_delete_exp_admin_report_warning', 'block_onboarding');
+                break;
         }
         return $returnmessage;
     }
@@ -595,7 +598,7 @@ class block_onboarding_view_external extends external_api {
 
         $params = self::validate_parameters(self::delete_entry_parameters(),
             array(
-                'context' => $type,
+                'type' => $type,
                 'id' => $id
             )
         );
@@ -603,36 +606,40 @@ class block_onboarding_view_external extends external_api {
         switch ($type) {
             case 'step':
                 \block_onboarding\steps_lib::delete_step($id);
-                $returnvalue['confirmation'] = 1;
+                $returnvalue['redirect'] = 'reload';
                 break;
             case 'wiki-category':
                 \block_onboarding\wiki_lib::delete_category($id);
-                $returnvalue['confirmation'] = 1;
+                $returnvalue['redirect'] = 'reload';
                 break;
             case 'wiki-link':
                 \block_onboarding\wiki_lib::delete_link($id);
-                $returnvalue['confirmation'] = 1;
+                $returnvalue['redirect'] = 'reload';
                 break;
             case 'exp-category':
                 \block_onboarding\experiences_lib::delete_category($id);
-                $returnvalue['confirmation'] = 1;
+                $returnvalue['redirect'] = 'reload';
                 break;
             case 'exp-course':
                 \block_onboarding\experiences_lib::delete_course($id);
-                $returnvalue['confirmation'] = 1;
+                $returnvalue['redirect'] = 'reload';
                 break;
             case 'exp-my-exp':
                 block_onboarding\experiences_lib::delete_experience($id);
-                $returnvalue['confirmation'] = 1;
+                $returnvalue['redirect'] = 'reload';
                 break;
             case 'exp-exp':
                 block_onboarding\experiences_lib::delete_experience($id);
-                $returnvalue['confirmation'] = 1;
+                $returnvalue['redirect'] = '../experiences/overview.php';
                 break;
             case 'exp-exp-blacklist':
                 block_onboarding\experiences_lib::delete_experience($id);
                 block_onboarding\experiences_lib::block_user($id);
-                $returnvalue['confirmation'] = 1;
+                $returnvalue['redirect'] = '../experiences/overview.php';
+                break;
+            case 'exp-admin-report':
+                block_onboarding\experiences_lib::delete_report($id);
+                $returnvalue['redirect'] = 'reload';
                 break;
         }
         return $returnvalue;
@@ -646,7 +653,7 @@ class block_onboarding_view_external extends external_api {
     public static function delete_entry_returns() {
         return new external_single_structure(
             array(
-                'confirmation' => new external_value(PARAM_INT, 'confirmation of deletion')
+                'redirect' => new external_value(PARAM_TEXT, 'link of page redirect, reload refers to reloading the initial page')
             )
         );
     }

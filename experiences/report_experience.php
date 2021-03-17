@@ -45,7 +45,7 @@ if ($mform->is_cancelled()) {
     if ($fromform = $mform->get_data()) {
         // Processing of data submitted in the form.
         block_onboarding\experiences_lib::edit_report($fromform);
-        redirect('experience.php?experience_id=' . $experience_id);
+        redirect('overview.php');
     }
 }
 
