@@ -495,7 +495,7 @@ class block_onboarding_view_external extends external_api {
     public static function delete_confirmation_parameters() {
         return new external_function_parameters(
             array(
-                'context' => new external_value(PARAM_TEXT, 'object type which is to be deleted'),
+                'type' => new external_value(PARAM_TEXT, 'object type selector which is to be deleted'),
                 'id' => new external_value(PARAM_INT, 'data id which is to be deleted'),
             )
         );
@@ -506,24 +506,24 @@ class block_onboarding_view_external extends external_api {
      * Parameter erklären!
      * @return string welcome message
      */
-    public static function delete_confirmation($context, $id) {
+    public static function delete_confirmation($type, $id) {
         global $DB;
 
         $params = self::validate_parameters(self::delete_confirmation_parameters(),
             array(
-                'context' => $context,
+                'type' => $type,
                 'id' => $id
             )
         );
 
-//        // Security checks.
-//        $context =  context_??::instance(???);
+        // Security checks.
+//        $context =   context_block::instance($this->context);
 //        self::validate_context($context);
-//        require_capability('block/onboarding:???', $context);
 
-        switch ($context) {
+        switch ($type) {
             case 'step':
-                $returnmessage['text'] = get_string('msg_delete_step_warning', 'block_onboarding');
+//                require_capability('block/onboarding:s_manage_steps', $context);
+                $returnmessage['text'] = get_string('msg_delete_step_warning', 'block_onboarding') . "sadsa " . $context->name;
                 break;
             case 'wiki-category':
                 $affected = $DB->count_records('block_onb_w_links', array('category_id' => $id));
@@ -579,7 +579,7 @@ class block_onboarding_view_external extends external_api {
     public static function delete_entry_parameters() {
         return new external_function_parameters(
             array(
-                'context' => new external_value(PARAM_TEXT, 'object type which is to be deleted'),
+                'type' => new external_value(PARAM_TEXT, 'object type selector which is to be deleted'),
                 'id' => new external_value(PARAM_INT, 'data id which is to be deleted'),
             )
         );
@@ -591,16 +591,16 @@ class block_onboarding_view_external extends external_api {
      * @return string welcome message
      */
 
-    public static function delete_entry($context, $id) {
+    public static function delete_entry($type, $id) {
 
         $params = self::validate_parameters(self::delete_entry_parameters(),
             array(
-                'context' => $context,
+                'context' => $type,
                 'id' => $id
             )
         );
 
-        switch ($context) {
+        switch ($type) {
             case 'step':
                 \block_onboarding\steps_lib::delete_step($id);
                 $returnvalue['confirmation'] = 1;

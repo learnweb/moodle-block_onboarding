@@ -16,7 +16,7 @@
 
 /**
  * The file for the steps_lib class.
- * Contains static methods for steps administration.
+ * Contains static methods for Steps administration.
  *
  * @package    block_onboarding
  * @copyright  2021 Westfälische Wilhelms-Universität Münster
@@ -28,7 +28,7 @@ namespace block_onboarding;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Static methods for steps administration.
+ * Static methods for Steps administration.
  *
  * @package    block_onboarding
  * @copyright  2021 Westfälische Wilhelms-Universität Münster

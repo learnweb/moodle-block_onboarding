@@ -14,10 +14,26 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * The file for the wiki_lib class.
+ * Contains static methods for Wiki administration.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 namespace block_onboarding;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Static methods for Wiki administration.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class wiki_lib {
 
     public static function edit_category($fromform) {
