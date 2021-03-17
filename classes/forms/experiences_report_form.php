@@ -60,7 +60,7 @@ class experiences_report_form extends moodleform {
             'server');
         $mform->setType('description', PARAM_TEXT);
 
-        $this->add_action_buttons();
+        $this->add_action_buttons($cancel = true, $submitlabel=get_string('report_experience', 'block_onboarding'));
     }
 
     public function validation($data, $files) {

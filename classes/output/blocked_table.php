@@ -30,7 +30,8 @@ class blocked_table extends table_sql {
         $this->define_columns($columns);
 
         // Define the titles of columns to show in header.
-        $headers = array('Id', 'Firstname', 'Lastname', 'Blocked Since', 'Actions');
+        $headers = array(get_string('id', 'block_onboarding'), get_string('firstname', 'block_onboarding'),
+            get_string('lastname', 'block_onboarding'), get_string('blockedsince', 'block_onboarding'), get_string('actions', 'block_onboarding'));
         $this->define_headers($headers);
 
         // Table configuration.

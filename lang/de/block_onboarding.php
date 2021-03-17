@@ -30,18 +30,18 @@ $string['admin'] = 'Administration';
 $string['settings'] = 'Einstellungen';
 $string['yes'] = 'Ja';
 
-// Guide
+// Guide.
 $string['guide'] = 'Guide';
 $string['guide_link'] = 'Gehe zum Guide';
 $string['guide_summary'] = 'Im Guide findest du nützliche organisatorische Informationen rund um dein Studium. Außerdem hilft dir das "Erste Schritte" - Programm dich zurechtzufinden.';
 
-// -> Wiki
+// Wiki.
 $string['wiki'] = 'Wiki';
 $string['wiki_admin'] = 'Wiki Administration';
 $string['manage_wiki'] = 'Wiki bearbeiten';
-
 $string['new_category'] = 'Neue Kategorie';
 $string['edit_category'] = 'Kategorie bearbeiten';
+$string['delete_category'] = 'Kategorie löschen';
 $string['category_name'] = 'Name';
 $string['category_name_req'] = 'Bitte gib eine Bezeichnung für die Kategorie an.';
 $string['default_category_name_wiki'] = 'Beispiel Kategorie';
@@ -68,11 +68,10 @@ $string['msg_delete_wiki_cat_warning'] = 'WARNUNG: Links in dieser Kategorie: ';
 $string['msg_delete_wiki_cat_lost'] = '. In dieser Kategorie enthaltene Links werden dauerhaft gelöscht. Möchtest du die Kategorie wirklich löschen?';
 $string['msg_delete_wiki_link_warning'] = 'WARNUNG: Beim Löschen dieses Links gehen die Daten dauerhaft verloren. Möchtest du den Link wirklich dauerhaft löschen?';
 
-// -> Steps
+// Steps.
 $string['steps'] = 'Erste Schritte';
 $string['steps_admin'] = 'Steps Administration';
 $string['manage_steps'] = 'Erste Schritte bearbeiten';
-
 $string['button_done'] = 'Erledigt!';
 $string['button_back'] = 'Zurück';
 $string['button_reset'] = 'Fortschritt zurücksetzen';
@@ -81,7 +80,6 @@ $string['hide'] = 'Ausblenden';
 $string['show'] = 'Einblenden';
 $string['hide_steps'] = 'Erste Schritte ausblenden';
 $string['show_steps'] = 'Erste Schritte einblenden';
-
 $string['completed'] = 'Abgeschlossen';
 $string['new_step'] = 'Neuer Schritt';
 $string['edit_step'] = 'Schritt bearbeiten';
@@ -105,24 +103,19 @@ $string['msg_delete_step_warning'] = 'WARNING: Beim Löschen dieses Schrittes we
 // Experiences.
 $string['experience'] = 'Erfahrung';
 $string['experiences'] = 'Erfahrungsberichte';
-
-$string['edit_category'] = 'Kategorie bearbeiten';
-$string['delete_category'] = 'Kategorie löschen';
-$string['category_name'] = 'Name';
+$string['experiences_summary'] = 'Our Experiences Portal gives you the opportunity to find out how other students, before you have designed their studies. This is a great chance to learn from others mistakes. You can also find lots of inspiration on how to design your individual studies.';
 $string['default_category_name'] = 'Beispiel Kategorie';
 $string['questions'] = 'Fragen';
-$string['degreeprograms'] = 'Studiengänge';
 $string['edit_course'] = 'Studiengang bearbeiten';
 $string['delete_course'] = 'Studiengang löschen';
 $string['course_name'] = 'Name';
 $string['course_name_missing'] = 'Bitte gebe einen Studiengangnamen an.';
 $string['default_course_name'] = 'Beispiel Studiengang';
 $string['course_select'] = 'Studiengang';
+$string['degreeprograms'] = 'Studiengänge';
 $string['myexperiencearea'] = 'Mein Erfahrungsbereich';
-
 $string['experience_category_missing'] = 'Bitte gebe einen Namen für die Kategorie an.';
 $string['experience_questions_missing'] = 'Gebe ein paar Vorschläge an.';
-
 $string['edit_experience'] = 'Erfahrungsbericht erstellen';
 $string['delete_experience'] = 'Erfahrungsbericht löschen';
 $string['delete_experience_blacklist'] = 'Erfahrungsbericht löschen & Nutzer blockieren';
@@ -138,7 +131,6 @@ $string['default_experience_name'] = 'Beispiel Erfahrung';
 $string['default_experience_url'] = 'http://www.example.com';
 $string['default_experience_description'] = 'Beispiel Studiengang';
 $string['experience_contact'] = 'Kontakt Informationen';
-
 $string['contact'] = 'Kontakt: ';
 $string['category_missing'] = 'Bitte trage etwas in das Textfeld ein oder unchecke die Checkbox.';
 $string['takeaways'] = 'Key Takeaways';
@@ -168,16 +160,13 @@ $string['selectcategory_help'] =
 $string['contactinformation'] = 'dieses Textfeld';
 $string['contactinformation_help'] =
 'Wenn du anderen Studierenden die Möglichkeit geben möchtest dich zu kontaktieren, trage hier deine Kontakdaten ein.';
-
 $string['aboutme'] = 'Über Mich';
 $string['aboutme_default'] = 'Schreib etwas über dich. (Alter, Semester, etc.)';
 $string['helpful'] = 'War dieser Bericht hilfreich?';
 $string['filters'] = 'Filter Optionen';
 $string['newdegreeprogram'] = 'Neuer Studiengang';
-$string['newcategory'] = 'Neue Kategorie';
 $string['notenoughdata'] = 'Es gibt nicht genug Daten um einen Erfahrungsbericht zu erstellen';
 $string['selectcategories'] = 'Wähle Kategorien';
-
 $string['experience_admin'] = 'Experience Administration';
 $string['experience_questions_missing'] = 'Bitte trage hier Fragen ein, die Anstoß zum Schreiben geben.';
 $string['experience_category_missing'] = 'Bitte trage einen Kategorienamen ein.';
@@ -186,7 +175,6 @@ $string['published'] = 'Veröffentlicht am';
 $string['savedraft'] = 'Als Entwurf speichern';
 $string['draft'] = 'Entwurf';
 $string['author'] = 'Autor';
-
 $string['unsuspend_experience'] = 'Sichtbar schalten';
 $string['suspend_experience'] = 'Unsichtbar schalten';
 $string['suspend_mail'] = 'Suspend Mail';
@@ -203,7 +191,15 @@ $string['rep_mail_option'] = "Option: ";
 $string['rep_mail_description'] = "Beschreibung: ";
 $string['unsus_mail_title'] = 'Dein Erfahrungsbericht ist wieder sichtbar!';
 $string['unsus_mail_comment'] = "Hallo,\r\nDanke, dass du das Problem behoben hast. Dein Erfahrungsbericht ist wieder sichtbar.\r\n \r\nBeste Grüße, \r\nDein Digital Onboarding Team";
-
+$string['blocked_overview'] = 'Geblockte Nutzer';
+$string['unblock'] = 'Unblock';
+$string['id'] = 'Id';
+$string['option'] = 'Option';
+$string['submitted'] = 'Versendet';
+$string['actions'] = 'Aktionen';
+$string['firstname'] = 'Vorname';
+$string['lastname'] = 'Nachname';
+$string['blockedsince'] = 'Geblockt Seit';
 $string['msg_delete_exp_cats_warning'] = 'WARNUNG: Berichte mit Einträgen zu dieser Kategorie: ';
 $string['msg_delete_exp_cats_lost'] = '. Die Bericht-Einträge zu dieser Kategorie werden dauerhaft gelöscht. Möchtest du die Kategorie wirklich löschen?';
 $string['msg_delete_exp_course_warning'] = 'WARNUNG: Berichte mit Einträgen zu diesem Studiengang: ';
@@ -211,6 +207,3 @@ $string['msg_delete_exp_course_lost'] = '. Die Bericht-Einträge zu diesem Studi
 $string['msg_delete_exp_exp_student_warning'] = 'WARNUNG: Beim Löschen deines Erfahrungsberichts gehen die Daten dauerhaft verloren. Du kannst deinen Bericht auch bearbeiten und \'Als Entwurf speichern\' klicken, um deinen Bericht aus der öffentlichen Bericht-Anzeige zu entfernen. Möchtest du deinen Bericht wirklich dauerhaft löschen?';
 $string['msg_delete_exp_exp_admin_warning'] = 'WARNUNG: Beim Löschen dieses Erfahrungsberichts gehen die Daten dauerhaft verloren. Möchtest du den Bericht wirklich dauerhaft löschen?';
 $string['msg_delete_exp_exp_blacklist_warning'] = 'WARNUNG: Diese Aktion führt zum Löschen des Erfahrungsberichts und sperrt den Autor, sodass dieser keine weiteren Berichte verfassen kann. Autoren können in der "Geblockte Nutzer"-Ansicht in den Einstellungen wieder freigeschaltet werden. Möchtest du wirklich fortfahren?';
-
-$string['blocked_overview'] = 'Geblockte Nutzer';
-$string['unblock'] = 'Unblock';

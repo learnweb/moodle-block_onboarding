@@ -35,11 +35,11 @@ $experience_id = optional_param('experience_id', -1, PARAM_INT);
 // Checking whether experience is suspended or not.
 $suspended = $DB->get_field('block_onb_e_exps', 'suspended', array('id' => $experience_id), $strictness=IGNORE_MISSING);
 if ($suspended == 1){
-    block_onboarding\experiences_lib::unsuspend_experience($experience_id);
+    \block_onboarding\experiences_lib::unsuspend_experience($experience_id);
     redirect('experience.php?experience_id=' . $experience_id);
 } else {
-    $context = context_system::instance();
 
+    $context = context_system::instance();
     $PAGE->set_context($context);
     $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/edit_category.php'));
     $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
@@ -61,7 +61,7 @@ if ($suspended == 1){
             redirect('experience.php?experience_id=' . $experience_id);
         } else if ($fromform = $mform->get_data()) {
             // Processing of data submitted in the form.
-            block_onboarding\experiences_lib::suspend_experience($fromform);
+            \block_onboarding\experiences_lib::suspend_experience($fromform);
             redirect('experience.php?experience_id=' . $fromform->experience_id);
         }
 
