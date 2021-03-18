@@ -44,7 +44,7 @@ class experiences_mail_form extends moodleform {
         $mform->setType('comment', PARAM_TEXT);
         $mform->setDefault('comment', get_string('sus_mail_text', 'block_onboarding'));
 
-        $this->add_action_buttons($submitlabel = get_string('submit_mail', 'block_onboarding'));
+        $this->add_action_buttons($cancel = true, $submitlabel = get_string('submit_mail', 'block_onboarding'));
     }
 
     public function validation($data, $files) {

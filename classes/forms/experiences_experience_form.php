@@ -44,7 +44,7 @@ class experiences_experience_form extends moodleform {
 
         // Degree Program Drop Down Menu.
         $courses = $DB->get_records('block_onb_e_courses');
-        $link = $DB->get_record('block_onb_e_exps', array('user_id' => $USER->id));
+        $link = $DB->get_record('block_onb_e_exps', array('id' => $experience->id));
         $coursesmodified = array();
         foreach ($courses as $course) {
             $coursesmodified[$course->id] = $course->name;
