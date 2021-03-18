@@ -21,7 +21,6 @@
  * This page can only be viewed by the administrator.
  *
  * @package    block_onboarding
- * @category
  * @copyright  2021 Westfälische Wilhelms-Universität Münster
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

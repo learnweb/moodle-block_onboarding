@@ -14,6 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * The file for the experiences_experience rederable class.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 namespace block_onboarding\output\renderables;
 
 defined('MOODLE_INTERNAL') || die();
@@ -22,6 +29,13 @@ use renderable;
 use templatable;
 use renderer_base;
 
+/**
+ * Class exporting the experiences_experience rederable for the template.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class experiences_experience implements renderable, templatable {
     private $experienceid;
 
