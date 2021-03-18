@@ -23,6 +23,9 @@
 
 define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notification) {
 
+    // Variable for storing experienceid which is initialized through init method upon loading the page.
+    var experienceidInit;
+
     /**
      * Initializes 'Helpful'-button upon loading experience report page.
      *
@@ -30,6 +33,8 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
      * @returns {Boolean} false
      */
     var init = function (experienceid) {
+        // Sets experienceid.
+        experienceidInit = experienceid;
         // AJAX call to externallib.php method to get current helpfulness rating.
         var promises = ajax.call([{
             methodname: 'block_onboarding_init_helpful',
@@ -60,7 +65,7 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
         // AJAX call to externallib.php method to get current helpfulness rating.
         var promises = ajax.call([{
             methodname: 'block_onboarding_click_helpful',
-            args: {experienceid: experienceid}
+            args: {experienceid: experienceidInit}
         }]);
         // Toggles color of 'Helpful'-button depending on users current helpfulness rating.
         promises[0].done(function (response) {

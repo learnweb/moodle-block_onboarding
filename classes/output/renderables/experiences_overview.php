@@ -39,18 +39,22 @@ use renderer_base;
 class experiences_overview implements renderable, templatable {
     private $form;
 
+    /**
+     * Constructor function.
+     */
     public function __construct($form) {
         $this->form = $form;
     }
 
+    /**
+     * Template export function.
+     */
     public function export_for_template(renderer_base $output) {
 
         global $DB, $USER;
 
         // Get Database Entries for display on the Start Page.
-
         $experience = $DB->get_record('block_onb_e_exps', array('user_id' => $USER->id));
-
         $blocked = $DB->record_exists('block_onb_e_blocked', array('user_id' => $USER->id));
 
         return [

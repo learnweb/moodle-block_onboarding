@@ -39,9 +39,15 @@ use renderer_base;
  */
 class steps_admin implements renderable, templatable {
 
+    /**
+     * Constructor function.
+     */
     public function __construct() {
     }
 
+    /**
+     * Template export function.
+     */
     public function export_for_template(renderer_base $output) {
         global $DB;
 

@@ -38,9 +38,16 @@ use renderer_base;
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class guide_overview implements renderable, templatable {
+
+    /**
+     * Constructor function.
+     */
     public function __construct() {
     }
 
+    /**
+     * Template export function.
+     */
     public function export_for_template(renderer_base $output) {
         global $DB;
         $categories = array_values($DB->get_records('block_onb_w_categories', $conditions = null, $sort = 'position ASC'));
