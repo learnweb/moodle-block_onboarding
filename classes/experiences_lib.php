@@ -85,7 +85,7 @@ class experiences_lib {
 
             // Check whether the checkbox for a category was checked and something was written in the textarea.
             if (isset($fromform->$formpropertycategorycheckbox) &&
-                empty($fromform->$formpropertycategorytextarea) == FALSE) {
+                empty($fromform->$formpropertycategorytextarea) == false) {
                 // Translates form data to new object for further processing.
                 $experiencecategory = new \stdClass;
                 $formpropertycategorytextarea = 'experience_category_' . $category->id . '_description';
