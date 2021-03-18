@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The File for the block_onboarding class.
+ * The file for the block_onboarding class.
  *
  * Displays an onboarding block.
  *

@@ -15,7 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * functions to support externallib for ajax calls
+ * The file for the steps_interaction_lib class.
+ * Contains static methods which outsource reoccurring functionality for externallib.php ajax calls.
  *
  * @package    block_onboarding
  * @copyright  2021 Westfälische Wilhelms-Universität Münster
@@ -25,17 +26,27 @@
 namespace block_onboarding;
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Static methods for outsourcing reoccurring functionality in externallib.php ajax calls.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class steps_interaction_lib {
 
     /**
-     * Beschreibung hinzufügen!
+     * Returns step id of the step which is currently displayed in the user's First Steps section.
+     *
+     * @return int Id of currently displayed step.
      */
     public static function get_current_user_stepid() {
         global $DB, $USER;
+        // Checks whether the user has accessed the First Steps section before and adjusts return value accordingly.
         $stepbool = $DB->record_exists('block_onb_s_current', array('userid' => $USER->id));
-        // wenn noch kein Fortschritt gemacht wurde, also kein Datensatz vorhanden ist -> starten bei pos = 1
         if ($stepbool == false) {
-            // wenn kein step in Liste vorhanden ist
+            // In case the user has never accessed the First Steps section before, check whether there are any steps saved
+            // in the database. If this is the case, initlize the section with the step at position 1, otherwise return -1.
             if ($DB->count_records('block_onb_s_steps') == 0) {
                 $returnstepid = -1;
             } else {
@@ -50,31 +61,66 @@ class steps_interaction_lib {
                 $returnstepid = $step->stepid;
             }
         } else {
+            // Load the saved current user step from the database.
             $step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id));
             $returnstepid = $step->stepid;
         }
         return $returnstepid;
     }
 
+    /**
+     * Sets currently displayed step in the user's First Steps section to the passed step id.
+     *
+     * @param int $stepid Step id of step to be set as currently displayed user step.
+     */
     public static function set_current_user_stepid($stepid) {
         global $DB, $USER;
-        // evtl. durch Funktion get_current_user_step (den ganzen Schritt) ersetzen
         $step = $DB->get_record('block_onb_s_current', array('userid' => $USER->id));
         $step->stepid = $stepid;
         $step->timemodified = time();
         $DB->update_record('block_onb_s_current', $step);
     }
 
+    /**
+     * Returns step database entry for a given step position.
+     *
+     * @param int $position Position of step.
+     * @return object Step database entry.
+     */
     public static function get_step_data($position) {
         global $DB;
         $returnstep = $DB->get_record('block_onb_s_steps', array('position' => $position));
         return $returnstep;
     }
 
+    /**
+     * Returns step position for a given step id.
+     *
+     * @param int $stepid Id of step.
+     * @return int Position of step.
+     */
+    public static function get_step_position($stepid) {
+        global $DB;
+        $step = $DB->get_record('block_onb_s_steps', array('id' => $stepid));
+        $returnstepposition = $step->position;
+        return $returnstepposition;
+    }
+
+    /**
+     * Returns step database entry for a given step position plus a given direction value.
+     * This method is used to display a different step in the user's First Steps section upon clicking the 'Back'- or 'Done'-button.
+     *
+     * @param int $position Base position of step.
+     * @param int $direction Direction value to be added to the base step position.
+     * @return object Step database entry.
+     */
     public static function get_next_step_data($position, $direction) {
         global $DB;
+        // Direction value which is 1 upon clicking the 'Done'-button and -1 upon clicking the 'Back'-button is
+        // added to the base step position.
         $position = $position + $direction;
         $stepbool = $DB->record_exists('block_onb_s_steps', array('position' => $position));
+        // Checks whether the record exists and returns -1 when steps are out of bounds.
         if ($stepbool) {
             $returnstep = $DB->get_record('block_onb_s_steps', array('position' => $position));
         } else {
@@ -83,22 +129,24 @@ class steps_interaction_lib {
         return $returnstep;
     }
 
-    public static function get_step_position($stepid) {
-        global $DB;
-        $step = $DB->get_record('block_onb_s_steps', array('id' => $stepid));
-        $returnstepposition = $step->position;
-        return $returnstepposition;
-    }
-
+    /**
+     * Checks whether a user has completed a given step in the First Steps section.
+     *
+     * @param int $stepid Id of step.
+     * @return int Trivalent logic selector value.
+     */
     public static function get_user_completed_step($stepid) {
         global $DB, $USER;
         $step = $DB->get_record('block_onb_s_steps', array('id' => $stepid));
         $totalsteps = $DB->count_records('block_onb_s_steps');
         $progress = $DB->get_records('block_onb_s_completed', array('userid' => $USER->id));
 
+        // Checks whether user has completed all steps and is currently at final step.
         if($step->position == $totalsteps and count($progress) == $totalsteps){
             $returncompleted = 2;
         } else{
+            // Checks whether given step has already been completed by comparing the given step id with all
+            // the user's completed step ids.
             $returncompleted = 0;
             foreach ($progress as $prostep)
                 if ($prostep->stepid == $stepid){
@@ -108,9 +156,14 @@ class steps_interaction_lib {
         return $returncompleted;
     }
 
+    /**
+     * Creates a new entry in the completed steps data table as long as the user has not yet completed the given step.
+     * This method is called upon clicking the 'Done'-button in the First Steps section.
+     *
+     * @param int $stepid Step id of step to be set as completed.
+     */
     public static function set_user_completed_step($stepid) {
         global $DB, $USER;
-        // nur wenn Step noch nicht abgeschlossen wurde, wird dieser hinzugefügt, sonst passiert nichts
         $stepbool = $DB->record_exists('block_onb_s_completed', array('userid' => $USER->id, 'stepid' => $stepid));
         if ($stepbool == false) {
             $step = new \stdClass();
@@ -120,6 +173,11 @@ class steps_interaction_lib {
         }
     }
 
+    /**
+     * Calculates the user progress percentage for the First Steps Section, which will then be displayed in the progress bar.
+     *
+     * @return int Rounded user progress percentage.
+     */
     public static function get_user_progress() {
         global $DB, $USER;
         $totalsteps = $DB->count_records('block_onb_s_steps');
@@ -128,6 +186,11 @@ class steps_interaction_lib {
         return $returnprogress;
     }
 
+    /**
+     * Creates a step object to be displayed in the First Steps section when there are no steps saved in the database.
+     *
+     * @return object Step object.
+     */
     public static function message_no_steps() {
         $returnstep['name'] = get_string('error_nosteps_title', 'block_onboarding');
         $returnstep['description'] = get_string('error_nosteps_message', 'block_onboarding');

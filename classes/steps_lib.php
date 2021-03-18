@@ -38,9 +38,9 @@ class steps_lib {
 
     /**
      * Determines whether an existing step is updated or a new step is added.
-     * Calls {@see add_step()} for new steps and {@see update_step()} to update exisiting steps.
+     * Calls {@see add_step()} for new steps and {@see update_step()} to update an existing step.
      *
-     * @param object $fromform
+     * @param object $fromform Form parameters passed from edit_step.php.
      */
     public static function edit_step($fromform) {
         // Translates form data to new object for further processing.
@@ -53,7 +53,7 @@ class steps_lib {
         // Checks whether a new step is added.
         if ($fromform->id != -1) {
             $step->id = $fromform->id;
-            self::update_step($step, $fromform->position);
+            self::update_step($step);
         } else {
             self::add_step($step);
         }
@@ -63,7 +63,7 @@ class steps_lib {
      * Inserts a new step into the database.
      * Calls {@see increment_step_positions()} to update positions of other steps if necessary.
      *
-     * @param object $step
+     * @param object $step Step object with form parameters.
      */
     public static function add_step($step) {
         global $DB;
@@ -75,7 +75,7 @@ class steps_lib {
         $step->timemodified = time();
         $step->id = $DB->insert_record('block_onb_s_steps', $step);
 
-        // Checks whether intended step position differs from last step position and updates affected step positions accordingly.
+        // Checks whether intended step position differs from max step position and updates affected step positions accordingly.
         if ($initposition != $insertposition) {
             self::increment_step_positions($insertposition, $initposition);
             $step->position = $insertposition;
@@ -88,10 +88,9 @@ class steps_lib {
      * Updates an existing step in the database.
      * Calls {@see decrement_step_positions()} or {@see increment_step_positions()} to update positions of other steps if necessary.
      *
-     * @param object $step
-     * @param int $fromformposition
+     * @param object $step Step object with form parameters.
      */
-    public static function update_step($step, $fromformposition) {
+    public static function update_step($step) {
         global $DB;
         $paramstep = $DB->get_record('block_onb_s_steps', array('id' => $step->id));
         $curposition = $paramstep->position;
@@ -105,7 +104,6 @@ class steps_lib {
                 self::increment_step_positions($insertposition, $curposition);
             }
         }
-        $step->position = $fromformposition + 1;
         $step->timemodified = time();
         $DB->update_record('block_onb_s_steps', $step);
     }
@@ -114,7 +112,7 @@ class steps_lib {
      * Deletes an existing step from the database.
      * Calls {@see decrement_step_positions()} to update positions of remaining steps.
      *
-     * @param int $stepid
+     * @param int $stepid Id of step which is to be deleted.
      */
     public static function delete_step($stepid) {
         global $DB;
@@ -144,8 +142,8 @@ class steps_lib {
     /**
      * Increments step positions between the $insert and $current step position, excluding the passed $current position.
      *
-     * @param int $insert
-     * @param int $cur
+     * @param int $insert New step position.
+     * @param int $cur Current step position.
      */
     public static function increment_step_positions($insert, $cur) {
         global $DB;
@@ -157,8 +155,8 @@ class steps_lib {
     /**
      * Decrements step positions between the $current step and $insert position, excluding the passed $current position.
      *
-     * @param int $insert
-     * @param int $cur
+     * @param int $insert New step position.
+     * @param int $cur Current step position.
      */
     public static function decrement_step_positions($insert, $cur) {
         global $DB;

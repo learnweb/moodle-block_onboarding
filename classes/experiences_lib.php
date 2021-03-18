@@ -16,18 +16,19 @@
 
 /**
  * The file for the experience_lib class.
- * Contains static methods for experience administration.
+ * Contains static methods for Experiences administration.
  *
  * @package    block_onboarding
  * @copyright  2021 Westfälische Wilhelms-Universität Münster
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 namespace block_onboarding;
 
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Static methods for experience administration.
+ * Static methods for Experiences administration.
  *
  * @package    block_onboarding
  * @copyright  2021 Westfälische Wilhelms-Universität Münster
@@ -40,14 +41,14 @@ class experiences_lib {
      *
      * @param object $fromform
      */
-    public static function edit_experience($fromform){
+    public static function edit_experience($fromform) {
         global $DB;
 
         // Translates form data to new object for further processing.
         $experience = new \stdClass();
         $experience->name = $fromform->name;
         $experience->contact = isset($fromform->contact) ? $fromform->contact : null;
-        if ($fromform->id == -1){
+        if ($fromform->id == -1) {
             // TODO muss hier isset?
             $experience->user_id = isset($fromform->user_id) ? $fromform->user_id : null;
             $experience->timecreated = time();
@@ -323,7 +324,7 @@ class experiences_lib {
         $toUser = $recipient;
         $fromUser = $USER;
         $subject = get_string('rep_mail_title', 'block_onboarding');
-        $title = $DB->get_field('block_onb_e_exps', 'name', array('id'=>$report->experience_id));
+        $title = $DB->get_field('block_onb_e_exps', 'name', array('id' => $report->experience_id));
         $message = get_string('rep_mail_comment', 'block_onboarding') . $title .
             get_string('rep_mail_exps_id', 'block_onboarding') . $report->experience_id .
             get_string('rep_mail_option', 'block_onboarding') . $report->type .

@@ -14,10 +14,27 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * The file for the constants class.
+ * Contains all constants for the onboarding block.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 namespace block_onboarding;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Constants for the onboarding block.
+ * As of March 2021 constants are only used for the different categories of the report function in the Experiences section.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class constants {
     /** @var string */
     const SPAM = 'spam/advertisement';

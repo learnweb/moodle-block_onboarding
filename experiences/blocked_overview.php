@@ -25,6 +25,7 @@
  * @copyright  2021 Westfälische Wilhelms-Universität Münster
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 require(__DIR__ . '/../../../config.php');
 require($CFG->libdir . '/tablelib.php');
 require($CFG->dirroot . '/blocks/onboarding/classes/output/blocked_table.php');

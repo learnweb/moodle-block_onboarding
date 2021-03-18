@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * External block_onboarding API
+ * External API for block_onboarding.
  *
  * @package    block_onboarding
  * @copyright  2021 Westfälische Wilhelms-Universität Münster
@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 require_once($CFG->libdir . '/externallib.php');
 
 /**
- * Class implementing the external API, esp. for AJAX functions.
+ * Class implementing the external API, especially for AJAX functions.
  *
  * @package    block_onboarding
  * @copyright  2021 Westfälische Wilhelms-Universität Münster
@@ -517,12 +517,12 @@ class block_onboarding_view_external extends external_api {
         );
 
         // Security checks.
-//        $context =   context_block::instance($this->context);
-//        self::validate_context($context);
+        //        $context =   context_block::instance($this->context);
+        //        self::validate_context($context);
 
         switch ($type) {
             case 'step':
-//                require_capability('block/onboarding:s_manage_steps', $context);
+                //                require_capability('block/onboarding:s_manage_steps', $context);
                 $returnmessage['text'] = get_string('msg_delete_step_warning', 'block_onboarding') . "sadsa " . $context->name;
                 break;
             case 'wiki-category':

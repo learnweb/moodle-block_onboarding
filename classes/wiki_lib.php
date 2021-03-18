@@ -36,11 +36,19 @@ defined('MOODLE_INTERNAL') || die();
  */
 class wiki_lib {
 
+    /**
+     * Determines whether an existing category is updated or a new category is added.
+     * Calls {@see add_category} for new categories and {@see update_category} to update an existing category.
+     *
+     * @param object $fromform Form parameters passed from edit_category.php.
+     */
     public static function edit_category($fromform) {
+        // Translates form data to new object for further processing.
         $category = new \stdClass();
         $category->name = $fromform->name;
         $category->position = $fromform->position + 1;
 
+        // Checks whether a new category is added.
         if ($fromform->id != -1) {
             $category->id = $fromform->id;
             self::update_category($category);
@@ -49,16 +57,24 @@ class wiki_lib {
         }
     }
 
+    /**
+     * Inserts a new category into the database.
+     * Calls {@see increment_category_positions()} to update positions of other categories if necessary.
+     *
+     * @param object $category Category object with form parameters.
+     */
     public static function add_category($category) {
         global $DB;
+        // Category is added at last category position at first.
         $initposition = $DB->count_records('block_onb_w_categories') + 1;
         $insertposition = $category->position;
-
         $category->position = $initposition;
         $category->timecreated = time();
         $category->timemodified = time();
         $category->id = $DB->insert_record('block_onb_w_categories', $category);
 
+        // Checks whether intended category position differs from max category position and updates affected
+        // category positions accordingly.
         if ($initposition != $insertposition) {
             self::increment_category_positions($insertposition, $initposition);
             $category->position = $insertposition;
@@ -67,12 +83,21 @@ class wiki_lib {
         }
     }
 
+    /**
+     * Updates an existing category in the database.
+     * Calls {@see decrement_category_positions()} or {@see increment_category_positions()} to update positions of other
+     * categories if necessary.
+     *
+     * @param object $category Category object with form parameters.
+     */
     public static function update_category($category) {
         global $DB;
         $paramcategory = $DB->get_record('block_onb_w_categories', array('id' => $category->id));
         $curposition = $paramcategory->position;
         $insertposition = $category->position;
 
+        // Checks whether intended category position differs from current category position and updates affected
+        // category positions accordingly.
         if ($insertposition > $curposition) {
             self::decrement_category_positions($insertposition, $curposition);
         } else {
@@ -84,6 +109,12 @@ class wiki_lib {
         $DB->update_record('block_onb_w_categories', $category);
     }
 
+    /**
+     * Deletes an existing category from the database.
+     * Calls {@see decrement_category_positions()} to update positions of remaining categories.
+     *
+     * @param int $categoryid Id of the category which is to be deleted.
+     */
     public static function delete_category($categoryid) {
         global $DB;
         $paramcategory = $DB->get_record('block_onb_w_categories', array('id' => $categoryid));
@@ -92,18 +123,51 @@ class wiki_lib {
         self::decrement_category_positions($categorycount, $curposition);
         $DB->delete_records('block_onb_w_categories', array('id' => $categoryid));
 
-        // Deleting all links within the category.
+        // Deletes all links within the category.
         $DB->delete_records('block_onb_w_links', array('category_id' => $categoryid));
     }
 
-    public static function edit_link($fromform) {
+    /**
+     * Increments category positions between the $insert and $current category position, excluding the passed $current position.
+     *
+     * @param int $insert New category position.
+     * @param int $cur Current category position.
+     */
+    public static function increment_category_positions($insert, $cur) {
         global $DB;
+        $sql = 'UPDATE {block_onb_w_categories} SET position = position +1 WHERE position >= :insert_pos and position < :cur_pos';
+        $DB->execute($sql, ['cur_pos' => $cur,
+            'insert_pos' => $insert]);
+    }
+
+    /**
+     * Decrements category positions between the $current category and $insert position, excluding the passed $current position.
+     *
+     * @param int $insert New category position.
+     * @param int $cur Current category position.
+     */
+    public static function decrement_category_positions($insert, $cur) {
+        global $DB;
+        $sql = 'UPDATE {block_onb_w_categories} SET position = position -1 WHERE position > :cur_pos and position <= :insert_pos';
+        $DB->execute($sql, ['cur_pos' => $cur,
+            'insert_pos' => $insert]);
+    }
+
+    /**
+     * Determines whether an existing link is updated or a new link is added to a category.
+     * Calls {@see add_link()} for new links and {@see update_link()} to update an existing link.
+     *
+     * @param object $fromform Form parameters passed from edit_link.php.
+     */
+    public static function edit_link($fromform) {
+        // Translates form data to new object for further processing.
         $link = new \stdClass();
         $link->name = $fromform->name;
         $link->category_id = $fromform->category_id;
         $link->url = $fromform->url;
         $link->description = $fromform->description;
 
+        // Checks whether a new link is added.
         if ($fromform->id != -1) {
             $link->id = $fromform->id;
             self::update_link($link);
@@ -112,11 +176,11 @@ class wiki_lib {
         }
     }
 
-    public static function delete_link($linkid) {
-        global $DB;
-        $DB->delete_records('block_onb_w_links', array('id' => $linkid));
-    }
-
+    /**
+     * Inserts a new link into the database.
+     *
+     * @param object $link Link object with form parameters.
+     */
     public static function add_link($link) {
         global $DB;
         $link->timecreated = time();
@@ -124,24 +188,24 @@ class wiki_lib {
         $link->id = $DB->insert_record('block_onb_w_links', $link);
     }
 
+    /**
+     * Updates an existing link in the database.
+     *
+     * @param object $link Link object with form parameters.
+     */
     public static function update_link($link) {
         global $DB;
         $link->timemodified = time();
         $DB->update_record('block_onb_w_links', $link);
     }
 
-
-    public static function increment_category_positions($insert, $cur) {
+    /**
+     * Deletes an existing link from the database.
+     *
+     * @param int $linkid Id of link which is to be deleted.
+     */
+    public static function delete_link($linkid) {
         global $DB;
-        $sql = 'UPDATE {block_onb_w_categories} SET position = position +1 WHERE position >= :insert_pos and position < :cur_pos';
-        $DB->execute($sql, ['cur_pos' => $cur,
-            'insert_pos' => $insert]);
-    }
-
-    public static function decrement_category_positions($insert, $cur) {
-        global $DB;
-        $sql = 'UPDATE {block_onb_w_categories} SET position = position -1 WHERE position > :cur_pos and position <= :insert_pos';
-        $DB->execute($sql, ['cur_pos' => $cur,
-            'insert_pos' => $insert]);
+        $DB->delete_records('block_onb_w_links', array('id' => $linkid));
     }
 }
