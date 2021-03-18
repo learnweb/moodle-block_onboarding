@@ -17,7 +17,7 @@
 class block_onboarding_steps_testcase extends advanced_testcase {
     public function test_add_step() {
         global $DB;
-        $this->resetAfterTest(TRUE);
+        $this->resetAfterTest(true);
 
         $this->assertEquals(0, $DB->count_records('block_onb_s_steps'));
 
@@ -26,7 +26,7 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $fromform->position = 0;
         $fromform->name = "Test Step";
         $fromform->description = "Test Description";
-        $fromform->achievement = FALSE;
+        $fromform->achievement = false;
 
         \block_onboarding\steps_lib::edit_step($fromform);
 
@@ -35,7 +35,7 @@ class block_onboarding_steps_testcase extends advanced_testcase {
 
     public function test_add_step_without_position() {
         global $DB;
-        $this->resetAfterTest(TRUE);
+        $this->resetAfterTest(true);
 
         $this->assertEquals(0, $DB->count_records('block_onb_s_steps'));
 
@@ -43,13 +43,13 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $fromform->id = -1;
         $fromform->name = "Test Step";
         $fromform->description = "Test Description";
-        $fromform->achievement = FALSE;
+        $fromform->achievement = false;
 
-        $errorthrown = FALSE;
+        $errorthrown = false;
         try {
             \block_onboarding\steps_lib::edit_step($fromform);
         } catch (\Exception $e) {
-            $errorthrown = TRUE;
+            $errorthrown = true;
         }
         $this->assertTrue($errorthrown);
 
@@ -58,7 +58,7 @@ class block_onboarding_steps_testcase extends advanced_testcase {
 
     public function test_update_step() {
         global $DB;
-        $this->resetAfterTest(TRUE);
+        $this->resetAfterTest(true);
 
         $this->assertEquals(0, $DB->count_records('block_onb_s_steps'));
 
@@ -67,7 +67,7 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $fromform->position = 0;
         $fromform->name = "Test Step";
         $fromform->description = "Test Description";
-        $fromform->achievement = FALSE;
+        $fromform->achievement = false;
 
         \block_onboarding\steps_lib::edit_step($fromform);
 
@@ -80,7 +80,7 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $fromform->position = 0;
         $fromform->name = "Test Step New";
         $fromform->description = "Test Description";
-        $fromform->achievement = FALSE;
+        $fromform->achievement = false;
 
         \block_onboarding\steps_lib::edit_step($fromform);
 
@@ -89,7 +89,7 @@ class block_onboarding_steps_testcase extends advanced_testcase {
 
     public function test_update_step_position() {
         global $DB;
-        $this->resetAfterTest(TRUE);
+        $this->resetAfterTest(true);
 
         $this->assertEquals(0, $DB->count_records('block_onb_s_steps'));
 
@@ -98,7 +98,7 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $fromform->position = 0;
         $fromform->name = "Test Step 1";
         $fromform->description = "Test Description";
-        $fromform->achievement = FALSE;
+        $fromform->achievement = false;
 
         \block_onboarding\steps_lib::edit_step($fromform);
 
@@ -107,7 +107,7 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $fromform->position = 1;
         $fromform->name = "Test Step 2";
         $fromform->description = "Test Description";
-        $fromform->achievement = FALSE;
+        $fromform->achievement = false;
 
         \block_onboarding\steps_lib::edit_step($fromform);
 
@@ -122,7 +122,7 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $fromform->position = 0;
         $fromform->name = "Test Step 2";
         $fromform->description = "Test Description";
-        $fromform->achievement = FALSE;
+        $fromform->achievement = false;
 
         \block_onboarding\steps_lib::edit_step($fromform);
 

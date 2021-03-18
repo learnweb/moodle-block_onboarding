@@ -142,7 +142,7 @@ class steps_interaction_lib {
         $progress = $DB->get_records('block_onb_s_completed', array('userid' => $USER->id));
 
         // Checks whether user has completed all steps and is currently at final step.
-        if($step->position == $totalsteps and count($progress) == $totalsteps) {
+        if ($step->position == $totalsteps and count($progress) == $totalsteps) {
             $returncompleted = 2;
         } else {
             // Checks whether given step has already been completed by comparing the given step id with all
