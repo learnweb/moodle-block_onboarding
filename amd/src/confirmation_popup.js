@@ -8,7 +8,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
 
             // fragt ab wv Einträge betroffen wären und zeigt confirmation box an
             var promises = ajax.call([{
-                methodname: 'block_onboarding_delete_confirmation',
+                methodname: 'block_onboarding_generate_confirmation',
                 args: {
                     type: type,
                     id: id
@@ -20,7 +20,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
                 // wenn bestätigt, rufe Lösch-Funktion auf
                 if (delete_confirmation == true) {
                     var promises = ajax.call([{
-                        methodname: 'block_onboarding_delete_entry',
+                        methodname: 'block_onboarding_execute_confirmation',
                         args: {
                             type: type,
                             id: id

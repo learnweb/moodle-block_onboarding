@@ -41,9 +41,9 @@ $functions = array(
         'type' => 'write',
         'ajax' => true
     ),
-    'block_onboarding_back_step' => array(
+    'block_onboarding_preceding_step' => array(
         'classname' => 'block_onboarding_view_external',
-        'methodname' => 'back_step',
+        'methodname' => 'preceding_step',
         'classpath' => 'blocks/onboarding/externallib.php',
         'description' => 'Retrieves the previous step for the First Steps section upon back-button click event.',
         'type' => 'write',
@@ -81,9 +81,9 @@ $functions = array(
         'type' => 'write',
         'ajax' => true
     ),
-    'block_onboarding_delete_confirmation' => array(
+    'block_onboarding_generate_confirmation' => array(
         'classname' => 'block_onboarding_view_external',
-        'methodname' => 'delete_confirmation',
+        'methodname' => 'generate_confirmation',
         'classpath' => 'blocks/onboarding/externallib.php',
         'description' => 'Checks database entries for parameter type and generates confirmation prompt for confirmation popup.',
         'type' => 'write',
@@ -91,11 +91,11 @@ $functions = array(
         'capabilities' => ['block/onboarding:w_manage_wiki', 'block/onboarding:s_manage_steps',
             'block/onboarding:e_manage_experiences']
     ),
-    'block_onboarding_delete_entry' => array(
+    'block_onboarding_execute_confirmation' => array(
         'classname' => 'block_onboarding_view_external',
-        'methodname' => 'delete_entry',
+        'methodname' => 'execute_confirmation',
         'classpath' => 'blocks/onboarding/externallib.php',
-        'description' => 'Deletes database entries for parameter type after user confirmation through the confirmation popup.',
+        'description' => 'Executes confirmation for parameter type after user confirmation through the confirmation popup.',
         'type' => 'write',
         'ajax' => true,
         'capabilities' => ['block/onboarding:w_manage_wiki', 'block/onboarding:s_manage_steps',
