@@ -145,9 +145,7 @@ class experiences_lib {
                 INNER JOIN {block_onb_e_exps} ee ON u.id = ee.user_id
                 WHERE ee.id = ' . $fromform->experience_id;
 
-        $recipient = $DB->get_record_sql($sql);
-
-        $toUser = $recipient;
+        $toUser = $DB->get_record_sql($sql);
         $fromUser = $USER;
         $subject = $fromform->title;
         $messageText = $fromform->comment;
@@ -308,25 +306,14 @@ class experiences_lib {
         $report->id = $DB->insert_record('block_onb_e_report', $report);
 
         // TODO Mail function has to be tested
-        // TODO: define receiving user
-        // Get the database entry for the recipient.
-        $sql = 'SELECT * FROM {user} u
-                INNER JOIN {block_onb_e_exps} ee ON u.id = ee.user_id
-                WHERE ee.id = ' . $fromform->experience_id;
-
-        $recipient = $DB->get_record_sql($sql);
 
         // Define necessary parameters for "email_to_user" function.
-        $toUser = $recipient;
+        $toUser = get_admin();
         $fromUser = $USER;
         $subject = get_string('rep_mail_title', 'block_onboarding');
-        $title = $DB->get_field('block_onb_e_exps', 'name', array('id' => $report->experience_id));
-        $message = get_string('rep_mail_comment', 'block_onboarding') . $title .
-            get_string('rep_mail_exps_id', 'block_onboarding') . $report->experience_id .
-            get_string('rep_mail_option', 'block_onboarding') . $report->type .
-            get_string('rep_mail_description', 'block_onboarding') . $report->description;
-        $messageText = $message;
-        $messageHtml = $message;
+        $report->title = $DB->get_field('block_onb_e_exps', 'name', array('id' => $report->experience_id));
+        $messageText = get_string('rep_mail_text', 'block_onboarding', $report);
+        $messageHtml = get_string('rep_mail_html', 'block_onboarding', $report);
 
         // Sends email to administrator.
         email_to_user($toUser, $fromUser, $subject, $messageText, $messageHtml, '', '', true);
@@ -346,14 +333,11 @@ class experiences_lib {
                 INNER JOIN {block_onb_e_exps} ee ON u.id = ee.user_id
                 WHERE ee.id = ' . $experienceid;
 
-        $recipient = $DB->get_record_sql($sql);
-
-        $toUser = $recipient;
+        $toUser = $DB->get_record_sql($sql);
         $fromUser = $USER;
         $subject = get_string('unsus_mail_title', 'block_onboarding');
-        $message = get_string('unsus_mail_comment', 'block_onboarding');
-        $messageText = $message;
-        $messageHtml = $message;
+        $messageText = get_string('unsus_mail_text', 'block_onboarding');
+        $messageHtml = get_string('unsus_mail_html', 'block_onboarding');
 
         // Sends email to the author.
         email_to_user($toUser, $fromUser, $subject, $messageText, $messageHtml, '', '', true);
