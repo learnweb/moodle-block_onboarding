@@ -54,40 +54,42 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
                 promises[0].done(function (response) {
                     // Toggles visibility of First Steps section. Visibility is 'hidden' by default.
                     if(response.visibility == 0){
-                        $('.show-btn').css('display', 'inline');
+                        $('.block-onboarding-steps-show-btn').css('display', 'inline');
                     } else if(response.visibility == 1){
-                        $('.hide-btn').css('display', 'inline');
-                        $('.steps-container').css('display', 'block');
+                        $('.block-onboarding-steps-hide-btn').css('display', 'inline');
+                        $('.block-onboarding-steps-container').css('display', 'block');
                     } else {
-                        $('.steps-container').css('display', 'block');
+                        $('.block-onboarding-steps-container').css('display', 'block');
                     }
                     // Toggles 'completed'-indicator of First Steps section. When all steps are completed and the
                     // user has reached the max step, a 'Reset progress'-button is displayed.
                     if (response.completed == 2) {
-                        $('.step-completed').css('visibility', 'visible');
-                        $('.next-btn').css('display', 'none');
-                        $('.reset-btn').css('visibility', 'visible');
+                        $('.block-onboarding-steps-step-completed').css('visibility', 'visible');
+                        $('.block-onboarding-steps-next-btn').css('display', 'none');
+                        $('.block-onboarding-steps-reset-btn').css('visibility', 'visible');
                     } else if (response.completed == 1) {
-                        $('.step-completed').css('visibility', 'visible');
+                        $('.block-onboarding-steps-step-completed').css('visibility', 'visible');
                     } else {
-                        $('.step-completed').css('visibility', 'hidden');
+                        $('.block-onboarding-steps-step-completed').css('visibility', 'hidden');
                     }
                     // Determines whether step is a regular step or an achievement step. Displays confetti animation
                     // for achievement steps.
                     if (response.achievement == 1) {
-                        $('.step-title').text(achievement_string + response.name);
+                        $('.block-onboarding-steps-step-title').text(achievement_string + response.name);
                         confetti_toogle = true;
                         confetti();
                         setTimeout(function () {
                             confetti_toogle = false;
                         }, 4000);
                     } else {
-                        $('.step-title').text(step_string + response.position + ': ' + response.name);
+                        $('.block-onboarding-steps-step-title').text(step_string + response.position + ': '
+                            + response.name);
                     }
                     // Fills First Steps section with retrieved content.
-                    $('.step_description').text(response.description);
-                    $('.progress-bar-value').text(response.progress + '%');
-                    $('.progress-bar-fill').css('width', (response.progress + '%'));
+                    $('.block-onboarding-steps-step-description').text(response.description);
+                    $('.block-onboarding-steps-block-onboarding-steps-progress-bar-value').text(response.progress
+                        + '%');
+                    $('.block-onboarding-steps-progress-bar-fill').css('width', (response.progress + '%'));
                 }).fail(notification.exception);
                 return false;
             });
@@ -98,7 +100,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
      *
      * @returns {Boolean} false
      */
-    $('.next-btn').on('click', function () {
+    $('.block-onboarding-steps-next-btn').on('click', function () {
         // AJAX call to externallib.php method to get next step.
         var promises = ajax.call([{
             methodname: 'block_onboarding_next_step',
@@ -108,31 +110,31 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
             // Toggles 'completed'-indicator of First Steps section. When all steps are completed and the
             // user has reached the max step, a 'Reset progress'-button is displayed.
             if (response.completed == 2) {
-                $('.step-completed').css('visibility', 'visible');
-                $('.next-btn').css('display', 'none');
-                $('.reset-btn').css('visibility', 'visible');
+                $('.block-onboarding-steps-step-completed').css('visibility', 'visible');
+                $('.block-onboarding-steps-next-btn').css('display', 'none');
+                $('.block-onboarding-steps-reset-btn').css('visibility', 'visible');
             } else if (response.completed == 1) {
-                $('.step-completed').css('visibility', 'visible');
+                $('.block-onboarding-steps-step-completed').css('visibility', 'visible');
             } else {
-                $('.step-completed').css('visibility', 'hidden');
+                $('.block-onboarding-steps-step-completed').css('visibility', 'hidden');
             }
             // Determines whether next step is a regular step or an achievement step. Displays confetti animation
             // for achievement steps.
             if (response.achievement == 1) {
-                $('.step-title').text(achievement_string + response.name);
+                $('.block-onboarding-steps-step-title').text(achievement_string + response.name);
                 confetti_toogle = true;
                 confetti();
                 setTimeout(function () {
                     confetti_toogle = false;
                 }, 4000);
             } else {
-                $('.step-title').text(step_string + response.position + ': ' + response.name);
+                $('.block-onboarding-steps-step-title').text(step_string + response.position + ': ' + response.name);
                 confetti_toogle = false;
             }
             // Fills First Steps section with retrieved content of next step.
-            $('.step_description').text(response.description);
-            $('.progress-bar-value').text(response.progress + '%');
-            $('.progress-bar-fill').css('width', (response.progress + '%'));
+            $('.block-onboarding-steps-step-description').text(response.description);
+            $('.block-onboarding-steps-block-onboarding-steps-progress-bar-value').text(response.progress + '%');
+            $('.block-onboarding-steps-progress-bar-fill').css('width', (response.progress + '%'));
         }).fail(notification.exception);
         return false;
     })
@@ -142,7 +144,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
      *
      * @returns {Boolean} false
      */
-    $('.back-btn').on('click', function () {
+    $('.block-onboarding-steps-back-btn').on('click', function () {
         // AJAX call to externallib.php method to get preceding step.
         var promises = ajax.call([{
             methodname: 'block_onboarding_preceding_step',
@@ -150,29 +152,29 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
         }]);
         promises[0].done(function (response) {
             // Hides 'Back'-button and displays 'Next'-button by default.
-            $('.reset-btn').css('visibility', 'hidden');
-            $('.next-btn').css('display', 'inline');
+            $('.block-onboarding-steps-reset-btn').css('visibility', 'hidden');
+            $('.block-onboarding-steps-next-btn').css('display', 'inline');
             // Toggles 'completed'-indicator of First Steps section.
             if (response.completed == 1 || response.completed == 2) {
-                $('.step-completed').css('visibility', 'visible');
+                $('.block-onboarding-steps-step-completed').css('visibility', 'visible');
             } else {
-                $('.step-completed').css('visibility', 'hidden');
+                $('.block-onboarding-steps-step-completed').css('visibility', 'hidden');
             }
             // Determines whether preceding step is a regular step or an achievement step. Displays confetti animation
             // for achievement steps.
             if (response.achievement == 1) {
-                $('.step-title').text(achievement_string + response.name);
+                $('.block-onboarding-steps-step-title').text(achievement_string + response.name);
                 confetti_toogle = true;
                 confetti();
                 setTimeout(function () {
                     confetti_toogle = false;
                 }, 4000);
             } else {
-                $('.step-title').text(step_string + response.position + ': ' + response.name);
+                $('.block-onboarding-steps-step-title').text(step_string + response.position + ': ' + response.name);
                 confetti_toogle = false;
             }
             // Updated First Steps description box with retrieved information.
-            $('.step_description').text(response.description);
+            $('.block-onboarding-steps-step-description').text(response.description);
         }).fail(notification.exception);
         return false;
     })
@@ -184,7 +186,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
      *
      * @returns {Boolean} false
      */
-    $('.reset-btn').on('click', function () {
+    $('.block-onboarding-steps-reset-btn').on('click', function () {
         // Displays confirmation popup asking the user to confirm the reset process.
         var reset_confirmation = confirm(reset_message_string);
         if (reset_confirmation == true) {
@@ -208,7 +210,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
      *
      * @returns {Boolean} false
      */
-    $('.hide-btn').on('click', function () {
+    $('.block-onboarding-steps-hide-btn').on('click', function () {
         var visibility = 0;
         // AJAX call to externallib.php method to update visibility value.
         var promises = ajax.call([{
@@ -219,9 +221,9 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
         }]);
         // Hides First Steps section and toggles 'Hide'-/'Show'-buttons.
         promises[0].done(function (response) {
-            $('.hide-btn').css('display', 'none');
-            $('.show-btn').css('display', 'inline');
-            $('.steps-container').css('display', 'none');
+            $('.block-onboarding-steps-hide-btn').css('display', 'none');
+            $('.block-onboarding-steps-show-btn').css('display', 'inline');
+            $('.block-onboarding-steps-container').css('display', 'none');
         }).fail(notification.exception);
         return false;
     })
@@ -232,7 +234,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
      *
      * @returns {Boolean} false
      */
-    $('.show-btn').on('click', function () {
+    $('.block-onboarding-steps-show-btn').on('click', function () {
         var visibility = 1;
         // AJAX call to externallib.php method to update visibility value.
         var promises = ajax.call([{
@@ -243,9 +245,9 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
         }]);
         // Displays First Steps section and toggles 'Hide'-/'Show'-buttons.
         promises[0].done(function (response) {
-            $('.hide-btn').css('display', 'inline');
-            $('.show-btn').css('display', 'none');
-            $('.steps-container').css('display', 'block');
+            $('.block-onboarding-steps-hide-btn').css('display', 'inline');
+            $('.block-onboarding-steps-show-btn').css('display', 'none');
+            $('.block-onboarding-steps-container').css('display', 'block');
         }).fail(notification.exception);
         return false;
     })
@@ -256,9 +258,11 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
      */
     var confetti = function () {
         // The confetti function utilizes an HTML canvas which is present as an overlay over the First Steps functions.
-        let achievement_canvas = document.getElementById('achievement-confetti');
-        achievement_canvas.width = document.getElementById('achievement-confetti').offsetWidth;
-        achievement_canvas.height = document.getElementById('achievement-confetti').offsetHeight;
+        let achievement_canvas = document.getElementById('block-onboarding-steps-achievement-confetti');
+        achievement_canvas.width = document
+            .getElementById('block-onboarding-steps-achievement-confetti').offsetWidth;
+        achievement_canvas.height = document
+            .getElementById('block-onboarding-steps-achievement-confetti').offsetHeight;
 
         // Initialization of base parameters.
         let context = achievement_canvas.getContext('2d');
