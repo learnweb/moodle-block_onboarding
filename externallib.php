@@ -517,9 +517,9 @@ class block_onboarding_view_external extends external_api {
         );
 
         // Security checks.
-        //        $context =   context_block::instance($this->context);
-        //        self::validate_context($context);
-        //                require_capability('block/onboarding:s_manage_steps', $context);
+//        $context =   context_block::instance($this->context);
+//        self::validate_context($context);
+//        require_capability('block/onboarding:s_manage_steps', $context);
 
         // Determines which type of warning message is to be generated. In some cases the warning message includes additional
         // information about the consequences of deleting the passed object.
