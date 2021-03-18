@@ -87,8 +87,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
                     }
                     // Fills First Steps section with retrieved content.
                     $('.block-onboarding-steps-step-description').text(response.description);
-                    $('.block-onboarding-steps-block-onboarding-steps-progress-bar-value').text(response.progress
-                        + '%');
+                    $('.block-onboarding-steps-progress-bar-value').text(response.progress + '%');
                     $('.block-onboarding-steps-progress-bar-fill').css('width', (response.progress + '%'));
                 }).fail(notification.exception);
                 return false;
@@ -133,7 +132,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
             }
             // Fills First Steps section with retrieved content of next step.
             $('.block-onboarding-steps-step-description').text(response.description);
-            $('.block-onboarding-steps-block-onboarding-steps-progress-bar-value').text(response.progress + '%');
+            $('.block-onboarding-steps-progress-bar-value').text(response.progress + '%');
             $('.block-onboarding-steps-progress-bar-fill').css('width', (response.progress + '%'));
         }).fail(notification.exception);
         return false;

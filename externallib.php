@@ -128,7 +128,6 @@ class block_onboarding_view_external extends external_api {
             // Collects relevant data for the next step in the First Steps section.
             $curposition = \block_onboarding\steps_interaction_lib::get_step_position($curstepid);
             $step = \block_onboarding\steps_interaction_lib::get_next_step_data($curposition, 1);
-            $progress = \block_onboarding\steps_interaction_lib::get_user_progress();
 
             // Checks whether next step is out of bounds.
             if ($step == -1) {
@@ -140,6 +139,8 @@ class block_onboarding_view_external extends external_api {
             }
             // Sets step to completed if step has not been completed before.
             \block_onboarding\steps_interaction_lib::set_user_completed_step($curposition);
+            // Gets user steps progress.
+            $progress = \block_onboarding\steps_interaction_lib::get_user_progress();
             // Checks whether next step has been completed before.
             $completed = \block_onboarding\steps_interaction_lib::get_user_completed_step($step->id);
 

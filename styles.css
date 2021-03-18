@@ -82,10 +82,6 @@ ul {
     position: relative;
 }
 
-.block-onboarding-card-block + block-onboarding-card-block{
-    margin-bottom: 0.5em;
-}
-
 .block-onboarding-container {
     padding: 2px 16px;
 }
@@ -179,6 +175,7 @@ ul {
     padding: 5px 5px;
     border-radius: 6px;
     position: absolute;
+    display: inline-block;
     z-index: 1;
 }
 
@@ -226,7 +223,7 @@ ul {
     position: relative;
     width: calc(100% - 6px);
     height: 30px;
-    background-color: #868686;
+    background-color:  var(--primary);
     margin: 3px;
     border-radius: 8px;
     border: 3px solid #000000;
@@ -241,6 +238,7 @@ ul {
 }
 
 .block-onboarding-steps-progress-bar-value {
+    color: #ffffff;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -264,10 +262,11 @@ ul {
 .block-onboarding-steps-step-completed {
     color: #ffffff;
     background-color: #32cd32;
-    padding: 0px 5px 0px 5px;
+    padding: 1px 5px 1px 5px;
     border: 2px solid #000000;
     border-radius: 5px;
     margin-left: 20px;
+    margin-bottom: 6px;
     visibility: hidden;
 }
 

@@ -17,7 +17,7 @@
         <div class="block-onboarding-steps-progress-bar-fill"></div>
     </div>
     <div class="block-onboarding-steps-content-wrapper">
-        <div class="block-onboarding-steps-title-wrapper">
+        <div>
             <span class="block-onboarding-steps-step-title"></span>
             <span class="block-onboarding-steps-step-completed">{{# str }}completed, block_onboarding{{/ str }}</span>
         </div>
@@ -40,7 +40,7 @@
 <div class="block-onboarding-steps-title-wrapper">
     <div class="block-onboarding-title">{{# str }}wiki, block_onboarding{{/ str }}</div>
     {{#can_manage_wiki}}
-        <a href="admin_wiki.php" class="admin-link">
+        <a href="admin_wiki.php">
             {{#pix}}i/settings, core, {{# str }}manage_wiki, block_onboarding{{/ str }}{{/pix}}
             {{# str }}settings, block_onboarding{{/ str }}
         </a>
