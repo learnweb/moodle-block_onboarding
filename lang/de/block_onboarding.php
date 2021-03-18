@@ -116,7 +116,7 @@ $string['msg_delete_step_warning'] = 'WARNING: Beim Löschen dieses Schrittes we
 // Experiences.
 $string['experience'] = 'Erfahrung';
 $string['experiences'] = 'Erfahrungsberichte';
-$string['experiences_summary'] = 'Our Experiences Portal gives you the opportunity to find out how other students, before you have designed their studies. This is a great chance to learn from others mistakes. You can also find lots of inspiration on how to design your individual studies.';
+$string['experiences_summary'] = 'Unser Erfahrungsbereich gibt dir die Möglichkeit herauszufinden, wie andere Studentierende vor dir ihr Studium gestaltet haben. Hier kannst du aus den Fehlern anderer lernen und Inspiration für dein Studium finden.';
 $string['default_category_name'] = 'Beispiel Kategorie';
 $string['questions'] = 'Fragen';
 $string['edit_course'] = 'Studiengang bearbeiten';
