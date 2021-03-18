@@ -39,10 +39,16 @@ use renderer_base;
 class experiences_experience implements renderable, templatable {
     private $experienceid;
 
+    /**
+     * Constructor function.
+     */
     public function __construct($experienceid) {
         $this->experienceid = $experienceid;
     }
 
+    /**
+     * Template export function.
+     */
     public function export_for_template(renderer_base $output) {
         global $USER, $DB;
 

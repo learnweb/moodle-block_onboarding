@@ -39,9 +39,15 @@ use renderer_base;
  */
 class block implements renderable, templatable {
 
+    /**
+     * Constructor function.
+     */
     public function __construct() {
     }
 
+    /**
+     * Template export function.
+     */
     public function export_for_template(renderer_base $output) {
         return [
             'base_plugin_url' => new \moodle_url('/blocks/onboarding/'),

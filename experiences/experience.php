@@ -61,4 +61,3 @@ if ($experience->suspended == null || ($experience->suspended == 1  && ($experie
     echo html_writer::tag('p', get_string('insufficient_permissions', 'block_onboarding'));
     echo $OUTPUT->footer();
 }
-
