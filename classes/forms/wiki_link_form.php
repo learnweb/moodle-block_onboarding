@@ -14,11 +14,28 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * File containing the form definition to edit Wiki links.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 defined('MOODLE_INTERNAL') || die();
+
 
 require_once($CFG->libdir . '/formslib.php');
 
+/**
+ * Class providing the form to edit Wiki links.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class wiki_link_form extends moodleform {
+
 
     public function definition() {
         global $CFG, $DB;
@@ -31,7 +48,7 @@ class wiki_link_form extends moodleform {
         $mform->setType('id', PARAM_INT);
 
         $mform->addElement('text', 'name', get_string('link_name', 'block_onboarding'),
-            array('maxlength' => 150, 'placeholder' => get_string('default_link_name', 'block_onboarding')));
+            array('maxlength' => 150, 'size' => 30, 'placeholder' => get_string('default_link_name', 'block_onboarding')));
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($link->name) ? $link->name : '');
         $mform->addRule('name', get_string('link_name_req', 'block_onboarding'), 'required', null, 'client');
