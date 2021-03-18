@@ -79,7 +79,9 @@ class report_table extends table_sql {
     }
 
     public function col_actions($values) {
-        return '<span onb-data-id='.$values->id.' onb-data-context="exp-admin-report" class="confirm-btn link-btn">' . get_string('delete', 'block_onboarding') . '</span>';
+        return '<span onb-data-id='.$values->id.
+            ' onb-data-context="exp-admin-report" class="block-onboarding-confirm-btn block-onboarding-link-btn">' .
+            get_string('delete', 'block_onboarding') . '</span>';
     }
 
     /**
@@ -88,6 +90,6 @@ class report_table extends table_sql {
      *
      * @return string return processed value. Return NULL if no change has been made.
      */
-    function other_cols($colname, $value) {
+    public function other_cols($colname, $value) {
     }
 }

@@ -87,6 +87,6 @@ class experience_table extends table_sql {
      *
      * @return string return processed value. Return NULL if no change has been made.
      */
-    function other_cols($colname, $value) {
+    public function other_cols($colname, $value) {
     }
 }

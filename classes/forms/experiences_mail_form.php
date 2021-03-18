@@ -25,14 +25,14 @@ class experiences_mail_form extends moodleform {
 
         $mform = $this->_form;
 
-        $experience_id = $this->_customdata['experience_id'];
+        $experienceid = $this->_customdata['experience_id'];
 
-        $mform->addElement('hidden', 'experience_id', $experience_id);
+        $mform->addElement('hidden', 'experience_id', $experienceid);
         $mform->setType('experience_id', PARAM_INT);
 
         // Course Name Field.
         $mform->addElement('textarea', 'title', get_string('course_name', 'block_onboarding'),
-            array('style="resize:none" wrap="virtual" rows="1" cols="100"',));
+            array('style="resize:none" wrap="virtual" rows="1" cols="100"'));
         $mform->addRule('title', get_string('title_missing', 'block_onboarding'), 'required', null, 'server');
         $mform->addRule('title', 'Max Length is 30 characters', 'maxlength', 30, 'block_onboarding');
         $mform->setType('title', PARAM_TEXT);
@@ -44,7 +44,7 @@ class experiences_mail_form extends moodleform {
         $mform->setType('comment', PARAM_TEXT);
         $mform->setDefault('comment', get_string('sus_mail_text', 'block_onboarding'));
 
-        $this->add_action_buttons($cancel = true, $submitlabel=get_string('submit_mail', 'block_onboarding'));
+        $this->add_action_buttons($cancel = true, $submitlabel = get_string('submit_mail', 'block_onboarding'));
     }
 
     public function validation($data, $files) {

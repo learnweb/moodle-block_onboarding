@@ -30,13 +30,13 @@ require_login();
 
 global $CFG, $DB;
 
-$experience_id = optional_param('experience_id', -1, PARAM_INT);
+$experienceid = optional_param('experience_id', -1, PARAM_INT);
 
 // Checking whether experience is suspended or not.
-$suspended = $DB->get_field('block_onb_e_exps', 'suspended', array('id' => $experience_id));
+$suspended = $DB->get_field('block_onb_e_exps', 'suspended', array('id' => $experienceid));
 if ($suspended == 1) {
-    \block_onboarding\experiences_lib::unsuspend_experience($experience_id);
-    redirect('experience.php?experience_id=' . $experience_id);
+    \block_onboarding\experiences_lib::unsuspend_experience($experienceid);
+    redirect('experience.php?experience_id=' . $experienceid);
 } else {
 
     $context = context_system::instance();
@@ -45,20 +45,20 @@ if ($suspended == 1) {
     $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
     $PAGE->navbar->add(get_string('experiences', 'block_onboarding'), new moodle_url('overview.php'));
     $PAGE->navbar->add(get_string('experience_admin', 'block_onboarding'), new moodle_url('admin.php'));
-    $experience = $DB->get_field('block_onb_e_exps', 'name', array('id' => $experience_id));
-    $PAGE->navbar->add($experience, new moodle_url('experience.php?experience_id=' . $experience_id));
+    $experience = $DB->get_field('block_onb_e_exps', 'name', array('id' => $experienceid));
+    $PAGE->navbar->add($experience, new moodle_url('experience.php?experience_id=' . $experienceid));
 
     if (has_capability('block/onboarding:e_manage_experiences', $context)) {
         $PAGE->set_title(get_string('edit_category', 'block_onboarding'));
         $PAGE->set_heading(get_string('edit_category', 'block_onboarding'));
-        $PAGE->navbar->add(get_string('suspend_mail', 'block_onboarding') . ' ' . $experience_id);
+        $PAGE->navbar->add(get_string('suspend_mail', 'block_onboarding') . ' ' . $experienceid);
 
         require_once($CFG->dirroot . '/blocks/onboarding/classes/forms/experiences_mail_form.php');
 
-        $mform = new experiences_mail_form(null, array('experience_id' => $experience_id));
+        $mform = new experiences_mail_form(null, array('experience_id' => $experienceid));
 
         if ($mform->is_cancelled()) {
-            redirect('experience.php?experience_id=' . $experience_id);
+            redirect('experience.php?experience_id=' . $experienceid);
         } else {
             if ($fromform = $mform->get_data()) {
                 // Processing of data submitted in the form.

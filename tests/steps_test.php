@@ -26,7 +26,7 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $fromform->position = 0;
         $fromform->name = "Test Step";
         $fromform->description = "Test Description";
-        $fromform->achievement = False;
+        $fromform->achievement = false;
 
         \block_onboarding\steps_lib::edit_step($fromform);
 
@@ -43,7 +43,7 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $fromform->id = -1;
         $fromform->name = "Test Step";
         $fromform->description = "Test Description";
-        $fromform->achievement = False;
+        $fromform->achievement = false;
 
         $errorthrown = false;
         try {
@@ -67,7 +67,7 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $fromform->position = 0;
         $fromform->name = "Test Step";
         $fromform->description = "Test Description";
-        $fromform->achievement = False;
+        $fromform->achievement = false;
 
         \block_onboarding\steps_lib::edit_step($fromform);
 
@@ -80,7 +80,7 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $fromform->position = 0;
         $fromform->name = "Test Step New";
         $fromform->description = "Test Description";
-        $fromform->achievement = False;
+        $fromform->achievement = false;
 
         \block_onboarding\steps_lib::edit_step($fromform);
 
@@ -98,7 +98,7 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $fromform->position = 0;
         $fromform->name = "Test Step 1";
         $fromform->description = "Test Description";
-        $fromform->achievement = False;
+        $fromform->achievement = false;
 
         \block_onboarding\steps_lib::edit_step($fromform);
 
@@ -107,7 +107,7 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $fromform->position = 1;
         $fromform->name = "Test Step 2";
         $fromform->description = "Test Description";
-        $fromform->achievement = False;
+        $fromform->achievement = false;
 
         \block_onboarding\steps_lib::edit_step($fromform);
 
@@ -122,7 +122,7 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $fromform->position = 0;
         $fromform->name = "Test Step 2";
         $fromform->description = "Test Description";
-        $fromform->achievement = False;
+        $fromform->achievement = false;
 
         \block_onboarding\steps_lib::edit_step($fromform);
 

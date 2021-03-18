@@ -44,17 +44,18 @@ $PAGE->set_heading(get_string('experiences', 'block_onboarding'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
 $PAGE->navbar->add(get_string('experiences', 'block_onboarding'));
 
-// Passing the form to the mustache file
+// Passing the form to the mustache file.
 require_once($CFG->dirroot . '/blocks/onboarding/classes/forms/experiences_filter_form.php');
 $mform = new experiences_filter_form(null, null);
 $form = $mform->render();
 
 // SQL Statement for Listview.
-$fields = 'ee.id as id, ee.name as name, u.firstname as author, ec.name as degreeprogram, ee.timecreated as published,
-ee.timemodified as lastmodified, ee.popularity as popularity';
-$from = '{block_onb_e_exps} ee
-INNER JOIN {user} u ON ee.user_id=u.id
-INNER JOIN {block_onb_e_courses} ec ON ee.course_id=ec.id';
+$fields1 = 'ee.id as id, ee.name as name, u.firstname as author, ec.name as degreeprogram, ';
+$fields2 = 'ee.timecreated as published, ee.timemodified as lastmodified, ee.popularity as popularity';
+$fields = $fields1 . $fields2;
+$from1 = '{block_onb_e_exps} ee INNER JOIN {user} u ON ee.user_id=u.id ';
+$from2 = 'INNER JOIN {block_onb_e_courses} ec ON ee.course_id=ec.id';
+$from = $from1 . $from2;
 $where = '1=1';
 $skip = false;
 
@@ -64,8 +65,7 @@ if ($fromform = $mform->get_data()) {
 
     if (empty($fromform->category_filter) != true) {
         // Category Filter applied.
-        $sql = 'SELECT experience_id
-        FROM {block_onb_e_exps_cats} matching WHERE category_id IN' . $cats;
+        $sql = 'SELECT experience_id FROM {block_onb_e_exps_cats} matching WHERE category_id IN' . $cats;
         $firstresult = $DB->get_fieldset_sql($sql);
         $sqlfirstresult = '(' . implode(',', $firstresult) . ')';
         if (empty($firstresult) != true) {
@@ -98,8 +98,7 @@ if ($fromform = $mform->get_data()) {
         }
     }
     if ($skip != true) {
-        $sql = 'SELECT id
-        FROM {block_onb_e_exps} experiences ' . $w;
+        $sql = 'SELECT id FROM {block_onb_e_exps} experiences ' . $w;
         $result = $DB->get_fieldset_sql($sql);
         $sqlresult = '(' . implode(',', $result) . ')';
         if (empty($result) != true) {

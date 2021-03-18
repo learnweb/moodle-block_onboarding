@@ -25,7 +25,7 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
 
     /**
      * Initializes 'Confirm'-button click event listener.
-     * Confirmation popups are triggered for HTML tags implementing the 'confirm-btn' CSS class.
+     * Confirmation popups are triggered for HTML tags implementing the 'block-onboarding-confirm-btn' CSS class.
      * These HTML tags also contain HTML variables which are then passed on to the externallib.php methods to determine
      * the specific object and the type of action to be performed with the object.
      *
@@ -33,8 +33,8 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
      */
     var init = function () {
         // JQuery click event listener for 'Confirm'-buttons.
-        $('.confirm-btn').on('click', function () {
-            // Gets the HTML variables of the HTML tag implementing the 'confirm-btn' class.
+        $('.block-onboarding-confirm-btn').on('click', function () {
+            // Gets the HTML variables of the HTML tag implementing the 'block-onboarding-confirm-btn' class.
             var type = $(this).attr('onb-data-context');
             var id = $(this).attr('onb-data-id');
             // AJAX call to externallib.php method to generate popup prompt.

@@ -38,6 +38,7 @@ $string['back'] = 'Back';
 $string['backtohome'] = 'Back to Home';
 $string['backtooverview'] = 'Back to Overview';
 $string['backtodashboard'] = 'Back to Dashboard';
+$string['backtomainpage'] = 'Back to Main Page';
 $string['overview'] = 'Overview';
 $string['admin'] = 'Administration';
 $string['settings'] = 'Settings';
@@ -57,7 +58,7 @@ $string['edit_category'] = 'Edit Category';
 $string['delete_category'] = 'Delete Category';
 $string['category_name'] = 'Name';
 $string['category_name_req'] = 'Please enter a name for the category.';
-$string['default_category_name_wiki'] = 'Default Category';
+$string['default_category_name_wiki'] = 'Please enter a category name.';
 $string['category_number'] = 'Category Position';
 $string['default_category_name'] = 'Sample Category';
 $string['new_link'] = 'New Link';
@@ -73,8 +74,8 @@ $string['link_description'] = 'Description';
 $string['link_description_req'] = 'Please provide a description for the link.';
 $string['link_description_help'] = 'Let me help you!';
 $string['link_number'] = 'Link Position';
-$string['default_link_name'] = 'Default Name';
-$string['default_link_url'] = 'http://www.example.com';
+$string['default_link_name'] = 'Please enter name for the link.';
+$string['default_link_url'] = 'Please provide a link URL.';
 $string['default_link_description'] = 'Sample Description';
 $string['msg_delete_wiki_cat_warning'] = 'WARNING: Links within this category: ';
 $string['msg_delete_wiki_cat_lost'] = '. The links within this category will be lost permanently. Are you sure you want to delete this category?';
@@ -98,7 +99,7 @@ $string['edit_step'] = 'Edit Step';
 $string['delete_step'] = 'Delete Step';
 $string['step_name'] = 'Name';
 $string['step_name_req'] = 'Please enter a name for the step.';
-$string['step_description'] = 'Description';
+$string['block-onboarding-steps-step-description'] = 'Description';
 $string['step_description_req'] = 'Please provide a description for the step.';
 $string['default_step_name'] = 'Please enter a step name.';
 $string['default_step_description'] = 'Sample Description';
@@ -192,40 +193,16 @@ $string['suspend_experience'] = 'Suspend';
 $string['suspend_mail'] = 'Suspend Mail';
 $string['title_missing'] = 'Please enter a title.';
 $string['sus_mail_title'] = 'Correction Experience Report';
-$string['sus_mail_text'] = "Hello,
-We received reports regarding your Experience submission.
-We'd like you to correct the following issue:\r\n\r\n\r\n
-As long as this issue is not resolved your submission can not be viewed by other students.
-Thank you for your understanding.\r\n
-Kind Regards,
-Your Digital Onboarding Team";
+$string['sus_mail_text'] = "Hello,\r\nWe received reports regarding your Experience submission.\r\nWe would like you to correct the following issue:\r\n\r\n\r\n\r\nAs long as this issue is not resolved your submission can not be viewed by other students.\r\nThank you for your understanding.\r\n\r\nKind Regards,\r\nYour Digital Onboarding Team";
 $string['submit_mail'] = 'Send Mail and Suspend';
 $string['reports'] = 'Reports';
 $string['suspended_experiences'] = 'Suspended Experiences';
 $string['rep_mail_title'] = 'Experiences: A New Report was just submitted';
-$string['rep_mail_text'] = 'Dear Administrator,\r\n
-A new report has just been submitted.\r\n
-Please review the following information:\r\n
-Experience Title: {$a->title}\r\n
-Experience Id: {$a->experience_id}\r\n
-Option: {$a->type}\r\n
-Description: {$a->description}';
-$string['rep_mail_html'] = 'Dear Administrator,<br>
-A new report has just been submitted.<br>
-Please review the following information:<br>
-Experience Title: {$a->title}<br>
-Experience Id: {$a->experience_id}<br>
-Option: {$a->type}<br>
-Description: {$a->description}';
+$string['rep_mail_text'] = 'Dear Administrator,\r\nA new report has just been submitted.\r\nPlease review the following information:\r\nExperience Title: {$a->title}\r\nExperience Id: {$a->experience_id}\r\nOption: {$a->type}\r\nDescription: {$a->description}';
+$string['rep_mail_html'] = 'Dear Administrator,<br>A new report has just been submitted.<br>Please review the following information:<br>Experience Title: {$a->title}<br>Experience Id: {$a->experience_id}<br>Option: {$a->type}<br>Description: {$a->description}';
 $string['unsus_mail_title'] = 'Your Report is public again!';
-$string['unsus_mail_text'] = "Hello,
-Thank you for resolving the issue. Your Experience report is public again.\r\n
-Kind Regards,
-Your Digital Onboarding Team";
-$string['unsus_mail_html'] = 'Hello,<br>
-Thank you for resolving the issue. Your Experience report is public again.<br><br>
-Kind Regards,<br>
-Your Digital Onboarding Team';
+$string['unsus_mail_text'] = 'Hello,\r\nThank you for resolving the issue. Your Experience report is public again.\r\n\r\nKind Regards,\r\nYour Digital Onboarding Team';
+$string['unsus_mail_html'] = 'Hello,<br>Thank you for resolving the issue. Your Experience report is public again.<br><br>Kind Regards,<br>Your Digital Onboarding Team';
 $string['blocked_overview'] = 'Blocked Users';
 $string['unblock'] = 'Unblock';
 $string['popularity'] = 'Popularity';

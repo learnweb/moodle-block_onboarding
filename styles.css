@@ -1,8 +1,17 @@
+/**
+ * Style sheets for block_onboarding plugin.
+ * The styles are grouped by features and sections, which implement the styles.
+ */
+
+/* ------------------------------------------------- */
+
+/* General */
+
 ul {
     margin-bottom: 0 !important;
 }
 
-.btn-normal {
+.block-onboarding-btn-normal {
     background-color: #578014 !important;
     border: none;
     color: #ffffff !important;
@@ -14,49 +23,49 @@ ul {
     font-size: 16px;
 }
 
-.title {
+.block-onboarding-title {
     font-size: 1.8em;
 }
 
-.title-2-light {
+.block-onboarding-title-2-light {
     font-weight: lighter;
     font-size: 1.6em;
 }
 
-.confirm-btn{
+.block-onboarding-confirm-btn{
     color: #ca3120;
 }
 
-.confirm-btn:hover{
+.block-onboarding-confirm-btn:hover{
     color: #852116;
     cursor: pointer;
 }
 
-.link-btn{
+.block-onboarding-link-btn{
     color: var(--primary) !important;
 }
 
+/* ------------------------------------------------- */
 
 /* Home */
 
-.home-container {
+.block-onboarding-home-container {
     display: flex;
     justify-content: space-between;
     margin-top: 1em;
 }
 
-.home-title {
+.block-onboarding-home-title {
     font-weight: lighter;
     font-size: 1.3em;
     margin-bottom: 0.25em;
 }
 
-.home-description {
+.block-onboarding-home-description {
     vertical-align: top;
 }
 
-.onboarding-card {
-    /* Add shadows to create the "card" effect */
+.block-onboarding-card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     width: 50%;
@@ -65,8 +74,7 @@ ul {
     position: relative;
 }
 
-.onboarding-card-block {
-    /* Add shadows to create the "card" effect */
+.block-onboarding-card-block {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     display: inline-block;
@@ -74,35 +82,25 @@ ul {
     position: relative;
 }
 
-
-/* On mouse-over, add a deeper shadow */
-
-
-/*.onboarding-card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}*/
-
-
-/* Add some padding inside the card container */
-
-.onboarding-container {
+.block-onboarding-container {
     padding: 2px 16px;
 }
 
-.onboarding-card-button {
+.block-onboarding-card-button {
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
 }
 
+/* ------------------------------------------------- */
 
 /* Guide */
 
-.admin-title {
+.block-onboarding-admin-title {
     font-size: 1.8em;
     padding-bottom: 12px;
 }
 
-.admin-content-title {
+.block-onboarding-admin-content-title {
     width: fit-content;
     font-size: 1.3em;
     color: #ffffff;
@@ -111,33 +109,34 @@ ul {
     padding: 7px 9px;
 }
 
-.admin-content-wrapper {
+.block-onboarding-admin-content-wrapper {
     font-size: 1.1em;
     margin-top: 6px;
     margin-left: 4px;
 }
 
-.admin-content-wrapper-list {
+.block-onboarding-admin-content-wrapper-list {
     font-size: 1.1em;
     padding-bottom: 12px;
     margin-top: 6px;
     margin-left: 4px;
 }
 
-.admin-edit-btn {
+.block-onboarding-admin-edit-btn {
     padding-left: 12px;
 }
 
+/* ------------------------------------------------- */
 
 /* Wiki */
 
-.wiki-title-wrapper {
+.block-onboarding-wiki-title-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.wiki-cat-container {
+.block-onboarding-wiki-cat-container {
     width: calc(100% - 4px);
     position: relative;
     background-color: slategray;
@@ -146,7 +145,7 @@ ul {
     padding: 7px;
 }
 
-.wiki-cat-title-wrapper {
+.block-onboarding-wiki-cat-title-wrapper {
     font-weight: bold;
     font-size: 1.3em;
     color: #ffffff;
@@ -155,7 +154,7 @@ ul {
     padding: 7px;
 }
 
-.wiki-cat-content-wrapper {
+.block-onboarding-wiki-cat-content-wrapper {
     font-size: 1.1em;
     background-color: #f8f9fa;
     border-radius: 8px;
@@ -163,12 +162,12 @@ ul {
     padding: 5px 0px 5px 3px;
 }
 
-.custom-tooltip {
+.block-onboarding-custom-tooltip {
     position: relative;
     display: inline-block;
 }
 
-.custom-tooltip .custom-tooltiptext {
+.block-onboarding-custom-tooltip .custom-tooltiptext {
     visibility: hidden;
     width: 480px;
     background-color: #000000;
@@ -176,17 +175,19 @@ ul {
     padding: 5px 5px;
     border-radius: 6px;
     position: absolute;
+    display: inline-block;
     z-index: 1;
 }
 
-.custom-tooltip:hover .custom-tooltiptext {
+.block-onboarding-custom-tooltip:hover .custom-tooltiptext {
     visibility: visible;
 }
 
+/* ------------------------------------------------- */
 
 /* Steps */
 
-.steps-container {
+.block-onboarding-steps-container {
     width: 100%;
     position: relative;
     border-radius: 8px;
@@ -198,19 +199,19 @@ ul {
     display: none;
 }
 
-.steps-title-wrapper {
+.block-onboarding-steps-title-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.steps-title-button-wrapper{
+.block-onboarding-steps-title-button-wrapper {
     display: flex;
     justify-content: flex-end;
     align-items: center;
 }
 
-.steps-content-wrapper {
+.block-onboarding-steps-content-wrapper {
     background-color: rgba(128, 128, 128, 0.8);
     color: #ffffff;
     margin: 3px;
@@ -218,17 +219,17 @@ ul {
     border-radius: 6px;
 }
 
-.progress-bar {
+.block-onboarding-steps-progress-bar {
     position: relative;
     width: calc(100% - 6px);
     height: 30px;
-    background-color: #868686;
+    background-color:  var(--primary);
     margin: 3px;
     border-radius: 8px;
     border: 3px solid #000000;
 }
 
-.progress-bar-fill {
+.block-onboarding-steps-progress-bar-fill {
     height: 100%;
     width: 0%;
     border-radius: 5px;
@@ -236,7 +237,8 @@ ul {
     transition: width 1.2s;
 }
 
-.progress-bar-value {
+.block-onboarding-steps-progress-bar-value {
+    color: #ffffff;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -246,58 +248,62 @@ ul {
     font-weight: bold;
 }
 
-.steps-button-wrapper {
+.block-onboarding-steps-button-wrapper {
     margin-top: 6px;
 }
 
-.step-title {
+.block-onboarding-steps-step-title {
     font-size: 1.5em;
 }
 
-.step-completed {
+.block-onboarding-steps-step-description {
+}
+
+.block-onboarding-steps-step-completed {
     color: #ffffff;
     background-color: #32cd32;
-    padding: 0px 5px 0px 5px;
+    padding: 1px 5px 1px 5px;
     border: 2px solid #000000;
     border-radius: 5px;
     margin-left: 20px;
+    margin-bottom: 6px;
     visibility: hidden;
 }
 
-.next-btn {
+.block-onboarding-steps-next-btn {
     outline: 0 !important;
 }
 
-.back-btn {
+.block-onboarding-steps-back-btn {
     outline: 0 !important;
 }
 
-.reset-btn {
+.block-onboarding-steps-reset-btn {
     outline: 0 !important;
     visibility: hidden;
 }
 
-.hide-btn {
+.block-onboarding-steps-hide-btn {
     cursor: pointer;
     color: var(--primary);
     display: none;
 }
 
-.show-btn {
+.block-onboarding-steps-show-btn {
     cursor: pointer;
     color: var(--primary);
     display: none;
 }
 
-.hide-btn + a {
+.block-onboarding-steps-hide-btn + a {
     margin-left: 25px;
 }
 
-.show-btn + a {
+.block-onboarding-steps-show-btn + a {
     margin-left: 25px;
 }
 
-#achievement-confetti {
+#block-onboarding-steps-achievement-confetti {
     height: 100%;
     width: 100%;
     position: absolute;
@@ -307,18 +313,19 @@ ul {
     pointer-events: none;
 }
 
+/* ------------------------------------------------- */
 
 /* Experiences */
 
-.experiences-title-wrapper {
+.block-onboarding-experiences-title-wrapper {
     float: right;
 }
 
-.block-experiences-overview-categories {
+.block-onboarding-experiences-overview-categories {
     margin-bottom: 20px;
 }
 
-.block-experiences-overview-categories-actions {
+.block-onboarding-experiences-overview-categories-actions {
     margin-bottom: 20px;
 }
 
@@ -329,7 +336,7 @@ ul {
     color: #ffffff;
 }
 
-.block-experiences-overview-category-text {
+.block-onboarding-experiences-overview-category-text {
     font-weight: lighter;
     font-size: 1.3em;
     display: inline-block;
@@ -338,26 +345,26 @@ ul {
     color: #ffffff;
 }
 
-.block-experiences-overview-category {
+.block-onboarding-experiences-overview-category {
     display: inline-block;
-    padding: 0px 10px 0px 0px;
+    padding: 0 10px 0 0;
     margin-bottom: .7rem;
 }
 
-.block-experiences-overview-experiences-actions {
+.block-onboarding-experiences-overview-experiences-actions {
     margin-bottom: 20px;
     margin-left: 20px;
 }
 
-.block-experiences-overview-courses {
+.block-onboarding-experiences-overview-courses {
     margin-bottom: 20px;
 }
 
-.block-experiences-overview-courses-actions {
+.block-onboarding-experiences-overview-courses-actions {
     margin-bottom: 20px;
 }
 
-.block-experiences-overview-course-text {
+.block-onboarding-experiences-overview-course-text {
     font-weight: lighter;
     font-size: 1.3em;
     display: inline-block;
@@ -366,24 +373,24 @@ ul {
     color: #ffffff;
 }
 
-.block-experiences-overview-course {
+.block-onboarding-experiences-overview-course {
     display: inline-block;
-    padding: 0px 10px 0px 0px;
+    padding: 0 10px 0 0;
     margin-bottom: .7rem;
 }
 
-.block-experiences-overview-report {
+.block-onboarding-experiences-overview-report {
     margin-bottom: 20px;
 }
 
-.block-experiences-overview-report-actions {
+.block-onboarding-experiences-overview-report-actions {
     margin-bottom: 20px;
 }
 
-.experiences-experience-container {
+.block-onboarding-experiences-experience-container {
 }
 
-.experiences-experience-header-container {
+.block-onboarding-experiences-experience-header-container {
     margin: .5em .5em;
     border-radius: 8px;
     padding: 3px;
@@ -393,7 +400,7 @@ ul {
     background-color: #ececec;
 }
 
-.experiences-experience-title-wrapper {
+.block-onboarding-experiences-experience-title-wrapper {
     color: #ffffff;
     background-color: #006784;
     margin: .25em;
@@ -402,26 +409,26 @@ ul {
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
 }
 
-.experiences-experience-title-title {
+.block-onboarding-experiences-experience-title-title {
     font-weight: bold;
     font-size: 1.3em;
 }
 
-.experiences-experience-title-btn{
+.block-onboarding-experiences-experience-title-btn{
     color: #ffffff !important;
 }
 
-.experiences-experience-title-edit-btn {
+.block-onboarding-experiences-experience-title-edit-btn {
     color: #ffffff;
     margin-left: 0.7em;
 }
 
-.experiences-experience-title-helpful {
+.block-onboarding-experiences-experience-title-helpful {
     float: right;
     margin-bottom: 0;
 }
 
-.experiences-experience-helpful-btn {
+.block-onboarding-experiences-experience-helpful-btn {
     margin-left: 0.5em;
     background-color: rgba(128, 128, 128, 0.8);
     color: #ffffff;
@@ -429,11 +436,11 @@ ul {
     border-radius: 3px;
 }
 
-.experiences-experience-helpful-btn:hover {
+.block-onboarding-experiences-experience-helpful-btn:hover {
     background-color: rgba(128, 128, 128, 1);
 }
 
-.experiences-experience-title-info {
+.block-onboarding-experiences-experience-title-info {
     background-color: rgba(128, 128, 128, 0.8);
     color: #ffffff;
     margin: 0.25em;
@@ -442,11 +449,11 @@ ul {
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
 }
 
-.experiences-experience-title-info-p {
+.block-onboarding-experiences-experience-title-info-p {
     margin-bottom: 0;
 }
 
-.experiences-experience-title-takeaways-title {
+.block-onboarding-experiences-experience-title-takeaways-title {
     font-weight: bold;
     width: fit-content;
     margin-top: 0.5em;
@@ -455,11 +462,11 @@ ul {
     text-shadow: 2px 2px 5px #555;
 }
 
-.experiences-experience-title-takeaways-list{
+.block-onboarding-experiences-experience-title-takeaways-list{
     margin-bottom: 0.25em;
 }
 
-.experiences-experience-title-takeaways-cat{
+.block-onboarding-experiences-experience-title-takeaways-cat{
     background-color: #ffffff;
     color: rgba(0, 0, 0, 0.8);
     padding: 0.1em 0.2em;
@@ -469,14 +476,14 @@ ul {
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
 }
 
-.experiences-experience-content-container {
+.block-onboarding-experiences-experience-content-container {
     margin: .5em .5em;
     border-radius: 8px;
     padding: 3px;
     background-color: #d5d7da;
 }
 
-.experiences-experience-content-cat {
+.block-onboarding-experiences-experience-content-cat {
     background-color: rgba(255, 255, 255, 0.9);
     color: #000000;
     margin: 0.25em 0.25em 0.5em 0.25em;
@@ -485,15 +492,15 @@ ul {
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
 }
 
-.experiences-experience-content-title {
+.block-onboarding-experiences-experience-content-title {
     font-weight: bold;
 }
 
-.experiences-experience-footer {
+.block-onboarding-experiences-experience-footer {
     margin: 0.5em;
 }
 
-.block-experiences-overview-experiences {
+.block-onboarding-experiences-overview-experiences {
     display: grid;
     grid-template-rows: 40px auto;
     grid-template-columns: auto auto;
@@ -520,5 +527,3 @@ aside {
     grid-row-start: 2;
     grid-row-end: 3;
 }
-
-/* General */

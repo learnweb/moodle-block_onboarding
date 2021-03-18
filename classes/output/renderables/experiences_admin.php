@@ -14,6 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * The file for the experiences_admin rederable class.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 namespace block_onboarding\output\renderables;
 
 defined('MOODLE_INTERNAL') || die();
@@ -22,6 +29,13 @@ use renderable;
 use templatable;
 use renderer_base;
 
+/**
+ * Class exporting the experiences_admin rederable for the template.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class experiences_admin implements renderable, templatable {
 
     public function __construct() {
@@ -33,31 +47,31 @@ class experiences_admin implements renderable, templatable {
         // Get Database Entries for display on the Start Page.
         $experiences = array_values($DB->get_records('block_onb_e_exps'));
         $categories = array_values($DB->get_records('block_onb_e_cats'));
-        $experiences_categories = array_values($DB->get_records('block_onb_e_exps_cats'));
+        $experiencescategories = array_values($DB->get_records('block_onb_e_exps_cats'));
         $courses = array_values($DB->get_records('block_onb_e_courses'));
 
-        $experiences_mapped = array();
+        $experiencesmapped = array();
         foreach ($experiences as $experience) {
             if ($USER->id == $experience->user_id || has_capability('block/onboarding:e_manage_experiences',
                     \context_system::instance())) {
                 $experience->editable = true;
             }
-            $experiences_mapped[$experience->id] = $experience;
+            $experiencesmapped[$experience->id] = $experience;
         }
 
-        $categories_mapped = array();
+        $categoriesmapped = array();
         foreach ($categories as $category) {
-            $categories_mapped[$category->id] = $category;
+            $categoriesmapped[$category->id] = $category;
         }
 
-        foreach ($experiences_categories as $experience_category) {
-            $experiences_mapped[$experience_category->experience_id]->categories[] =
-                $categories_mapped[$experience_category->category_id];
+        foreach ($experiencescategories as $experiencecategory) {
+            $experiencesmapped[$experiencecategory->experience_id]->categories[] =
+                $categoriesmapped[$experiencecategory->category_id];
         }
 
-        $courses_mapped = array();
+        $coursesmapped = array();
         foreach ($courses as $course) {
-            $courses_mapped[$course->id] = $course;
+            $coursesmapped[$course->id] = $course;
         }
 
         return [
@@ -65,7 +79,7 @@ class experiences_admin implements renderable, templatable {
                 \context_system::instance()),
             'categories_general' => $categories,
             'courses_general' => $courses,
-            'experiences_with_categories' => array_values($experiences_mapped)
+            'experiences_with_categories' => array_values($experiencesmapped)
         ];
     }
 }

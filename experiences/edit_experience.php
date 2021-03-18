@@ -39,75 +39,70 @@ $experienceid = optional_param('experience_id', -1, PARAM_INT);
 $pexperience = new stdClass;
 $pexperience->id = -1;
 
-$checkexperience = $DB->record_exists('block_onb_e_exps', array('user_id' => $USER->id));
-if ($checkexperience) {
-    redirect('overview.php');
+// Check if the user is blocked.
+$checkblocked = $DB->record_exists('block_onb_e_blocked', array('user_id' => $USER->id));
+if ($checkblocked == true) {
+    // If blocked the user gets an error page.
+    $PAGE->set_title(get_string('error', 'block_onboarding'));
+    $PAGE->set_heading(get_string('error', 'block_onboarding'));
+
+    echo $OUTPUT->header();
+    echo html_writer::tag('p', get_string('blocked', 'block_onboarding'));
+    echo $OUTPUT->footer();
+
 } else {
-    // Check if the user is blocked.
-    $checkblocked = $DB->record_exists('block_onb_e_blocked', array('user_id' => $USER->id));
-    if ($checkblocked == true) {
-        // If blocked the user gets an error page.
-        $PAGE->set_title(get_string('error', 'block_onboarding'));
-        $PAGE->set_heading(get_string('error', 'block_onboarding'));
+    if ($experienceid != -1) {
+        // Get the existing data from the Database.
+        $pexperience = $DB->get_record('block_onb_e_exps',
+            array('id' => $experienceid), $fields = '*', $strictness = IGNORE_MISSING);
+    }
 
-        echo $OUTPUT->header();
-        echo html_writer::tag('p', get_string('blocked', 'block_onboarding'));
-        echo $OUTPUT->footer();
+    // Check if there are existing categories and courses.
+    $checkcourses = $DB->count_records('block_onb_e_courses');
+    $checkcategories = $DB->count_records('block_onb_e_cats');
 
-    } else {
-        if ($experienceid != -1) {
-            // Get the existing data from the Database.
-            $pexperience = $DB->get_record('block_onb_e_exps',
-                array('id' => $experienceid), $fields = '*', $strictness = IGNORE_MISSING);
-        }
+    if ($checkcourses != 0 || $checkcategories != 0) {
 
-        // Check if there are existing categories and courses.
-        $checkcourses = $DB->count_records('block_onb_e_courses');
-        $checkcategories = $DB->count_records('block_onb_e_cats');
+        // Check if the user is allowed to edit the experience.
+        if ($experienceid == -1 || $USER->id == $pexperience->user_id ||
+            has_capability('block/onboarding:e_manage_experiences', \context_system::instance())) {
+            $PAGE->set_title(get_string('edit_experience', 'block_onboarding'));
+            $PAGE->set_heading(get_string('edit_experience', 'block_onboarding'));
 
-        if ($checkcourses != 0 || $checkcategories != 0) {
+            require_once($CFG->dirroot . '/blocks/onboarding/classes/forms/experiences_experience_form.php');
 
-            // Check if the user is allowed to edit the experience.
-            if ($experienceid == -1 || $USER->id == $pexperience->user_id ||
-                has_capability('block/onboarding:e_manage_experiences', \context_system::instance())) {
-                $PAGE->set_title(get_string('edit_experience', 'block_onboarding'));
-                $PAGE->set_heading(get_string('edit_experience', 'block_onboarding'));
+            $mform = new experiences_experience_form(null, array('experience' => $pexperience));
 
-                require_once($CFG->dirroot . '/blocks/onboarding/classes/forms/experiences_experience_form.php');
-
-                $mform = new experiences_experience_form(null, array('experience' => $pexperience));
-
-                if ($mform->is_cancelled()) {
-                    redirect('overview.php');
-                } else {
-                    if ($fromform = $mform->get_data()) {
-                        // Processing of data submitted in the form.
-                        block_onboarding\experiences_lib::edit_experience($fromform);
-                        redirect('overview.php');
-                    }
-                }
-
-                // Display of the form.
-                echo $OUTPUT->header();
-                $mform->display();
-                echo $OUTPUT->footer();
+            if ($mform->is_cancelled()) {
+                redirect('overview.php');
             } else {
-                // If not allowed to edit the user gets an error page.
-                $PAGE->set_title(get_string('error', 'block_onboarding'));
-                $PAGE->set_heading(get_string('error', 'block_onboarding'));
-
-                echo $OUTPUT->header();
-                echo html_writer::tag('p', get_string('insufficient_permissions', 'block_onboarding'));
-                echo $OUTPUT->footer();
+                if ($fromform = $mform->get_data()) {
+                    // Processing of data submitted in the form.
+                    block_onboarding\experiences_lib::edit_experience($fromform);
+                    redirect('overview.php');
+                }
             }
+
+            // Display of the form.
+            echo $OUTPUT->header();
+            $mform->display();
+            echo $OUTPUT->footer();
         } else {
-            // If either no courses or no categories the user gets an error page.
+            // If not allowed to edit the user gets an error page.
             $PAGE->set_title(get_string('error', 'block_onboarding'));
             $PAGE->set_heading(get_string('error', 'block_onboarding'));
 
             echo $OUTPUT->header();
-            echo html_writer::tag('p', get_string('notenoughdata', 'block_onboarding'));
+            echo html_writer::tag('p', get_string('insufficient_permissions', 'block_onboarding'));
             echo $OUTPUT->footer();
         }
+    } else {
+        // If either no courses or no categories the user gets an error page.
+        $PAGE->set_title(get_string('error', 'block_onboarding'));
+        $PAGE->set_heading(get_string('error', 'block_onboarding'));
+
+        echo $OUTPUT->header();
+        echo html_writer::tag('p', get_string('notenoughdata', 'block_onboarding'));
+        echo $OUTPUT->footer();
     }
 }
