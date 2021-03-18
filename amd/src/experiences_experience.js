@@ -39,9 +39,11 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
         // Changes color of 'Helpful'-button depending on whether user has declared experience report as helpful.
         promises[0].done(function (response) {
             if(response.alreadyhelpful === 1) {
-                $('.experiences-experience-helpful-btn').css({'background-color': '#32cd32', 'color': '#ffffff'});
+                $('.block-onboarding-experiences-experience-helpful-btn')
+                    .css({'background-color': '#32cd32', 'color': '#ffffff'});
             } else {
-                $('.experiences-experience-helpful-btn').css({'background': 'rgba(128, 128, 128, 0.8)',
+                $('.block-onboarding-experiences-experience-helpful-btn')
+                    .css({'background': 'rgba(128, 128, 128, 0.8)',
                     'color': '#ffffff'});
             }
         }).fail(notification.exception);
@@ -54,7 +56,7 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
      * @param {int} experienceid
      * @returns {Boolean} false
      */
-    $('.experiences-experience-helpful-btn').on('click', function () {
+    $('.block-onboarding-experiences-experience-helpful-btn').on('click', function () {
         // AJAX call to externallib.php method to get current helpfulness rating.
         var promises = ajax.call([{
             methodname: 'block_onboarding_click_helpful',
@@ -63,10 +65,11 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
         // Toggles color of 'Helpful'-button depending on users current helpfulness rating.
         promises[0].done(function (response) {
             if(response.alreadyhelpful === 1) {
-                $('.experiences-experience-helpful-btn').css({'background-color': '#32cd32', 'color': '#ffffff'});
+                $('.block-onboarding-experiences-experience-helpful-btn')
+                    .css({'background-color': '#32cd32', 'color': '#ffffff'});
             } else {
-                $('.experiences-experience-helpful-btn').css({'background': 'rgba(128, 128, 128, 0.8)',
-                    'color': '#ffffff'});
+                $('.block-onboarding-experiences-experience-helpful-btn')
+                    .css({'background': 'rgba(128, 128, 128, 0.8)', 'color': '#ffffff'});
             }
         }).fail(notification.exception);
         return false;

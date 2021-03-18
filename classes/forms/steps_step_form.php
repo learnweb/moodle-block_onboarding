@@ -36,7 +36,7 @@ class steps_step_form extends moodleform {
         $mform->setDefault('name', isset($step->name) ? $step->name : '');
         $mform->addRule('name', get_string('step_name_req', 'block_onboarding'), 'required', null, 'client');
 
-        $mform->addElement('textarea', 'description', get_string('step_description', 'block_onboarding'),
+        $mform->addElement('textarea', 'description', get_string('block-onboarding-steps-step-description', 'block_onboarding'),
             array('wrap' => "virtual",
                 'rows' => 10,
                 'cols' => 50,

@@ -59,7 +59,7 @@ class block_onboarding_view_external extends external_api {
             $curposition = \block_onboarding\steps_interaction_lib::get_step_position($curstepid);
             $step = \block_onboarding\steps_interaction_lib::get_step_data($curposition);
             $progress = \block_onboarding\steps_interaction_lib::get_user_progress();
-            $hascompletedstep = \block_onboarding\steps_interaction_lib::get_user_completed_step($step->id);
+            $completed = \block_onboarding\steps_interaction_lib::get_user_completed_step($step->id);
             $visibility = $DB->get_record('block_onb_s_current', array('userid' => $USER->id))->showsteps;
 
             // Return object generation.
@@ -68,7 +68,7 @@ class block_onboarding_view_external extends external_api {
             $returnstep['position'] = $step->position;
             $returnstep['achievement'] = $step->achievement;
             $returnstep['progress'] = $progress;
-            $returnstep['hascompletedstep'] = $hascompletedstep;
+            $returnstep['completed'] = $completed;
             $returnstep['visibility'] = $visibility;
             return $returnstep;
         }
@@ -98,7 +98,7 @@ class block_onboarding_view_external extends external_api {
                 'position' => new external_value(PARAM_INT, 'position of new step'),
                 'achievement' => new external_value(PARAM_INT, 'determines whether a step is an achievement'),
                 'progress' => new external_value(PARAM_INT, 'progress of user'),
-                'hascompletedstep' => new external_value(PARAM_INT, 'determines whether user already completed step'),
+                'completed' => new external_value(PARAM_INT, 'determines whether user already completed step'),
                 'visibility' => new external_value(PARAM_INT, 'indicates visibility of First Steps section')
             )
         );
@@ -497,7 +497,7 @@ class block_onboarding_view_external extends external_api {
     /* --------------------------------------------------------------------------------------------------------- */
 
     /**
-     * Generates text to display in a confirmation prompt popup upon clicking an HTML tag with the 'confirm-btn' CSS class.
+     * Generates text to display in a confirmation prompt popup upon clicking an HTML tag with the 'block-onboarding-confirm-btn' CSS class.
      * Previously set HTML variables determine the type of prompt to be generated and the id of the object.
      * Mostly used for warning messages when deleting content such as Steps, Wiki Categories or Experiences and may more use cases.
      *
