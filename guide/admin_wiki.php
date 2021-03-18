@@ -1,5 +1,5 @@
 <?php
-// This file is part of wiki block for Moodle - http://moodle.org/
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,35 +14,51 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Wiki content administration section.
+ *
+ * This page contains an overview of the Wiki for the administrator and links to the editing forms for updating
+ * existing Wiki categories and Wiki links or create new ones.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 require(__DIR__ . '/../../../config.php');
 
 require_login();
 
 $context = context_system::instance();
-
-global $USER, $DB;
-
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/wiki/admin_wiki.php'));
 
-if(has_capability('block/onboarding:w_manage_wiki', $context)){
+// Checks whether user holds the required capability for managing the Wiki.
+if (has_capability('block/onboarding:w_manage_wiki', $context)) {
+    // Initializes the page and JavaScript function.
+    $PAGE->requires->js_call_amd('block_onboarding/confirmation_popup', 'init');
     $PAGE->set_title(get_string('wiki_admin', 'block_onboarding'));
     $PAGE->set_heading(get_string('wiki_admin', 'block_onboarding'));
     $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
     $PAGE->navbar->add(get_string('guide', 'block_onboarding'), new moodle_url('overview.php'));
     $PAGE->navbar->add(get_string('wiki_admin', 'block_onboarding'));
     $output = $PAGE->get_renderer('block_onboarding');
+
+    // Defines the page output.
     echo $output->header();
     echo $output->container_start('wiki-overview');
     $renderable = new \block_onboarding\output\renderables\wiki_admin();
     echo $output->render($renderable);
     echo $output->container_end();
     echo $output->footer();
-}else{
+
+} else {
+    // Initializes page title and heading in case permissions are insufficient.
     $PAGE->set_title(get_string('error', 'block_onboarding'));
     $PAGE->set_heading(get_string('error', 'block_onboarding'));
     $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
-  
+
+    // Defines the page output.
     echo $OUTPUT->header();
     echo html_writer::tag('p', get_string('insufficient_permissions', 'block_onboarding'));
     echo $OUTPUT->footer();

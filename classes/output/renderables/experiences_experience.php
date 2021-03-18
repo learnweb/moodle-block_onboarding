@@ -30,7 +30,7 @@ class experiences_experience implements renderable, templatable {
     }
 
     public function export_for_template(renderer_base $output) {
-        global $DB;
+        global $USER, $DB;
 
         $experience = $DB->get_record('block_onb_e_exps', array('id' => $this->experience_id));
         // $categories = $DB->get_records('block_onb_e_cats');
@@ -44,21 +44,34 @@ class experiences_experience implements renderable, templatable {
         $experiences_categories_joined_categories = $DB->get_records_sql($sql);
 
         // SQL Query to get Degree Program and Authors Firstname.
-        $moresql = "SELECT ee.id, ec.name as degreeprogram, u.firstname as author
+        $sql = "SELECT ee.id, u.firstname as author
         FROM {block_onb_e_exps} ee
-        INNER JOIN {block_onb_e_courses} ec
-        ON ee.course_id = ec.id
         INNER JOIN {user} u
         ON u.id = ee.user_id
         WHERE ee.id = {$this->experience_id}";
-        $degreeprogram_author = $DB->get_record_sql($moresql);
+        $author = $DB->get_record_sql($sql);
+
+        // SQL Query to get Degree Program and Authors Firstname.
+        $sql = "SELECT ee.id, ec.name as degreeprogram
+        FROM {block_onb_e_exps} ee
+        INNER JOIN {block_onb_e_courses} ec
+        ON ee.course_id = ec.id
+        WHERE ee.id = {$this->experience_id}";
+        $degreeprogram = $DB->get_record_sql($sql);
+
+        $report = $DB->get_record('block_onb_e_report',
+            array('experience_id' => $this->experience_id, 'user_id' => $USER->id));
 
         return [
+            'can_edit_experience' => has_capability('block/onboarding:e_manage_experiences',
+                \context_system::instance()) || $USER->id == $experience->user_id,
             'can_manage_experiences' => has_capability('block/onboarding:e_manage_experiences',
-                \context_system::instance()),
+                    \context_system::instance()),
             'experience' => $experience,
             'experiences_categories_joined_categories' => array_values($experiences_categories_joined_categories),
-            'degreeprogram_author' => $degreeprogram_author
+            'author' => $author,
+            'degreeprogram' => $degreeprogram,
+            'report' => $report
         ];
     }
 }

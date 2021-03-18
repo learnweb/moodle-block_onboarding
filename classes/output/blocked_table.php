@@ -16,7 +16,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-class experience_table extends table_sql {
+class blocked_table extends table_sql {
 
     /**
      * Constructor.
@@ -27,58 +27,49 @@ class experience_table extends table_sql {
     public function __construct($uniqueid) {
         parent::__construct($uniqueid);
         // Define the list of columns to show.
-        $columns = array('name', 'author', 'degreeprogram', 'published', 'lastmodified', 'popularity');
+        $columns = array('id', 'firstname', 'lastname', 'blockedsince', 'actions');
         $this->define_columns($columns);
 
         // Define the titles of columns to show in header.
-        $headers = array(get_string('experience_name', 'block_onboarding'), get_string('author', 'block_onboarding'),
-            get_string('experience_degreeprogram', 'block_onboarding'), get_string('published', 'block_onboarding'),
-            get_string('lastmodified', 'block_onboarding'), get_string('popularity', 'block_onboarding'));
+        $headers = array(get_string('id', 'block_onboarding'), get_string('firstname', 'block_onboarding'),
+            get_string('lastname', 'block_onboarding'), get_string('blockedsince', 'block_onboarding'), get_string('actions', 'block_onboarding'));
         $this->define_headers($headers);
 
         // Table configuration.
         $this->set_attribute('cellspacing', '0');
-
-        $this->sortable(true, 'published', SORT_DESC);
-
+        $this->sortable(true, 'blockedsince', SORT_DESC);
+        $this->no_sorting('actions');
         $this->initialbars(false);
         $this->collapsible(false);
-
     }
 
     /**
-     * This function is called for each data row to allow processing of the experience value.
+     * This function is called for each data row to allow processing of the blocked user value.
      *
      * @param object $values Contains object with all the values of record.
      * @return string Return content for each column.
      */
 
     // Configure Column Content.
-    public function col_name($values) {
-        return '<a href="experience.php?experience_id=' . $values->id . '">' . $values->name . '</a>';
+    public function col_id($values) {
+        return $values->id;
     }
 
-    public function col_author($values) {
-        return $values->author;
+    public function col_firstname($values) {
+        return $values->firstname;
     }
 
-    public function col_degreeprogram($values) {
-        return $values->degreeprogram;
+    public function col_lastname($values) {
+        return $values->lastname;
     }
 
-    public function col_published($values) {
-        $date = userdate($values->published, get_string('strftimedatetimeshort', 'core_langconfig'));
+    public function col_blockedsince($values) {
+        $date = userdate($values->blockedsince, get_string('strftimedatetimeshort', 'core_langconfig'));
         return $date;
     }
 
-    public function col_lastmodified($values) {
-        $date = userdate($values->lastmodified, get_string('strftimedatetimeshort', 'core_langconfig'));
-        return $date;
-    }
-
-    public function col_popularity($values) {
-        global $DB;
-        return $DB->count_records('block_onb_e_helpful', array('experience_id' => $values->id));
+    public function col_actions($values) {
+        return '<span onb-data-id='.$values->id.' onb-data-context="exp-admin-unblock" class="confirm-btn link-btn">' . get_string('unblock', 'block_onboarding') . '</span>';
     }
 
     /**

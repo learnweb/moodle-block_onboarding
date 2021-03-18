@@ -1,5 +1,5 @@
 <?php
-// This file is part of experiences block for Moodle - http://moodle.org/
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,6 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * This file contains the structure of the administration page admin.php.
+ *
+ * This page can only be viewed by the administrator and contains links to other administrative pages.
+ * It also gives the user the ability to edit, delete and create new categories and courses.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 require(__DIR__ . '/../../../config.php');
 
 require_login();
@@ -24,13 +35,14 @@ $url = new moodle_url('/blocks/onboarding/experiences/admin.php');
 $PAGE->set_url($url);
 $PAGE->set_context($context);
 
-if(has_capability('block/onboarding:e_manage_experiences', $context)){
+if (has_capability('block/onboarding:e_manage_experiences', $context)) {
+    $PAGE->requires->js_call_amd('block_onboarding/delete_confirmation', 'init');
     $PAGE->set_title(get_string('experiences', 'block_onboarding'));
     $PAGE->set_heading(get_string('experiences', 'block_onboarding'));
     $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
     $PAGE->navbar->add(get_string('experiences', 'block_onboarding'), new moodle_url('overview.php'));
     $PAGE->navbar->add(get_string('experience_admin', 'block_onboarding'));
-    
+
     $output = $PAGE->get_renderer('block_onboarding');
     echo $output->header();
     echo $output->container_start('experiences-admin');
@@ -38,7 +50,7 @@ if(has_capability('block/onboarding:e_manage_experiences', $context)){
     echo $output->render($renderable);
     echo $output->container_end();
     echo $output->footer();
-}else{
+} else {
     $PAGE->set_title(get_string('error', 'block_onboarding'));
     $PAGE->set_heading(get_string('error', 'block_onboarding'));
     $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));

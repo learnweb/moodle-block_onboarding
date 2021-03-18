@@ -19,42 +19,42 @@ defined('MOODLE_INTERNAL') || die();
 class report_table extends table_sql {
 
     /**
-     * Constructor
+     * Constructor.
+     *
      * @param int $uniqueid all tables have to have a unique id, this is used
      *      as a key when storing table properties like sort order in the session.
      */
     public function __construct($uniqueid) {
         parent::__construct($uniqueid);
         // Define the list of columns to show.
-        $columns = array('experience', 'experience_id', 'type', 'description', 'author', 'timecreated');
+        $columns = array('experience', 'experience_id', 'type', 'description', 'author', 'timecreated', 'actions');
         $this->define_columns($columns);
 
         // Define the titles of columns to show in header.
-        $headers = array('Experience', 'Id', 'Type', 'Description', 'Author', 'Date');
+        $headers = array(get_string('experience', 'block_onboarding'), get_string('id', 'block_onboarding'),
+            get_string('option', 'block_onboarding'), get_string('experience_description', 'block_onboarding'),
+            get_string('author', 'block_onboarding'), get_string('submitted', 'block_onboarding'),
+            get_string('actions', 'block_onboarding'));
         $this->define_headers($headers);
 
         // Table configuration.
         $this->set_attribute('cellspacing', '0');
-
         $this->sortable(true, 'timecreated', SORT_DESC);
-
+        $this->no_sorting('actions');
         $this->initialbars(false);
         $this->collapsible(false);
-
     }
 
     /**
-     * This function is called for each data row to allow processing of the
-     * username value.
+     * This function is called for each data row to allow processing of the report value.
      *
      * @param object $values Contains object with all the values of record.
-     * @return $string Return username with link to profile or username only
-     *     when downloading.
+     * @return string Return content for each column.
      */
 
     // Configure Column Content.
     public function col_experience($values) {
-        return '<a href="experience.php?experience_id='.$values->experience_id.'">'.$values->experience.'</a>';
+        return '<a href="experience.php?experience_id=' . $values->experience_id . '">' . $values->experience . '</a>';
     }
 
     public function col_experience_id($values) {
@@ -78,13 +78,16 @@ class report_table extends table_sql {
         return $date;
     }
 
+    public function col_actions($values) {
+        return '<span onb-data-id='.$values->id.' onb-data-context="exp-admin-report" class="confirm-btn link-btn">' . get_string('delete', 'block_onboarding') . '</span>';
+    }
+
     /**
      * This function is called for each data row to allow processing of
      * columns which do not have a *_cols function.
-     * @return string return processed value. Return NULL if no change has
-     *     been made.
+     *
+     * @return string return processed value. Return NULL if no change has been made.
      */
     function other_cols($colname, $value) {
-
     }
 }

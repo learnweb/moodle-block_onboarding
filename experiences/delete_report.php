@@ -1,5 +1,5 @@
 <?php
-// This file is part of experiences block for Moodle - http://moodle.org/
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,13 +20,14 @@ require_login();
 
 global $DB;
 
+//TODO: file obsolete??
+
 $context = context_system::instance();
 
 if (has_capability('block/onboarding:e_manage_experiences', $context)) {
-    $course_id = optional_param('course_id', -1, PARAM_INT);
-    // Deletion of the course from the Database.
-    block_onboarding\experiences_lib::delete_course($course_id);
-    redirect('admin.php');
+    $report_id = optional_param('report_id', -1, PARAM_INT);
+    block_onboarding\experiences_lib::delete_report($report_id);
+    redirect('report_overview.php');
 } else {
     $PAGE->set_context($context);
     $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/edit_experience.php'));

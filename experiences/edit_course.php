@@ -1,5 +1,5 @@
 <?php
-// This file is part of experiences block for Moodle - http://moodle.org/
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,6 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * File to display the course form and process the input.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 require(__DIR__ . '/../../../config.php');
 
 require_login();
@@ -29,32 +36,38 @@ $PAGE->navbar->add(get_string('experiences', 'block_onboarding'), new moodle_url
 $PAGE->navbar->add(get_string('experience_admin', 'block_onboarding'), new moodle_url('admin.php'));
 $PAGE->navbar->add(get_string('edit_course', 'block_onboarding'));
 
+// Check if the user has the necessary capability.
 if (has_capability('block/onboarding:e_manage_experiences', \context_system::instance())) {
     $PAGE->set_title(get_string('edit_course', 'block_onboarding'));
     $PAGE->set_heading(get_string('edit_course', 'block_onboarding'));
 
     require_once($CFG->dirroot . '/blocks/onboarding/classes/forms/experiences_course_form.php');
 
-    $course_id = optional_param('course_id', -1, PARAM_INT);
+    $courseid = optional_param('course_id', -1, PARAM_INT);
     $pcourse = new stdClass;
     $pcourse->id = -1;
-    if ($course_id != -1) {
+    if ($courseid != -1) {
         // Get the existing data from the Database.
-        $pcourse = block_onboarding\experiences_lib::get_course_by_id($course_id);
+        $pcourse = block_onboarding\experiences_lib::get_course_by_id($courseid);
     }
     $mform = new experiences_course_form(null, array('course' => $pcourse));
 
     if ($mform->is_cancelled()) {
         redirect('admin.php');
-    } else if ($fromform = $mform->get_data()) {
-        \block_onboarding\experiences_lib::edit_course($fromform);
-        redirect('admin.php');
+    } else {
+        if ($fromform = $mform->get_data()) {
+            // Processing of data submitted in the form.
+            block_onboarding\experiences_lib::edit_course($fromform);
+            redirect('admin.php');
+        }
     }
 
+    // Display of the form.
     echo $OUTPUT->header();
     $mform->display();
     echo $OUTPUT->footer();
 } else {
+    // If the user doesn't have the capability needed an error page is displayed.
     $PAGE->set_title(get_string('error', 'block_onboarding'));
     $PAGE->set_heading(get_string('error', 'block_onboarding'));
 
