@@ -1,5 +1,5 @@
 <?php
-// This file is part of experiences block for Moodle - http://moodle.org/
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file contains the structure of the overview page overview.php.
+ * Overview of the Experiences section.
  *
  * This page contains two form elements that function as filters for the displayed table.
  * Additionally there is an area where the user can see their created experience or create a new one.
@@ -24,6 +24,7 @@
  * @copyright  2021 Westfälische Wilhelms-Universität Münster
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 require(__DIR__ . '/../../../config.php');
 require($CFG->libdir . '/tablelib.php');
 require($CFG->dirroot . '/blocks/onboarding/classes/output/experience_table.php');

@@ -1,5 +1,5 @@
 <?php
-// This file is part of wiki block for Moodle - http://moodle.org/
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,6 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Overview of the Guide section.
+ *
+ * This page contains the basic overview structure for the Guide section, which includes the First Steps section
+ * and the Wiki Section as well as the links to the related Administration sections.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 require(__DIR__ . '/../../../config.php');
 
 require_login();
@@ -22,6 +33,7 @@ $context = context_system::instance();
 
 global $USER, $DB;
 
+// Initializes the page.
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/wiki/overview.php'));
 $PAGE->requires->js_call_amd('block_onboarding/steps_view', 'init');
@@ -30,6 +42,7 @@ $PAGE->set_heading(get_string('guide', 'block_onboarding'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
 $PAGE->navbar->add(get_string('guide', 'block_onboarding'));
 
+// Defines the page output.
 $output = $PAGE->get_renderer('block_onboarding');
 echo $output->header();
 echo $output->container_start('wiki-overview');

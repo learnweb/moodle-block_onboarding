@@ -39,6 +39,9 @@
  *
  * The variable name for the capability definitions array is $capabilities
  *
+ * WARNING: Currently all capabilities are set to CONTEXT_SYSTEM which might be
+ * problematic if several instances of the onboarding block exist within a Moodle installation.
+ *
  * @package    block_onboarding
  * @copyright  2021 Westfälische Wilhelms-Universität Münster
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -63,7 +66,7 @@ $capabilities = array(
         'riskbitmask' => RISK_SPAM | RISK_XSS,
 
         'captype' => 'write',
-        'contextlevel' => CONTEXT_BLOCK,
+        'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
@@ -74,7 +77,7 @@ $capabilities = array(
     'block/onboarding:w_manage_wiki' => [
         'riskbitmask' => RISK_SPAM,
         'captype' => 'write',
-        'contextlevel' => CONTEXT_BLOCK,
+        'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => [
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
@@ -84,7 +87,7 @@ $capabilities = array(
     'block/onboarding:s_manage_steps' => [
         'riskbitmask' => RISK_SPAM,
         'captype' => 'write',
-        'contextlevel' => CONTEXT_BLOCK,
+        'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => [
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
@@ -94,7 +97,7 @@ $capabilities = array(
     'block/onboarding:e_manage_experiences' => [
         'riskbitmask' => RISK_SPAM,
         'captype' => 'write',
-        'contextlevel' => CONTEXT_BLOCK,
+        'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => [
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
