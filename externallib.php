@@ -516,23 +516,26 @@ class block_onboarding_view_external extends external_api {
             )
         );
 
-        // Security checks.
-//        $context =   context_block::instance($this->context);
-//        self::validate_context($context);
-//        require_capability('block/onboarding:s_manage_steps', $context);
+        // Context Validation.
+        $context =   context_system::instance();
+        self::validate_context($context);
 
         // Determines which type of warning message is to be generated. In some cases the warning message includes additional
-        // information about the consequences of deleting the passed object.
+        // information about the consequences of performing the type of action on the passed object.
+        // Security checks are performed to determine whether the user is allowed to execute the type of action.
         switch ($type) {
             case 'step':
+                require_capability('block/onboarding:s_manage_steps', $context);
                 $returnmessage['text'] = get_string('msg_delete_step_warning', 'block_onboarding') . "sadsa " . $context->name;
                 break;
             case 'wiki-category':
+                require_capability('block/onboarding:w_manage_wiki', $context);
                 $affected = $DB->count_records('block_onb_w_links', array('category_id' => $id));
                 $returnmessage['text'] = get_string('msg_delete_wiki_cat_warning', 'block_onboarding') . $affected .
                     get_string('msg_delete_wiki_cat_lost', 'block_onboarding');
                 break;
             case 'wiki-link':
+                require_capability('block/onboarding:w_manage_wiki', $context);
                 $returnmessage['text'] = get_string('msg_delete_wiki_link_warning', 'block_onboarding');
                 break;
             case 'exp-category':
@@ -541,6 +544,7 @@ class block_onboarding_view_external extends external_api {
                     get_string('msg_delete_exp_cats_lost', 'block_onboarding');
                 break;
             case 'exp-course':
+                require_capability('block/onboarding:e_manage_experiences', $context);
                 $affected = $DB->count_records('block_onb_e_exps', array('course_id' => $id));
                 $returnmessage['text'] = get_string('msg_delete_exp_course_warning', 'block_onboarding') . $affected .
                     get_string('msg_delete_exp_course_lost', 'block_onboarding');
@@ -552,12 +556,15 @@ class block_onboarding_view_external extends external_api {
                 $returnmessage['text'] = get_string('msg_delete_exp_exp_admin_warning', 'block_onboarding');
                 break;
             case 'exp-exp-blacklist':
+                require_capability('block/onboarding:e_manage_experiences', $context);
                 $returnmessage['text'] = get_string('msg_delete_exp_exp_blacklist_warning', 'block_onboarding');
                 break;
             case 'exp-admin-report':
+                require_capability('block/onboarding:e_manage_experiences', $context);
                 $returnmessage['text'] = get_string('msg_delete_exp_admin_report_warning', 'block_onboarding');
                 break;
             case 'exp-admin-unblock':
+                require_capability('block/onboarding:e_manage_experiences', $context);
                 $returnmessage['text'] = get_string('msg_delete_exp_admin_unblock_warning', 'block_onboarding');
                 break;
         }
@@ -612,25 +619,35 @@ class block_onboarding_view_external extends external_api {
             )
         );
 
+        // Context Validation.
+        $context =   context_system::instance();
+        self::validate_context($context);
+
         // Determines which type of action is to be executed.
+        // Security checks are performed to determine whether the user is allowed to execute the type of action.
         switch ($type) {
             case 'step':
+                require_capability('block/onboarding:s_manage_steps', $context);
                 \block_onboarding\steps_lib::delete_step($id);
                 $returnvalue['redirect'] = 'reload';
                 break;
             case 'wiki-category':
+                require_capability('block/onboarding:w_manage_wiki', $context);
                 \block_onboarding\wiki_lib::delete_category($id);
                 $returnvalue['redirect'] = 'reload';
                 break;
             case 'wiki-link':
+                require_capability('block/onboarding:w_manage_wiki', $context);
                 \block_onboarding\wiki_lib::delete_link($id);
                 $returnvalue['redirect'] = 'reload';
                 break;
             case 'exp-category':
+                require_capability('block/onboarding:e_manage_experiences', $context);
                 \block_onboarding\experiences_lib::delete_category($id);
                 $returnvalue['redirect'] = 'reload';
                 break;
             case 'exp-course':
+                require_capability('block/onboarding:e_manage_experiences', $context);
                 \block_onboarding\experiences_lib::delete_course($id);
                 $returnvalue['redirect'] = 'reload';
                 break;
@@ -643,15 +660,18 @@ class block_onboarding_view_external extends external_api {
                 $returnvalue['redirect'] = '../experiences/overview.php';
                 break;
             case 'exp-exp-blacklist':
+                require_capability('block/onboarding:e_manage_experiences', $context);
                 block_onboarding\experiences_lib::block_user($id);
                 block_onboarding\experiences_lib::delete_experience($id);
                 $returnvalue['redirect'] = '../experiences/overview.php';
                 break;
             case 'exp-admin-report':
+                require_capability('block/onboarding:e_manage_experiences', $context);
                 block_onboarding\experiences_lib::delete_report($id);
                 $returnvalue['redirect'] = 'reload';
                 break;
             case 'exp-admin-unblock':
+                require_capability('block/onboarding:e_manage_experiences', $context);
                 block_onboarding\experiences_lib::unblock_user($id);
                 $returnvalue['redirect'] = 'reload';
                 break;
