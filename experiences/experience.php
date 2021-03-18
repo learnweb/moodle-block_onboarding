@@ -38,8 +38,8 @@ $PAGE->navbar->add(get_string('experiences', 'block_onboarding'), new moodle_url
 $experience = new stdClass();
 $experience = $DB->get_record('block_onb_e_exps', array('id' => $experienceid));
 
-if ($experience->user_id == $USER->id ||
-    has_capability('block/onboarding:e_manage_experiences', \context_system::instance())) {
+if ($experience->suspended == null || ($experience->suspended == 1  && ($experience->user_id == $USER->id ||
+    has_capability('block/onboarding:e_manage_experiences', \context_system::instance())))) {
     $PAGE->set_title(get_string('experience', 'block_onboarding'));
     $PAGE->set_heading(get_string('experience', 'block_onboarding'));
     $PAGE->navbar->add($experience->name);
