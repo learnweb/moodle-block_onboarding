@@ -517,7 +517,7 @@ class block_onboarding_view_external extends external_api {
         );
 
         // Context Validation.
-        $context =   context_system::instance();
+        $context = context_system::instance();
         self::validate_context($context);
 
         // Determines which type of warning message is to be generated. In some cases the warning message includes additional
@@ -620,7 +620,7 @@ class block_onboarding_view_external extends external_api {
         );
 
         // Context Validation.
-        $context =   context_system::instance();
+        $context = context_system::instance();
         self::validate_context($context);
 
         // Determines which type of action is to be executed.

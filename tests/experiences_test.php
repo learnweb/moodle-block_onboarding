@@ -45,12 +45,12 @@ class block_onboarding_experiences_testcase extends advanced_testcase {
         $course->name = "Test Course";
         $course->timecreated = time();
         $course->timemodified = time();
-        $course_id = $DB->insert_record('block_onb_e_courses', $course);
+        $courseid = $DB->insert_record('block_onb_e_courses', $course);
 
         $fromform = new \stdClass();
         $fromform->id = -1;
         $fromform->user_id = $USER->id;
-        $fromform->course_id = $course_id;
+        $fromform->course_id = $courseid;
         $fromform->name = "Test Experience";
 
         \block_onboarding\experiences_lib::edit_experience($fromform);
@@ -71,12 +71,12 @@ class block_onboarding_experiences_testcase extends advanced_testcase {
         $course->name = "Test Course";
         $course->timecreated = time();
         $course->timemodified = time();
-        $course_id = $DB->insert_record('block_onb_e_courses', $course);
+        $courseid = $DB->insert_record('block_onb_e_courses', $course);
 
         $fromform = new \stdClass();
         $fromform->id = -1;
         $fromform->user_id = $USER->id;
-        $fromform->course_id = $course_id;
+        $fromform->course_id = $courseid;
 
         $errorthrown = false;
         try {
@@ -102,12 +102,12 @@ class block_onboarding_experiences_testcase extends advanced_testcase {
         $course->name = "Test Course";
         $course->timecreated = time();
         $course->timemodified = time();
-        $course_id = $DB->insert_record('block_onb_e_courses', $course);
+        $courseid = $DB->insert_record('block_onb_e_courses', $course);
 
         $fromform = new \stdClass();
         $fromform->id = -1;
         $fromform->user_id = $USER->id;
-        $fromform->course_id = $course_id;
+        $fromform->course_id = $courseid;
         $fromform->name = "Test Experience";
 
         \block_onboarding\experiences_lib::edit_experience($fromform);
@@ -119,7 +119,7 @@ class block_onboarding_experiences_testcase extends advanced_testcase {
         $fromform = new \stdClass();
         $fromform->id = $experience->id;
         $fromform->user_id = $USER->id;
-        $fromform->course_id = $course_id;
+        $fromform->course_id = $courseid;
         $fromform->name = "Test Experience New";
 
         \block_onboarding\experiences_lib::edit_experience($fromform);

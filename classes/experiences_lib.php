@@ -70,7 +70,7 @@ class experiences_lib {
         // Experience is either updated or newly created.
         if ($fromform->id != -1) {
             $experience->id = $fromform->id;
-            $DB->update_record('block_onb_e_exps', $experience, $bulk = false);
+            $DB->update_record('block_onb_e_exps', $experience);
         } else {
             $experience->id = $DB->insert_record('block_onb_e_exps', $experience);
         }
@@ -84,7 +84,8 @@ class experiences_lib {
             $formpropertycategorytextarea = 'experience_category_' . $category->id . '_description';
 
             // Check whether the checkbox for a category was checked and something was written in the textarea.
-            if (isset($fromform->$formpropertycategorycheckbox) && empty($fromform->$formpropertycategorytextarea) == false) {
+            if (isset($fromform->$formpropertycategorycheckbox) &&
+                empty($fromform->$formpropertycategorytextarea) == FALSE) {
                 // Translates form data to new object for further processing.
                 $experiencecategory = new \stdClass;
                 $formpropertycategorytextarea = 'experience_category_' . $category->id . '_description';
@@ -140,18 +141,17 @@ class experiences_lib {
         global $USER, $DB;
 
         // TODO Mail function has to be tested
-        // Sends email to author
-        $sql = 'SELECT * FROM {user} u
-                INNER JOIN {block_onb_e_exps} ee ON u.id = ee.user_id
-                WHERE ee.id = ' . $fromform->experience_id;
+        // Sends email to author.
+        $sql = 'SELECT * FROM {user} u INNER JOIN {block_onb_e_exps} ee ON u.id = ee.user_id WHERE ee.id = '
+            . $fromform->experience_id;
 
-        $toUser = $DB->get_record_sql($sql);
-        $fromUser = $USER;
+        $touser = $DB->get_record_sql($sql);
+        $fromuser = $USER;
         $subject = $fromform->title;
-        $messageText = $fromform->comment;
-        $messageHtml = $fromform->comment;
+        $messagetext = $fromform->comment;
+        $messagehtml = $fromform->comment;
 
-        email_to_user($toUser, $fromUser, $subject, $messageText, $messageHtml, '', '', true);
+        email_to_user($touser, $fromuser, $subject, $messagetext, $messagehtml, '', '', true);
 
         // Sets "suspended" for the experience in question to "1".
         $DB->set_field('block_onb_e_exps', 'suspended', 1, array('id' => $fromform->experience_id));
@@ -221,7 +221,7 @@ class experiences_lib {
      */
     public static function get_category_by_id($categoryid) {
         global $DB;
-        return $DB->get_record('block_onb_e_cats', array('id' => $categoryid), $fields = '*', $strictness = IGNORE_MISSING);
+        return $DB->get_record('block_onb_e_cats', array('id' => $categoryid));
     }
 
     /**
@@ -305,18 +305,16 @@ class experiences_lib {
 
         $report->id = $DB->insert_record('block_onb_e_report', $report);
 
-        // TODO Mail function has to be tested
-
         // Define necessary parameters for "email_to_user" function.
-        $toUser = get_admin();
-        $fromUser = $USER;
+        $touser = get_admin();
+        $fromuser = $USER;
         $subject = get_string('rep_mail_title', 'block_onboarding');
         $report->title = $DB->get_field('block_onb_e_exps', 'name', array('id' => $report->experience_id));
-        $messageText = get_string('rep_mail_text', 'block_onboarding', $report);
-        $messageHtml = get_string('rep_mail_html', 'block_onboarding', $report);
+        $messagetext = get_string('rep_mail_text', 'block_onboarding', $report);
+        $messagehtml = get_string('rep_mail_html', 'block_onboarding', $report);
 
         // Sends email to administrator.
-        email_to_user($toUser, $fromUser, $subject, $messageText, $messageHtml, '', '', true);
+        email_to_user($touser, $fromuser, $subject, $messagetext, $messagehtml, '', '', true);
     }
 
     /**
@@ -327,20 +325,18 @@ class experiences_lib {
     public static function unsuspend_experience($experienceid) {
         global $USER, $DB;
 
-        // TODO Mail function has to be tested
         // Get the database entry for the recipient.
-        $sql = 'SELECT * FROM {user} u
-                INNER JOIN {block_onb_e_exps} ee ON u.id = ee.user_id
-                WHERE ee.id = ' . $experienceid;
+        $sql = 'SELECT * FROM {user} u INNER JOIN {block_onb_e_exps} ee ON u.id = ee.user_id WHERE ee.id = '
+            . $experienceid;
 
-        $toUser = $DB->get_record_sql($sql);
-        $fromUser = $USER;
+        $touser = $DB->get_record_sql($sql);
+        $fromuser = $USER;
         $subject = get_string('unsus_mail_title', 'block_onboarding');
-        $messageText = get_string('unsus_mail_text', 'block_onboarding');
-        $messageHtml = get_string('unsus_mail_html', 'block_onboarding');
+        $messagetext = get_string('unsus_mail_text', 'block_onboarding');
+        $messagehtml = get_string('unsus_mail_html', 'block_onboarding');
 
         // Sends email to the author.
-        email_to_user($toUser, $fromUser, $subject, $messageText, $messageHtml, '', '', true);
+        email_to_user($touser, $fromuser, $subject, $messagetext, $messagehtml, '', '', true);
 
         // Sets "suspended" for the experience in question to "null".
         $DB->set_field('block_onb_e_exps', 'suspended', null, array('id' => $experienceid));

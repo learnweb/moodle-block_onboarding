@@ -191,7 +191,7 @@ $string['unsuspend_experience'] = 'Sichtbar schalten';
 $string['suspend_experience'] = 'Unsichtbar schalten';
 $string['suspend_mail'] = 'Suspend Mail';
 $string['title_missing'] = 'Bitte vergebe einen Titel.';
-$string['sus_mail_title'] = 'Korrektur deines Berichtes erforderlich';
+$string['sus_mail_title'] = 'Korrektur erforderlich';
 $string['sus_mail_text'] = "Hallo,
 Wir haben eine Meldung bezüglich deines veröffentlichten Erfahrungsberichtes erhalten.
 Wir würden dich darum bitten, das folgende Problem zu korrigieren:\r\n\r\n\r\n
@@ -218,10 +218,10 @@ Erfahrungsbericht Id: {$a->experience_id}<br>
 Option: {$a->type}<br>
 Beschreibung: {$a->description}';
 $string['unsus_mail_title'] = 'Dein Erfahrungsbericht ist wieder sichtbar!';
-$string['unsus_mail_text'] = "Hallo,
+$string['unsus_mail_text'] = 'Hallo,
 Danke, dass du das Problem behoben hast. Dein Erfahrungsbericht ist wieder sichtbar.\r\n
 Beste Grüße,
-Dein Digital Onboarding Team";
+Dein Digital Onboarding Team';
 $string['unsus_mail_html'] = 'Hallo,<br>
 Danke, dass du das Problem behoben hast. Dein Erfahrungsbericht ist wieder sichtbar.<br><br>
 Beste Grüße,<br>

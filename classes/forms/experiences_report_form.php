@@ -27,9 +27,9 @@ class experiences_report_form extends moodleform {
 
         $mform = $this->_form;
 
-        $experience_id = $this->_customdata['experience_id'];
+        $experienceid = $this->_customdata['experience_id'];
 
-        $mform->addElement('hidden', 'experience_id', $experience_id);
+        $mform->addElement('hidden', 'experience_id', $experienceid);
         $mform->setType('experience_id', PARAM_INT);
 
         $mform->addElement('hidden', 'user_id', $USER->id);
@@ -60,7 +60,7 @@ class experiences_report_form extends moodleform {
             'server');
         $mform->setType('description', PARAM_TEXT);
 
-        $this->add_action_buttons($cancel = true, $submitlabel=get_string('report_experience', 'block_onboarding'));
+        $this->add_action_buttons($submitlabel = get_string('report_experience', 'block_onboarding'));
     }
 
     public function validation($data, $files) {
