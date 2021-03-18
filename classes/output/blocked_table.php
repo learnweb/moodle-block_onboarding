@@ -19,7 +19,8 @@ defined('MOODLE_INTERNAL') || die();
 class blocked_table extends table_sql {
 
     /**
-     * Constructor
+     * Constructor.
+     *
      * @param int $uniqueid all tables have to have a unique id, this is used
      *      as a key when storing table properties like sort order in the session.
      */
@@ -43,12 +44,10 @@ class blocked_table extends table_sql {
     }
 
     /**
-     * This function is called for each data row to allow processing of the
-     * username value.
+     * This function is called for each data row to allow processing of the blocked user value.
      *
      * @param object $values Contains object with all the values of record.
-     * @return $string Return username with link to profile or username only
-     *     when downloading.
+     * @return string Return content for each column.
      */
 
     // Configure Column Content.
@@ -76,10 +75,9 @@ class blocked_table extends table_sql {
     /**
      * This function is called for each data row to allow processing of
      * columns which do not have a *_cols function.
-     * @return string return processed value. Return NULL if no change has
-     *     been made.
+     *
+     * @return string return processed value. Return NULL if no change has been made.
      */
     function other_cols($colname, $value) {
-
     }
 }

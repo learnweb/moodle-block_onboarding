@@ -43,12 +43,12 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
 
     require_once($CFG->dirroot . '/blocks/onboarding/classes/forms/experiences_course_form.php');
 
-    $course_id = optional_param('course_id', -1, PARAM_INT);
+    $courseid = optional_param('course_id', -1, PARAM_INT);
     $pcourse = new stdClass;
     $pcourse->id = -1;
-    if ($course_id != -1) {
+    if ($courseid != -1) {
         // Get the existing data from the Database.
-        $pcourse = block_onboarding\experiences_lib::get_course_by_id($course_id);
+        $pcourse = block_onboarding\experiences_lib::get_course_by_id($courseid);
     }
     $mform = new experiences_course_form(null, array('course' => $pcourse));
 
