@@ -218,9 +218,9 @@ Erfahrungsbericht Id: {$a->experience_id}<br>
 Option: {$a->type}<br>
 Beschreibung: {$a->description}';
 $string['unsus_mail_title'] = 'Dein Erfahrungsbericht ist wieder sichtbar!';
-$string['unsus_mail_text'] = "Hallo,\r\n
-Danke, dass du das Problem behoben hast. Dein Erfahrungsbericht ist wieder sichtbar.\r\n\r\n
-Beste Grüße,\r\n
+$string['unsus_mail_text'] = "Hallo,
+Danke, dass du das Problem behoben hast. Dein Erfahrungsbericht ist wieder sichtbar.\r\n
+Beste Grüße,
 Dein Digital Onboarding Team";
 $string['unsus_mail_html'] = 'Hallo,<br>
 Danke, dass du das Problem behoben hast. Dein Erfahrungsbericht ist wieder sichtbar.<br><br>

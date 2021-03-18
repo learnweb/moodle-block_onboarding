@@ -218,9 +218,9 @@ Experience Id: {$a->experience_id}<br>
 Option: {$a->type}<br>
 Description: {$a->description}';
 $string['unsus_mail_title'] = 'Your Report is public again!';
-$string['unsus_mail_text'] = "Hello,\r\n
-Thank you for resolving the issue. Your Experience report is public again.\r\n\r\n
-Kind Regards,\r\n
+$string['unsus_mail_text'] = "Hello,
+Thank you for resolving the issue. Your Experience report is public again.\r\n
+Kind Regards,
 Your Digital Onboarding Team";
 $string['unsus_mail_html'] = 'Hello,<br>
 Thank you for resolving the issue. Your Experience report is public again.<br><br>
