@@ -53,7 +53,7 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
     $fields1 = 'er.id as id, ee.name as experience, er.experience_id as experience_id, er.type as type, ';
     $fields2 = 'er.description as description, u.firstname as author, er.timecreated as timecreated';
     $fields = $fields1 . $fields2;
-    $from1 = '{block_onb_e_report} er INNER JOIN {user} u ON er.user_id=u.id';
+    $from1 = '{block_onb_e_report} er INNER JOIN {user} u ON er.user_id=u.id ';
     $from2 = 'INNER JOIN {block_onb_e_exps} ee ON er.experience_id=ee.id';
     $from = $from1 . $from2;
     $where = '1=1';
@@ -71,7 +71,7 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
     $fields1 = 'ee.id as id, ee.name as name, u.firstname as author, ec.name as degreeprogram, ';
     $fields2 = 'ee.timecreated as published, ee.timemodified as lastmodified, ee.popularity as popularity';
     $fields = $fields1 . $fields2;
-    $from1 = '{block_onb_e_exps} ee INNER JOIN {user} u ON ee.user_id=u.id';
+    $from1 = '{block_onb_e_exps} ee INNER JOIN {user} u ON ee.user_id=u.id ';
     $from2 = 'INNER JOIN {block_onb_e_courses} ec ON ee.course_id=ec.id';
     $from = $from1 . $from2;
     $where = 'ee.suspended = 1';
