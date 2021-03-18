@@ -138,7 +138,7 @@ class block_onboarding_view_external extends external_api {
                 \block_onboarding\steps_interaction_lib::set_current_user_stepid($step->id);
             }
             // Sets step to completed if step has not been completed before.
-            \block_onboarding\steps_interaction_lib::set_user_completed_step($curposition);
+            \block_onboarding\steps_interaction_lib::set_user_completed_step($curstepid);
             // Gets user steps progress.
             $progress = \block_onboarding\steps_interaction_lib::get_user_progress();
             // Checks whether next step has been completed before.
@@ -209,10 +209,10 @@ class block_onboarding_view_external extends external_api {
             $curposition = \block_onboarding\steps_interaction_lib::get_step_position($curstepid);
             $step = \block_onboarding\steps_interaction_lib::get_next_step_data($curposition, -1);
 
-            // Checks whether next step is out of bounds.
+            // Checks whether preceding step is out of bounds.
             if ($step == -1) {
                 // Uses current step as preceding step when out of bounds.
-                $step = \block_onboarding\steps_interaction_lib::get_step_data($curstepid);
+                $step = \block_onboarding\steps_interaction_lib::get_step_data($curposition);
             } else {
                 // Sets preceding step to current user step when not out of bounds.
                 \block_onboarding\steps_interaction_lib::set_current_user_stepid($step->id);
@@ -529,7 +529,7 @@ class block_onboarding_view_external extends external_api {
         switch ($type) {
             case 'step':
                 require_capability('block/onboarding:s_manage_steps', $context);
-                $returnmessage['text'] = get_string('msg_delete_step_warning', 'block_onboarding') . "sadsa " . $context->name;
+                $returnmessage['text'] = get_string('msg_delete_step_warning', 'block_onboarding') . $context->name;
                 break;
             case 'wiki-category':
                 require_capability('block/onboarding:w_manage_wiki', $context);
