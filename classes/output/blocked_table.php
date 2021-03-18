@@ -70,8 +70,9 @@ class blocked_table extends table_sql {
     }
 
     public function col_actions($values) {
-        return '<span onb-data-id='.$values->id.' onb-data-context="exp-admin-unblock" 
-        class="block-onboarding-confirm-btn block-onboarding-link-btn">' . get_string('unblock', 'block_onboarding') . '</span>';
+        return '<span onb-data-id=' . $values->id .
+            ' onb-data-context="exp-admin-unblock" class="block-onboarding-confirm-btn block-onboarding-link-btn">' .
+            get_string('unblock', 'block_onboarding') . '</span>';
     }
 
     /**
