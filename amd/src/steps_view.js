@@ -90,7 +90,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
 
     $('.back-btn').on('click', function () {
         var promises = ajax.call([{
-            methodname: 'block_onboarding_back_step',
+            methodname: 'block_onboarding_preceding_step',
             args: {}
         }]);
         promises[0].done(function (response) {
