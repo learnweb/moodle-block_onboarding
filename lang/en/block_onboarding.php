@@ -194,7 +194,7 @@ $string['title_missing'] = 'Please enter a title.';
 $string['sus_mail_title'] = 'Correction Experience Report';
 $string['sus_mail_text'] = "Hello,
 We received reports regarding your Experience submission.
-We'd like you to correct the following issue:\r\n\r\n\r\n
+We would like you to correct the following issue:\r\n\r\n\r\n
 As long as this issue is not resolved your submission can not be viewed by other students.
 Thank you for your understanding.\r\n
 Kind Regards,
@@ -218,10 +218,10 @@ Experience Id: {$a->experience_id}<br>
 Option: {$a->type}<br>
 Description: {$a->description}';
 $string['unsus_mail_title'] = 'Your Report is public again!';
-$string['unsus_mail_text'] = "Hello,
+$string['unsus_mail_text'] = 'Hello,
 Thank you for resolving the issue. Your Experience report is public again.\r\n
 Kind Regards,
-Your Digital Onboarding Team";
+Your Digital Onboarding Team';
 $string['unsus_mail_html'] = 'Hello,<br>
 Thank you for resolving the issue. Your Experience report is public again.<br><br>
 Kind Regards,<br>

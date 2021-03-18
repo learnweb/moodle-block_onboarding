@@ -23,7 +23,7 @@ use templatable;
 use renderer_base;
 
 class experiences_overview implements renderable, templatable {
-    var $form = null;
+    private $form;
 
     public function __construct($form) {
         $this->form = $form;

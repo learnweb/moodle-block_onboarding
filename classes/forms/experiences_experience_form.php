@@ -55,10 +55,6 @@ class experiences_experience_form extends moodleform {
         $mform->addRule('course_id', get_string('experience_degreeprogram_missing', 'block_onboarding'), 'required', null,
             'server');
 
-        // About Me Checkbox
-        // $mform->addElement('checkbox', 'aboutme', get_string('aboutme', 'block_onboarding'));
-        // $mform->setDefault('aboutme', true);
-
         // Category Checkboxes.
         $categorygroup = array();
         $categories = $DB->get_records('block_onb_e_cats');
@@ -72,13 +68,12 @@ class experiences_experience_form extends moodleform {
         $mform->addGroup($categorygroup, 'categorygroup', get_string('selectcategories', 'block_onboarding'), '<br>', false);
         $mform->addHelpButton('categorygroup', 'selectcategory', 'block_onboarding');
 
-        // About Me Textarea
+        // About Me Textarea.
         $mform->addElement('textarea', 'aboutme_text', get_string('aboutme', 'block_onboarding'),
             array('style="resize:none" wrap="virtual" rows="4" cols="100"',
                 'placeholder' => get_string('aboutme_default', 'block_onboarding')));
         $mform->setType('aboutme_text', PARAM_TEXT);
         $mform->setDefault('aboutme_text', isset($experience->aboutme) ? $experience->aboutme : "");
-        // $mform->hideIf('aboutme_text', 'aboutme');
 
         // Category Textboxes.
         $categories = $DB->get_records('block_onb_e_cats');
@@ -92,8 +87,6 @@ class experiences_experience_form extends moodleform {
                 array('wrap="virtual" rows="10" cols="100"',
                     'placeholder' => $category->questions));
             $mform->setType('experience_category_' . $category->id . '_description', PARAM_TEXT);
-            // $mform->addRule('experience_category_' . $category->id . '_description',
-            //    get_string('category_missing', 'block_onboarding'), 'required', null, 'server');
             $mform->setDefault('experience_category_' . $category->id . '_description',
                 isset($experiencescategoriesmapped[$category->id]) ?
                     $experiencescategoriesmapped[$category->id]->description : "");
@@ -104,8 +97,6 @@ class experiences_experience_form extends moodleform {
                 get_string('takeaways_required', 'block_onboarding'),
                 array('style="resize:none" wrap="virtual" rows="1" cols="100"',
                     'placeholder' => get_string('takeaways_default', 'block_onboarding')));
-            // $mform->addRule('experience_category_' . $category->id . '_takeaway',
-            //    get_string('takeaways_missing', 'block_onboarding'), 'required', null, 'server');
             $mform->setType('experience_category_' . $category->id . '_takeaway', PARAM_TEXT);
             $mform->setDefault('experience_category_' . $category->id . '_takeaway',
                 isset($experiencescategoriesmapped[$category->id]) ?

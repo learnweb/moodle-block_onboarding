@@ -35,9 +35,8 @@ $PAGE->navbar->add(get_string('report_overview', 'block_onboarding'));
 // Check if the user has the necessary capability.
 if (has_capability('block/onboarding:e_manage_experiences', \context_system::instance())) {
 
-    $table_report = new report_table('uniqueid');
-    $table_suspended = new experience_table('uniqueid');
-    // $PAGE->set_context($context);
+    $tablereport = new report_table('uniqueid');
+    $tablesuspended = new experience_table('uniqueid');
 
     $PAGE->set_title(get_string('report_overview', 'block_onboarding'));
     $PAGE->set_heading(get_string('report_overview', 'block_onboarding'));
@@ -51,16 +50,16 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
     echo html_writer::empty_tag('br');
 
     // SQL statement for report listview.
-    $fields = 'er.id as id, ee.name as experience, er.experience_id as experience_id, er.type as type, er.description as description, 
-    u.firstname as author, er.timecreated as timecreated';
+    $fields = 'er.id as id, ee.name as experience, er.experience_id as experience_id, er.type as type,
+    er.description as description, u.firstname as author, er.timecreated as timecreated';
     $from = '{block_onb_e_report} er
     INNER JOIN {user} u ON er.user_id=u.id
     INNER JOIN {block_onb_e_exps} ee ON er.experience_id=ee.id';
     $where = '1=1';
 
-    $table_report->set_sql($fields, $from, $where);
-    $table_report->define_baseurl("$CFG->wwwroot/blocks/onboarding/experiences/report_overview.php");
-    $table_report->out(5, true);
+    $tablereport->set_sql($fields, $from, $where);
+    $tablereport->define_baseurl("$CFG->wwwroot/blocks/onboarding/experiences/report_overview.php");
+    $tablereport->out(5, true);
 
     // Display Title.
     echo html_writer::empty_tag('br');
@@ -75,9 +74,9 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
     INNER JOIN {block_onb_e_courses} ec ON ee.course_id=ec.id';
     $where = 'ee.suspended = 1';
 
-    $table_suspended->set_sql($fields, $from, $where);
-    $table_suspended->define_baseurl("$CFG->wwwroot/blocks/onboarding/experiences/report_overview.php");
-    $table_suspended->out(5, true);
+    $tablesuspended->set_sql($fields, $from, $where);
+    $tablesuspended->define_baseurl("$CFG->wwwroot/blocks/onboarding/experiences/report_overview.php");
+    $tablesuspended->out(5, true);
 
     echo $output->footer();
 } else {

@@ -44,7 +44,7 @@ $PAGE->set_heading(get_string('experiences', 'block_onboarding'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
 $PAGE->navbar->add(get_string('experiences', 'block_onboarding'));
 
-// Passing the form to the mustache file
+// Passing the form to the mustache file.
 require_once($CFG->dirroot . '/blocks/onboarding/classes/forms/experiences_filter_form.php');
 $mform = new experiences_filter_form(null, null);
 $form = $mform->render();
@@ -65,7 +65,8 @@ if ($fromform = $mform->get_data()) {
     if (empty($fromform->category_filter) != true) {
         // Category Filter applied.
         $sql = 'SELECT experience_id
-        FROM {block_onb_e_exps_cats} matching WHERE category_id IN' . $cats;
+                  FROM {block_onb_e_exps_cats} matching
+                 WHERE category_id IN' . $cats;
         $firstresult = $DB->get_fieldset_sql($sql);
         $sqlfirstresult = '(' . implode(',', $firstresult) . ')';
         if (empty($firstresult) != true) {
@@ -99,7 +100,7 @@ if ($fromform = $mform->get_data()) {
     }
     if ($skip != true) {
         $sql = 'SELECT id
-        FROM {block_onb_e_exps} experiences ' . $w;
+                  FROM {block_onb_e_exps} experiences ' . $w;
         $result = $DB->get_fieldset_sql($sql);
         $sqlresult = '(' . implode(',', $result) . ')';
         if (empty($result) != true) {
