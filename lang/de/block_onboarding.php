@@ -192,40 +192,16 @@ $string['suspend_experience'] = 'Unsichtbar schalten';
 $string['suspend_mail'] = 'Suspend Mail';
 $string['title_missing'] = 'Bitte vergebe einen Titel.';
 $string['sus_mail_title'] = 'Korrektur erforderlich';
-$string['sus_mail_text'] = "Hallo,
-Wir haben eine Meldung bezüglich deines veröffentlichten Erfahrungsberichtes erhalten.
-Wir würden dich darum bitten, das folgende Problem zu korrigieren:\r\n\r\n\r\n
-Solange dieses Problem besteht, können andere Studenten deinen Bericht nicht ansehen.
-Vielen Dank für dein Verständnis.\r\n
-Beste Grüße,
-Dein Digital Onboarding Team";
+$string['sus_mail_text'] = "Hallo,\r\nWir haben eine Meldung bezüglich deines veröffentlichten Erfahrungsberichtes erhalten.\r\nWir würden dich darum bitten, das folgende Problem zu korrigieren:\r\n\r\n\r\n\r\nSolange dieses Problem besteht, können andere Studenten deinen Bericht nicht ansehen.\r\nVielen Dank für dein Verständnis.\r\n\r\nBeste Grüße,\r\nDein Digital Onboarding Team";
 $string['submit_mail'] = 'Sende E-Mail und schalte unsichtbar';
 $string['reports'] = 'Meldungen';
 $string['suspended_experiences'] = 'Unsichtbare Erfahrungsberichte';
 $string['rep_mail_title'] = 'Erfahrungen: Ein Bericht wurde soeben gemeldet';
-$string['rep_mail_text'] = 'Lieber Administrator,\r\n
-Eine neue Meldung wurde soeben erstellt.\r\n
-Bitte überprüfe folgende Informationen:\r\n
-Erfahrungsbericht Titel: {$a->title}\r\n
-Erfahrungsbericht Id: {$a->experience_id}\r\n
-Option: {$a->type}\r\n
-Beschreibung: {$a->description}';
-$string['rep_mail_html'] = 'Lieber Administrator,<br>
-Eine neue Meldung wurde soeben erstellt.<br>
-Bitte überprüfe folgende Informationen:<br>
-Erfahrungsbericht Titel: {$a->title}<br>
-Erfahrungsbericht Id: {$a->experience_id}<br>
-Option: {$a->type}<br>
-Beschreibung: {$a->description}';
+$string['rep_mail_text'] = 'Lieber Administrator,\r\nEine neue Meldung wurde soeben erstellt.\r\nBitte überprüfe folgende Informationen:\r\nErfahrungsbericht Titel: {$a->title}\r\nErfahrungsbericht Id: {$a->experience_id}\r\nOption: {$a->type}\r\nBeschreibung: {$a->description}';
+$string['rep_mail_html'] = 'Lieber Administrator,<br>Eine neue Meldung wurde soeben erstellt.<br>Bitte überprüfe folgende Informationen:<br>Erfahrungsbericht Titel: {$a->title}<br>Erfahrungsbericht Id: {$a->experience_id}<br>Option: {$a->type}<br>Beschreibung: {$a->description}';
 $string['unsus_mail_title'] = 'Dein Erfahrungsbericht ist wieder sichtbar!';
-$string['unsus_mail_text'] = 'Hallo,
-Danke, dass du das Problem behoben hast. Dein Erfahrungsbericht ist wieder sichtbar.\r\n
-Beste Grüße,
-Dein Digital Onboarding Team';
-$string['unsus_mail_html'] = 'Hallo,<br>
-Danke, dass du das Problem behoben hast. Dein Erfahrungsbericht ist wieder sichtbar.<br><br>
-Beste Grüße,<br>
-Dein Digital Onboarding Team';
+$string['unsus_mail_text'] = 'Hallo,\r\nDanke, dass du das Problem behoben hast. Dein Erfahrungsbericht ist wieder sichtbar.\r\n\r\nBeste Grüße,\r\nDein Digital Onboarding Team';
+$string['unsus_mail_html'] = 'Hallo,<br>Danke, dass du das Problem behoben hast. Dein Erfahrungsbericht ist wieder sichtbar.<br><br>Beste Grüße,<br>Dein Digital Onboarding Team';
 $string['blocked_overview'] = 'Geblockte Nutzer';
 $string['unblock'] = 'Unblock';
 $string['popularity'] = 'Beliebtheit';

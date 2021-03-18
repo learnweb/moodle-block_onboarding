@@ -192,40 +192,16 @@ $string['suspend_experience'] = 'Suspend';
 $string['suspend_mail'] = 'Suspend Mail';
 $string['title_missing'] = 'Please enter a title.';
 $string['sus_mail_title'] = 'Correction Experience Report';
-$string['sus_mail_text'] = "Hello,
-We received reports regarding your Experience submission.
-We would like you to correct the following issue:\r\n\r\n\r\n
-As long as this issue is not resolved your submission can not be viewed by other students.
-Thank you for your understanding.\r\n
-Kind Regards,
-Your Digital Onboarding Team";
+$string['sus_mail_text'] = "Hello,\r\nWe received reports regarding your Experience submission.\r\nWe would like you to correct the following issue:\r\n\r\n\r\n\r\nAs long as this issue is not resolved your submission can not be viewed by other students.\r\nThank you for your understanding.\r\n\r\nKind Regards,\r\nYour Digital Onboarding Team";
 $string['submit_mail'] = 'Send Mail and Suspend';
 $string['reports'] = 'Reports';
 $string['suspended_experiences'] = 'Suspended Experiences';
 $string['rep_mail_title'] = 'Experiences: A New Report was just submitted';
-$string['rep_mail_text'] = 'Dear Administrator,\r\n
-A new report has just been submitted.\r\n
-Please review the following information:\r\n
-Experience Title: {$a->title}\r\n
-Experience Id: {$a->experience_id}\r\n
-Option: {$a->type}\r\n
-Description: {$a->description}';
-$string['rep_mail_html'] = 'Dear Administrator,<br>
-A new report has just been submitted.<br>
-Please review the following information:<br>
-Experience Title: {$a->title}<br>
-Experience Id: {$a->experience_id}<br>
-Option: {$a->type}<br>
-Description: {$a->description}';
+$string['rep_mail_text'] = 'Dear Administrator,\r\nA new report has just been submitted.\r\nPlease review the following information:\r\nExperience Title: {$a->title}\r\nExperience Id: {$a->experience_id}\r\nOption: {$a->type}\r\nDescription: {$a->description}';
+$string['rep_mail_html'] = 'Dear Administrator,<br>A new report has just been submitted.<br>Please review the following information:<br>Experience Title: {$a->title}<br>Experience Id: {$a->experience_id}<br>Option: {$a->type}<br>Description: {$a->description}';
 $string['unsus_mail_title'] = 'Your Report is public again!';
-$string['unsus_mail_text'] = 'Hello,
-Thank you for resolving the issue. Your Experience report is public again.\r\n
-Kind Regards,
-Your Digital Onboarding Team';
-$string['unsus_mail_html'] = 'Hello,<br>
-Thank you for resolving the issue. Your Experience report is public again.<br><br>
-Kind Regards,<br>
-Your Digital Onboarding Team';
+$string['unsus_mail_text'] = 'Hello,\r\nThank you for resolving the issue. Your Experience report is public again.\r\n\r\nKind Regards,\r\nYour Digital Onboarding Team';
+$string['unsus_mail_html'] = 'Hello,<br>Thank you for resolving the issue. Your Experience report is public again.<br><br>Kind Regards,<br>Your Digital Onboarding Team';
 $string['blocked_overview'] = 'Blocked Users';
 $string['unblock'] = 'Unblock';
 $string['popularity'] = 'Popularity';

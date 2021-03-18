@@ -50,11 +50,12 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
     echo html_writer::empty_tag('br');
 
     // SQL statement for report listview.
-    $fields = 'er.id as id, ee.name as experience, er.experience_id as experience_id, er.type as type,
-    er.description as description, u.firstname as author, er.timecreated as timecreated';
-    $from = '{block_onb_e_report} er
-    INNER JOIN {user} u ON er.user_id=u.id
-    INNER JOIN {block_onb_e_exps} ee ON er.experience_id=ee.id';
+    $fields1 = 'er.id as id, ee.name as experience, er.experience_id as experience_id, er.type as type, ';
+    $fields2 = 'er.description as description, u.firstname as author, er.timecreated as timecreated';
+    $fields = $fields1 . $fields2;
+    $from1 = '{block_onb_e_report} er INNER JOIN {user} u ON er.user_id=u.id';
+    $from2 = 'INNER JOIN {block_onb_e_exps} ee ON er.experience_id=ee.id';
+    $from = $from1 . $from2;
     $where = '1=1';
 
     $tablereport->set_sql($fields, $from, $where);
@@ -67,11 +68,12 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
     echo html_writer::empty_tag('br');
 
     // SQL statement for suspended listview.
-    $fields = 'ee.id as id, ee.name as name, u.firstname as author, ec.name as degreeprogram, 
-    ee.timecreated as published, ee.timemodified as lastmodified, ee.popularity as popularity';
-    $from = '{block_onb_e_exps} ee
-    INNER JOIN {user} u ON ee.user_id=u.id
-    INNER JOIN {block_onb_e_courses} ec ON ee.course_id=ec.id';
+    $fields1 = 'ee.id as id, ee.name as name, u.firstname as author, ec.name as degreeprogram, ';
+    $fields2 = 'ee.timecreated as published, ee.timemodified as lastmodified, ee.popularity as popularity';
+    $fields = $fields1 . $fields2;
+    $from1 = '{block_onb_e_exps} ee INNER JOIN {user} u ON ee.user_id=u.id';
+    $from2 = 'INNER JOIN {block_onb_e_courses} ec ON ee.course_id=ec.id';
+    $from = $from1 . $from2;
     $where = 'ee.suspended = 1';
 
     $tablesuspended->set_sql($fields, $from, $where);
