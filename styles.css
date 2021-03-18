@@ -82,6 +82,9 @@ ul {
     position: relative;
 }
 
+.block-onboarding-card-block + block-onboarding-card-block{
+    margin-bottom: 0.5em;
+}
 
 .block-onboarding-container {
     padding: 2px 16px;
@@ -89,7 +92,7 @@ ul {
 
 .block-onboarding-card-button {
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
 }
 
 /* ------------------------------------------------- */
