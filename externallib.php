@@ -497,9 +497,11 @@ class block_onboarding_view_external extends external_api {
     /* --------------------------------------------------------------------------------------------------------- */
 
     /**
-     * Generates text to display in a confirmation prompt popup upon clicking an HTML tag with the 'block-onboarding-confirm-btn' CSS class.
+     * Generates text to display in a confirmation prompt popup upon clicking an HTML tag with the
+     * 'block-onboarding-confirm-btn' CSS class.
      * Previously set HTML variables determine the type of prompt to be generated and the id of the object.
-     * Mostly used for warning messages when deleting content such as Steps, Wiki Categories or Experiences and may more use cases.
+     * Mostly used for warning messages when deleting content such as Steps, Wiki Categories or Experiences
+     * and may more use cases.
      *
      * @param int $type Type of prompt to be generated.
      * @param int $id Id of the object.

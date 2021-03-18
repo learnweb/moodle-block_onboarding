@@ -35,24 +35,25 @@ class experiences_experience implements renderable, templatable {
         $experience = $DB->get_record('block_onb_e_exps', array('id' => $this->experienceid));
 
         // SQL Query to get Category content written by the User.
-        $sql = "SELECT *
-                  FROM {block_onb_e_exps_cats} block_onb_e_exps_cats
-            INNER JOIN {block_onb_e_cats} block_onb_e_cats ON block_onb_e_exps_cats.category_id = block_onb_e_cats.id
-                 WHERE block_onb_e_exps_cats.experience_id = {$this->experienceid}";
+        $select = "SELECT * FROM {block_onb_e_exps_cats} block_onb_e_exps_cats ";
+        $join = "INNER JOIN {block_onb_e_cats} block_onb_e_cats ";
+        $on = "ON block_onb_e_exps_cats.category_id = block_onb_e_cats.id ";
+        $where = "WHERE block_onb_e_exps_cats.experience_id = {$this->experienceid}";
+        $sql = $select . $join . $on . $where;
         $experiencescategoriesjoinedcategories = $DB->get_records_sql($sql);
 
         // SQL Query to get Degree Program and Authors Firstname.
-        $sql = "SELECT ee.id, u.firstname as author
-                  FROM {block_onb_e_exps} ee
-            INNER JOIN {user} u ON u.id = ee.user_id
-                 WHERE ee.id = {$this->experienceid}";
+        $select = "SELECT ee.id, u.firstname as author FROM {block_onb_e_exps} ee";
+        $join = "INNER JOIN {user} u ON u.id = ee.user_id";
+        $where = "WHERE ee.id = {$this->experienceid}";
+        $sql = $select . $join . $where;
         $author = $DB->get_record_sql($sql);
 
         // SQL Query to get Degree Program and Authors Firstname.
-        $sql = "SELECT ee.id, ec.name as degreeprogram
-                  FROM {block_onb_e_exps} ee
-            INNER JOIN {block_onb_e_courses} ec ON ee.course_id = ec.id
-                 WHERE ee.id = {$this->experienceid}";
+        $select = "SELECT ee.id, ec.name as degreeprogram FROM {block_onb_e_exps} ee";
+        $join = "INNER JOIN {block_onb_e_courses} ec ON ee.course_id = ec.id";
+        $where = "WHERE ee.id = {$this->experienceid}";
+        $sql = $select . $join . $where;
         $degreeprogram = $DB->get_record_sql($sql);
 
         $report = $DB->get_record('block_onb_e_report',
