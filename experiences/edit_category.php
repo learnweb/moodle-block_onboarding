@@ -43,14 +43,14 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
 
     require_once($CFG->dirroot . '/blocks/onboarding/classes/forms/experiences_category_form.php');
 
-    $category_id = optional_param('category_id', -1, PARAM_INT);
-    $pCategory = new stdClass;
-    $pCategory->id = -1;
-    if ($category_id != -1) {
+    $categoryid = optional_param('category_id', -1, PARAM_INT);
+    $pcategory = new stdClass;
+    $pcategory->id = -1;
+    if ($categoryid != -1) {
         // Get the existing data from the Database.
-        $pCategory = block_onboarding\experiences_lib::get_category_by_id($category_id);
+        $pcategory = block_onboarding\experiences_lib::get_category_by_id($categoryid);
     }
-    $mform = new experiences_category_form(null, array('category' => $pCategory));
+    $mform = new experiences_category_form(null, array('category' => $pcategory));
 
     if ($mform->is_cancelled()) {
         redirect('admin.php');

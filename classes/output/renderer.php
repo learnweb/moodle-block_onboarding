@@ -27,7 +27,7 @@ class renderer extends plugin_renderer_base {
         return parent::render_from_template('block_onboarding/block', $data);
     }
 
-    // Wiki
+    // Wiki.
 
     public function render_wiki_overview(renderable $page) {
         $data = $page->export_for_template($this);
@@ -39,14 +39,14 @@ class renderer extends plugin_renderer_base {
         return parent::render_from_template('block_onboarding/wiki_admin', $data);
     }
 
-    // Steps
+    // Steps.
 
     public function render_steps_admin(renderable $page) {
         $data = $page->export_for_template($this);
         return parent::render_from_template('block_onboarding/steps_admin', $data);
     }
 
-    // Experiences
+    // Experiences.
 
     public function render_experiences_overview(renderable $page) {
         $data = $page->export_for_template($this);
