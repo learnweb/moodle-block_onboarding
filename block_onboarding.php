@@ -69,11 +69,11 @@ class block_onboarding extends block_base {
     }
 
     /**
-     * Enables global configuration for block.
+     * Disables global configuration for block.
      *
-     * @return boolean Global configuration is enabled.
+     * @return boolean Global configuration is disabled.
      */
     public function has_config() {
-        return true;
+        return false;
     }
 }

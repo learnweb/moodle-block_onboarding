@@ -38,6 +38,7 @@ $string['back'] = 'Back';
 $string['backtohome'] = 'Back to Home';
 $string['backtooverview'] = 'Back to Overview';
 $string['backtodashboard'] = 'Back to Dashboard';
+$string['backtomainpage'] = 'Back to Main Page';
 $string['overview'] = 'Overview';
 $string['admin'] = 'Administration';
 $string['settings'] = 'Settings';
