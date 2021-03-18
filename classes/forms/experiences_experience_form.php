@@ -14,22 +14,41 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * File containing the form definition for experience reports.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/formslib.php');
 
+/**
+ * Class providing the form for experience reports.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class experiences_experience_form extends moodleform {
 
+    /**
+     * Form definition.
+     */
     public function definition() {
         global $CFG, $DB, $USER;
 
         $mform = $this->_form;
-
         $experience = $this->_customdata['experience'];
 
+        // Hidden experience report id.
         $mform->addElement('hidden', 'id', $experience->id);
         $mform->setType('id', PARAM_INT);
 
+        // Hidden user id.
         $mform->addElement('hidden', 'user_id', $USER->id);
         $mform->setType('user_id', PARAM_INT);
 
@@ -42,7 +61,7 @@ class experiences_experience_form extends moodleform {
         $mform->setDefault('name', isset($experience->name) ? $experience->name : get_string('default_experience_name',
             'block_onboarding'));
 
-        // Degree Program Drop Down Menu.
+        // Degree Program selector.
         $courses = $DB->get_records('block_onb_e_courses');
         $link = $DB->get_record('block_onb_e_exps', array('id' => $experience->id));
         $coursesmodified = array();
@@ -55,7 +74,7 @@ class experiences_experience_form extends moodleform {
         $mform->addRule('course_id', get_string('experience_degreeprogram_missing', 'block_onboarding'), 'required', null,
             'server');
 
-        // Category Checkboxes.
+        // Category checkboxes.
         $categorygroup = array();
         $categories = $DB->get_records('block_onb_e_cats');
         $experiencescategories = $DB->get_records('block_onb_e_exps_cats', array('experience_id' => $experience->id));
@@ -68,14 +87,14 @@ class experiences_experience_form extends moodleform {
         $mform->addGroup($categorygroup, 'categorygroup', get_string('selectcategories', 'block_onboarding'), '<br>', false);
         $mform->addHelpButton('categorygroup', 'selectcategory', 'block_onboarding');
 
-        // About Me Textarea.
+        // About Me textarea.
         $mform->addElement('textarea', 'aboutme_text', get_string('aboutme', 'block_onboarding'),
             array('style="resize:none" wrap="virtual" rows="4" cols="100"',
                 'placeholder' => get_string('aboutme_default', 'block_onboarding')));
         $mform->setType('aboutme_text', PARAM_TEXT);
         $mform->setDefault('aboutme_text', isset($experience->aboutme) ? $experience->aboutme : "");
 
-        // Category Textboxes.
+        // Category textboxes.
         $categories = $DB->get_records('block_onb_e_cats');
         $experiencescategories = $DB->get_records('block_onb_e_exps_cats', array('experience_id' => $experience->id));
         $experiencescategoriesmapped = array();
@@ -92,7 +111,7 @@ class experiences_experience_form extends moodleform {
                     $experiencescategoriesmapped[$category->id]->description : "");
             $mform->hideIf('experience_category_' . $category->id . '_description', 'category_' . $category->id);
 
-            // Key Takeaway Field.
+            // Key Takeaway field.
             $mform->addElement('textarea', 'experience_category_' . $category->id . '_takeaway',
                 get_string('takeaways_required', 'block_onboarding'),
                 array('style="resize:none" wrap="virtual" rows="1" cols="100"',
@@ -104,7 +123,7 @@ class experiences_experience_form extends moodleform {
             $mform->hideIf('experience_category_' . $category->id . '_takeaway', 'category_' . $category->id);
         }
 
-        // Contact Field.
+        // Contact field.
         $mform->addElement('textarea', 'contact', get_string('experience_contact', 'block_onboarding'),
             array('style="resize:none" wrap="virtual" rows="1" cols="60"'));
         $mform->addRule('contact', 'Max Length is 30 characters', 'maxlength', 30, 'block_onboarding');
@@ -112,14 +131,11 @@ class experiences_experience_form extends moodleform {
         $mform->setDefault('contact', isset($experience->contact) ? $experience->contact : '');
         $mform->addHelpButton('contact', 'contactinformation', 'block_onboarding');
 
+        // Adds 'Publish'-, 'Draft'- and 'Cancel'-buttons.
         $buttonarray = array();
         $buttonarray[] = $mform->createElement('submit', 'publish', get_string('publish', 'block_onboarding'));
         $buttonarray[] = $mform->createElement('submit', 'draft', get_string('savedraft', 'block_onboarding'));
         $buttonarray[] = $mform->createElement('cancel');
         $mform->addGroup($buttonarray, 'buttonar', '', ' ', false);
-    }
-
-    public function validation($data, $files) {
-        return array();
     }
 }
