@@ -43,21 +43,21 @@ class experiences_experience implements renderable, templatable {
         $experiencescategoriesjoinedcategories = $DB->get_records_sql($sql);
 
         // SQL Query to get Degree Program and Authors Firstname.
-        $select = "SELECT ee.id, u.firstname as author FROM {block_onb_e_exps} ee";
-        $join = "INNER JOIN {user} u ON u.id = ee.user_id";
+        $select = "SELECT ee.id, u.firstname as author FROM {block_onb_e_exps} ee ";
+        $join = "INNER JOIN {user} u ON u.id = ee.user_id ";
         $where = "WHERE ee.id = {$this->experienceid}";
         $sql = $select . $join . $where;
         $author = $DB->get_record_sql($sql);
 
         // SQL Query to get Degree Program and Authors Firstname.
-        $select = "SELECT ee.id, ec.name as degreeprogram FROM {block_onb_e_exps} ee";
-        $join = "INNER JOIN {block_onb_e_courses} ec ON ee.course_id = ec.id";
+        $select = "SELECT ee.id, ec.name as degreeprogram FROM {block_onb_e_exps} ee ";
+        $join = "INNER JOIN {block_onb_e_courses} ec ON ee.course_id = ec.id ";
         $where = "WHERE ee.id = {$this->experienceid}";
         $sql = $select . $join . $where;
         $degreeprogram = $DB->get_record_sql($sql);
 
         $report = $DB->get_record('block_onb_e_report',
-            array('experience_id' => $this->experience_id, 'user_id' => $USER->id));
+            array('experience_id' => $this->experienceid, 'user_id' => $USER->id));
 
         return [
             'can_edit_experience' => has_capability('block/onboarding:e_manage_experiences',
