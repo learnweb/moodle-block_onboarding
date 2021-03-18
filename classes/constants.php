@@ -29,25 +29,39 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Constants for the onboarding block.
- * As of March 2021 constants are only used for the different categories of the report function in the Experiences section.
+ * As of March 2021 constants are only used for the different types of the report form in the Experiences section.
  *
  * @package    block_onboarding
  * @copyright  2021 Westfälische Wilhelms-Universität Münster
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class constants {
-    /** @var string */
+    /**
+     * This is used when the experience includes spam or advertisement.
+     */
     const SPAM = 'spam/advertisement';
-    /** @var string */
+    /**
+     * This is used when the experience includes profanity.
+     */
     const PROFANITY = 'profanity';
-    /** @var string */
+    /**
+     * This is used when the experience includes offensive content.
+     */
     const OFFENSIVE = 'offensive content';
-    /** @var string */
+    /**
+     * This is used when the experience includes false information.
+     */
     const FALSEINFO = 'false information';
-    /** @var string */
+    /**
+     * This is used when the content for a category of the experience does not fit the category.
+     */
     const FALSEMATCH = 'content does not fit category';
-    /** @var string */
+    /**
+     * This is used when the experience includes personal information.
+     */
     const PERSONALINFO = 'disclosure of personal information';
-    /** @var string */
+    /**
+     * This is used when the experience has another issue that can not be described with the constants above.
+     */
     const OTHER = 'other';
 }

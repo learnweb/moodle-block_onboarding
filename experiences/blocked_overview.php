@@ -37,7 +37,7 @@ global $DB;
 $context = context_system::instance();
 
 $PAGE->set_context($context);
-$PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/report_overview.php'));
+$PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/blocked_overview.php'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
 $PAGE->navbar->add(get_string('experiences', 'block_onboarding'), new moodle_url('overview.php'));
 $PAGE->navbar->add(get_string('experience_admin', 'block_onboarding'), new moodle_url('admin.php'));

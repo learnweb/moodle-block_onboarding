@@ -39,7 +39,7 @@ class experiences_lib {
     /**
      * Either edits an existing experience or creates a new one.
      *
-     * @param object $fromform
+     * @param object $fromform Form parameters passed from edit_experience.php.
      */
     public static function edit_experience($fromform) {
         global $DB;
@@ -49,12 +49,11 @@ class experiences_lib {
         $experience->name = $fromform->name;
         $experience->contact = isset($fromform->contact) ? $fromform->contact : null;
         if ($fromform->id == -1) {
-            // TODO muss hier isset?
-            $experience->user_id = isset($fromform->user_id) ? $fromform->user_id : null;
+            $experience->user_id = $fromform->user_id;
             $experience->timecreated = time();
         }
-        // TODO muss hier isset?
-        $experience->course_id = isset($fromform->course_id) ? $fromform->course_id : null;
+
+        $experience->course_id = $fromform->course_id;
         if (!empty($fromform->publish)) {
             $experience->published = 1;
         } else {
@@ -66,9 +65,6 @@ class experiences_lib {
 
         if (isset($fromform->aboutme_text)) {
             $experience->aboutme = $fromform->aboutme_text;
-        } else {
-            // TODO muss hier else?
-            $experience->aboutme = null;
         }
 
         // Experience is either updated or newly created.
@@ -84,11 +80,11 @@ class experiences_lib {
         $insertcategories = array();
 
         foreach ($categories as $category) {
-            $formproperty_category_checkbox = 'category_' . $category->id;
+            $formpropertycategorycheckbox = 'category_' . $category->id;
             $formpropertycategorytextarea = 'experience_category_' . $category->id . '_description';
 
             // Check whether the checkbox for a category was checked and something was written in the textarea.
-            if (isset($fromform->$formproperty_category_checkbox) && empty($fromform->$formpropertycategorytextarea) == false) {
+            if (isset($fromform->$formpropertycategorycheckbox) && empty($fromform->$formpropertycategorytextarea) == false) {
                 // Translates form data to new object for further processing.
                 $experiencecategory = new \stdClass;
                 $formpropertycategorytextarea = 'experience_category_' . $category->id . '_description';
@@ -127,18 +123,18 @@ class experiences_lib {
     /**
      * Deletes an existing category from the database.
      *
-     * @param int $experience_id
+     * @param int $experienceid Id of experience which is to be deleted.
      */
-    public static function delete_experience($experience_id) {
+    public static function delete_experience($experienceid) {
         global $DB;
-        $DB->delete_records('block_onb_e_exps_cats', array('experience_id' => $experience_id));
-        $DB->delete_records('block_onb_e_exps', array('id' => $experience_id));
+        $DB->delete_records('block_onb_e_exps_cats', array('experience_id' => $experienceid));
+        $DB->delete_records('block_onb_e_exps', array('id' => $experienceid));
     }
 
     /**
      * sets the experience report invisible and sends an email to the author.
      *
-     * @param object $fromform
+     * @param object $fromform Form parameters passed from suspend_experience.php.
      */
     public static function suspend_experience($fromform) {
         global $USER, $DB;
@@ -149,9 +145,7 @@ class experiences_lib {
                 INNER JOIN {block_onb_e_exps} ee ON u.id = ee.user_id
                 WHERE ee.id = ' . $fromform->experience_id;
 
-        $recipient = $DB->get_record_sql($sql);
-
-        $toUser = $recipient;
+        $toUser = $DB->get_record_sql($sql);
         $fromUser = $USER;
         $subject = $fromform->title;
         $messageText = $fromform->comment;
@@ -167,7 +161,7 @@ class experiences_lib {
      * Determines whether an existing category is updated or a new category is added.
      * Calls {@see add_category()} for new categories and {@see update_category()} to update existing categories.
      *
-     * @param object $fromform
+     * @param object $fromform Form parameters passed from edit_category.php.
      */
     public static function edit_category($fromform) {
         // Translates form data to new object for further processing.
@@ -190,7 +184,7 @@ class experiences_lib {
     /**
      * Inserts a new category into the database.
      *
-     * @param object $category
+     * @param object $category Category object with form parameters.
      */
     public static function add_category($category) {
         global $DB;
@@ -200,7 +194,7 @@ class experiences_lib {
     /**
      * Updates an existing category in the database.
      *
-     * @param object $category
+     * @param object $category Category object with form parameters.
      */
     public static function update_category($category) {
         global $DB;
@@ -210,7 +204,7 @@ class experiences_lib {
     /**
      * Deletes an existing category from the database.
      *
-     * @param int $categoryid
+     * @param int $categoryid Id of category which is to be deleted.
      */
     public static function delete_category($categoryid) {
         global $DB;
@@ -222,7 +216,7 @@ class experiences_lib {
     /**
      * Returns Category Object.
      *
-     * @param int $categoryid
+     * @param int $categoryid Id of category which is to be returned.
      * @return object Category.
      */
     public static function get_category_by_id($categoryid) {
@@ -234,7 +228,7 @@ class experiences_lib {
      * Determines whether an existing course is updated or a new course is added.
      * Calls {@see add_course()} for new courses and {@see update_course()} to update existing courses.
      *
-     * @param object $fromform
+     * @param object $fromform Form parameters passed from edit_course.php.
      */
     public static function edit_course($fromform) {
         // Data written in the Database.
@@ -254,7 +248,7 @@ class experiences_lib {
     /**
      * Inserts a new course into the database.
      *
-     * @param object $course
+     * @param object $course Course object with form parameters.
      */
     public static function add_course($course) {
         global $DB;
@@ -264,7 +258,7 @@ class experiences_lib {
     /**
      * Updates an existing course in the database.
      *
-     * @param object $course
+     * @param object $course Course object with form parameters.
      */
     public static function update_course($course) {
         global $DB;
@@ -274,7 +268,7 @@ class experiences_lib {
     /**
      * Deletes an existing course from the database.
      *
-     * @param int $courseid
+     * @param int $courseid Id of course which is to be deleted.
      */
     public static function delete_course($courseid) {
         global $DB;
@@ -286,7 +280,7 @@ class experiences_lib {
     /**
      * Returns Course Object.
      *
-     * @param int $courseid
+     * @param int $courseid Id of course which is to be returned.
      * @return object Course.
      */
     public static function get_course_by_id($courseid) {
@@ -297,7 +291,7 @@ class experiences_lib {
     /**
      * Creates a report and sends a notification email to the administrator.
      *
-     * @param object $fromform
+     * @param object $fromform Form parameters passed from report_experience.php.
      */
     public static function edit_report($fromform) {
         global $USER, $DB;
@@ -312,25 +306,14 @@ class experiences_lib {
         $report->id = $DB->insert_record('block_onb_e_report', $report);
 
         // TODO Mail function has to be tested
-        // TODO: define receiving user
-        // Get the database entry for the recipient.
-        $sql = 'SELECT * FROM {user} u
-                INNER JOIN {block_onb_e_exps} ee ON u.id = ee.user_id
-                WHERE ee.id = ' . $fromform->experience_id;
-
-        $recipient = $DB->get_record_sql($sql);
 
         // Define necessary parameters for "email_to_user" function.
-        $toUser = $recipient;
+        $toUser = get_admin();
         $fromUser = $USER;
         $subject = get_string('rep_mail_title', 'block_onboarding');
-        $title = $DB->get_field('block_onb_e_exps', 'name', array('id' => $report->experience_id));
-        $message = get_string('rep_mail_comment', 'block_onboarding') . $title .
-            get_string('rep_mail_exps_id', 'block_onboarding') . $report->experience_id .
-            get_string('rep_mail_option', 'block_onboarding') . $report->type .
-            get_string('rep_mail_description', 'block_onboarding') . $report->description;
-        $messageText = $message;
-        $messageHtml = $message;
+        $report->title = $DB->get_field('block_onb_e_exps', 'name', array('id' => $report->experience_id));
+        $messageText = get_string('rep_mail_text', 'block_onboarding', $report);
+        $messageHtml = get_string('rep_mail_html', 'block_onboarding', $report);
 
         // Sends email to administrator.
         email_to_user($toUser, $fromUser, $subject, $messageText, $messageHtml, '', '', true);
@@ -339,64 +322,61 @@ class experiences_lib {
     /**
      * Sets the experience to visible and sends a notification mail to the author.
      *
-     * @param object $experience_id
+     * @param object $experienceid Id of experience which is to be unsuspended.
      */
-    public static function unsuspend_experience($experience_id) {
+    public static function unsuspend_experience($experienceid) {
         global $USER, $DB;
 
         // TODO Mail function has to be tested
         // Get the database entry for the recipient.
         $sql = 'SELECT * FROM {user} u
                 INNER JOIN {block_onb_e_exps} ee ON u.id = ee.user_id
-                WHERE ee.id = ' . $experience_id;
+                WHERE ee.id = ' . $experienceid;
 
-        $recipient = $DB->get_record_sql($sql);
-
-        $toUser = $recipient;
+        $toUser = $DB->get_record_sql($sql);
         $fromUser = $USER;
         $subject = get_string('unsus_mail_title', 'block_onboarding');
-        $message = get_string('unsus_mail_comment', 'block_onboarding');
-        $messageText = $message;
-        $messageHtml = $message;
+        $messageText = get_string('unsus_mail_text', 'block_onboarding');
+        $messageHtml = get_string('unsus_mail_html', 'block_onboarding');
 
         // Sends email to the author.
         email_to_user($toUser, $fromUser, $subject, $messageText, $messageHtml, '', '', true);
 
         // Sets "suspended" for the experience in question to "null".
-        $DB->set_field('block_onb_e_exps', 'suspended', null, array('id' => $experience_id));
+        $DB->set_field('block_onb_e_exps', 'suspended', null, array('id' => $experienceid));
     }
 
     /**
      * Deletes an existing report from the database.
      *
-     * @param int $report_id
+     * @param int $reportid Id of report which is to be deleted.
      */
-    public static function delete_report($report_id) {
+    public static function delete_report($reportid) {
         global $DB;
         // Deletion of the report.
-        $DB->delete_records('block_onb_e_report', array('id' => $report_id));
+        $DB->delete_records('block_onb_e_report', array('id' => $reportid));
     }
 
     /**
      * Reinstates the users ability to create an experience.
      *
-     * @param int $user_id
+     * @param int $userid Id of user which is to be unblocked.
      */
-    public static function unblock_user($user_id) {
+    public static function unblock_user($userid) {
         global $DB;
         // Deletion of the report.
-        $DB->delete_records('block_onb_e_blocked', array('user_id' => $user_id));
+        $DB->delete_records('block_onb_e_blocked', array('user_id' => $userid));
     }
 
     /**
      * Takes the users ability to create an experience.
      *
-     * @param int $experience_id
+     * @param int $experienceid Id of experience whose author is to be blocked.
      */
-    public static function block_user($experience_id) {
+    public static function block_user($experienceid) {
         global $DB;
 
-        $experience = $DB->get_record('block_onb_e_exps', array('id' => $experience_id));
+        $experience = $DB->get_record('block_onb_e_exps', array('id' => $experienceid));
 
         $user = new \stdClass();
         $user->user_id = $experience->user_id;
