@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The file for the report table class.
+ * The file for the blocked table class.
  *
  * @package    block_onboarding
  * @copyright  2021 Westfälische Wilhelms-Universität Münster
@@ -25,13 +25,13 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Class defining the reported experiences table.
+ * Class defining the blocked users table.
  *
  * @package    block_onboarding
  * @copyright  2021 Westfälische Wilhelms-Universität Münster
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class report_table extends table_sql {
+class blocked_table extends table_sql {
 
     /**
      * Constructor.
@@ -42,61 +42,52 @@ class report_table extends table_sql {
     public function __construct($uniqueid) {
         parent::__construct($uniqueid);
         // Define the list of columns to show.
-        $columns = array('experience', 'experience_id', 'type', 'description', 'author', 'timecreated', 'actions');
+        $columns = array('id', 'firstname', 'lastname', 'blockedsince', 'actions');
         $this->define_columns($columns);
 
         // Define the titles of columns to show in header.
-        $headers = array(get_string('experience', 'block_onboarding'), get_string('id', 'block_onboarding'),
-            get_string('option', 'block_onboarding'), get_string('experience_description', 'block_onboarding'),
-            get_string('author', 'block_onboarding'), get_string('submitted', 'block_onboarding'),
+        $headers = array(get_string('id', 'block_onboarding'), get_string('firstname', 'block_onboarding'),
+            get_string('lastname', 'block_onboarding'), get_string('blockedsince', 'block_onboarding'),
             get_string('actions', 'block_onboarding'));
         $this->define_headers($headers);
 
         // Table configuration.
         $this->set_attribute('cellspacing', '0');
-        $this->sortable(true, 'timecreated', SORT_DESC);
+        $this->sortable(true, 'blockedsince', SORT_DESC);
         $this->no_sorting('actions');
         $this->initialbars(false);
         $this->collapsible(false);
     }
 
     /**
-     * This function is called for each data row to allow processing of the report value.
+     * This function is called for each data row to allow processing of the blocked user value.
      *
      * @param object $values Contains object with all the values of record.
      * @return string Return content for each column.
      */
 
     // Configure Column Content.
-    public function col_experience($values) {
-        return '<a href="experience.php?experience_id=' . $values->experience_id . '">' . $values->experience . '</a>';
+    public function col_id($values) {
+        return $values->id;
     }
 
-    public function col_experience_id($values) {
-        return $values->experience_id;
+    public function col_firstname($values) {
+        return $values->firstname;
     }
 
-    public function col_type($values) {
-        return $values->type;
+    public function col_lastname($values) {
+        return $values->lastname;
     }
 
-    public function col_description($values) {
-        return $values->description;
-    }
-
-    public function col_author($values) {
-        return $values->author;
-    }
-
-    public function col_timecreated($values) {
-        $date = userdate($values->timecreated, get_string('strftimedatetimeshort', 'core_langconfig'));
+    public function col_blockedsince($values) {
+        $date = userdate($values->blockedsince, get_string('strftimedatetimeshort', 'core_langconfig'));
         return $date;
     }
 
     public function col_actions($values) {
-        return '<span onb-data-id='.$values->id.
-            ' onb-data-context="exp-admin-report" class="block-onboarding-confirm-btn block-onboarding-link-btn">' .
-            get_string('delete', 'block_onboarding') . '</span>';
+        return '<span onb-data-id=' . $values->id .
+            ' onb-data-context="exp-admin-unblock" class="block-onboarding-confirm-btn block-onboarding-link-btn">' .
+            get_string('unblock', 'block_onboarding') . '</span>';
     }
 
     /**

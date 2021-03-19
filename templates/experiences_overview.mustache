@@ -1,9 +1,9 @@
-<div class="block-experiences-overview-experiences">
+<div class="block-onboarding-experiences-overview-experiences">
     <navigation>
         <a href="../index.php">
             {{#pix}}t/left, core,Back{{/pix}}{{# str }}backtohome, block_onboarding{{/ str }}
         </a>
-        <div class="experiences-title-wrapper">
+        <div class="block-onboarding-experiences-title-wrapper">
             {{#can_manage_experiences}}
                 <a href="admin.php">
                     {{#pix}}i/settings, core, {{# str }}settings, block_onboarding{{/ str }}{{/pix}}
@@ -16,27 +16,22 @@
         {{#form}}{{{form}}}{{/form}}
     </filter>
     <aside>
-        <div class="block-experiences-overview-experiences-actions">
-            <div class="title">{{# str }} myexperiencearea, block_onboarding {{/ str }}</div>
-            {{^experience}}
-                <a href="edit_experience.php">{{# str }}newexperience, block_onboarding{{/ str }}</a>
-            {{/experience}}
+        <div class="block-onboarding-experiences-overview-experiences-actions">
+            <div class="block-onboarding-title">{{# str }} myexperiencearea, block_onboarding {{/ str }}</div>
             <br>
-            <div class="title-2-light">{{#experience}}
-                <a href="experience.php?experience_id={{{id}}}">
-                    {{{name}}}
-                    {{^published}}[{{# str }}draft, block_onboarding{{/ str }}]{{/published}}
-                </a>
+            {{^blocked}}
+                {{^experience}}
+                    <div class="block-onboarding-title-2-light">
+                        <a href="edit_experience.php">{{# str }}newexperience, block_onboarding{{/ str }} {{#pix}}t/editstring, core {{/pix}}</a>
+                    </div>
+                {{/experience}}
+            {{/blocked}}
+            {{#experience}}
+                <div class="block-onboarding-title-2-light">
+                    <a href="experience.php?experience_id={{{id}}}">{{{name}}} {{^published}}[{{# str }}draft, block_onboarding{{/ str }}]{{/published}}</a>
+                    <a href="edit_experience.php?experience_id={{{id}}}">{{#pix}}t/editstring, core, {{# str }}edit_experience, block_onboarding{{/ str }}{{/pix}}</a><span onb-data-id="{{{id}}}" onb-data-context="exp-my-exp" class="block-onboarding-confirm-btn">{{#pix}}t/delete, core, {{# str }}edit_experience, block_onboarding{{/ str }}{{/pix}}</span>
+                </div>
             {{/experience}}
-            {{#experiences_with_categories}}{{#editable}}
-                <a href="edit_experience.php?experience_id={{{id}}}">
-                    {{#pix}}t/editstring, core, {{# str }}edit_experience, block_onboarding{{/ str }}{{/pix}}
-                </a>
-                <span onb-data-id="{{{id}}}" onb-data-context="exp-my-exp" class="delete-btn">
-                    {{#pix}}t/delete, core, {{# str }}edit_experience, block_onboarding{{/ str }}{{/pix}}
-                </span>
-            {{/editable}}{{/experiences_with_categories}}</div>
-            <!--{{#categories_general}}<p class="block-experiences-overview-category-badge">{{{name}}}</p> {{/categories_general}}-->
         </div>
     </aside>
 </div>

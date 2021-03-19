@@ -14,6 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * The file for the steps_admin rederable class.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 namespace block_onboarding\output\renderables;
 
 defined('MOODLE_INTERNAL') || die();
@@ -23,29 +30,40 @@ use renderable;
 use templatable;
 use renderer_base;
 
+/**
+ * Class exporting the steps_admin rederable for the template.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class steps_admin implements renderable, templatable {
-  public function __construct() {
-  }
 
-  public function export_for_template(renderer_base $output) {
-    global $DB;
-
-    //$steps = array_values($DB->get_records_sql('SELECT * FROM {block_onb_s_steps} ORDER BY position ASC'));
-
-    $steps = array_values($DB->get_records('block_onb_s_steps', $conditions=null, $sort='position ASC'));
-
-    foreach($steps as $step){
-        if($step->achievement == 1){
-            $step->achievement = get_string('step_achievement', 'block_onboarding');
-        } else {
-            $step->achievement = get_string('step_step', 'block_onboarding');
-        }
+    /**
+     * Constructor function.
+     */
+    public function __construct() {
     }
 
+    /**
+     * Template export function.
+     */
+    public function export_for_template(renderer_base $output) {
+        global $DB;
 
-    return [
-      'can_manage_wiki' => has_capability('block/onboarding:s_manage_steps', \context_system::instance()),
-      'steps' => $steps
-    ];
-  }
+        $steps = array_values($DB->get_records('block_onb_s_steps', $conditions = null, $sort = 'position ASC'));
+
+        foreach ($steps as $step) {
+            if ($step->achievement == 1) {
+                $step->achievement = get_string('step_achievement', 'block_onboarding');
+            } else {
+                $step->achievement = get_string('step_step', 'block_onboarding');
+            }
+        }
+
+        return [
+            'can_manage_wiki' => has_capability('block/onboarding:s_manage_steps', \context_system::instance()),
+            'steps' => $steps
+        ];
+    }
 }

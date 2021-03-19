@@ -14,52 +14,76 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * File containing the form definition for Wiki links.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 defined('MOODLE_INTERNAL') || die();
+
 
 require_once($CFG->libdir . '/formslib.php');
 
+/**
+ * Class providing the form for Wiki links.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class wiki_link_form extends moodleform {
 
+    /**
+     * Form definition.
+     */
     public function definition() {
         global $CFG, $DB;
 
         $mform = $this->_form;
-
         $link = $this->_customdata['link'];
 
-        $mform->addElement('hidden','id', $link->id);
+        // Hidden link id.
+        $mform->addElement('hidden', 'id', $link->id);
         $mform->setType('id', PARAM_INT);
 
-        $mform->addElement('text', 'name', get_string('link_name', 'block_onboarding'), array('maxlength'=>150, 'placeholder'=>get_string('default_link_name', 'block_onboarding')));
+        // Link name field.
+        $mform->addElement('text', 'name', get_string('link_name', 'block_onboarding'),
+            array('maxlength' => 150, 'size' => 30, 'placeholder' => get_string('default_link_name', 'block_onboarding')));
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($link->name) ? $link->name : '');
         $mform->addRule('name', get_string('link_name_req', 'block_onboarding'), 'required', null, 'client');
 
+        // Category select field.
         $categories = $DB->get_records('block_onb_w_categories');
-        $categories_modified = array();
-        foreach($categories as $category){
-          $categories_modified[$category->id] = $category->name;
+        $categoriesmodified = array();
+        foreach ($categories as $category) {
+            $categoriesmodified[$category->id] = $category->name;
         }
-        $mform->addElement('select', 'category_id', get_string('link_category', 'block_onboarding'), $categories_modified);
-        if(isset($link->category_id)){
-          $mform->setDefault('category_id', $link->category_id);
+        $mform->addElement('select', 'category_id', get_string('link_category', 'block_onboarding'), $categoriesmodified);
+        if (isset($link->category_id)) {
+            $mform->setDefault('category_id', $link->category_id);
         }
         $mform->addRule('category_id', get_string('link_category_req', 'block_onboarding'), 'required', null, 'client');
 
-        $mform->addElement('text', 'url', get_string('link_url', 'block_onboarding'), array('maxlength'=>255, 'size'=>48, 'placeholder'=>get_string('default_link_url', 'block_onboarding')));
+        // Link URL field.
+        $mform->addElement('text', 'url', get_string('link_url', 'block_onboarding'),
+            array('maxlength' => 255, 'size' => 48, 'placeholder' => get_string('default_link_url', 'block_onboarding')));
         $mform->setType('url', PARAM_TEXT);
         $mform->setDefault('url', isset($link->url) ? $link->url : '');
         $mform->addRule('url', get_string('link_url_req', 'block_onboarding'), 'required', null, 'client');
 
-        $mform->addElement('textarea', 'description', get_string('link_description', 'block_onboarding'), array('wrap'=>"virtual", 'rows'=>10, 'cols'=>50, 'placeholder'=>get_string('link_description_req', 'block_onboarding')));
+        // Link description field.
+        $mform->addElement('textarea', 'description', get_string('link_description', 'block_onboarding'),
+            array('wrap' => "virtual", 'rows' => 10, 'cols' => 50,
+                'placeholder' => get_string('link_description_req', 'block_onboarding')));
         $mform->setType('description', PARAM_TEXT);
         $mform->setDefault('description', isset($link->description) ? $link->description : '');
         $mform->addRule('description', get_string('link_description_req', 'block_onboarding'), 'required', null, 'client');
 
+        // Adds 'Submit'- and 'Cancel'-buttons.
         $this->add_action_buttons();
-    }
-
-    public function validation($data, $files) {
-        return array();
     }
 }

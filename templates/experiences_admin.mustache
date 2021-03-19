@@ -1,59 +1,33 @@
-<a href="overview.php">
-    {{#pix}}t/left, core, {{# str }}back, block_onboarding{{/ str }}{{/pix}}
-    {{# str }}backtooverview, block_onboarding{{/ str }}
-</a>
+<a href="overview.php">{{#pix}}t/left, core, {{# str }}back, block_onboarding{{/ str }}{{/pix}}{{# str }}backtooverview, block_onboarding{{/ str }}</a>
 <br>
-<div class="block-experiences-overview-report">
-    <div class="title">{{# str }}report_overview, block_onboarding{{/ str }}</div>
-    <div class="block-experiences-overview-report-actions">
-        <a href="report_overview.php"> {{# str }}report_overview, block_onboarding{{/ str }}</a>
+<div class="block-onboarding-experiences-overview-report">
+    <div class="block-onboarding-title">{{# str }}report_overview, block_onboarding{{/ str }}</div>
+    <div class="block-onboarding-experiences-overview-report-actions">
+        <a href="report_overview.php"> {{# str }}report_overview, block_onboarding{{/ str }}</a><br>
+        <a href="blocked_overview.php"> {{# str }}blocked_overview, block_onboarding{{/ str }}</a>
     </div>
 </div>
-<div class="block-experiences-overview-categories">
-    <div class="title">{{# str }}category_filter, block_onboarding{{/ str }}</div>
-    <div class="block-experiences-overview-categories-actions">
-        <a href="edit_category.php">{{# str }}newcategory, block_onboarding{{/ str }}</a>
+<div class="block-onboarding-experiences-overview-categories">
+    <div class="block-onboarding-title">{{# str }}category_filter, block_onboarding{{/ str }}</div>
+    <div class="block-onboarding-experiences-overview-categories-actions">
+        <a href="edit_category.php">{{# str }}new_category, block_onboarding{{/ str }}</a>
     </div>
     {{#categories_general}}
-        <div class="block-experiences-overview-category">
-            <div class="block-experiences-overview-category-text">{{{name}}}</div>
-            <a href="edit_category.php?category_id={{{id}}}">
-            {{#pix}}t/editstring, core, {{# str }}edit_category, block_onboarding{{/ str }}{{/pix}}
-            </a>
-            <span onb-data-id="{{{id}}}" onb-data-context="exp-category" class="delete-btn">
-                {{#pix}}t/delete, core, {{# str }}delete_category, block_onboarding{{/ str }}{{/pix}}
-            </span>
+        <div class="block-onboarding-experiences-overview-category">
+            <div class="block-onboarding-experiences-overview-category-text">{{{name}}}</div>
+            <a href="edit_category.php?category_id={{{id}}}">{{#pix}}t/editstring, core, {{# str }}edit_category, block_onboarding{{/ str }}{{/pix}}</a><span onb-data-id="{{{id}}}" onb-data-context="exp-category" class="block-onboarding-confirm-btn">{{#pix}}t/delete, core, {{# str }}delete_category, block_onboarding{{/ str }}{{/pix}}</span>
         </div>
     {{/categories_general}}
 </div>
-<div class="block-experiences-overview-courses">
-    <div class="title">Degree Programs</div>
-    <div class="block-experiences-overview-courses-actions">
+<div class="block-onboarding-experiences-overview-courses">
+    <div class="block-onboarding-title">{{# str }}degreeprograms, block_onboarding{{/ str }}</div>
+    <div class="block-onboarding-experiences-overview-courses-actions">
         <a href="edit_course.php">{{# str }}newdegreeprogram, block_onboarding{{/ str }}</a>
     </div>
     {{#courses_general}}
-        <div class="block-experiences-overview-course">
-            <div class="block-experiences-overview-course-text">{{{name}}}</div>
-            <a href="edit_course.php?course_id={{{id}}}">
-                {{#pix}}t/editstring, core, {{# str }}edit_course, block_onboarding{{/ str }}{{/pix}}
-            </a>
-            <span onb-data-id="{{{id}}}" onb-data-context="exp-course" class="delete-btn">
-                {{#pix}}t/delete, core, {{# str }}delete_course, block_onboarding{{/ str }}{{/pix}}
-            </span>
+        <div class="block-onboarding-experiences-overview-course">
+            <div class="block-onboarding-experiences-overview-course-text">{{{name}}}</div>
+            <a href="edit_course.php?course_id={{{id}}}">{{#pix}}t/editstring, core, {{# str }}edit_course, block_onboarding{{/ str }}{{/pix}}</a><span onb-data-id="{{{id}}}" onb-data-context="exp-course" class="block-onboarding-confirm-btn">{{#pix}}t/delete, core, {{# str }}delete_course, block_onboarding{{/ str }}{{/pix}}</span>
         </div>
     {{/courses_general}}
 </div>
-<!--
-<div class="block-experiences-overview-experiences">
-  <h2>Experiences</h2>
-  <div class="block-experiences-overview-experiences-actions">
-    <a href="edit_experience.php">New Experience</a>
-  </div>
-  {{#experiences_with_categories}}
-      <div>
-        <h4><a href="experience.php?experience_id={{{id}}}">{{{name}}}</a> {{#editable}} <a href="edit_experience.php?experience_id={{{id}}}">{{#pix}}t/editstring, core, Edit Experience{{/pix}}</a><a href="delete_experience.php?experience_id={{{id}}}">{{#pix}}t/delete, core, Delete Experience{{/pix}}</a>{{/editable}}</h4>
-        {{#categories}}<p class="block-experiences-overview-category-badge">{{{name}}}</p> {{/categories}}
-      </div>
-  {{/experiences_with_categories}}
-</div>
--->

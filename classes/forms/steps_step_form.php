@@ -14,42 +14,61 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * File containing the form definition for steps.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/formslib.php');
 
+/**
+ * Class providing the form for steps.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class steps_step_form extends moodleform {
 
+    /**
+     * Form definition.
+     */
     public function definition() {
         global $CFG, $DB;
 
         $mform = $this->_form;
-
-        /*
-         * _customdata erlaubt die Übergabe von weiteren Parametern beim Erstellen einer Instanz einer Moodle Form,
-         * hier lässt sich zusätzlich der step als Variable übergeben
-         */
         $step = $this->_customdata['step'];
 
+        // Hidden step id.
         $mform->addElement('hidden', 'id', $step->id);
         $mform->setType('id', PARAM_INT);
 
+        // Step name Field.
         $mform->addElement('text', 'name', get_string('step_name', 'block_onboarding'),
-            array('maxlength' => 150, 'placeholder' => get_string('default_step_name', 'block_onboarding')));
+            array('maxlength' => 150, 'size' => 50,
+                'placeholder' => get_string('default_step_name', 'block_onboarding')));
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($step->name) ? $step->name : '');
         $mform->addRule('name', get_string('step_name_req', 'block_onboarding'), 'required', null, 'client');
 
-        $mform->addElement('textarea', 'description', get_string('step_description', 'block_onboarding'),
+        // Step description field.
+        $mform->addElement('textarea', 'description', get_string('block-onboarding-steps-step-description', 'block_onboarding'),
             array('wrap' => "virtual", 'rows' => 10, 'cols' => 50,
                 'placeholder' => get_string('step_description_req', 'block_onboarding')));
         $mform->setType('description', PARAM_TEXT);
         $mform->setDefault('description', isset($step->description) ? $step->description : '');
         $mform->addRule('description', get_string('step_description_req', 'block_onboarding'), 'required', null, 'client');
 
+        // Achievement checkbox.
         $mform->addElement('checkbox', 'achievement', get_string('step_achievement', 'block_onboarding'));
         $mform->setDefault('achievement', isset($step->achievement) ? (($step->achievement == 1) ? true : false) : false);
 
+        // Step position selector.
         $countpositions = $DB->count_records('block_onb_s_steps');
         if ($step->id == -1) {
             $positionarray = range(1, $countpositions + 1);
@@ -60,10 +79,7 @@ class steps_step_form extends moodleform {
         $mform->setType('position', PARAM_INT);
         $mform->setDefault('position', isset($step->position) ? $step->position - 1 : $DB->count_records('block_onb_s_steps'));
 
+        // Adds 'Submit'- and 'Cancel'-buttons.
         $this->add_action_buttons();
-    }
-
-    public function validation($data, $files) {
-        return array();
     }
 }

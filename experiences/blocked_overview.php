@@ -1,5 +1,5 @@
 <?php
-// This file is part of experiences block for Moodle - http://moodle.org/
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,7 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * File to display the category form and process the input.
+ * This file contains the structure of the blocked user overview block_overview.php.
+ *
+ * On this page blocked users are displayed in a table format with the possibility to unblock them.
+ * This page can only be viewed by the administrator.
  *
  * @package    block_onboarding
  * @copyright  2021 Westfälische Wilhelms-Universität Münster
@@ -23,6 +26,8 @@
  */
 
 require(__DIR__ . '/../../../config.php');
+require($CFG->libdir . '/tablelib.php');
+require($CFG->dirroot . '/blocks/onboarding/classes/output/blocked_table.php');
 
 require_login();
 
@@ -31,43 +36,36 @@ global $DB;
 $context = context_system::instance();
 
 $PAGE->set_context($context);
-$PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/edit_category.php'));
+$PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/blocked_overview.php'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
 $PAGE->navbar->add(get_string('experiences', 'block_onboarding'), new moodle_url('overview.php'));
 $PAGE->navbar->add(get_string('experience_admin', 'block_onboarding'), new moodle_url('admin.php'));
-$PAGE->navbar->add(get_string('edit_category', 'block_onboarding'));
+$PAGE->navbar->add(get_string('blocked_overview', 'block_onboarding'));
 
-// Check if the user has the necessary capability.
 if (has_capability('block/onboarding:e_manage_experiences', \context_system::instance())) {
-    $PAGE->set_title(get_string('edit_category', 'block_onboarding'));
-    $PAGE->set_heading(get_string('edit_category', 'block_onboarding'));
 
-    require_once($CFG->dirroot . '/blocks/onboarding/classes/forms/experiences_category_form.php');
+    $table = new blocked_table('uniqueid');
 
-    $categoryid = optional_param('category_id', -1, PARAM_INT);
-    $pcategory = new stdClass;
-    $pcategory->id = -1;
-    if ($categoryid != -1) {
-        // Get the existing data from the Database.
-        $pcategory = block_onboarding\experiences_lib::get_category_by_id($categoryid);
-    }
-    $mform = new experiences_category_form(null, array('category' => $pcategory));
+    $PAGE->set_title(get_string('blocked_overview', 'block_onboarding'));
+    $PAGE->set_heading(get_string('blocked_overview', 'block_onboarding'));
+    $PAGE->requires->css('/blocks/onboarding/style.css');
+    $PAGE->requires->js_call_amd('block_onboarding/confirmation_popup', 'init');
+    $output = $PAGE->get_renderer('block_onboarding');
 
-    if ($mform->is_cancelled()) {
-        redirect('admin.php');
-    } else {
-        if ($fromform = $mform->get_data()) {
-            block_onboarding\experiences_lib::edit_category($fromform);
-            redirect('admin.php');
-        }
-    }
+    echo $output->header();
 
-    // Display of the form.
-    echo $OUTPUT->header();
-    $mform->display();
-    echo $OUTPUT->footer();
+    // SQL Statement for Listview.
+    $fields = 'u.id as id, u.firstname as firstname, u.lastname as lastname, b.blockedsince as blockedsince';
+    $from = '{block_onb_e_blocked} b
+    INNER JOIN {user} u ON b.user_id=u.id';
+    $where = '1=1';
+
+    $table->set_sql($fields, $from, $where);
+    $table->define_baseurl("$CFG->wwwroot/blocks/onboarding/experiences/blocked_overview.php");
+    $table->out(10, true);
+
+    echo $output->footer();
 } else {
-    // If the user doesn't have the capability needed an error page is displayed.
     $PAGE->set_title(get_string('error', 'block_onboarding'));
     $PAGE->set_heading(get_string('error', 'block_onboarding'));
 
