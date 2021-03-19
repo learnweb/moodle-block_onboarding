@@ -98,12 +98,6 @@ if ($checkblocked == true) {
             echo $OUTPUT->footer();
         }
     } else {
-        // If either no courses or no categories the user gets an error page.
-        $PAGE->set_title(get_string('error', 'block_onboarding'));
-        $PAGE->set_heading(get_string('error', 'block_onboarding'));
-
-        echo $OUTPUT->header();
-        echo html_writer::tag('p', get_string('notenoughdata', 'block_onboarding'));
-        echo $OUTPUT->footer();
+        throw new moodle_exception('error_notenoughdata', 'block_onboarding');
     }
 }
