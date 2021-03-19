@@ -62,7 +62,7 @@ if ($checkblocked == true) {
     $checkcourses = $DB->count_records('block_onb_e_courses');
     $checkcategories = $DB->count_records('block_onb_e_cats');
 
-    if ($checkcourses != 0 || $checkcategories != 0) {
+    if ($checkcourses != 0 && $checkcategories != 0) {
 
         // Check if the user is allowed to edit the experience.
         if ($experienceid == -1 || $USER->id == $pexperience->user_id ||
