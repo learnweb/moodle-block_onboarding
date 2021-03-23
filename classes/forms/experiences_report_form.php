@@ -70,7 +70,7 @@ class experiences_report_form extends moodleform {
             get_string('personalinformation', 'block_onboarding'), constants::PERSONALINFO, '');
         $radioarray[] = $mform->createElement('radio', 'type', '',
             get_string('other', 'block_onboarding'), constants::OTHER, '');
-        $mform->addGroup($radioarray, 'types', get_string('types', 'block_onboarding'), array('<br>'), false);
+        $mform->addGroup($radioarray, 'types', get_string('reason_report', 'block_onboarding'), array('<br>'), false);
         $mform->setDefault('type', constants::OTHER);
         $mform->addRule('types', get_string('experience_type_missing', 'block_onboarding'), 'required', null, 'server');
 

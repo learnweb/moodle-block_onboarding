@@ -42,7 +42,6 @@ class experiences_filter_form extends moodleform {
         global $CFG, $DB;
 
         $mform = $this->_form;
-        $filtergroup = array();
 
         // Experiences course filter selector.
         $courses = $DB->get_records('block_onb_e_courses');
@@ -51,10 +50,10 @@ class experiences_filter_form extends moodleform {
         foreach ($courses as $course) {
             $coursesmodified[$course->id] = $course->name;
         }
-        $selectcourses = $mform->createElement('select', 'course_filter', get_string('degreeprogram_filter', 'block_onboarding'),
+        $selectcourse = $mform->addElement('select', 'course_filter', get_string('degreeprogram_filter', 'block_onboarding'),
             $coursesmodified, array('size' => $coursescount));
-        $selectcourses->setMultiple(true);
-        $filtergroup[] =& $selectcourses;
+        $selectcourse->setMultiple(true);
+        $mform->addHelpButton('course_filter', 'filter_or_courses', 'block_onboarding');
 
         // Experiences categories filter selector.
         $categories = $DB->get_records('block_onb_e_cats');
@@ -63,14 +62,10 @@ class experiences_filter_form extends moodleform {
         foreach ($categories as $category) {
             $categoriesmodified[$category->id] = $category->name;
         }
-        $selectcategories = $mform->createElement('select', 'category_filter', get_string('category_filter', 'block_onboarding'),
+        $selectcategories = $mform->addElement('select', 'category_filter', get_string('category_filter', 'block_onboarding'),
             $categoriesmodified, array('size' => $categoriescount));
         $selectcategories->setMultiple(true);
-        $filtergroup[] =& $selectcategories;
-
-        // Groups filter forms together.
-        $mform->addGroup($filtergroup, 'filtergroup', get_string('filters', 'block_onboarding'), '', false);
-        $mform->addHelpButton('filtergroup', 'filter_or', 'block_onboarding');
+        $mform->addHelpButton('category_filter', 'filter_or_categories', 'block_onboarding');
 
         // Adds 'Submit'-button.
         $mform->addElement('submit', 'applyfilter', get_string('applyfilter', 'block_onboarding'));

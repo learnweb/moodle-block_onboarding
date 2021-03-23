@@ -60,8 +60,14 @@ $where = '1=1';
 $skip = false;
 
 if ($fromform = $mform->get_data()) {
-    $cats = '(' . implode(',', $fromform->category_filter) . ')';
-    $crs = '(' . implode(',', $fromform->course_filter) . ')';
+    $cats = '';
+    if (isset($fromform->category_filter)) {
+        $cats = '(' . implode(',', $fromform->category_filter) . ')';
+    }
+    $crs = '';
+    if (isset($fromform->course_filter)) {
+        $crs = '(' . implode(',', $fromform->course_filter) . ')';
+    }
 
     if (empty($fromform->category_filter) != true) {
         // Category Filter applied.
