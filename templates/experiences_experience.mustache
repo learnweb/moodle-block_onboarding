@@ -13,10 +13,12 @@
                     <a href="suspend_experience.php?experience_id={{{id}}}" class="block-onboarding-experiences-experience-title-btn">{{#suspended}}{{#pix}}i/hide, core, {{# str }}unsuspend_experience, block_onboarding{{/ str }}{{/pix}}{{/suspended}}{{^suspended}}{{#pix}}i/show, core, {{# str }}suspend_experience, block_onboarding{{/ str }}{{/pix}}{{/suspended}}</a>
                 {{/can_manage_experiences}}
             {{/experience}}
+            {{#foreignexperience}}
             <span class="block-onboarding-experiences-experience-title-helpful">
             {{# str }}helpful, block_onboarding{{/ str }}
                 <button class="block-onboarding-experiences-experience-helpful-btn" type=button>{{# str }}yes, block_onboarding{{/ str }}</button>
             </span>
+            {{/foreignexperience}}
         </div>
         <div class="block-onboarding-experiences-experience-title-info">
             {{#experience}}

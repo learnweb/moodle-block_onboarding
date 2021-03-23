@@ -6,7 +6,7 @@
 /* ------------------------------------------------- */
 
 /* General */
-
+/* TODO ONLY FOR PLUGIN  */
 ul {
     margin-bottom: 0 !important;
 }
@@ -505,7 +505,7 @@ ul {
     grid-template-rows: 40px auto;
     grid-template-columns: auto auto;
 }
-
+/* TODO ONLY FOR PLUGIN  */
 navigation {
     grid-column-start: 1;
     grid-column-end: 5;

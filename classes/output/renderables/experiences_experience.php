@@ -78,12 +78,12 @@ class experiences_experience implements renderable, templatable {
 
         $report = $DB->get_record('block_onb_e_report',
             array('experience_id' => $this->experienceid, 'user_id' => $USER->id));
-
         return [
             'can_edit_experience' => has_capability('block/onboarding:e_manage_experiences',
                 \context_system::instance()) || $USER->id == $experience->user_id,
             'can_manage_experiences' => has_capability('block/onboarding:e_manage_experiences',
                     \context_system::instance()),
+            'foreignexperience' => !($experience->user_id == $USER->id),
             'experience' => $experience,
             'experiences_categories_joined_categories' => array_values($experiencescategoriesjoinedcategories),
             'author' => $author,

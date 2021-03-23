@@ -43,6 +43,7 @@ $PAGE->navbar->add(get_string('edit_link', 'block_onboarding'));
 
 // Checks whether user holds the required capability for managing the Wiki.
 if (has_capability('block/onboarding:w_manage_wiki', $context)) {
+    // TODO CHECK IF ONE CATEGORY EXISTS.
     // Initializes page title and heading.
     $PAGE->set_title(get_string('edit_link', 'block_onboarding'));
     $PAGE->set_heading(get_string('edit_link', 'block_onboarding'));
