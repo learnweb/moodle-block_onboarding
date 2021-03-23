@@ -57,7 +57,9 @@
     <div class="block-onboarding-experiences-experience-footer">
         {{#experience}}
             {{^report}}
+                {{#foreignexperience}}
                 <a href="report_experience.php?experience_id={{{id}}}">{{# str }}report_experience, block_onboarding{{/ str }}</a>
+                {{/foreignexperience}}
             {{/report}}
         {{/experience}}
     </div>

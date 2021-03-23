@@ -12,27 +12,26 @@
             {{/can_manage_experiences}}
         </div>
     </navigation>
-    <filter>
-        {{#form}}{{{form}}}{{/form}}
-    </filter>
-    <aside>
-        <div class="block-onboarding-experiences-overview-experiences-actions">
-            <div class="block-onboarding-title">{{# str }} myexperiencearea, block_onboarding {{/ str }}</div>
-            <br>
-            {{^blocked}}
-                {{^experience}}
-                    <div class="block-onboarding-title-2-light">
-                        <a href="edit_experience.php">{{# str }}newexperience, block_onboarding{{/ str }} {{#pix}}t/editstring, core {{/pix}}</a>
-                    </div>
-                {{/experience}}
-            {{/blocked}}
-            {{#experience}}
+    <div class="block-onboarding-experiences-overview-experiences-actions">
+        <br>
+        {{^blocked}}
+            {{^experience}}
                 <div class="block-onboarding-title-2-light">
-                    <a href="experience.php?experience_id={{{id}}}">{{{name}}} {{^published}}[{{# str }}draft, block_onboarding{{/ str }}]{{/published}}</a>
-                    <a href="edit_experience.php?experience_id={{{id}}}">{{#pix}}t/editstring, core, {{# str }}edit_experience, block_onboarding{{/ str }}{{/pix}}</a><span onb-data-id="{{{id}}}" onb-data-context="exp-my-exp" class="block-onboarding-confirm-btn">{{#pix}}t/delete, core, {{# str }}edit_experience, block_onboarding{{/ str }}{{/pix}}</span>
+                    <a href="edit_experience.php">{{# str }}newexperience, block_onboarding{{/ str }} {{#pix}}t/editstring, core {{/pix}}</a>
                 </div>
             {{/experience}}
+        {{/blocked}}
+        {{#experience}}
+            <div class="block-onboarding-title-2-light">
+                <a href="experience.php?experience_id={{{id}}}">{{# str }}editexperience, block_onboarding{{/ str }} {{^published}}[{{# str }}draft, block_onboarding{{/ str }}]{{/published}}</a>
+            </div>
+        {{/experience}}
+    </div>
+    <filter>
+        <div class="block-onboarding-title-2-light">
+        {{# str }}searchexperiences, block_onboarding{{/ str }}
         </div>
-    </aside>
+        {{#form}}{{{form}}}{{/form}}
+    </filter>
 </div>
 <br>
