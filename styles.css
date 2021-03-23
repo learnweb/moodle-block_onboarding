@@ -28,8 +28,7 @@ ul {
 }
 
 .block-onboarding-title-2-light {
-    font-weight: lighter;
-    font-size: 1.6em;
+    font-size: 1.4em;
 }
 
 .block-onboarding-confirm-btn{
@@ -353,7 +352,6 @@ ul {
 
 .block-onboarding-experiences-overview-experiences-actions {
     margin-bottom: 20px;
-    margin-left: 20px;
 }
 
 .block-onboarding-experiences-overview-courses {
@@ -501,9 +499,14 @@ ul {
 }
 
 .block-onboarding-experiences-overview-experiences {
-    display: grid;
     grid-template-rows: 40px auto;
     grid-template-columns: auto auto;
+}
+
+.block-onboarding-experiences-overview-experiences #id_category_filter {
+    vertical-align: top;
+    position: absolute;
+    top: 0px;
 }
 /* TODO ONLY FOR PLUGIN  */
 navigation {
@@ -511,19 +514,4 @@ navigation {
     grid-column-end: 5;
     grid-row-start: 1;
     grid-row-end: 2;
-}
-
-filter {
-    grid-column-start: 1;
-    grid-column-end: 4;
-    grid-row-start: 2;
-    grid-row-end: 3;
-}
-
-aside {
-    border-left: 1px solid lightgray;
-    grid-column-start: 4;
-    grid-column-end: 5;
-    grid-row-start: 2;
-    grid-row-end: 3;
 }
