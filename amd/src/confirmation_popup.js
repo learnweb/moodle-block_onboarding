@@ -51,7 +51,7 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
                 // Checks whether user confirms popup prompt.
                 if (deleteConfirmation == true) {
                     // AJAX call to externallib.php method to execute type of action for object.
-                    var promises = ajax.call([{
+                    var promises2 = ajax.call([{
                         methodname: 'block_onboarding_execute_confirmation',
                         args: {
                             type: type,
@@ -59,8 +59,8 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
                         }
                     }]);
                     // Second chained promise redirects user to a certain page after executing the passed action.
-                    promises[0].done(function (response) {
-                        if (response.redirect == "reload"){
+                    promises2[0].done(function(response) {
+                        if (response.redirect == "reload") {
                             location.reload();
                         } else {
                             window.location.href = response.redirect;
@@ -71,8 +71,8 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
                 }
             }).fail(notification.exception);
             return false;
-        })
-    }
+        });
+    };
 
     // Returns init method to be called by PHP page implementing the function.
     return {

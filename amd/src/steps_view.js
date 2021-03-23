@@ -28,7 +28,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
     // Default backup strings.
     var step_string = 'Step ';
     var achievement_string = 'Achviement! ';
-    var reset_message_string = 'Do you really want to reset your progress?\nAll progress will be lost permanently.'
+    var reset_message_string = 'Do you really want to reset your progress?\nAll progress will be lost permanently.';
 
     /**
      * Provides the First Steps section with content upon loading the Guide page and gets the required language strings.
@@ -136,7 +136,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
             $('.block-onboarding-steps-progress-bar-fill').css('width', (response.progress + '%'));
         }).fail(notification.exception);
         return false;
-    })
+    });
 
     /**
      * JQuery click event listener for 'Back'-button clicks in the First Steps section.
@@ -176,7 +176,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
             $('.block-onboarding-steps-step-description').text(response.description);
         }).fail(notification.exception);
         return false;
-    })
+    });
 
     /**
      * JQuery click event listener for 'Reset'-button clicks in the First Steps section.
@@ -201,7 +201,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
             }).fail(notification.exception);
             return false;
         }
-    })
+    });
 
     /**
      * JQuery click event listener for 'Hide'-button clicks in the First Steps section.
@@ -225,7 +225,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
             $('.block-onboarding-steps-container').css('display', 'none');
         }).fail(notification.exception);
         return false;
-    })
+    });
 
     /**
      * JQuery click event listener for 'Show'-button clicks in the First Steps section.
@@ -249,7 +249,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
             $('.block-onboarding-steps-container').css('display', 'block');
         }).fail(notification.exception);
         return false;
-    })
+    });
 
     /**
      * Confetti function to display confetti animation within the First Steps section.
@@ -344,7 +344,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
         }
         update();
         draw();
-    }
+    };
 
     // Returns init method to be called by PHP page implementing the functions.
     return {
