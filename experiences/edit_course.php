@@ -49,7 +49,7 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
     $pcourse->id = -1;
     if ($courseid != -1) {
         // Get the existing data from the Database.
-        $pcourse = block_onboarding\experiences_lib::get_course_by_id($courseid);
+        $pcourse = $DB->get_record('block_onb_e_courses', array('id' => $courseid));
     }
     $mform = new experiences_course_form(null, array('course' => $pcourse));
 

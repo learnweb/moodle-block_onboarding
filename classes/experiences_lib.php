@@ -159,11 +159,11 @@ class experiences_lib {
 
     /**
      * Determines whether an existing category is updated or a new category is added.
-     * Calls {@see add_category()} for new categories and {@see update_category()} to update existing categories.
      *
      * @param object $fromform Form parameters passed from edit_category.php.
      */
     public static function edit_category($fromform) {
+        global $DB;
         // Translates form data to new object for further processing.
         $category = new \stdClass();
         $category->name = $fromform->name;
@@ -174,32 +174,14 @@ class experiences_lib {
         // Checks whether a new category is added.
         if ($fromform->id != -1) {
             $category->id = $fromform->id;
-            self::update_category($category);
+            // Nice to have make Category names unique
+            $DB->update_record('block_onb_e_cats', $category, $bulk = false);
         } else {
             $category->timecreated = time();
-            self::add_category($category);
+            $DB->insert_record('block_onb_e_cats', $category);
         }
     }
 
-    /**
-     * Inserts a new category into the database.
-     *
-     * @param object $category Category object with form parameters.
-     */
-    public static function add_category($category) {
-        global $DB;
-        $DB->insert_record('block_onb_e_cats', $category);
-    }
-
-    /**
-     * Updates an existing category in the database.
-     *
-     * @param object $category Category object with form parameters.
-     */
-    public static function update_category($category) {
-        global $DB;
-        $DB->update_record('block_onb_e_cats', $category, $bulk = false);
-    }
 
     /**
      * Deletes an existing category from the database.
@@ -226,11 +208,11 @@ class experiences_lib {
 
     /**
      * Determines whether an existing course is updated or a new course is added.
-     * Calls {@see add_course()} for new courses and {@see update_course()} to update existing courses.
      *
      * @param object $fromform Form parameters passed from edit_course.php.
      */
     public static function edit_course($fromform) {
+        global $DB;
         // Data written in the Database.
         $course = new \stdClass();
         $course->name = $fromform->name;
@@ -239,31 +221,13 @@ class experiences_lib {
 
         if ($fromform->id != -1) {
             $course->id = $fromform->id;
-            self::update_course($course);
+            // Nice to have: Make names unique
+            $DB->update_record('block_onb_e_courses', $course, $bulk = false);
         } else {
-            self::add_course($course);
+            $DB->insert_record('block_onb_e_courses', $course);
         }
     }
 
-    /**
-     * Inserts a new course into the database.
-     *
-     * @param object $course Course object with form parameters.
-     */
-    public static function add_course($course) {
-        global $DB;
-        $DB->insert_record('block_onb_e_courses', $course);
-    }
-
-    /**
-     * Updates an existing course in the database.
-     *
-     * @param object $course Course object with form parameters.
-     */
-    public static function update_course($course) {
-        global $DB;
-        $DB->update_record('block_onb_e_courses', $course, $bulk = false);
-    }
 
     /**
      * Deletes an existing course from the database.
@@ -275,17 +239,6 @@ class experiences_lib {
         $DB->delete_records('block_onb_e_courses', array('id' => $courseid));
         $DB->set_field('block_onb_e_exps', 'published', null, array('course_id' => $courseid));
         $DB->set_field('block_onb_e_exps', 'course_id', null, array('course_id' => $courseid));
-    }
-
-    /**
-     * Returns Course Object.
-     *
-     * @param int $courseid Id of course which is to be returned.
-     * @return object Course.
-     */
-    public static function get_course_by_id($courseid) {
-        global $DB;
-        return $DB->get_record('block_onb_e_courses', array('id' => $courseid));
     }
 
     /**
