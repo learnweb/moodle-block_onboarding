@@ -443,6 +443,7 @@ class block_onboarding_view_external extends external_api {
         global $DB, $USER;
 
         // Parameter validation.
+        // TODO If you don't use params it does not have to be written to a variable -- but might be necessary for defaults?
         $params = self::validate_parameters(self::click_helpful_parameters(),
             array(
                 'experienceid' => $experienceid
