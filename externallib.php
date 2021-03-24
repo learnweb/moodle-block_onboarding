@@ -678,7 +678,7 @@ class block_onboarding_view_external extends external_api {
                 break;
             case 'exp-admin-unblock':
                 require_capability('block/onboarding:e_manage_experiences', $context);
-                block_onboarding\experiences_lib::unblock_user($id);
+                $DB->delete_records('block_onb_e_blocked', array('user_id' => $id));
                 $returnvalue['redirect'] = 'reload';
                 break;
         }

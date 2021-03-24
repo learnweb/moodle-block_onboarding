@@ -28,10 +28,6 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Static methods for outsourcing reoccurring functionality in externallib.php ajax calls.
- *
- * @package    block_onboarding
- * @copyright  2021 Westfälische Wilhelms-Universität Münster
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class steps_interaction_lib {
 

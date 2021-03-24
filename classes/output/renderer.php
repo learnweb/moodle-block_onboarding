@@ -30,10 +30,6 @@ use renderable;
 
 /**
  * Provides functions to reder block pages.
- *
- * @package    block_onboarding
- * @copyright  2021 Westfälische Wilhelms-Universität Münster
- * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class renderer extends plugin_renderer_base {
     public function render_block(renderable $page) {

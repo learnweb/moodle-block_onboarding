@@ -30,10 +30,6 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Constants for the onboarding block.
  * As of March 2021 constants are only used for the different types of the report form in the Experiences section.
- *
- * @package    block_onboarding
- * @copyright  2021 Westfälische Wilhelms-Universität Münster
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class constants {
     /**

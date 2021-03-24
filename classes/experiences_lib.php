@@ -29,10 +29,6 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Static methods for Experiences administration.
- *
- * @package    block_onboarding
- * @copyright  2021 Westfälische Wilhelms-Universität Münster
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class experiences_lib {
 
@@ -168,7 +164,6 @@ class experiences_lib {
         $category = new \stdClass();
         $category->name = $fromform->name;
         $category->questions = $fromform->questions;
-        $category->timecreated = time();
         $category->timemodified = time();
 
         // Checks whether a new category is added.
@@ -216,7 +211,6 @@ class experiences_lib {
         // Data written in the Database.
         $course = new \stdClass();
         $course->name = $fromform->name;
-        $course->timecreated = time();
         $course->timemodified = time();
 
         if ($fromform->id != -1) {
@@ -224,6 +218,7 @@ class experiences_lib {
             // Nice to have: Make names unique
             $DB->update_record('block_onb_e_courses', $course, $bulk = false);
         } else {
+            $course->timecreated = time();
             $DB->insert_record('block_onb_e_courses', $course);
         }
     }
@@ -237,6 +232,7 @@ class experiences_lib {
     public static function delete_course($courseid) {
         global $DB;
         $DB->delete_records('block_onb_e_courses', array('id' => $courseid));
+        // TODO better deletion? Rare occasion that programs are deleted and if so, reports are probably outdated/ students don't look into the experiences
         $DB->set_field('block_onb_e_exps', 'published', null, array('course_id' => $courseid));
         $DB->set_field('block_onb_e_exps', 'course_id', null, array('course_id' => $courseid));
     }
@@ -293,28 +289,6 @@ class experiences_lib {
 
         // Sets "suspended" for the experience in question to "null".
         $DB->set_field('block_onb_e_exps', 'suspended', null, array('id' => $experienceid));
-    }
-
-    /**
-     * Deletes an existing report from the database.
-     *
-     * @param int $reportid Id of report which is to be deleted.
-     */
-    public static function delete_report($reportid) {
-        global $DB;
-        // Deletion of the report.
-        $DB->delete_records('block_onb_e_report', array('id' => $reportid));
-    }
-
-    /**
-     * Reinstates the users ability to create an experience.
-     *
-     * @param int $userid Id of user which is to be unblocked.
-     */
-    public static function unblock_user($userid) {
-        global $DB;
-        // Deletion of the report.
-        $DB->delete_records('block_onb_e_blocked', array('user_id' => $userid));
     }
 
     /**

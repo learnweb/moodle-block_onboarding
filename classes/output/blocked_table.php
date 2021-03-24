@@ -26,10 +26,6 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Class defining the blocked users table.
- *
- * @package    block_onboarding
- * @copyright  2021 Westfälische Wilhelms-Universität Münster
- * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class blocked_table extends table_sql {
 
