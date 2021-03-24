@@ -67,18 +67,14 @@ class steps_lib {
         $initposition = $DB->count_records('block_onb_s_steps') + 1;
         $insertposition = $step->position;
         $step->position = $initposition;
-        $step->timecreated = time();
-        $step->timemodified = time();
-        $step->id = $DB->insert_record('block_onb_s_steps', $step);
-
         // Checks whether intended step position differs from max step position and updates affected step positions accordingly.
-        // TODO check this before writing to database -> avoid insertion plus update
         if ($initposition != $insertposition) {
             self::increment_step_positions($insertposition, $initposition);
             $step->position = $insertposition;
-            $step->timemodified = time();
-            $DB->update_record('block_onb_s_steps', $step);
         }
+        $step->timecreated = time();
+        $step->timemodified = time();
+        $step->id = $DB->insert_record('block_onb_s_steps', $step);
     }
 
     /**

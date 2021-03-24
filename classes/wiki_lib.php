@@ -65,19 +65,15 @@ class wiki_lib {
         $initposition = $DB->count_records('block_onb_w_categories') + 1;
         $insertposition = $category->position;
         $category->position = $initposition;
-        $category->timecreated = time();
-        $category->timemodified = time();
-        $category->id = $DB->insert_record('block_onb_w_categories', $category);
-
         // Checks whether intended category position differs from max category position and updates affected
         // category positions accordingly.
-        // TODO check this before writing to database -> avoid insertion plus update
         if ($initposition != $insertposition) {
             self::increment_category_positions($insertposition, $initposition);
             $category->position = $insertposition;
-            $category->timemodified = time();
-            $DB->update_record('block_onb_w_categories', $category);
         }
+        $category->timecreated = time();
+        $category->timemodified = time();
+        $category->id = $DB->insert_record('block_onb_w_categories', $category);
     }
 
     /**
