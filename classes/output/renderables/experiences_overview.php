@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The file for the experiences_overview rederable class.
+ * The file for the experiences_overview renderable class.
  *
  * @package    block_onboarding
  * @copyright  2021 Westfälische Wilhelms-Universität Münster
@@ -30,11 +30,7 @@ use templatable;
 use renderer_base;
 
 /**
- * Class exporting the experiences_overview rederable for the template.
- *
- * @package    block_onboarding
- * @copyright  2021 Westfälische Wilhelms-Universität Münster
- * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Class exporting the experiences_overview renderable for the template.
  */
 class experiences_overview implements renderable, templatable {
     private $form;

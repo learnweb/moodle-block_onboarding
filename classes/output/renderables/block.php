@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The file for the block rederable class.
+ * The file for the block renderable class.
  *
  * @package    block_onboarding
  * @copyright  2021 Westfälische Wilhelms-Universität Münster
@@ -32,10 +32,6 @@ use renderer_base;
 
 /**
  * Class exporting the block rederable for the template.
- *
- * @package    block_onboarding
- * @copyright  2021 Westfälische Wilhelms-Universität Münster
- * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block implements renderable, templatable {
 
