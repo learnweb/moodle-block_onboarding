@@ -30,10 +30,6 @@ use block_onboarding\constants;
 
 /**
  * Class providing the form for reporting function for experiences.
- *
- * @package    block_onboarding
- * @copyright  2021 Westfälische Wilhelms-Universität Münster
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class experiences_report_form extends moodleform {
 
@@ -41,7 +37,7 @@ class experiences_report_form extends moodleform {
      * Form definition.
      */
     public function definition() {
-        global $CFG, $USER;
+        global $USER;
 
         $mform = $this->_form;
         $experienceid = $this->_customdata['experience_id'];

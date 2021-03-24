@@ -28,10 +28,6 @@ require_once($CFG->libdir . '/formslib.php');
 
 /**
  * Class providing the form for experience reports.
- *
- * @package    block_onboarding
- * @copyright  2021 Westfälische Wilhelms-Universität Münster
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class experiences_experience_form extends moodleform {
 
@@ -39,7 +35,7 @@ class experiences_experience_form extends moodleform {
      * Form definition.
      */
     public function definition() {
-        global $CFG, $DB, $USER;
+        global $DB, $USER;
 
         $mform = $this->_form;
         $experience = $this->_customdata['experience'];

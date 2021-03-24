@@ -29,10 +29,6 @@ require_once($CFG->libdir . '/formslib.php');
 
 /**
  * Class providing the form for Wiki links.
- *
- * @package    block_onboarding
- * @copyright  2021 Westfälische Wilhelms-Universität Münster
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class wiki_link_form extends moodleform {
 
@@ -40,7 +36,7 @@ class wiki_link_form extends moodleform {
      * Form definition.
      */
     public function definition() {
-        global $CFG, $DB;
+        global $DB;
 
         $mform = $this->_form;
         $link = $this->_customdata['link'];

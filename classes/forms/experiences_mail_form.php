@@ -14,6 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * File containing the form definition for specifying a notification email for the author of an experience.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/formslib.php');
@@ -21,7 +29,6 @@ require_once($CFG->libdir . '/formslib.php');
 class experiences_mail_form extends moodleform {
 
     public function definition() {
-        global $CFG, $USER;
 
         $mform = $this->_form;
 
