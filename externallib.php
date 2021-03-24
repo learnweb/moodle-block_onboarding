@@ -130,7 +130,7 @@ class block_onboarding_view_external extends external_api {
             $step = \block_onboarding\steps_interaction_lib::get_next_step_data($curposition, 1);
 
             // Checks whether next step is out of bounds.
-            if ($step == -1) {
+            if ($step == null) {
                 // Uses current step as next step when out of bounds.
                 $step = \block_onboarding\steps_interaction_lib::get_step_data($curposition);
             } else {
@@ -210,7 +210,7 @@ class block_onboarding_view_external extends external_api {
             $step = \block_onboarding\steps_interaction_lib::get_next_step_data($curposition, -1);
 
             // Checks whether preceding step is out of bounds.
-            if ($step == -1) {
+            if ($step == null) {
                 // Uses current step as preceding step when out of bounds.
                 $step = \block_onboarding\steps_interaction_lib::get_step_data($curposition);
             } else {

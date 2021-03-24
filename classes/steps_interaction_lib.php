@@ -124,7 +124,7 @@ class steps_interaction_lib {
         if ($stepbool) {
             $returnstep = $DB->get_record('block_onb_s_steps', array('position' => $position));
         } else {
-            $returnstep = -1;
+            $returnstep = null;
         }
         return $returnstep;
     }
