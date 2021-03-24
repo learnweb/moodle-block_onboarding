@@ -29,10 +29,6 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Static methods for Steps administration.
- *
- * @package    block_onboarding
- * @copyright  2021 Westfälische Wilhelms-Universität Münster
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class steps_lib {
 
@@ -76,6 +72,7 @@ class steps_lib {
         $step->id = $DB->insert_record('block_onb_s_steps', $step);
 
         // Checks whether intended step position differs from max step position and updates affected step positions accordingly.
+        // TODO check this before writing to database -> avoid insertion plus update
         if ($initposition != $insertposition) {
             self::increment_step_positions($insertposition, $initposition);
             $step->position = $insertposition;

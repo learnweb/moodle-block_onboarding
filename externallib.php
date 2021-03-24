@@ -644,7 +644,7 @@ class block_onboarding_view_external extends external_api {
                 break;
             case 'wiki-link':
                 require_capability('block/onboarding:w_manage_wiki', $context);
-                \block_onboarding\wiki_lib::delete_link($id);
+                $DB->delete_records('block_onb_w_links', array('id' => $id));
                 $returnvalue['redirect'] = 'reload';
                 break;
             case 'exp-category':

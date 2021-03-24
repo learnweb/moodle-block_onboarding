@@ -29,10 +29,6 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Static methods for Wiki administration.
- *
- * @package    block_onboarding
- * @copyright  2021 Westfälische Wilhelms-Universität Münster
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class wiki_lib {
 
@@ -75,6 +71,7 @@ class wiki_lib {
 
         // Checks whether intended category position differs from max category position and updates affected
         // category positions accordingly.
+        // TODO check this before writing to database -> avoid insertion plus update
         if ($initposition != $insertposition) {
             self::increment_category_positions($insertposition, $initposition);
             $category->position = $insertposition;
@@ -155,57 +152,26 @@ class wiki_lib {
 
     /**
      * Determines whether an existing link is updated or a new link is added to a category.
-     * Calls {@see add_link()} for new links and {@see update_link()} to update an existing link.
      *
      * @param object $fromform Form parameters passed from edit_link.php.
      */
     public static function edit_link($fromform) {
+        global $DB;
         // Translates form data to new object for further processing.
         $link = new \stdClass();
         $link->name = $fromform->name;
         $link->category_id = $fromform->category_id;
         $link->url = $fromform->url;
         $link->description = $fromform->description;
+        $link->timemodified = time();
 
         // Checks whether a new link is added.
         if ($fromform->id != -1) {
             $link->id = $fromform->id;
-            self::update_link($link);
+            $DB->update_record('block_onb_w_links', $link);
         } else {
-            self::add_link($link);
+            $link->timecreated = time();
+            $link->id = $DB->insert_record('block_onb_w_links', $link);
         }
-    }
-
-    /**
-     * Inserts a new link into the database.
-     *
-     * @param object $link Link object with form parameters.
-     */
-    public static function add_link($link) {
-        global $DB;
-        $link->timecreated = time();
-        $link->timemodified = time();
-        $link->id = $DB->insert_record('block_onb_w_links', $link);
-    }
-
-    /**
-     * Updates an existing link in the database.
-     *
-     * @param object $link Link object with form parameters.
-     */
-    public static function update_link($link) {
-        global $DB;
-        $link->timemodified = time();
-        $DB->update_record('block_onb_w_links', $link);
-    }
-
-    /**
-     * Deletes an existing link from the database.
-     *
-     * @param int $linkid Id of link which is to be deleted.
-     */
-    public static function delete_link($linkid) {
-        global $DB;
-        $DB->delete_records('block_onb_w_links', array('id' => $linkid));
     }
 }
