@@ -195,7 +195,7 @@ class block_onboarding_view_external extends external_api {
     public static function preceding_step() {
 
         // Parameter validation.
-        $params = self::validate_parameters(self::return_empty_progress_parameters(),
+        $params = self::validate_parameters(self::preceding_step_parameters(),
             array()
         );
 
@@ -242,16 +242,6 @@ class block_onboarding_view_external extends external_api {
     }
 
     /**
-     * Returns description of method parameters.
-     *
-     * @return external_function_parameters
-     */
-    public static function return_empty_progress_parameters() {
-        return new external_function_parameters(
-            array()
-        );
-    }
-    /**
      * Returns result of the back step process for the user's First Steps section.
      *
      * @return external_single_structure
@@ -280,7 +270,7 @@ class block_onboarding_view_external extends external_api {
         global $DB, $USER;
 
         // Parameter validation.
-        $params = self::validate_parameters(self::return_empty_progress_parameters(),
+        $params = self::validate_parameters(self::reset_progress_parameters(),
             array()
         );
 
@@ -305,6 +295,19 @@ class block_onboarding_view_external extends external_api {
             )
         );
     }
+
+    /**
+     * Returns description of method parameters.
+     *
+     * @return external_function_parameters
+     */
+    public static function reset_progress_parameters() {
+        return new external_function_parameters(
+            array()
+        );
+    }
+
+
 
     /* --------------------------------------------------------------------------------------------------------- */
 
