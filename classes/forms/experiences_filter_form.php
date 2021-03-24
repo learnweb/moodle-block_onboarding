@@ -41,26 +41,24 @@ class experiences_filter_form extends moodleform {
 
         // Experiences course filter selector.
         $courses = $DB->get_records('block_onb_e_courses');
-        $coursescount = $DB->count_records('block_onb_e_courses');
         $coursesmodified = array();
         foreach ($courses as $course) {
             $coursesmodified[$course->id] = $course->name;
         }
-        $selectcourse = $mform->addElement('select', 'course_filter', get_string('degreeprogram_filter', 'block_onboarding'),
-            $coursesmodified, array('size' => $coursescount));
-        $selectcourse->setMultiple(true);
+        $options = array(
+            'multiple' => true,
+            'noselectionstring' => get_string('allareas', 'search'),
+        );
+        $mform->addElement('autocomplete', 'course_filter', get_string('degreeprogram_filter', 'block_onboarding'), $coursesmodified, $options);        // Report description field.
         $mform->addHelpButton('course_filter', 'filter_or_courses', 'block_onboarding');
 
         // Experiences categories filter selector.
         $categories = $DB->get_records('block_onb_e_cats');
-        $categoriescount = $DB->count_records('block_onb_e_cats');
         $categoriesmodified = array();
         foreach ($categories as $category) {
             $categoriesmodified[$category->id] = $category->name;
         }
-        $selectcategories = $mform->addElement('select', 'category_filter', get_string('category_filter', 'block_onboarding'),
-            $categoriesmodified, array('size' => $categoriescount));
-        $selectcategories->setMultiple(true);
+        $mform->addElement('autocomplete', 'category_filter', get_string('category_filter', 'block_onboarding'), $categoriesmodified, $options);        // Report description field.
         $mform->addHelpButton('category_filter', 'filter_or_categories', 'block_onboarding');
 
         // Adds 'Submit'-button.
