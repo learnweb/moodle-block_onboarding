@@ -44,8 +44,8 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
         // Changes color of 'Helpful'-button depending on whether user has declared experience report as helpful.
         promises[0].done(function (response) {
             if(response.alreadyhelpful === 1) {
-                $('.block-onboarding-experiences-experience-helpful-btn') // TODO change to fitting color
-                    .css({'background-color': '#32cd32', 'color': '#ffffff'});
+                $('.block-onboarding-experiences-experience-helpful-btn')
+                    .css({'background-color': '#578014', 'color': '#ffffff'});
             } else {
                 $('.block-onboarding-experiences-experience-helpful-btn')
                     .css({'background': 'rgba(128, 128, 128, 0.8)',
@@ -71,7 +71,7 @@ define(['jquery', 'core/ajax', 'core/notification'], function ($, ajax, notifica
         promises[0].done(function (response) {
             if(response.alreadyhelpful === 1) {
                 $('.block-onboarding-experiences-experience-helpful-btn')
-                    .css({'background-color': '#32cd32', 'color': '#ffffff'});
+                    .css({'background-color': '#578014', 'color': '#ffffff'});
             } else {
                 $('.block-onboarding-experiences-experience-helpful-btn')
                     .css({'background': 'rgba(128, 128, 128, 0.8)', 'color': '#ffffff'});
