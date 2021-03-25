@@ -232,9 +232,8 @@ class experiences_lib {
     public static function delete_course($courseid) {
         global $DB;
         $DB->delete_records('block_onb_e_courses', array('id' => $courseid));
-        // TODO better deletion? Rare occasion that programs are deleted and if so, reports are probably outdated/ students don't look into the experiences
-        $DB->set_field('block_onb_e_exps', 'published', null, array('course_id' => $courseid));
-        $DB->set_field('block_onb_e_exps', 'course_id', null, array('course_id' => $courseid));
+        $DB->delete_records('block_onb_e_exps', array('course_id' => $courseid));
+        $DB->delete_records('block_onb_e_exps', array('course_id' => $courseid));
     }
 
     /**
