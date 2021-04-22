@@ -86,7 +86,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
                             + response.name);
                     }
                     // Fills First Steps section with retrieved content.
-                    $('.block-onboarding-steps-step-description').text(response.description);
+                    $('.block-onboarding-steps-step-description').text(response.description['text']);
                     $('.block-onboarding-steps-progress-bar-value').text(response.progress + '%');
                     $('.block-onboarding-steps-progress-bar-fill').css('width', (response.progress + '%'));
                 }).fail(notification.exception);
@@ -131,7 +131,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
                 confetti_toogle = false;
             }
             // Fills First Steps section with retrieved content of next step.
-            $('.block-onboarding-steps-step-description').text(response.description);
+            $('.block-onboarding-steps-step-description').text(response.description['text']);
             $('.block-onboarding-steps-progress-bar-value').text(response.progress + '%');
             $('.block-onboarding-steps-progress-bar-fill').css('width', (response.progress + '%'));
         }).fail(notification.exception);
@@ -173,7 +173,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
                 confetti_toogle = false;
             }
             // Updated First Steps description box with retrieved information.
-            $('.block-onboarding-steps-step-description').text(response.description);
+            $('.block-onboarding-steps-step-description').text(response.description['text']);
         }).fail(notification.exception);
         return false;
     });

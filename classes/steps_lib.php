@@ -42,7 +42,7 @@ class steps_lib {
         // Translates form data to new object for further processing.
         $step = new \stdClass();
         $step->name = $fromform->name;
-        $step->description = $fromform->description;
+        $step->description = $fromform->description['text'];
         $step->achievement = isset($fromform->achievement) ? 1 : 0;
         $step->position = $fromform->position + 1;
 
