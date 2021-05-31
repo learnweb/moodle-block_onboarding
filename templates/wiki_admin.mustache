@@ -2,7 +2,10 @@
 <br>
 <br>
 <div class="block-onboarding-admin-title">{{# str }}wiki_admin, block_onboarding{{/ str }}</div>
-{{#categories_with_links}}
+<div class="block-onboarding-title-2-light">
+    <a href="edit_category.php"><div class="icon fa fa-plus fa-fw "></div>{{#str}}new_category, block_onboarding{{/str}}</a>
+</div>
+    {{#categories_with_links}}
     <span class="block-onboarding-admin-content-title">{{{name}}}</span>
     <span class="block-onboarding-admin-edit-btn">
         {{#can_manage_wiki}}
@@ -27,6 +30,6 @@
         {{/links}}
     </ul>
 {{/categories_with_links}}
-<a href="edit_category.php">{{#str}}new_category, block_onboarding{{/str}}</a>
-<br>
-<a href="edit_link.php">{{#str}}new_link, block_onboarding{{/str}}</a>
+<div class="block-onboarding-title-2-light">
+    <a href="edit_link.php"><div class="icon fa fa-plus fa-fw "></div>{{#str}}new_link, block_onboarding{{/str}}</a>
+</div>

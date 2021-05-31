@@ -243,11 +243,12 @@ class experiences_lib {
      */
     public static function edit_report($fromform) {
         global $USER, $DB;
+        var_dump($fromform);
         // Translates form data to new object for further processing.
         $report = new \stdClass();
         $report->experience_id = $fromform->experience_id;
         $report->user_id = $fromform->user_id;
-        $report->type = $fromform->type;
+        $report->type = implode( $fromform->type, ',');
         $report->description = $fromform->description;
         $report->timecreated = time();
 

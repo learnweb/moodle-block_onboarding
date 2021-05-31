@@ -52,32 +52,44 @@ class experiences_report_form extends moodleform {
 
         // Reporting reason selector.
         $radioarray = array();
-        $radioarray[] = $mform->createElement('radio', 'type', '',
+        $radioarray[] = $mform->createElement('advcheckbox', 'type', '',
             get_string('spam', 'block_onboarding'), constants::SPAM, '');
-        $radioarray[] = $mform->createElement('radio', 'type', '',
+        $radioarray[] = $mform->createElement('advcheckbox', 'type', '',
             get_string('profanity', 'block_onboarding'), constants::PROFANITY, '');
-        $radioarray[] = $mform->createElement('radio', 'type', '',
+        $radioarray[] = $mform->createElement('advcheckbox', 'type', '',
             get_string('offensive', 'block_onboarding'), constants::OFFENSIVE, '');
-        $radioarray[] = $mform->createElement('radio', 'type', '',
+        $radioarray[] = $mform->createElement('advcheckbox', 'type', '',
             get_string('falseinformation', 'block_onboarding'), constants::FALSEINFO, '');
-        $radioarray[] = $mform->createElement('radio', 'type', '',
+        $radioarray[] = $mform->createElement('advcheckbox', 'type', '',
             get_string('falsematching', 'block_onboarding'), constants::FALSEMATCH, '');
-        $radioarray[] = $mform->createElement('radio', 'type', '',
+        $radioarray[] = $mform->createElement('advcheckbox', 'type', '',
             get_string('personalinformation', 'block_onboarding'), constants::PERSONALINFO, '');
-        $radioarray[] = $mform->createElement('radio', 'type', '',
+        $radioarray[] = $mform->createElement('advcheckbox', 'type', '',
             get_string('other', 'block_onboarding'), constants::OTHER, '');
         $mform->addGroup($radioarray, 'types', get_string('reason_report', 'block_onboarding'), array('<br>'), false);
         $mform->setDefault('type', constants::OTHER);
-        $mform->addRule('types', get_string('experience_type_missing', 'block_onboarding'), 'required', null, 'server');
+        //$mform->addRule('types', get_string('experience_type_missing', 'block_onboarding'), 'required', null, 'server');
 
-        // Report description field.
         $mform->addElement('textarea', 'description', get_string('experience_description', 'block_onboarding'),
             array('wrap="virtual" rows="5" cols="50"'));
+
         $mform->addRule('description', get_string('experience_description_missing', 'block_onboarding'), 'required', null,
             'server');
         $mform->setType('description', PARAM_TEXT);
 
         // Adds 'Report'- and 'Cancel'-buttons.
         $this->add_action_buttons($cancel = true, $submitlabel = get_string('report_experience', 'block_onboarding'));
+    }
+
+    function validation($data, $files) {
+        $errors= array();
+        var_dump($data);
+
+        /*if (empty($data['enrolenddisabled'])){
+            if ($data['enrolenddate'] <= $data['enrolstartdate']){
+                $errors['enroldateendgrp'] = get_string('enrolenddaterror');
+            }
+        }*/
+        return $errors;
     }
 }

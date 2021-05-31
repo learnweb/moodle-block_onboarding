@@ -1,7 +1,7 @@
 <a href="overview.php">{{#pix}}t/left, core, {{# str }}back, block_onboarding{{/ str }}{{/pix}}{{# str }}backtooverview, block_onboarding{{/ str }}</a>
 <br>
 <br>
-<div class="block-onboarding-admin-title">{{# str }}steps_admin, block_onboarding{{/ str }}</div>
+<div class="block-onboarding-admin-title"><div class="icon fa fa-plus fa-fw "></div><a href="edit_step.php">{{#str}}new_step, block_onboarding{{/str}}</a></div>
 {{#steps}}
     <span class="block-onboarding-admin-content-title">
         #{{{position}}} - {{{achievement}}}:  {{{name}}}
@@ -14,4 +14,3 @@
     </span>
     <p class="block-onboarding-admin-content-wrapper">{{{description}}}</p>
 {{/steps}}
-<a href="edit_step.php">{{#str}}new_step, block_onboarding{{/str}}</a>
