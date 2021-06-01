@@ -24,7 +24,7 @@
 
 // General.
 $string['pluginname'] = 'Onboarding';
-$string['onboarding'] = 'Onboarding';
+$string['newhere'] = 'New at the university?';
 $string['onboarding:addinstance'] = 'Add a new Onboarding block';
 $string['onboarding:myaddinstance'] = 'Add a new Onboarding block to the MyMoodle area';
 $string['onboarding:w_manage_wiki'] = 'Manage Wiki content';
@@ -45,9 +45,8 @@ $string['settings'] = 'Settings';
 $string['yes'] = 'Yes';
 
 // Guide.
-$string['guide'] = 'Guide';
-$string['guide_link'] = 'To the Guide';
-$string['guide_summary'] = 'In our Guide you can find useful Links along with a handy "First Steps" - Programm, which will get you ready right away.';
+$string['firststeps'] = 'First Steps';
+$string['guide_summary'] = 'Here you can find useful Links along with a handy "First Steps" - Program, which will get you ready right away.';
 
 // Wiki.
 $string['wiki'] = 'Wiki';
@@ -116,7 +115,7 @@ $string['msg_delete_step_warning'] = 'WARNING: This will permanently delete this
 // Experiences.
 $string['experience'] = 'Experience';
 $string['experiences'] = 'Experiences';
-$string['experiences_summary'] = 'Our Experiences Portal gives you the opportunity to find out how other students, before you have designed their studies. This is a great chance to learn from others mistakes. You can also find lots of inspiration on how to design your individual studies.';
+$string['experiences_summary'] = 'Our Experiences Collection gives you the opportunity to find out how other students, before you have designed their studies. This is a great chance to learn from others. You can also find lots of inspiration on how to design your individual studies.';
 $string['default_category_name'] = 'Sample Category';
 $string['questions'] = 'Questions';
 $string['edit_course'] = 'Edit Degree Program';

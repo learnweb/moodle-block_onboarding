@@ -32,7 +32,7 @@ class block_onboarding extends block_base {
      * Initializes the block.
      */
     public function init() {
-        $this->title = get_string('onboarding', 'block_onboarding');
+        $this->title = get_string('newhere', 'block_onboarding');
     }
 
     /**

@@ -94,7 +94,7 @@ class block_onboarding_view_external extends external_api {
         return new external_single_structure(
             array(
                 'name' => new external_value(PARAM_TEXT, 'name of new step'),
-                'description' => new external_value(PARAM_TEXT, 'description of new step'),
+                'description' => new external_value(PARAM_RAW, 'description of new step'),
                 'position' => new external_value(PARAM_INT, 'position of new step'),
                 'achievement' => new external_value(PARAM_INT, 'determines whether a step is an achievement'),
                 'progress' => new external_value(PARAM_INT, 'progress of user'),
@@ -175,7 +175,7 @@ class block_onboarding_view_external extends external_api {
         return new external_single_structure(
             array(
                 'name' => new external_value(PARAM_TEXT, 'name of new step'),
-                'description' => new external_value(PARAM_TEXT, 'description of new step'),
+                'description' => new external_value(PARAM_RAW, 'description of new step'),
                 'position' => new external_value(PARAM_INT, 'position of new step'),
                 'achievement' => new external_value(PARAM_INT, 'determines whether a step is an achievement'),
                 'progress' => new external_value(PARAM_INT, 'progress of user'),
@@ -250,7 +250,7 @@ class block_onboarding_view_external extends external_api {
         return new external_single_structure(
             array(
                 'name' => new external_value(PARAM_TEXT, 'name of new step'),
-                'description' => new external_value(PARAM_TEXT, 'description of new step'),
+                'description' => new external_value(PARAM_RAW, 'description of new step'),
                 'achievement' => new external_value(PARAM_INT, 'determines whether a step is an achievement'),
                 'position' => new external_value(PARAM_INT, 'position of new step'),
                 'completed' => new external_value(PARAM_INT, 'determines whether user already completed step'),

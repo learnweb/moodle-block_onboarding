@@ -37,10 +37,10 @@ global $USER, $DB;
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/wiki/overview.php'));
 $PAGE->requires->js_call_amd('block_onboarding/steps_view', 'init');
-$PAGE->set_title(get_string('guide', 'block_onboarding'));
-$PAGE->set_heading(get_string('guide', 'block_onboarding'));
+$PAGE->set_title(get_string('firststeps', 'block_onboarding'));
+$PAGE->set_heading(get_string('firststeps', 'block_onboarding'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
-$PAGE->navbar->add(get_string('guide', 'block_onboarding'));
+$PAGE->navbar->add(get_string('firststeps', 'block_onboarding'));
 
 // Defines the page output.
 $output = $PAGE->get_renderer('block_onboarding');

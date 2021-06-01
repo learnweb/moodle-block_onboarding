@@ -24,7 +24,7 @@
 
 // General.
 $string['pluginname'] = 'Onboarding';
-$string['onboarding'] = 'Onboarding';
+$string['newhere'] = 'Neu im Studium?';
 $string['onboarding:addinstance'] = 'Einen neuen Onboarding Block hinzufügen';
 $string['onboarding:myaddinstance'] = 'Einen neuen Onboarding Block zur MyMoodle Sektion hinzufügen';
 $string['onboarding:w_manage_wiki'] = 'Wiki Inhalte verwalten';
@@ -45,9 +45,8 @@ $string['settings'] = 'Einstellungen';
 $string['yes'] = 'Ja';
 
 // Guide.
-$string['guide'] = 'Guide';
-$string['guide_link'] = 'Gehe zum Guide';
-$string['guide_summary'] = 'Im Guide findest du nützliche organisatorische Informationen rund um dein Studium. Außerdem hilft dir das "Erste Schritte" - Programm dich zurechtzufinden.';
+$string['firststeps'] = 'Erste Schritte';
+$string['guide_summary'] = 'Hier findest du nützliche organisatorische Informationen rund um dein Studium. Außerdem hilft dir das "Erste Schritte" - Programm dich zurechtzufinden.';
 
 // Wiki.
 $string['wiki'] = 'Wiki';
@@ -115,7 +114,7 @@ $string['msg_delete_step_warning'] = 'WARNING: Beim Löschen dieses Schrittes we
 // Experiences.
 $string['experience'] = 'Erfahrung';
 $string['experiences'] = 'Erfahrungsberichte';
-$string['experiences_summary'] = 'Unser Erfahrungsbereich gibt dir die Möglichkeit herauszufinden, wie andere Studentierende vor dir ihr Studium gestaltet haben. Hier kannst du aus den Fehlern anderer lernen und Inspiration für dein Studium finden.';
+$string['experiences_summary'] = 'Unser Erfahrungsbereich gibt dir die Möglichkeit herauszufinden, wie andere Studentierende vor dir ihr Studium gestaltet haben. Hier kannst du von anderen lernen und Inspiration für dein Studium finden.';
 $string['default_category_name'] = 'Beispiel Kategorie';
 $string['questions'] = 'Fragen';
 $string['edit_course'] = 'Studiengang bearbeiten';

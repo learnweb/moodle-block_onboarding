@@ -39,7 +39,6 @@ class steps_step_form extends moodleform {
 
         $mform = $this->_form;
         $step = $this->_customdata['step'];
-
         // Hidden step id.
         $mform->addElement('hidden', 'id', $step->id);
         $mform->setType('id', PARAM_INT);
@@ -54,10 +53,9 @@ class steps_step_form extends moodleform {
 
         // Step description field.
         $mform->addElement('editor', 'description', get_string('block-onboarding-steps-step-description', 'block_onboarding'),
-            array('wrap' => "virtual", 'rows' => 10, 'cols' => 50,
-                'placeholder' => get_string('step_description_req', 'block_onboarding')))->setValue( array('text' => $step->description));
-        $mform->setType('description', PARAM_RAW); 
-//$mform->setDefault('description['text']', isset($step->description['text']) ? $step->description['text'] : '');
+            array('wrap' => "virtual", 'rows' => 10, 'cols' => 50, // TODO still throws error
+                'placeholder' => get_string('step_description_req', 'block_onboarding')))->setValue(array('text' => $step->description));
+        //$mform->setType('description', PARAM_RAW);
         $mform->addRule('description', get_string('step_description_req', 'block_onboarding'), 'required', null, 'client');
 
         // Achievement checkbox.

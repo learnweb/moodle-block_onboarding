@@ -82,11 +82,12 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
                             confetti_toogle = false;
                         }, 4000);
                     } else {
-                        $('.block-onboarding-steps-step-title').text(step_string + response.position + ': '
-                            + response.name);
+                        let blocktitle = document.getElementsByClassName('block-onboarding-steps-step-title');
+                        blocktitle[0].innerHTML = step_string + response.position + ': ' + response.name;
                     }
                     // Fills First Steps section with retrieved content.
-                    $('.block-onboarding-steps-step-description').text(response.description['text']);
+                    let steptitle2 = document.getElementsByClassName('block-onboarding-steps-step-description');
+                    steptitle2[0].innerHTML = response.description;
                     $('.block-onboarding-steps-progress-bar-value').text(response.progress + '%');
                     $('.block-onboarding-steps-progress-bar-fill').css('width', (response.progress + '%'));
                 }).fail(notification.exception);
@@ -127,11 +128,13 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
                     confetti_toogle = false;
                 }, 4000);
             } else {
-                $('.block-onboarding-steps-step-title').text(step_string + response.position + ': ' + response.name);
+                let steptitle2 = document.getElementsByClassName('block-onboarding-steps-step-title');
+                steptitle2[0].innerHTML = step_string + response.position + ': ' + response.name;
                 confetti_toogle = false;
             }
             // Fills First Steps section with retrieved content of next step.
-            $('.block-onboarding-steps-step-description').text(response.description['text']);
+            let stepdescription= document.getElementsByClassName('block-onboarding-steps-step-description');
+            stepdescription[0].innerHTML = response.description;
             $('.block-onboarding-steps-progress-bar-value').text(response.progress + '%');
             $('.block-onboarding-steps-progress-bar-fill').css('width', (response.progress + '%'));
         }).fail(notification.exception);
@@ -162,18 +165,21 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
             // Determines whether preceding step is a regular step or an achievement step. Displays confetti animation
             // for achievement steps.
             if (response.achievement == 1) {
-                $('.block-onboarding-steps-step-title').text(achievement_string + response.name);
+                let steptitle2 = document.getElementsByClassName('block-onboarding-steps-step-title');
+                steptitle2[0].innerHTML = achievement_string + response.name;
                 confetti_toogle = true;
                 confetti();
                 setTimeout(function () {
                     confetti_toogle = false;
                 }, 4000);
             } else {
-                $('.block-onboarding-steps-step-title').text(step_string + response.position + ': ' + response.name);
+                let steptitle = document.getElementsByClassName('block-onboarding-steps-step-title');
+                steptitle[0].innerHTML = step_string + response.position + ': ' + response.name;
                 confetti_toogle = false;
             }
             // Updated First Steps description box with retrieved information.
-            $('.block-onboarding-steps-step-description').text(response.description['text']);
+            let stepdescription = document.getElementsByClassName('block-onboarding-steps-step-description');
+            stepdescription[0].innerHTML = response.description;
         }).fail(notification.exception);
         return false;
     });
@@ -195,6 +201,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
                 args: {}
             }]);
             // Reloads current page upon progress deletion to initialize new records for user's First Steps section.
+            // eslint-disable-next-line no-unused-vars
             promises[0].done(function (response) {
                 location.reload();
                 return false;
@@ -219,7 +226,8 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
             }
         }]);
         // Hides First Steps section and toggles 'Hide'-/'Show'-buttons.
-        promises[0].done(function (response) {
+        // eslint-disable-next-line no-unused-vars
+        promises[0].done(function (reponse) {
             $('.block-onboarding-steps-hide-btn').css('display', 'none');
             $('.block-onboarding-steps-show-btn').css('display', 'inline');
             $('.block-onboarding-steps-container').css('display', 'none');
@@ -243,6 +251,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
             }
         }]);
         // Displays First Steps section and toggles 'Hide'-/'Show'-buttons.
+        // eslint-disable-next-line no-unused-vars
         promises[0].done(function (response) {
             $('.block-onboarding-steps-hide-btn').css('display', 'inline');
             $('.block-onboarding-steps-show-btn').css('display', 'none');
@@ -296,6 +305,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
                 p.y += p.gravity * dif;
                 p.rotation += p.rotationSpeed * dif;
             }
+            // eslint-disable-next-line no-unmodified-loop-condition
             while (particle.length < number_of_particles && confetti_toogle == true) {
                 particle.push(new Particle(Math.random() * achievement_canvas.width, -20));
             }
@@ -338,6 +348,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
         }
 
         //  Updates and draws confetti particles on HTML canvas as long as confetti toggle is set to true.
+        // eslint-disable-next-line no-unmodified-loop-condition
         while (particle.length < number_of_particles && confetti_toogle == true) {
             particle.push(new Particle(Math.random() * achievement_canvas.width,
                 Math.random() * achievement_canvas.height));

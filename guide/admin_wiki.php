@@ -40,7 +40,7 @@ if (has_capability('block/onboarding:w_manage_wiki', $context)) {
     $PAGE->set_title(get_string('wiki_admin', 'block_onboarding'));
     $PAGE->set_heading(get_string('wiki_admin', 'block_onboarding'));
     $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
-    $PAGE->navbar->add(get_string('guide', 'block_onboarding'), new moodle_url('overview.php'));
+    $PAGE->navbar->add(get_string('firststeps', 'block_onboarding'), new moodle_url('overview.php'));
     $PAGE->navbar->add(get_string('wiki_admin', 'block_onboarding'));
     $output = $PAGE->get_renderer('block_onboarding');
 

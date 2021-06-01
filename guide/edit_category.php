@@ -37,7 +37,7 @@ $context = context_system::instance();
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/wiki/edit_category.php'));
 $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
-$PAGE->navbar->add(get_string('guide', 'block_onboarding'), new moodle_url('overview.php'));
+$PAGE->navbar->add(get_string('firststeps', 'block_onboarding'), new moodle_url('overview.php'));
 $PAGE->navbar->add(get_string('wiki_admin', 'block_onboarding'), new moodle_url('admin_wiki.php'));
 $PAGE->navbar->add(get_string('edit_category', 'block_onboarding'));
 
