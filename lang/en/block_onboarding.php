@@ -43,7 +43,10 @@ $string['overview'] = 'Overview';
 $string['admin'] = 'Administration';
 $string['settings'] = 'Settings';
 $string['yes'] = 'Yes';
-
+// Admin Settings.
+$string['studies'] = 'Courses of study';
+$string['checkcategorysetting'] = 'Select if the Course Category should be choosable.';
+$string['checkcategorysetting_desc'] = 'Any of the selected categories will show up for users to be selected as their primary course category.';
 // Guide.
 $string['firststeps'] = 'First Steps';
 $string['guide_summary'] = 'Here you can find useful Links along with a handy "First Steps" - Program, which will get you ready right away.';

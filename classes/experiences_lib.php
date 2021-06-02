@@ -169,7 +169,7 @@ class experiences_lib {
         // Checks whether a new category is added.
         if ($fromform->id != -1) {
             $category->id = $fromform->id;
-            // Nice to have make Category names unique
+            // Nice to have make Category names unique.
             $DB->update_record('block_onb_e_cats', $category, $bulk = false);
         } else {
             $category->timecreated = time();
@@ -215,7 +215,7 @@ class experiences_lib {
 
         if ($fromform->id != -1) {
             $course->id = $fromform->id;
-            // Nice to have: Make names unique
+            // Nice to have: Make names unique.
             $DB->update_record('block_onb_e_courses', $course, $bulk = false);
         } else {
             $course->timecreated = time();
@@ -243,12 +243,11 @@ class experiences_lib {
      */
     public static function edit_report($fromform) {
         global $USER, $DB;
-        var_dump($fromform);
         // Translates form data to new object for further processing.
         $report = new \stdClass();
         $report->experience_id = $fromform->experience_id;
         $report->user_id = $fromform->user_id;
-        $report->type = implode( $fromform->type, ',');
+        $report->type = implode(',', $fromform->type);
         $report->description = $fromform->description;
         $report->timecreated = time();
 

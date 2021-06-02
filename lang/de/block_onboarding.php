@@ -43,7 +43,10 @@ $string['overview'] = 'Überblick';
 $string['admin'] = 'Administration';
 $string['settings'] = 'Einstellungen';
 $string['yes'] = 'Ja';
-
+// Admin Settings.
+$string['studies'] = 'Studiengänge';
+$string['checkcategorysetting'] = 'Wähle valide Kurs Katgorien aus';
+$string['checkcategorysetting_desc'] = 'Alle Kurs Kategorien die ausgewählt werden können von Nutzern ausgewählt werden, als ihr FB.';
 // Guide.
 $string['firststeps'] = 'Erste Schritte';
 $string['guide_summary'] = 'Hier findest du nützliche organisatorische Informationen rund um dein Studium. Außerdem hilft dir das "Erste Schritte" - Programm dich zurechtzufinden.';

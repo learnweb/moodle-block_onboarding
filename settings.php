@@ -1,5 +1,5 @@
 <?php
-// This file is part of wiki block for Moodle - http://moodle.org/
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,19 +15,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines the version and other meta-info about the plugin.
- *
- * Setting the $plugin->version to 0 prevents the plugin from being installed.
- * See https://docs.moodle.org/dev/version.php for more info.
+ * Settings.
  *
  * @package    block_onboarding
- * @copyright  2021 Westfälische Wilhelms-Universität Münster
- * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright  2021 Nina Herrmann
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+defined('MOODLE_INTERNAL') || die;
 
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->component = 'block_onboarding';
-$plugin->version = 2021031806;
-$plugin->requires = 2020061500;
-$plugin->maturity = MATURITY_STABLE;
+if ($hassiteconfig) { // Needs this condition or there is error on login page.
+    global $CFG, $ADMIN, $DB;
+    $settings->add(new admin_setting_configtext('block_onboarding_studies', get_string('studies', 'block_onboarding'),
+        get_string('studies', 'block_onboarding'), 5, PARAM_INT));
+}

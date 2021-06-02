@@ -68,7 +68,6 @@ class experiences_report_form extends moodleform {
             get_string('other', 'block_onboarding'), constants::OTHER, '');
         $mform->addGroup($radioarray, 'types', get_string('reason_report', 'block_onboarding'), array('<br>'), false);
         $mform->setDefault('type', constants::OTHER);
-        //$mform->addRule('types', get_string('experience_type_missing', 'block_onboarding'), 'required', null, 'server');
 
         $mform->addElement('textarea', 'description', get_string('experience_description', 'block_onboarding'),
             array('wrap="virtual" rows="5" cols="50"'));
@@ -81,10 +80,9 @@ class experiences_report_form extends moodleform {
         $this->add_action_buttons($cancel = true, $submitlabel = get_string('report_experience', 'block_onboarding'));
     }
 
-    function validation($data, $files) {
-        $errors= array();
-        var_dump($data);
-
+    public function validation($data, $files) {
+        $errors = array();
+        // TODO: check if there is some content.
         /*if (empty($data['enrolenddisabled'])){
             if ($data['enrolenddate'] <= $data['enrolstartdate']){
                 $errors['enroldateendgrp'] = get_string('enrolenddaterror');

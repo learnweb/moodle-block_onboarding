@@ -47,13 +47,13 @@ class guide_overview implements renderable, templatable {
     public function export_for_template(renderer_base $output) {
         global $DB;
         $categories = array_values($DB->get_records('block_onb_w_categories', $conditions = null, $sort = 'position ASC'));
-        $links = array_values($DB->get_records('block_onb_w_links')); // TODO check if valid URLs or provide appropriate error
-
+        $links = array_values($DB->get_records('block_onb_w_links'));
+        // TODO check if valid URLs or provide appropriate error.
+        // filter_var($text, FILTER_VALIDATE_URL).
         foreach ($categories as $category) {
             foreach ($links as $link) {
                 if ($link->category_id == $category->id) {
                     $category->links[] = $link;
-
                 }
             }
         }

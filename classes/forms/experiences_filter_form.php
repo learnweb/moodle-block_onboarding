@@ -49,7 +49,9 @@ class experiences_filter_form extends moodleform {
             'multiple' => true,
             'noselectionstring' => get_string('allareas', 'search'),
         );
-        $mform->addElement('autocomplete', 'course_filter', get_string('degreeprogram_filter', 'block_onboarding'), $coursesmodified, $options);        // Report description field.
+        // Report description field.
+        $mform->addElement('autocomplete', 'course_filter',
+            get_string('degreeprogram_filter', 'block_onboarding'), $coursesmodified, $options);
         $mform->addHelpButton('course_filter', 'filter_or_courses', 'block_onboarding');
 
         // Experiences categories filter selector.
@@ -58,7 +60,9 @@ class experiences_filter_form extends moodleform {
         foreach ($categories as $category) {
             $categoriesmodified[$category->id] = $category->name;
         }
-        $mform->addElement('autocomplete', 'category_filter', get_string('category_filter', 'block_onboarding'), $categoriesmodified, $options);        // Report description field.
+        // Report description field.
+        $mform->addElement('autocomplete', 'category_filter',
+            get_string('category_filter', 'block_onboarding'), $categoriesmodified, $options);
         $mform->addHelpButton('category_filter', 'filter_or_categories', 'block_onboarding');
 
         // Adds 'Submit'-button.

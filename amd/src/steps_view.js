@@ -82,12 +82,12 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
                             confetti_toogle = false;
                         }, 4000);
                     } else {
-                        let blocktitle = document.getElementsByClassName('block-onboarding-steps-step-title');
-                        blocktitle[0].innerHTML = step_string + response.position + ': ' + response.name;
+                        let stepstitle = document.getElementsByClassName('block-onboarding-steps-step-title');
+                        stepstitle[0].innerHTML = step_string + response.position + ': ' + response.name;
                     }
                     // Fills First Steps section with retrieved content.
-                    let steptitle2 = document.getElementsByClassName('block-onboarding-steps-step-description');
-                    steptitle2[0].innerHTML = response.description;
+                    let stepdescription = document.getElementsByClassName('block-onboarding-steps-step-description');
+                    stepdescription[0].innerHTML = response.description;
                     $('.block-onboarding-steps-progress-bar-value').text(response.progress + '%');
                     $('.block-onboarding-steps-progress-bar-fill').css('width', (response.progress + '%'));
                 }).fail(notification.exception);
@@ -128,12 +128,12 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
                     confetti_toogle = false;
                 }, 4000);
             } else {
-                let steptitle2 = document.getElementsByClassName('block-onboarding-steps-step-title');
-                steptitle2[0].innerHTML = step_string + response.position + ': ' + response.name;
+                let steptitle = document.getElementsByClassName('block-onboarding-steps-step-title');
+                steptitle[0].innerHTML = step_string + response.position + ': ' + response.name;
                 confetti_toogle = false;
             }
             // Fills First Steps section with retrieved content of next step.
-            let stepdescription= document.getElementsByClassName('block-onboarding-steps-step-description');
+            let stepdescription = document.getElementsByClassName('block-onboarding-steps-step-description');
             stepdescription[0].innerHTML = response.description;
             $('.block-onboarding-steps-progress-bar-value').text(response.progress + '%');
             $('.block-onboarding-steps-progress-bar-fill').css('width', (response.progress + '%'));
@@ -165,8 +165,8 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/str'], function ($, aj
             // Determines whether preceding step is a regular step or an achievement step. Displays confetti animation
             // for achievement steps.
             if (response.achievement == 1) {
-                let steptitle2 = document.getElementsByClassName('block-onboarding-steps-step-title');
-                steptitle2[0].innerHTML = achievement_string + response.name;
+                let steptitle = document.getElementsByClassName('block-onboarding-steps-step-title');
+                steptitle[0].innerHTML = achievement_string + response.name;
                 confetti_toogle = true;
                 confetti();
                 setTimeout(function () {
