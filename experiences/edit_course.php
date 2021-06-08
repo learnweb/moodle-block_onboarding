@@ -45,11 +45,18 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
     require_once($CFG->dirroot . '/blocks/onboarding/classes/forms/experiences_course_form.php');
 
     $courseid = optional_param('course_id', -1, PARAM_INT);
+    $delete = optional_param('delete', -1, PARAM_INT);
     $pcourse = new stdClass;
     $pcourse->id = -1;
+
     if ($courseid != -1) {
-        // Get the existing data from the Database.
-        $pcourse = $DB->get_record('block_onb_e_courses', array('id' => $courseid));
+        if ($delete == 1) {
+            $DB->delete_records('block_onb_e_courses', array('id' => $courseid));
+            redirect(new moodle_url('/blocks/onboarding/adminsettings.php'));
+        } else {
+            // Get the existing data from the Database.
+            $pcourse = $DB->get_record('block_onb_e_courses', array('id' => $courseid));
+        }
     }
     $mform = new experiences_course_form(null, array('course' => $pcourse));
 
@@ -59,7 +66,7 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
         if ($fromform = $mform->get_data()) {
             // Processing of data submitted in the form.
             block_onboarding\experiences_lib::edit_course($fromform);
-            redirect('admin.php');
+            redirect(new moodle_url('/blocks/onboarding/adminsettings.php'));
         }
     }
 

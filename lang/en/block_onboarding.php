@@ -44,9 +44,12 @@ $string['admin'] = 'Administration';
 $string['settings'] = 'Settings';
 $string['yes'] = 'Yes';
 // Admin Settings.
+$string['heading_admin_form_studies'] = 'Change the courses of study';
 $string['studies'] = 'Courses of study';
-$string['checkcategorysetting'] = 'Select if the Course Category should be choosable.';
-$string['checkcategorysetting_desc'] = 'Any of the selected categories will show up for users to be selected as their primary course category.';
+$string['csvofstudiestext'] = 'How to list the courses of study';
+$string['csvofstudiestext_help'] = 'Please upload a .csv File which has a semicolon seperated list of the courses of studies offered at your university.';
+$string['addsinglestudytext'] = 'Add a single study';
+$string['addsinglestudytext_help'] = 'Adds a single study to the existing ones.';
 // Guide.
 $string['firststeps'] = 'First Steps';
 $string['guide_summary'] = 'Here you can find useful Links along with a handy "First Steps" - Program, which will get you ready right away.';

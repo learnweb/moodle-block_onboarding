@@ -21,10 +21,15 @@
  * @copyright  2021 Nina Herrmann
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 defined('MOODLE_INTERNAL') || die;
 
 if ($hassiteconfig) { // Needs this condition or there is error on login page.
-    global $CFG, $ADMIN, $DB;
-    $settings->add(new admin_setting_configtext('block_onboarding_studies', get_string('studies', 'block_onboarding'),
-        get_string('studies', 'block_onboarding'), 5, PARAM_INT));
+    $ADMIN->add('blocksettings', new admin_externalpage('block_onboarding',
+        "Foo Admin Component", new moodle_url('/blocks/onboarding/adminsettings.php')));
+    //     $ADMIN->add('blocksettings', new admin_externalpage('block_qrcode',
+    //        get_string('pluginname', 'block_qrcode'),
+    //        new moodle_url('/blocks/qrcode/adminsettings.php')));
 }
+$settings = null;
+

@@ -70,7 +70,7 @@ if (has_capability('block/onboarding:s_manage_steps', $context)) {
         // Utilizes related steps library method and redirects to First Steps administration section when editing form is submitted.
         if ($fromform = $mform->get_data()) {
             \block_onboarding\steps_lib::edit_step($fromform);
-            redirect('admin_steps.php');
+            redirect(new moodle_url('/blocks/onboarding/adminsettings.php'));
         }
     }
 

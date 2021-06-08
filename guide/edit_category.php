@@ -72,7 +72,7 @@ if (has_capability('block/onboarding:w_manage_wiki', $context)) {
         // Utilizes related Wiki library method and redirects to Wiki administration section when editing form is submitted.
         if ($fromform = $mform->get_data()) {
             \block_onboarding\wiki_lib::edit_category($fromform);
-            redirect('admin_wiki.php');
+            redirect(new moodle_url('/blocks/onboarding/adminsettings.php'));
         }
     }
 
