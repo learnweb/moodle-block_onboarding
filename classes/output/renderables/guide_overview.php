@@ -61,7 +61,8 @@ class guide_overview implements renderable, templatable {
         return [
             'can_manage_wiki' => has_capability('block/onboarding:w_manage_wiki', \context_system::instance()),
             'can_manage_steps' => has_capability('block/onboarding:s_manage_steps', \context_system::instance()),
-            'categories_with_links' => $categories
+            'categories_with_links' => $categories,
+            'adminlink' => new \moodle_url('/blocks/onboarding/guidesettings.php')
         ];
     }
 }

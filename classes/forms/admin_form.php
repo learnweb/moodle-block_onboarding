@@ -55,6 +55,6 @@ class admin_form extends moodleform {
         $mform->setType('csvofstudies', PARAM_RAW);
 
         // Adds 'Submit'-button.
-        $mform->addElement('submit', 'submitbutton', 'Submit');
+        $mform->addElement('submit', 'submitbutton', get_string('submit', 'moodle'));
     }
 }

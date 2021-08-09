@@ -15,20 +15,23 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The file for the experience table class.
+ * The file for the experience category table class.
  *
  * @package    block_onboarding
  * @copyright  2021 Westfälische Wilhelms-Universität Münster
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace block_onboarding\output;
+use table_sql;
 
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Class defining the experiences table.
+ * Class defining the steps table.
  */
-class experience_table extends table_sql {
+
+class exp_category_table extends table_sql {
 
     /**
      * Constructor.
@@ -39,19 +42,18 @@ class experience_table extends table_sql {
     public function __construct($uniqueid) {
         parent::__construct($uniqueid);
         // Define the list of columns to show.
-        $columns = array('name', 'author', 'degreeprogram', 'published', 'lastmodified', 'popularity');
+        $columns = array('name', 'questions','action');
         $this->define_columns($columns);
 
         // Define the titles of columns to show in header.
-        $headers = array(get_string('name', 'block_onboarding'), get_string('author', 'block_onboarding'),
-            get_string('experience_degreeprogram', 'block_onboarding'), get_string('published', 'block_onboarding'),
-            get_string('lastmodified', 'block_onboarding'), get_string('popularity', 'block_onboarding'));
+        $headers = array(get_string('name', 'block_onboarding'), get_string('question', 'block_onboarding'),
+            get_string('actions', 'moodle'));
         $this->define_headers($headers);
 
         // Table configuration.
         $this->set_attribute('cellspacing', '0');
 
-        $this->sortable(true, 'published', SORT_DESC);
+        $this->sortable(true, 'position', SORT_ASC);
 
         $this->initialbars(false);
         $this->collapsible(false);
@@ -67,31 +69,24 @@ class experience_table extends table_sql {
 
     // Configure Column Content.
     public function col_name($values) {
-        return '<a href="experience.php?experience_id=' . $values->id . '">' . $values->name . '</a>';
+        return $values->name;
     }
 
-    public function col_author($values) {
-        return $values->author;
+    public function col_links($values) {
+        return $values->questions;
     }
 
-    public function col_degreeprogram($values) {
-        return $values->degreeprogram;
+
+    public function col_action($values) {
+        global $OUTPUT;
+        $editlink = \html_writer::link(new \moodle_url('/blocks/onboarding/experience/edit_category.php?category_id=' . $values->id),
+            $OUTPUT->pix_icon('t/editinline', get_string('edit_category', 'block_onboarding'), 'moodle'));
+        $deletecategory = '<span onb-data-id="' . $values->id .'" onb-data-context="wiki-category" class="block-onboarding-confirm-btn">' .
+            $OUTPUT->pix_icon('i/trash', get_string('delete_category', 'block_onboarding'), 'moodle') . '</span>';
+        return $editlink . $deletecategory;
     }
 
-    public function col_published($values) {
-        $date = userdate($values->published, get_string('strftimedatetimeshort', 'core_langconfig'));
-        return $date;
-    }
 
-    public function col_lastmodified($values) {
-        $date = userdate($values->lastmodified, get_string('strftimedatetimeshort', 'core_langconfig'));
-        return $date;
-    }
-
-    public function col_popularity($values) {
-        global $DB;
-        return $DB->count_records('block_onb_e_helpful', array('experience_id' => $values->id));
-    }
 
     /**
      * This function is called for each data row to allow processing of

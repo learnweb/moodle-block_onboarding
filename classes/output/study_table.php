@@ -22,13 +22,16 @@
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace block_onboarding\output;
+use table_sql;
 
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Class defining the experiences table.
+ * Class defining the steps table.
  */
-class experience_table extends table_sql {
+
+class study_table extends table_sql {
 
     /**
      * Constructor.
@@ -39,19 +42,17 @@ class experience_table extends table_sql {
     public function __construct($uniqueid) {
         parent::__construct($uniqueid);
         // Define the list of columns to show.
-        $columns = array('name', 'author', 'degreeprogram', 'published', 'lastmodified', 'popularity');
+        $columns = array('name');
         $this->define_columns($columns);
 
         // Define the titles of columns to show in header.
-        $headers = array(get_string('name', 'block_onboarding'), get_string('author', 'block_onboarding'),
-            get_string('experience_degreeprogram', 'block_onboarding'), get_string('published', 'block_onboarding'),
-            get_string('lastmodified', 'block_onboarding'), get_string('popularity', 'block_onboarding'));
+        $headers = array(get_string('name', 'block_onboarding'));
         $this->define_headers($headers);
 
         // Table configuration.
         $this->set_attribute('cellspacing', '0');
 
-        $this->sortable(true, 'published', SORT_DESC);
+        $this->sortable(true, 'position', SORT_ASC);
 
         $this->initialbars(false);
         $this->collapsible(false);
@@ -67,30 +68,11 @@ class experience_table extends table_sql {
 
     // Configure Column Content.
     public function col_name($values) {
-        return '<a href="experience.php?experience_id=' . $values->id . '">' . $values->name . '</a>';
-    }
-
-    public function col_author($values) {
-        return $values->author;
-    }
-
-    public function col_degreeprogram($values) {
-        return $values->degreeprogram;
-    }
-
-    public function col_published($values) {
-        $date = userdate($values->published, get_string('strftimedatetimeshort', 'core_langconfig'));
-        return $date;
-    }
-
-    public function col_lastmodified($values) {
-        $date = userdate($values->lastmodified, get_string('strftimedatetimeshort', 'core_langconfig'));
-        return $date;
-    }
-
-    public function col_popularity($values) {
-        global $DB;
-        return $DB->count_records('block_onb_e_helpful', array('experience_id' => $values->id));
+        global $OUTPUT;
+        $editlink = \html_writer::link(new \moodle_url('/blocks/onboarding/experiences/edit_course.php?course_id=' . $values->id),
+            $OUTPUT->pix_icon('t/editinline', 'Edit', 'moodle'));
+        $deletelink = \html_writer::link(new \moodle_url('/blocks/onboarding/experiences/edit_course.php?course_id=' . $values->id . '&delete=1'), $OUTPUT->pix_icon('i/trash', 'Delete', 'moodle'));
+        return $values->name . ' ' . $editlink . $deletelink;
     }
 
     /**

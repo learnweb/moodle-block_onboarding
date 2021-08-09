@@ -32,6 +32,7 @@ require_login();
 global $DB;
 
 $context = context_system::instance();
+$context = context_system::instance();
 
 // Initializes the page.
 $PAGE->set_context($context);
@@ -52,6 +53,7 @@ if (has_capability('block/onboarding:s_manage_steps', $context)) {
     // Retrieves optional URL parameter to determine whether a new step is added or an existing step is edited.
     // The URL variable refers to the step id which is -1 when a new step is to be added to the database.
     $stepid = optional_param('step_id', -1, PARAM_INT);
+    $delete = optional_param('delete', -1, PARAM_INT);
 
     // Checks whether the step id refers to an existing step and retrieves the step from the database if this is the case.
     // Otherwise a step id of -1 is used, which will be further processed in the First Steps library.
@@ -70,7 +72,7 @@ if (has_capability('block/onboarding:s_manage_steps', $context)) {
         // Utilizes related steps library method and redirects to First Steps administration section when editing form is submitted.
         if ($fromform = $mform->get_data()) {
             \block_onboarding\steps_lib::edit_step($fromform);
-            redirect(new moodle_url('/blocks/onboarding/adminsettings.php'));
+            redirect(new moodle_url('/blocks/onboarding/guidesettings.php'));
         }
     }
 

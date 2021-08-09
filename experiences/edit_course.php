@@ -52,7 +52,7 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
     if ($courseid != -1) {
         if ($delete == 1) {
             $DB->delete_records('block_onb_e_courses', array('id' => $courseid));
-            redirect(new moodle_url('/blocks/onboarding/adminsettings.php'));
+            redirect(new moodle_url('/blocks/onboarding/experiencesettings.php'));
         } else {
             // Get the existing data from the Database.
             $pcourse = $DB->get_record('block_onb_e_courses', array('id' => $courseid));
@@ -66,7 +66,7 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
         if ($fromform = $mform->get_data()) {
             // Processing of data submitted in the form.
             block_onboarding\experiences_lib::edit_course($fromform);
-            redirect(new moodle_url('/blocks/onboarding/adminsettings.php'));
+            redirect(new moodle_url('/blocks/onboarding/experiencesettings.php'));
         }
     }
 

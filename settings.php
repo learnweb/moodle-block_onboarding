@@ -25,11 +25,10 @@
 defined('MOODLE_INTERNAL') || die;
 
 if ($hassiteconfig) { // Needs this condition or there is error on login page.
-    $ADMIN->add('blocksettings', new admin_externalpage('block_onboarding',
-        "Foo Admin Component", new moodle_url('/blocks/onboarding/adminsettings.php')));
-    //     $ADMIN->add('blocksettings', new admin_externalpage('block_qrcode',
-    //        get_string('pluginname', 'block_qrcode'),
-    //        new moodle_url('/blocks/qrcode/adminsettings.php')));
+    $ADMIN->add('blocksettings', new admin_externalpage('block_onboarding_guide',
+        "Guide Settings", new moodle_url('/blocks/onboarding/guidesettings.php')));
+    $ADMIN->add('blocksettings', new admin_externalpage('block_onboarding_experience',
+        "Experience Settings", new moodle_url('/blocks/onboarding/experiencesettings.php')));
 }
 $settings = null;
 

@@ -58,7 +58,7 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
     } else {
         if ($fromform = $mform->get_data()) {
             block_onboarding\experiences_lib::edit_category($fromform);
-            redirect(new moodle_url('/blocks/onboarding/adminsettings.php'));
+            redirect(new moodle_url('/blocks/onboarding/experiencesettings.php'));
         }
     }
 

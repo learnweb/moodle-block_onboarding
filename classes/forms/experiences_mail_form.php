@@ -38,7 +38,7 @@ class experiences_mail_form extends moodleform {
         $mform->setType('experience_id', PARAM_INT);
 
         // Course Name Field.
-        $mform->addElement('textarea', 'title', get_string('course_name', 'block_onboarding'),
+        $mform->addElement('textarea', 'title', get_string('name', 'block_onboarding'),
             array('style="resize:none" wrap="virtual" rows="1" cols="100"'));
         $mform->addRule('title', get_string('title_missing', 'block_onboarding'), 'required', null, 'server');
         $mform->addRule('title', 'Max Length is 30 characters', 'maxlength', 30, 'block_onboarding');

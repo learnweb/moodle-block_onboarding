@@ -45,7 +45,7 @@ class wiki_category_form extends moodleform {
         $mform->setType('id', PARAM_INT);
 
         // Category name field.
-        $mform->addElement('text', 'name', get_string('category_name', 'block_onboarding'), array('maxlength' => 150, 'size' => 30,
+        $mform->addElement('text', 'name', get_string('name', 'block_onboarding'), array('maxlength' => 150, 'size' => 30,
             'placeholder' => get_string('default_category_name_wiki', 'block_onboarding')));
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($category->name) ? $category->name : '');

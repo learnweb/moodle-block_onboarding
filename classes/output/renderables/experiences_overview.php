@@ -57,7 +57,8 @@ class experiences_overview implements renderable, templatable {
             'can_manage_experiences' => has_capability('block/onboarding:e_manage_experiences', \context_system::instance()),
             'form' => $this->form,
             'experience' => $experience,
-            'blocked' => $blocked
+            'blocked' => $blocked,
+            'adminlink' => new \moodle_url('/blocks/onboarding/experiencesettings.php')
         ];
     }
 }

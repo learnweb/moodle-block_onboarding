@@ -6,7 +6,7 @@
         <span class="block-onboarding-steps-hide-btn">{{#pix}}i/show, core, {{# str }}hide_steps, block_onboarding{{/ str }}{{/pix}}{{# str }}hide, block_onboarding{{/ str }}</span>
         <span class="block-onboarding-steps-show-btn">{{#pix}}i/hide, core, {{# str }}show_steps, block_onboarding{{/ str }}{{/pix}}{{# str }}show, block_onboarding{{/ str }}</span>
         {{#can_manage_steps}}
-            <a href="admin_steps.php">{{#pix}}i/settings, core, {{# str }}manage_steps, block_onboarding{{/ str }}{{/pix}}{{# str }}settings, block_onboarding{{/ str }}</a>
+            <a href="{{{adminlink}}}">{{#pix}}i/settings, core, {{# str }}manage_steps, block_onboarding{{/ str }}{{/pix}}{{# str }}settings, block_onboarding{{/ str }}</a>
         {{/can_manage_steps}}
     </span>
 </div>
@@ -40,7 +40,7 @@
 <div class="block-onboarding-steps-title-wrapper">
     <div class="block-onboarding-title">{{# str }}wiki, block_onboarding{{/ str }}</div>
     {{#can_manage_wiki}}
-        <a href="admin_wiki.php">
+        <a href="{{{adminlink}}}">
             {{#pix}}i/settings, core, {{# str }}manage_wiki, block_onboarding{{/ str }}{{/pix}}
             {{# str }}settings, block_onboarding{{/ str }}
         </a>

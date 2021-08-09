@@ -44,7 +44,7 @@ class steps_step_form extends moodleform {
         $mform->setType('id', PARAM_INT);
 
         // Step name Field.
-        $mform->addElement('text', 'name', get_string('step_name', 'block_onboarding'),
+        $mform->addElement('text', 'name', get_string('name', 'block_onboarding'),
             array('maxlength' => 150, 'size' => 50,
                 'placeholder' => get_string('default_step_name', 'block_onboarding')));
         $mform->setType('name', PARAM_TEXT);

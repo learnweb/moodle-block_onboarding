@@ -72,7 +72,7 @@ class wiki_link_form extends moodleform {
         $mform->addRule('url', get_string('link_url_req', 'block_onboarding'), 'required', null, 'client');
 
         // Link description field.
-        $mform->addElement('textarea', 'description', get_string('link_description', 'block_onboarding'),
+        $mform->addElement('textarea', 'description', get_string('description', 'block_onboarding'),
             array('wrap' => "virtual", 'rows' => 10, 'cols' => 50,
                 'placeholder' => get_string('link_description_req', 'block_onboarding')));
         $mform->setType('description', PARAM_TEXT);

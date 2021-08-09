@@ -22,8 +22,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use block_onboarding\output\category_table;
-use block_onboarding\output\steps_table;
+use block_onboarding\output\exp_category_table;
 use block_onboarding\output\study_table;
 
 require_once(__DIR__ . '/../../config.php');
@@ -33,11 +32,11 @@ require_once($CFG->dirroot . '/blocks/onboarding/classes/forms/admin_form.php');
 require_login();
 
 require_capability('moodle/site:config', context_system::instance());
-admin_externalpage_setup('block_onboarding');
+admin_externalpage_setup('block_onboarding_experience');
 echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('settings', 'block_onboarding'));
 
 $mform = new \block_onboarding\admin_form();
+$PAGE->requires->js_call_amd('block_onboarding/confirmation_popup', 'init');
 
 // Form is submitted.
 if ($data = $mform->get_data()) {
@@ -73,27 +72,21 @@ $mform->set_data($entry);
 $mform->display();
 echo html_writer::div('Edit Courses of Studies', 'h3');
 $table = new study_table('uniqueid');
-$table->define_baseurl("$CFG->wwwroot/blocks/onboarding/adminsettings.php");
+$table->define_baseurl("$CFG->wwwroot/blocks/onboarding/experiencesettings.php");
 $fields = 'id, name';
 $from = 'mdl_block_onb_e_courses';
 $table->set_sql($fields, $from, 'id >= 0');
 $table->out(10, true);
 
-echo html_writer::div('Edit Steps', 'h3');
-echo html_writer::link(new moodle_url('/blocks/onboarding/guide/edit_step.php'), '<div class="icon fa fa-plus fa-fw "></div>' . 'Step');
-$table = new steps_table('uniqueid');
-$table->define_baseurl("$CFG->wwwroot/blocks/onboarding/adminsettings.php");
-$fields = 'id, name, description, position, achievement';
-$from = 'mdl_block_onb_s_steps';
+echo html_writer::div(get_string('edit_categories', 'block_onboarding'), 'h3');
+echo html_writer::link(new moodle_url('/blocks/onboarding/experiences/edit_category.php'), $OUTPUT->pix_icon('t/add', 'Add', 'moodle') .
+    get_string('link_category', 'block_onboarding'));
+$table = new exp_category_table('uniqueid');
+$table->define_baseurl("$CFG->wwwroot/blocks/onboarding/experiencesettings.php");
+$fields = 'id, name, questions';
+$from = 'mdl_block_onb_e_cats';
 $table->set_sql($fields, $from, 'id >= 0');
 $table->out(10, true);
-echo html_writer::div('Edit Categories', 'h3');
-echo html_writer::link(new moodle_url('/blocks/onboarding/guide/edit_category.php'), '<div class="icon fa fa-plus fa-fw "></div>' . 'Category');
-$table = new category_table('uniqueid');
-$table->define_baseurl("$CFG->wwwroot/blocks/onboarding/adminsettings.php");
-$fields = 'id, name, position';
-$from = 'mdl_block_onb_w_categories';
-$table->set_sql($fields, $from, 'id >= 0');
-$table->out(10, true);
+
 echo $OUTPUT->footer();
 

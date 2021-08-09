@@ -44,7 +44,7 @@ class experiences_category_form extends moodleform {
         $mform->setType('id', PARAM_INT);
 
         // Category Name Field.
-        $mform->addElement('text', 'name', get_string('category_name', 'block_onboarding'));
+        $mform->addElement('text', 'name', get_string('name', 'block_onboarding'));
         $mform->addRule('name', get_string('experience_category_missing', 'block_onboarding'),
             'required', null, 'server');
         $mform->addRule('name', 'Max Length is 30 characters', 'maxlength', 30, 'block_onboarding');
