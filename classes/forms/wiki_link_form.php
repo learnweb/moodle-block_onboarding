@@ -46,7 +46,7 @@ class wiki_link_form extends moodleform {
         $mform->setType('id', PARAM_INT);
 
         // Link name field.
-        $mform->addElement('text', 'name', get_string('link_name', 'block_onboarding'),
+        $mform->addElement('text', 'name', get_string('name', 'block_onboarding'),
             array('maxlength' => 150, 'size' => 30, 'placeholder' => get_string('default_link_name', 'block_onboarding')));
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($link->name) ? $link->name : '');
@@ -80,6 +80,21 @@ class wiki_link_form extends moodleform {
         $mform->addRule('description', get_string('link_description_req', 'block_onboarding'), 'required', null, 'client');
 
         // Adds 'Submit'- and 'Cancel'-buttons.
-        $this->add_action_buttons();
+        $this->add_buttons();
+    }
+
+    /* Add an extra button for having add next*/
+    public function add_buttons() {
+        $mform =& $this->_form;
+
+        $buttonarray = array();
+        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('savechanges'));
+
+        $buttonarray[] = &$mform->createElement('submit', 'submitbutton2',
+            get_string('addanother', 'block_onboarding'));
+
+        $buttonarray[] = &$mform->createElement('cancel');
+        $mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
+        $mform->closeHeaderBefore('buttonar');
     }
 }

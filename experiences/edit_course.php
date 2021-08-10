@@ -61,7 +61,7 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
     $mform = new experiences_course_form(null, array('course' => $pcourse));
 
     if ($mform->is_cancelled()) {
-        redirect('admin.php');
+        redirect(new moodle_url('/blocks/onboarding/experiencesettings.php'));
     } else {
         if ($fromform = $mform->get_data()) {
             // Processing of data submitted in the form.

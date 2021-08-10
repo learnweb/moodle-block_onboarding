@@ -54,11 +54,16 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
     $mform = new experiences_category_form(null, array('category' => $pcategory));
 
     if ($mform->is_cancelled()) {
-        redirect('admin.php');
+        redirect(new moodle_url('/blocks/onboarding/experiencesettings.php'));
     } else {
         if ($fromform = $mform->get_data()) {
             block_onboarding\experiences_lib::edit_category($fromform);
-            redirect(new moodle_url('/blocks/onboarding/experiencesettings.php'));
+            if (property_exists($fromform, 'submitbutton')) {
+                redirect(new moodle_url('/blocks/onboarding/experiencesettings.php'));
+            }
+            if (property_exists($fromform, 'submitbutton2')) {
+                redirect(new moodle_url('/blocks/onboarding/experiences/edit_category.php'));
+            }
         }
     }
 

@@ -67,12 +67,17 @@ if (has_capability('block/onboarding:w_manage_wiki', $context)) {
     $mform = new wiki_link_form(null, array('link' => $paramlink));
     if ($mform->is_cancelled()) {
         // Redirects to Wiki administration section when editing process is canceled.
-        redirect('admin_wiki.php');
+        redirect(new moodle_url('/blocks/onboarding/guidesettings.php'));
     } else {
         // Utilizes related Wiki library method and redirects to Wiki administration section when editing form is submitted.
         if ($fromform = $mform->get_data()) {
             \block_onboarding\wiki_lib::edit_link($fromform);
-            redirect('admin_wiki.php');
+            if (property_exists($fromform, 'submitbutton')) {
+                redirect(new moodle_url('/blocks/onboarding/guidesettings.php'));
+            }
+            if (property_exists($fromform, 'submitbutton2')) {
+                redirect(new moodle_url('/blocks/onboarding/guide/edit_link.php'));
+            }
         }
     }
 

@@ -44,9 +44,13 @@ $string['admin'] = 'Administration';
 $string['settings'] = 'Einstellungen';
 $string['yes'] = 'Ja';
 // Admin Settings.
+$string['heading_admin_form_studies'] = 'Studiengänge anpassen';
+$string['csvofstudiestext'] = 'Hilfe zur Eingabe der Studiengänge';
+$string['csvofstudiestext_help'] = 'Bitte fügen Sie eine mit Semicolons separierte Liste der Studiengänge ein.';
+$string['addsinglestudytext'] = 'Einzelnen Studiengäng hinzufügen';
+$string['addsinglestudytext_help'] = 'Fügt einen einzelnen Studiengang zu den exitierenden hinzu.';
 $string['studies'] = 'Studiengänge';
-$string['checkcategorysetting'] = 'Wähle valide Kurs Katgorien aus';
-$string['checkcategorysetting_desc'] = 'Alle Kurs Kategorien die ausgewählt werden können von Nutzern ausgewählt werden, als ihr FB.';
+$string['addanother'] = 'Speichern und Weitere hinzufügen';
 // Guide.
 $string['firststeps'] = 'Erste Schritte';
 $string['guide_summary'] = 'Hier findest du nützliche organisatorische Informationen rund um dein Studium. Außerdem hilft dir das Erste Schritte - Programm dich zurechtzufinden.';

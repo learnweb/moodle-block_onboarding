@@ -78,7 +78,7 @@ $from = 'mdl_block_onb_e_courses';
 $table->set_sql($fields, $from, 'id >= 0');
 $table->out(10, true);
 
-echo html_writer::div(get_string('edit_categories', 'block_onboarding'), 'h3');
+echo html_writer::div(get_string('edit_categories', 'block_onboarding'), 'h3', array('style' => 'margin-top:3%;'));
 echo html_writer::link(new moodle_url('/blocks/onboarding/experiences/edit_category.php'), $OUTPUT->pix_icon('t/add', 'Add', 'moodle') .
     get_string('link_category', 'block_onboarding'));
 $table = new exp_category_table('uniqueid');

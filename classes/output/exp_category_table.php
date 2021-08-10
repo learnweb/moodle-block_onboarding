@@ -46,7 +46,7 @@ class exp_category_table extends table_sql {
         $this->define_columns($columns);
 
         // Define the titles of columns to show in header.
-        $headers = array(get_string('name', 'block_onboarding'), get_string('question', 'block_onboarding'),
+        $headers = array(get_string('name', 'block_onboarding'), get_string('questions', 'block_onboarding'),
             get_string('actions', 'moodle'));
         $this->define_headers($headers);
 

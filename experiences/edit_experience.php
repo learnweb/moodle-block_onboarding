@@ -75,12 +75,12 @@ if ($checkblocked == true) {
             $mform = new experiences_experience_form(null, array('experience' => $pexperience));
 
             if ($mform->is_cancelled()) {
-                redirect('overview.php');
+                redirect(new moodle_url('/blocks/onboarding/experiences/overview.php'));
             } else {
                 if ($fromform = $mform->get_data()) {
                     // Processing of data submitted in the form.
                     block_onboarding\experiences_lib::edit_experience($fromform);
-                    redirect('overview.php');
+                    redirect(new moodle_url('/blocks/onboarding/experiences/overview.php'));
                 }
             }
 

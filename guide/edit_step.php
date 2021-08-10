@@ -67,12 +67,17 @@ if (has_capability('block/onboarding:s_manage_steps', $context)) {
     $mform = new steps_step_form(null, array('step' => $paramstep));
     if ($mform->is_cancelled()) {
         // Redirects to First Steps administration section when editing process is canceled.
-        redirect('admin_steps.php');
+        redirect(new moodle_url('/blocks/onboarding/guidesettings.php'));
     } else {
         // Utilizes related steps library method and redirects to First Steps administration section when editing form is submitted.
         if ($fromform = $mform->get_data()) {
             \block_onboarding\steps_lib::edit_step($fromform);
-            redirect(new moodle_url('/blocks/onboarding/guidesettings.php'));
+            if (property_exists($fromform, 'submitbutton')) {
+                redirect(new moodle_url('/blocks/onboarding/guidesettings.php'));
+            }
+            if (property_exists($fromform, 'submitbutton2')) {
+                redirect(new moodle_url('/blocks/onboarding/guide/edit_step.php'));
+            }
         }
     }
 

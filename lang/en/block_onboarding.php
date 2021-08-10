@@ -47,9 +47,11 @@ $string['yes'] = 'Yes';
 $string['heading_admin_form_studies'] = 'Change the courses of study';
 $string['studies'] = 'Courses of study';
 $string['csvofstudiestext'] = 'How to list the courses of study';
-$string['csvofstudiestext_help'] = 'Please upload a .csv File which has a semicolon seperated list of the courses of studies offered at your university.';
+$string['csvofstudiestext_help'] = 'Please upload semicolon separated list of the courses of studies offered at your university.';
 $string['addsinglestudytext'] = 'Add a single study';
 $string['addsinglestudytext_help'] = 'Adds a single study to the existing ones.';
+$string['addanother'] = 'Submit and add more';
+
 // Guide.
 $string['firststeps'] = 'First Steps';
 $string['guide_summary'] = 'Here you can find useful links along with a First Steps program.';

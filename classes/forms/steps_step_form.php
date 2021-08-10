@@ -75,6 +75,21 @@ class steps_step_form extends moodleform {
         $mform->setDefault('position', isset($step->position) ? $step->position - 1 : $DB->count_records('block_onb_s_steps'));
 
         // Adds 'Submit'- and 'Cancel'-buttons.
-        $this->add_action_buttons();
+        $this->add_buttons();
+    }
+
+    /* Add an extra button for having add next*/
+    public function add_buttons() {
+        $mform =& $this->_form;
+
+        $buttonarray = array();
+        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('savechanges'));
+
+        $buttonarray[] = &$mform->createElement('submit', 'submitbutton2',
+            get_string('addanother', 'block_onboarding'));
+
+        $buttonarray[] = &$mform->createElement('cancel');
+        $mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
+        $mform->closeHeaderBefore('buttonar');
     }
 }

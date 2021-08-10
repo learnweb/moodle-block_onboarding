@@ -60,7 +60,21 @@ class experiences_category_form extends moodleform {
         $mform->setType('questions', PARAM_TEXT);
         $mform->setDefault('questions', isset($category->questions) ? $category->questions : '');
 
-        // Adds 'Submit'- and 'Cancel'-buttons.
-        $this->add_action_buttons();
+        // Adds 'Submit'- Submit and next and 'Cancel'-buttons.
+        $this->add_buttons();
+    }
+    /* Add an extra button for having add next*/
+    public function add_buttons() {
+        $mform =& $this->_form;
+
+        $buttonarray = array();
+        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('savechanges'));
+
+        $buttonarray[] = &$mform->createElement('submit', 'submitbutton2',
+            get_string('addanother', 'block_onboarding'));
+
+        $buttonarray[] = &$mform->createElement('cancel');
+        $mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
+        $mform->closeHeaderBefore('buttonar');
     }
 }
