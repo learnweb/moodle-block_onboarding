@@ -47,7 +47,7 @@ class block_onboarding extends block_base {
             'course-view-social' => false,
             'mod' => false,
             'mod-quiz' => false,
-            'my' => false
+            'my' => true
         );
     }
 
