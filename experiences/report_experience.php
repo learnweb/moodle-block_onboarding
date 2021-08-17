@@ -38,7 +38,6 @@ if ($checkreport) {
 } else {
 
     $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/report_experience.php'));
-    $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
     $PAGE->navbar->add(get_string('experiences', 'block_onboarding'), new moodle_url('overview.php'));
     $experience = $DB->get_field('block_onb_e_exps', 'name', array('id' => $experienceid));
     $PAGE->navbar->add($experience, new moodle_url('experience.php?experience_id=' . $experienceid));

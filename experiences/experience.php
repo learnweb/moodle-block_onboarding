@@ -33,8 +33,6 @@ $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/experience.php'));
 $experienceid = optional_param('experience_id', -1, PARAM_INT);
 $PAGE->requires->js_call_amd('block_onboarding/experiences_experience', 'init', array($experienceid));
-$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
-$PAGE->navbar->add(get_string('experiences', 'block_onboarding'), new moodle_url('overview.php'));
 $experience = new stdClass();
 $experience = $DB->get_record('block_onb_e_exps', array('id' => $experienceid));
 
@@ -53,11 +51,5 @@ if ($experience->suspended == null || ($experience->suspended == 1  && ($experie
     echo $output->container_end();
     echo $output->footer();
 } else {
-    $PAGE->set_title(get_string('error', 'block_onboarding'));
-    $PAGE->set_heading(get_string('error', 'block_onboarding'));
-    $PAGE->navbar->add(get_string('error', 'block_onboarding'));
-
-    echo $OUTPUT->header();
-    echo html_writer::tag('p', get_string('insufficient_permissions', 'block_onboarding'));
-    echo $OUTPUT->footer();
+    redirect(new moodle_url("/my"));
 }

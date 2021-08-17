@@ -32,9 +32,6 @@ $context = context_system::instance();
 
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/edit_experience.php'));
-$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
-$PAGE->navbar->add(get_string('experiences', 'block_onboarding'), new moodle_url('overview.php'));
-$PAGE->navbar->add(get_string('edit_experience', 'block_onboarding'));
 
 $experienceid = optional_param('experience_id', -1, PARAM_INT);
 $pexperience = new stdClass;
@@ -98,6 +95,6 @@ if ($checkblocked == true) {
             echo $OUTPUT->footer();
         }
     } else {
-        throw new moodle_exception('error_notenoughdata', 'block_onboarding');
+        redirect(new moodle_url("/my"));
     }
 }

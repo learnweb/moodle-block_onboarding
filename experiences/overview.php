@@ -41,8 +41,6 @@ $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/overview.php'));
 $PAGE->requires->js_call_amd('block_onboarding/confirmation_popup', 'init');
 $PAGE->set_title(get_string('experiences', 'block_onboarding'));
 $PAGE->set_heading(get_string('experiences', 'block_onboarding'));
-$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
-$PAGE->navbar->add(get_string('experiences', 'block_onboarding'));
 
 // Passing the form to the mustache file.
 require_once($CFG->dirroot . '/blocks/onboarding/classes/forms/experiences_filter_form.php');

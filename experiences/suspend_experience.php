@@ -43,9 +43,7 @@ if ($suspended == 1) {
     $context = context_system::instance();
     $PAGE->set_context($context);
     $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/edit_category.php'));
-    $PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
     $PAGE->navbar->add(get_string('experiences', 'block_onboarding'), new moodle_url('overview.php'));
-    $PAGE->navbar->add(get_string('experience_admin', 'block_onboarding'), new moodle_url('admin.php'));
     $experience = $DB->get_field('block_onb_e_exps', 'name', array('id' => $experienceid));
     $PAGE->navbar->add($experience, new moodle_url('experience.php?experience_id=' . $experienceid));
 
@@ -73,14 +71,6 @@ if ($suspended == 1) {
         $mform->display();
         echo $OUTPUT->footer();
     } else {
-        $PAGE->set_context($context);
-        $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/edit_experience.php'));
-        $PAGE->set_title(get_string('error', 'block_onboarding'));
-        $PAGE->set_heading(get_string('error', 'block_onboarding'));
-        $PAGE->navbar->add(get_string('error', 'block_onboarding'));
-
-        echo $OUTPUT->header();
-        echo html_writer::tag('p', get_string('insufficient_permissions', 'block_onboarding'));
-        echo $OUTPUT->footer();
+        redirect(new moodle_url("/my"));
     }
 }

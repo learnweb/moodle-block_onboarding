@@ -47,7 +47,10 @@ class experiences_experience_form extends moodleform {
         // Hidden user id.
         $mform->addElement('hidden', 'user_id', $USER->id);
         $mform->setType('user_id', PARAM_INT);
-
+        $output = html_writer::start_tag('div', array('class' => 'alert alert-warning'));
+        $output .= get_string('experience_advice', 'block_onboarding');
+        $output .= html_writer::end_tag('div');
+        $mform->addElement('html', $output);
         // Experience Name Field.
         $mform->addElement('textarea', 'name', get_string('name', 'block_onboarding'),
             array('style="resize:none" wrap="virtual" rows="1" cols="60"'));
@@ -126,6 +129,8 @@ class experiences_experience_form extends moodleform {
         $mform->setType('contact', PARAM_TEXT);
         $mform->setDefault('contact', isset($experience->contact) ? $experience->contact : '');
         $mform->addHelpButton('contact', 'contactinformation', 'block_onboarding');
+        $mform->addElement('checkbox', 'anonym', get_string('anonym', 'block_onboarding'));
+        $mform->addHelpButton('anonym', 'anonym', 'block_onboarding');
 
         // Adds 'Publish'-, 'Draft'- and 'Cancel'-buttons.
         $buttonarray = array();

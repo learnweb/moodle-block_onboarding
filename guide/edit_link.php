@@ -36,10 +36,6 @@ $context = context_system::instance();
 // Initializes the page.
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/wiki/edit_link.php'));
-$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
-$PAGE->navbar->add(get_string('firststeps', 'block_onboarding'), new moodle_url('overview.php'));
-$PAGE->navbar->add(get_string('wiki_admin', 'block_onboarding'), new moodle_url('admin_wiki.php'));
-$PAGE->navbar->add(get_string('edit_link', 'block_onboarding'));
 
 // Checks whether user holds the required capability for managing the Wiki.
 if (has_capability('block/onboarding:w_manage_wiki', $context)) {
@@ -88,11 +84,5 @@ if (has_capability('block/onboarding:w_manage_wiki', $context)) {
 
 } else {
     // Initializes page title and heading in case permissions are insufficient.
-    $PAGE->set_title(get_string('error', 'block_onboarding'));
-    $PAGE->set_heading(get_string('error', 'block_onboarding'));
-
-    // Defines the page output.
-    echo $OUTPUT->header();
-    echo html_writer::tag('p', get_string('insufficient_permissions', 'block_onboarding'));
-    echo $OUTPUT->footer();
+    redirect(new moodle_url("/my"));
 }

@@ -42,12 +42,12 @@ class block_onboarding extends block_base {
      */
     public function applicable_formats() {
         return array(
-            'site-index' => true,
-            'course-view' => true,
+            'site-index' => false,
+            'course-view' => false,
             'course-view-social' => false,
             'mod' => false,
             'mod-quiz' => false,
-            'my' => true
+            'my' => false
         );
     }
 

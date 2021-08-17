@@ -62,6 +62,9 @@ class experiences_lib {
         if (isset($fromform->aboutme_text)) {
             $experience->aboutme = $fromform->aboutme_text;
         }
+        if (isset($fromform->anonym)) {
+            $experience->anonym = 1;
+        }
 
         // Experience is either updated or newly created.
         if ($fromform->id != -1) {

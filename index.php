@@ -30,11 +30,12 @@ $context = context_system::instance();
 
 global $USER, $DB;
 
+redirect(new moodle_url("/blocks/onboarding/experiences/overview.php"));
+
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding'));
 $PAGE->set_title(get_string('pluginname', 'block_onboarding'));
 $PAGE->set_heading(get_string('pluginname', 'block_onboarding'));
-$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
 
 $output = $PAGE->get_renderer('block_onboarding');
 echo $output->header();

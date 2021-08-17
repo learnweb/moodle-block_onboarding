@@ -32,6 +32,7 @@ $string['onboarding:s_manage_steps'] = 'Steps Inhalte verwalten';
 $string['onboarding:e_manage_experiences'] = 'Erfahrungsberichte verwalten';
 $string['error'] = "Error";
 $string['insufficient_permissions'] = 'Sorry, ungenügende Berechtigungen';
+$string['insufficient_permissions'] = 'Sorry, ungenügende Berechtigungen';
 $string['blocked'] = 'Sorry, du bist nicht berechtigt auf diesen Inhalt zuzugreifen.';
 $string['settings'] = 'Einstellungen';
 $string['back'] = 'Zurück';
@@ -124,6 +125,9 @@ $string['msg_delete_step_warning'] = 'WARNING: Beim Löschen dieses Schrittes we
 
 // Experiences.
 $string['experience'] = 'Erfahrung';
+$string['anonym'] = 'Anonym';
+$string['anonym_help'] =
+    'In der tabellarischen Übersicht der Erfahrungberichte wird dein Name nicht angezeigt. Ansonsten wird dein Vorname angezeigt. Dein Nachname wird nie angezeigt.';
 $string['experiences'] = 'Erfahrungsberichte';
 $string['experiences_summary'] = 'Unser Erfahrungsbereich gibt dir die Möglichkeit herauszufinden, wie andere Studentierende vor dir ihr Studium gestaltet haben. Hier kannst du von anderen lernen und Inspiration für dein Studium finden.';
 $string['default_category_name'] = 'Beispiel Kategorie';
@@ -171,6 +175,7 @@ $string['reason_report'] = 'Wähle einen Grund warum dieser Bericht gemeldet wur
 $string['report_experience'] = 'Erfahrungsbericht melden';
 $string['report_overview'] = 'Verwaltung von gemeldeten Beiträgen';
 $string['experience_description_missing'] = 'Bitte tragen Sie eine Beschreibung ein.';
+$string['experience_advice'] = 'Denk beim Erstellen des Erfahrungsberichtes bitte daran, dass wir verpflichtet sind anstößige Inhalte zu löschen und ggf. weitere Maßnahmen zu tätigen.';
 $string['filter_or_courses'] = 'Studiengang Filter';
 $string['filter_or_categories'] = 'Kategorien Filter';
 $string['filter_or_courses_help'] =

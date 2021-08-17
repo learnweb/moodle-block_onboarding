@@ -37,10 +37,6 @@ $context = context_system::instance();
 // Initializes the page.
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/steps/edit_step.php'));
-$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
-$PAGE->navbar->add(get_string('firststeps', 'block_onboarding'), new moodle_url('overview.php'));
-$PAGE->navbar->add(get_string('steps_admin', 'block_onboarding'), new moodle_url('admin_steps.php'));
-$PAGE->navbar->add(get_string('edit_step', 'block_onboarding'));
 
 // Checks whether user holds the required capability for managing steps.
 if (has_capability('block/onboarding:s_manage_steps', $context)) {
@@ -87,12 +83,5 @@ if (has_capability('block/onboarding:s_manage_steps', $context)) {
     echo $OUTPUT->footer();
 
 } else {
-    // Initializes page title and heading in case permissions are insufficient.
-    $PAGE->set_title(get_string('error', 'block_onboarding'));
-    $PAGE->set_heading(get_string('error', 'block_onboarding'));
-
-    // Defines the page output.
-    echo $OUTPUT->header();
-    echo html_writer::tag('p', get_string('insufficient_permissions', 'block_onboarding'));
-    echo $OUTPUT->footer();
+    redirect(new moodle_url("/my"));
 }

@@ -67,6 +67,10 @@ class experience_table extends table_sql {
 
     // Configure Column Content.
     public function col_name($values) {
+        var_dump($values);
+        if (isset($values->anonym)) {
+            return get_string('anonym', 'block_onboarding');
+        }
         return '<a href="experience.php?experience_id=' . $values->id . '">' . $values->name . '</a>';
     }
 

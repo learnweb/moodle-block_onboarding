@@ -36,17 +36,19 @@ global $USER, $DB;
 // Initializes the page.
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/wiki/overview.php'));
-$PAGE->requires->js_call_amd('block_onboarding/steps_view', 'init');
-$PAGE->set_title(get_string('firststeps', 'block_onboarding'));
-$PAGE->set_heading(get_string('firststeps', 'block_onboarding'));
-$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
-$PAGE->navbar->add(get_string('firststeps', 'block_onboarding'));
+if (has_capability('block/onboarding:w_manage_wiki', $context)) {
+    $PAGE->requires->js_call_amd('block_onboarding/steps_view', 'init');
+    $PAGE->set_title(get_string('firststeps', 'block_onboarding'));
+    $PAGE->set_heading(get_string('firststeps', 'block_onboarding'));
 
-// Defines the page output.
-$output = $PAGE->get_renderer('block_onboarding');
-echo $output->header();
-echo $output->container_start('wiki-overview');
-$renderable = new \block_onboarding\output\renderables\guide_overview();
-echo $output->render($renderable);
-echo $output->container_end();
-echo $output->footer();
+    // Defines the page output.
+    $output = $PAGE->get_renderer('block_onboarding');
+    echo $output->header();
+    echo $output->container_start('wiki-overview');
+    $renderable = new \block_onboarding\output\renderables\guide_overview();
+    echo $output->render($renderable);
+    echo $output->container_end();
+    echo $output->footer();
+} else {
+    redirect(new moodle_url("/my"));
+}

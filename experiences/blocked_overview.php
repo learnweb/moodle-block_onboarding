@@ -37,10 +37,6 @@ $context = context_system::instance();
 
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/blocked_overview.php'));
-$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'), new moodle_url('../index.php'));
-$PAGE->navbar->add(get_string('experiences', 'block_onboarding'), new moodle_url('overview.php'));
-$PAGE->navbar->add(get_string('experience_admin', 'block_onboarding'), new moodle_url('admin.php'));
-$PAGE->navbar->add(get_string('blocked_overview', 'block_onboarding'));
 
 if (has_capability('block/onboarding:e_manage_experiences', \context_system::instance())) {
 
@@ -66,10 +62,5 @@ if (has_capability('block/onboarding:e_manage_experiences', \context_system::ins
 
     echo $output->footer();
 } else {
-    $PAGE->set_title(get_string('error', 'block_onboarding'));
-    $PAGE->set_heading(get_string('error', 'block_onboarding'));
-
-    echo $OUTPUT->header();
-    echo html_writer::tag('p', get_string('insufficient_permissions', 'block_onboarding'));
-    echo $OUTPUT->footer();
+    redirect(new moodle_url("/my"));
 }

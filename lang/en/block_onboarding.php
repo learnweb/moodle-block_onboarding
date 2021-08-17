@@ -124,6 +124,9 @@ $string['msg_delete_step_warning'] = 'WARNING: This will permanently delete this
 
 // Experiences.
 $string['experience'] = 'Experience';
+$string['anonym'] = 'Anonym';
+$string['anonym_help'] =
+    'Your name is not displayed for other students. Otherwise your firstname will be used. Fullnames are never used.';
 $string['experiences'] = 'Experiences';
 $string['experiences_summary'] = 'Our experiences collection allows you to find out how other students have perceived their studies. 
 This gives you the opportunity to get inspired and learn from others.';
@@ -152,6 +155,7 @@ $string['default_experience_name'] = 'Sample Experience';
 $string['default_experience_url'] = 'http://www.example.com';
 $string['default_experience_description'] = 'Sample Description';
 $string['experience_contact'] = 'Contact Information';
+$string['experience_advice'] = 'Please keep in mind that we are commited to eliminate inappropiate content and will take further actions in severe cases.';
 $string['contact'] = 'Contact: ';
 $string['category_missing'] = 'Please enter some thoughts or uncheck the box.';
 $string['takeaways'] = 'Key Takeaways';
