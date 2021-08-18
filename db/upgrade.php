@@ -44,9 +44,9 @@ function xmldb_block_onboarding_upgrade($oldversion) {
 
         // Define field id to be added to block_onb_e_exps.
         $table = new xmldb_table('block_onb_e_exps');
-        $field = new xmldb_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null);
+        $field = new xmldb_field('anonym', XMLDB_TYPE_INTEGER, '2', null, XMLDB_NOTNULL, null, '0', 'suspended');
 
-        // Conditionally launch add field id.
+        // Conditionally launch add field anonym.
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
         }
