@@ -6,10 +6,6 @@
 /* ------------------------------------------------- */
 
 /* General */
-/* TODO ONLY FOR PLUGIN  */
-ul {
-    margin-bottom: 0 !important;
-}
 
 .block-onboarding-btn-normal {
     background-color: #578014 !important;
@@ -383,7 +379,6 @@ ul {
     margin: .5em .5em;
     border-radius: 8px;
     padding: 3px;
-    background-image: url([[pix:block_onboarding|library]]);
     background-repeat: no-repeat;
     background-size: cover;
     background-color: #ececec;
@@ -430,8 +425,8 @@ ul {
 }
 
 .block-onboarding-experiences-experience-title-info {
-    background-color: rgba(128, 128, 128, 0.8);
-    color: #ffffff;
+    background-color: rgba(255, 255, 255, 1);
+    color: #000;
     margin: 0.25em;
     padding: 7px;
     border-radius: 6px;
@@ -441,17 +436,20 @@ ul {
 .block-onboarding-experiences-experience-title-info-p {
     margin-bottom: 0;
 }
+.block-onboarding-experiences-experience-title-variable {
+    font-weight: bold;
+}
 
 .block-onboarding-experiences-experience-title-takeaways-title {
     font-weight: bold;
     width: fit-content;
     margin-top: 0.5em;
     margin-bottom: 0.4em;
-    color: #ffffff;
-    text-shadow: 2px 2px 5px #555;
+    color: #000;
 }
 
 .block-onboarding-experiences-experience-title-takeaways-list{
+    margin-left: .6em;
     margin-bottom: 0.25em;
 }
 
@@ -461,7 +459,6 @@ ul {
     padding: 0.1em 0.2em;
     border-radius: 3px;
     font-weight: bold;
-    margin-left: 0.6em;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -499,10 +496,6 @@ ul {
     position: absolute;
     top: 0px;
 }
-/* TODO ONLY FOR PLUGIN  */
-navigation {
-    grid-column-start: 1;
-    grid-column-end: 5;
-    grid-row-start: 1;
-    grid-row-end: 2;
+.report_exp_onboarding > .onboarding_close_elements{
+    margin-bottom: 0;
 }

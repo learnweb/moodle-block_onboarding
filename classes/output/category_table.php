@@ -77,9 +77,11 @@ class category_table extends table_sql {
         $links = $DB->get_records('block_onb_w_links', array('category_id' => $values->id));
         $arrayoflinks = array();
         array_push($arrayoflinks, \html_writer::link(new \moodle_url('/blocks/onboarding/guide/edit_link.php'),
-            $OUTPUT->pix_icon('t/add', get_string('new_link', 'block_onboarding'), 'moodle') . get_string('new_link', 'block_onboarding')));
+            $OUTPUT->pix_icon('t/add', get_string('new_link', 'block_onboarding'), 'moodle') .
+            get_string('new_link', 'block_onboarding')));
         foreach ($links as $link) {
-            $deletelink = '<span onb-data-id="' . $link->id . '"onb-data-context="wiki-link" class="block-onboarding-confirm-btn">' .
+            $deletelink = '<span onb-data-id="' . $link->id .
+                '"onb-data-context="wiki-link" class="block-onboarding-confirm-btn">' .
                 $OUTPUT->pix_icon('i/trash', get_string('delete_link', 'block_onboarding'), 'moodle') . '</a>';
             $editlink = \html_writer::link(new \moodle_url('/blocks/onboarding/guide/edit_link.php?link_id=' . $values->id),
                 $OUTPUT->pix_icon('t/editinline', get_string('edit_link', 'block_onboarding'), 'moodle'));
@@ -96,9 +98,11 @@ class category_table extends table_sql {
     public function col_action($values) {
         global $OUTPUT;
         $editlink = \html_writer::link(new \moodle_url('/blocks/onboarding/guide/edit_category.php?category_id=' . $values->id),
-            $OUTPUT->pix_icon('t/editinline', get_string('edit_category', 'block_onboarding'), 'moodle'));
-        $deletecategory = '<span onb-data-id="' . $values->id .'" onb-data-context="wiki-category" class="block-onboarding-confirm-btn">' .
-            $OUTPUT->pix_icon('i/trash', get_string('delete_category', 'block_onboarding'), 'moodle') . '</span>';
+            $OUTPUT->pix_icon('t/editinline', get_string('edit_category', 'block_onboarding'),
+                'moodle'));
+        $deletecategory = '<span onb-data-id="' . $values->id .
+            '" onb-data-context="wiki-category" class="block-onboarding-confirm-btn">' . $OUTPUT->pix_icon('i/trash',
+                get_string('delete_category', 'block_onboarding'), 'moodle') . '</span>';
         return $editlink . $deletecategory;
     }
 

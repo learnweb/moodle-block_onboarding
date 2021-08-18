@@ -42,7 +42,7 @@ class exp_category_table extends table_sql {
     public function __construct($uniqueid) {
         parent::__construct($uniqueid);
         // Define the list of columns to show.
-        $columns = array('name', 'questions','action');
+        $columns = array('name', 'questions', 'action');
         $this->define_columns($columns);
 
         // Define the titles of columns to show in header.
@@ -79,10 +79,12 @@ class exp_category_table extends table_sql {
 
     public function col_action($values) {
         global $OUTPUT;
-        $editlink = \html_writer::link(new \moodle_url('/blocks/onboarding/experience/edit_category.php?category_id=' . $values->id),
-            $OUTPUT->pix_icon('t/editinline', get_string('edit_category', 'block_onboarding'), 'moodle'));
-        $deletecategory = '<span onb-data-id="' . $values->id .'" onb-data-context="wiki-category" class="block-onboarding-confirm-btn">' .
-            $OUTPUT->pix_icon('i/trash', get_string('delete_category', 'block_onboarding'), 'moodle') . '</span>';
+        $editlink = \html_writer::link(new \moodle_url('/blocks/onboarding/experience/edit_category.php?category_id=' .
+            $values->id), $OUTPUT->pix_icon('t/editinline', get_string('edit_category', 'block_onboarding'),
+            'moodle'));
+        $deletecategory = '<span onb-data-id="' . $values->id .
+            '" onb-data-context="wiki-category" class="block-onboarding-confirm-btn">' . $OUTPUT->pix_icon('i/trash',
+                get_string('delete_category', 'block_onboarding'), 'moodle') . '</span>';
         return $editlink . $deletecategory;
     }
 

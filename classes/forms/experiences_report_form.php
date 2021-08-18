@@ -41,7 +41,7 @@ class experiences_report_form extends moodleform {
 
         $mform = $this->_form;
         $experienceid = $this->_customdata['experience_id'];
-
+        $mform->updateAttributes(array('class' => 'mform report_exp_onboarding'));
         // Hidden experience id.
         $mform->addElement('hidden', 'experience_id', $experienceid);
         $mform->setType('experience_id', PARAM_INT);

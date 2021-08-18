@@ -128,8 +128,7 @@ $string['anonym'] = 'Anonym';
 $string['anonym_help'] =
     'Your name is not displayed for other students. Otherwise your firstname will be used. Fullnames are never used.';
 $string['experiences'] = 'Experiences';
-$string['experiences_summary'] = 'Our experiences collection allows you to find out how other students have perceived their studies. 
-This gives you the opportunity to get inspired and learn from others.';
+$string['experiences_summary'] = 'Our experiences collection allows you to find out how other students have perceived their studies. This gives you the opportunity to get inspired and learn from others.';
 $string['default_category_name'] = 'Sample Category';
 $string['questions'] = 'Questions';
 $string['edit_course'] = 'Edit Degree Program';
@@ -241,3 +240,7 @@ $string['msg_delete_exp_exp_admin_warning'] = 'WARNING: This will permanently de
 $string['msg_delete_exp_exp_blacklist_warning'] = 'WARNING: This will delete the report and also blacklist the author, meaning the author will not be able to submit further experience reports. Blacklisted users can always be unblocked in the "Blocked Users" section in the Administrator Settings. Are you sure you want to proceed?';
 $string['msg_delete_exp_admin_report_warning'] = 'WARNING: This will permanently delete the reported issue. Are you sure you want to proceed?';
 $string['msg_delete_exp_admin_unblock_warning'] = 'WARNING: This will unblock the user, allowing the user to sumbit experience reports again. Are you sure you want to proceed?';
+$string['wip'] = 'We are working on it.';
+$string['site_wip'] = 'To display this site we are missing some settings, we are working on it. If nothing happens please contact the support.';
+$string['no_type'] = 'Please select at least one reasons for reporting.';
+

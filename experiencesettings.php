@@ -42,11 +42,11 @@ $PAGE->requires->js_call_amd('block_onboarding/confirmation_popup', 'init');
 if ($data = $mform->get_data()) {
     global $DB;
     // Adds single or multiple courses of studies seperated by semicolons.
-    if(isset($data->{"csvofstudies"})){
+    if (isset($data->{"csvofstudies"})) {
         $cleanedtext = str_replace(array("\n", "\r"), '', $data->{"csvofstudies"});
         $studies = explode ( ';', $cleanedtext);
         foreach ($studies as $singlestudy) {
-            if (strlen($singlestudy) > 0){
+            if (strlen($singlestudy) > 0) {
                 $exist = $DB->get_records('block_onb_e_courses', array('name' => $singlestudy));
                 if (!empty($exist)) {
                     echo $singlestudy . ' was not added as it already exists. <br>';
@@ -79,8 +79,8 @@ $table->set_sql($fields, $from, 'id >= 0');
 $table->out(10, true);
 
 echo html_writer::div(get_string('edit_categories', 'block_onboarding'), 'h3', array('style' => 'margin-top:3%;'));
-echo html_writer::link(new moodle_url('/blocks/onboarding/experiences/edit_category.php'), $OUTPUT->pix_icon('t/add', 'Add', 'moodle') .
-    get_string('link_category', 'block_onboarding'));
+echo html_writer::link(new moodle_url('/blocks/onboarding/experiences/edit_category.php'),
+    $OUTPUT->pix_icon('t/add', 'Add', 'moodle') . get_string('link_category', 'block_onboarding'));
 $table = new exp_category_table('uniqueid');
 $table->define_baseurl("$CFG->wwwroot/blocks/onboarding/experiencesettings.php");
 $fields = 'id, name, questions';

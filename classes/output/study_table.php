@@ -71,7 +71,8 @@ class study_table extends table_sql {
         global $OUTPUT;
         $editlink = \html_writer::link(new \moodle_url('/blocks/onboarding/experiences/edit_course.php?course_id=' . $values->id),
             $OUTPUT->pix_icon('t/editinline', 'Edit', 'moodle'));
-        $deletelink = \html_writer::link(new \moodle_url('/blocks/onboarding/experiences/edit_course.php?course_id=' . $values->id . '&delete=1'), $OUTPUT->pix_icon('i/trash', 'Delete', 'moodle'));
+        $deletelink = \html_writer::link(new \moodle_url('/blocks/onboarding/experiences/edit_course.php?course_id=' .
+            $values->id . '&delete=1'), $OUTPUT->pix_icon('i/trash', 'Delete', 'moodle'));
         return $values->name . ' ' . $editlink . $deletelink;
     }
 

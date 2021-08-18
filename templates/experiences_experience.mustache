@@ -22,17 +22,17 @@
         </div>
         <div class="block-onboarding-experiences-experience-title-info">
             {{#experience}}
-                <p class="block-onboarding-experiences-experience-title-info-p">{{# str }}published, block_onboarding{{/ str }}: {{#userdate}}{{{timecreated}}}, {{#str}}strftimedatetimeshort {{/str}}{{/userdate}}</p>
+                <p class="block-onboarding-experiences-experience-title-info-p">{{# str }}published, block_onboarding{{/ str }}:<span class="block-onboarding-experiences-experience-title-variable"> {{#userdate}}{{{timecreated}}}, {{#str}}strftimedatetimeshort {{/str}}{{/userdate}}</span></p>
             {{/experience}}
-            <p class="block-onboarding-experiences-experience-title-info-p">{{#author}}{{# str }}author, block_onboarding{{/ str }}: {{{author}}}{{/author}}{{#experience}}{{#contact}} - "{{{contact}}}"{{/contact}}{{/experience}}</p>
-            <p class="block-onboarding-experiences-experience-title-info-p">{{#degreeprogram}}{{# str }}experience_degreeprogram, block_onboarding{{/ str }}: {{{degreeprogram}}}{{/degreeprogram}}</p>
+            <p class="block-onboarding-experiences-experience-title-info-p">{{#author}}{{# str }}author, block_onboarding{{/ str }}:<span class="block-onboarding-experiences-experience-title-variable"> {{{author}}}{{/author}}{{#experience}}{{#contact}} - "{{{contact}}}"{{/contact}}{{/experience}}</span></p>
+            <p class="block-onboarding-experiences-experience-title-info-p">{{#degreeprogram}}{{# str }}experience_degreeprogram, block_onboarding{{/ str }}:<span class="block-onboarding-experiences-experience-title-variable"> {{{degreeprogram}}}{{/degreeprogram}}</span></p>
             <div class="experiences-experience-title-takeaways">
                 <h4 class="block-onboarding-experiences-experience-title-takeaways-title">{{# str }}takeaways, block_onboarding{{/ str }}</h4>
                 <ul>
                     {{#experiences_categories_joined_categories}}
                         <li class="block-onboarding-experiences-experience-title-takeaways-list">{{{takeaway}}}
-                            <span class="block-onboarding-experiences-experience-title-takeaways-cat">{{{name}}}</span>
                         </li>
+                        <span class="block-onboarding-experiences-experience-title-takeaways-cat">{{{name}}}</span>
                     {{/experiences_categories_joined_categories}}
                 </ul>
             </div>

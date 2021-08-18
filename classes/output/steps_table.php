@@ -91,8 +91,10 @@ class steps_table extends table_sql {
 
     public function col_action($values) {
         global $OUTPUT;
-        $editlink = \html_writer::link(new \moodle_url('/blocks/onboarding/guide/edit_step.php?step_id=' . $values->id), $OUTPUT->pix_icon('t/editinline', 'Edit', 'moodle'));
-        $seconddelete = '<span onb-data-id=' . $values->id . ' onb-data-context="step" class="block-onboarding-confirm-btn">' . $OUTPUT->pix_icon('i/trash', 'Delete', 'moodle') . '</a>';
+        $editlink = \html_writer::link(new \moodle_url('/blocks/onboarding/guide/edit_step.php?step_id=' .
+            $values->id), $OUTPUT->pix_icon('t/editinline', 'Edit', 'moodle'));
+        $seconddelete = '<span onb-data-id=' . $values->id . ' onb-data-context="step" class="block-onboarding-confirm-btn">' .
+            $OUTPUT->pix_icon('i/trash', 'Delete', 'moodle') . '</a>';
 
         return $editlink . $seconddelete;
     }

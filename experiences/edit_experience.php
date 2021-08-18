@@ -26,13 +26,12 @@ require(__DIR__ . '/../../../config.php');
 
 require_login();
 
-global $DB, $USER;
+global $DB, $USER, $PAGE, $OUTPUT, $CFG;
 
 $context = context_system::instance();
 
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding/experiences/edit_experience.php'));
-
 $experienceid = optional_param('experience_id', -1, PARAM_INT);
 $pexperience = new stdClass;
 $pexperience->id = -1;
@@ -95,6 +94,12 @@ if ($checkblocked == true) {
             echo $OUTPUT->footer();
         }
     } else {
-        redirect(new moodle_url("/my"));
+        // If blocked the user gets an error page.
+        $PAGE->set_title(get_string('wip', 'block_onboarding'));
+        $PAGE->set_heading(get_string('wip', 'block_onboarding'));
+
+        echo $OUTPUT->header();
+        echo html_writer::tag('p', get_string('site_wip', 'block_onboarding'));
+        echo $OUTPUT->footer();
     }
 }
