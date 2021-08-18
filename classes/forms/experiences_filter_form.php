@@ -14,21 +14,32 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * File containing the form definition for experiences filter.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/formslib.php');
 
+/**
+ * Class providing the form for experiences filter.
+ */
 class experiences_filter_form extends moodleform {
 
+    /**
+     * Form definition.
+     */
     public function definition() {
-        global $CFG, $DB;
+        global $DB;
 
         $mform = $this->_form;
 
-        // $mform->addElement('header', 'filter', get_string('filters', 'block_onboarding'));
-
-        $filtergroup = array();
-
+        // Experiences course filter selector.
         $courses = $DB->get_records('block_onb_e_courses');
         $coursesmodified = array();
         foreach ($courses as $course) {
@@ -36,32 +47,25 @@ class experiences_filter_form extends moodleform {
         }
         $options = array(
             'multiple' => true,
-            'noselectionstring' => '',
-            'placeholder' => get_string('degreeprogram_filter', 'block_onboarding')
+            'noselectionstring' => get_string('allareas', 'search'),
         );
-        $filtergroup[] =& $mform->createElement('autocomplete', 'course_filter', get_string('degreeprogram_filter', 'block_onboarding'),
-            $coursesmodified, $options);
+        // Report description field.
+        $mform->addElement('autocomplete', 'course_filter',
+            get_string('degreeprogram_filter', 'block_onboarding'), $coursesmodified, $options);
+        $mform->addHelpButton('course_filter', 'filter_or_courses', 'block_onboarding');
 
+        // Experiences categories filter selector.
         $categories = $DB->get_records('block_onb_e_cats');
         $categoriesmodified = array();
-        foreach ($categories as $category){
+        foreach ($categories as $category) {
             $categoriesmodified[$category->id] = $category->name;
         }
-        $options = array(
-            'multiple' => true,
-            'noselectionstring' => '',
-            'placeholder' => get_string('category_filter', 'block_onboarding')
-        );
-        $filtergroup[] =& $mform->createElement('autocomplete', 'category_filter', get_string('category_filter', 'block_onboarding'),
-            $categoriesmodified, $options);
+        // Report description field.
+        $mform->addElement('autocomplete', 'category_filter',
+            get_string('category_filter', 'block_onboarding'), $categoriesmodified, $options);
+        $mform->addHelpButton('category_filter', 'filter_or_categories', 'block_onboarding');
 
-        $mform->addGroup($filtergroup, 'filtergroup', get_string('filters', 'block_onboarding'), '', false);
-        $mform->addHelpButton('filtergroup', 'filter_or', 'block_onboarding');
-
+        // Adds 'Submit'-button.
         $mform->addElement('submit', 'applyfilter', get_string('applyfilter', 'block_onboarding'));
-    }
-
-    public function validation($data, $files) {
-        return array();
     }
 }

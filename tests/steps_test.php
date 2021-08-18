@@ -1,4 +1,35 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * The file for the block_onboarding_steps_testcase class.
+ * Contains tests for steps administration.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+/**
+ * Testcases for steps administration.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
 class block_onboarding_steps_testcase extends advanced_testcase {
     public function test_add_step() {
@@ -12,14 +43,37 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $fromform->position = 0;
         $fromform->name = "Test Step";
         $fromform->description = "Test Description";
-        $fromform->achievement = False;
+        $fromform->achievement = false;
 
         \block_onboarding\steps_lib::edit_step($fromform);
 
         $this->assertTrue($DB->record_exists('block_onb_s_steps', array('name' => 'Test Step')));
     }
 
-    public function test_update_step(){
+    public function test_add_step_without_position() {
+        global $DB;
+        $this->resetAfterTest(true);
+
+        $this->assertEquals(0, $DB->count_records('block_onb_s_steps'));
+
+        $fromform = new \stdClass();
+        $fromform->id = -1;
+        $fromform->name = "Test Step";
+        $fromform->description = "Test Description";
+        $fromform->achievement = false;
+
+        $errorthrown = false;
+        try {
+            \block_onboarding\steps_lib::edit_step($fromform);
+        } catch (\Exception $e) {
+            $errorthrown = true;
+        }
+        $this->assertTrue($errorthrown);
+
+        $this->assertFalse($DB->record_exists('block_onb_s_steps', array('name' => 'Test Step')));
+    }
+
+    public function test_update_step() {
         global $DB;
         $this->resetAfterTest(true);
 
@@ -30,7 +84,7 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $fromform->position = 0;
         $fromform->name = "Test Step";
         $fromform->description = "Test Description";
-        $fromform->achievement = False;
+        $fromform->achievement = false;
 
         \block_onboarding\steps_lib::edit_step($fromform);
 
@@ -43,14 +97,14 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $fromform->position = 0;
         $fromform->name = "Test Step New";
         $fromform->description = "Test Description";
-        $fromform->achievement = False;
+        $fromform->achievement = false;
 
         \block_onboarding\steps_lib::edit_step($fromform);
 
         $this->assertTrue($DB->record_exists('block_onb_s_steps', array('name' => 'Test Step New')));
     }
 
-    public function test_update_step_position(){
+    public function test_update_step_position() {
         global $DB;
         $this->resetAfterTest(true);
 
@@ -61,7 +115,7 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $fromform->position = 0;
         $fromform->name = "Test Step 1";
         $fromform->description = "Test Description";
-        $fromform->achievement = False;
+        $fromform->achievement = false;
 
         \block_onboarding\steps_lib::edit_step($fromform);
 
@@ -70,7 +124,7 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $fromform->position = 1;
         $fromform->name = "Test Step 2";
         $fromform->description = "Test Description";
-        $fromform->achievement = False;
+        $fromform->achievement = false;
 
         \block_onboarding\steps_lib::edit_step($fromform);
 
@@ -85,7 +139,7 @@ class block_onboarding_steps_testcase extends advanced_testcase {
         $fromform->position = 0;
         $fromform->name = "Test Step 2";
         $fromform->description = "Test Description";
-        $fromform->achievement = False;
+        $fromform->achievement = false;
 
         \block_onboarding\steps_lib::edit_step($fromform);
 

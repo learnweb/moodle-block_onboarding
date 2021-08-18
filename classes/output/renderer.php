@@ -14,6 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * The file for the rederer class.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 namespace block_onboarding\output;
 
 defined('MOODLE_INTERNAL') || die();
@@ -21,41 +28,61 @@ defined('MOODLE_INTERNAL') || die();
 use plugin_renderer_base;
 use renderable;
 
+/**
+ * Provides functions to reder block pages.
+ */
 class renderer extends plugin_renderer_base {
-  public function render_onboarding_block(renderable $page) {
-    $data = $page->export_for_template($this);
-    return parent::render_from_template('block_onboarding/block', $data);
-  }
+    public function render_block(renderable $page) {
+        $data = $page->export_for_template($this);
+        return parent::render_from_template('block_onboarding/block', $data);
+    }
 
-  // Wiki
+    public function render_home(renderable $page) {
+        $data = $page->export_for_template($this);
+        return parent::render_from_template('block_onboarding/home', $data);
+    }
 
-  public function render_wiki_overview(renderable $page) {
-    $data = $page->export_for_template($this);
-    return parent::render_from_template('block_onboarding/wiki_overview', $data);
-  }
+    // Guide.
 
-  public function render_wiki_admin(renderable $page) {
-    $data = $page->export_for_template($this);
-    return parent::render_from_template('block_onboarding/wiki_admin', $data);
-  }
+    public function render_guide_overview(renderable $page) {
+        $data = $page->export_for_template($this);
+        return parent::render_from_template('block_onboarding/guide_overview', $data);
+    }
 
-  // Steps
+    // Wiki.
 
-  public function render_steps_admin(renderable $page) {
-    $data = $page->export_for_template($this);
-    return parent::render_from_template('block_onboarding/steps_admin', $data);
-  }
+    public function render_wiki_overview(renderable $page) {
+        $data = $page->export_for_template($this);
+        return parent::render_from_template('block_onboarding/wiki_overview', $data);
+    }
 
-  // Experiences
+    public function render_wiki_admin(renderable $page) {
+        $data = $page->export_for_template($this);
+        return parent::render_from_template('block_onboarding/wiki_admin', $data);
+    }
 
-  public function render_experiences_overview(renderable $page) {
-    $data = $page->export_for_template($this);
-    return parent::render_from_template('block_onboarding/experiences_overview', $data);
-  }
+    // Steps.
 
-  public function render_experiences_admin(renderable $page) {
-    $data = $page->export_for_template($this);
-    return parent::render_from_template('block_onboarding/experiences_admin', $data);
-  }
+    public function render_steps_admin(renderable $page) {
+        $data = $page->export_for_template($this);
+        return parent::render_from_template('block_onboarding/steps_admin', $data);
+    }
+
+    // Experiences.
+
+    public function render_experiences_overview(renderable $page) {
+        $data = $page->export_for_template($this);
+        return parent::render_from_template('block_onboarding/experiences_overview', $data);
+    }
+
+    public function render_experiences_admin(renderable $page) {
+        $data = $page->export_for_template($this);
+        return parent::render_from_template('block_onboarding/experiences_admin', $data);
+    }
+
+    public function render_experiences_experience(renderable $page) {
+        $data = $page->export_for_template($this);
+        return parent::render_from_template('block_onboarding/experiences_experience', $data);
+    }
 
 }

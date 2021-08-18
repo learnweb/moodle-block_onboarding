@@ -1,30 +1,27 @@
-<a href="{{dashboard_url}}">{{#pix}}t/left, core, Back{{/pix}}Back to Dashboard</a>
-<br></br>
-<!--<a class="btn btn-default btn-block" href="./guide/overview.php">Guide</a>
-<a class="btn btn-default btn-block" href="./experiences/overview.php">Experiences</a>-->
-
-<div class="home-container">
-    <div class="onboarding-card">
-    <img src="{{base_plugin_url}}pix/compass.jpeg" alt="Avatar" style="width:100%">
-        <div class="onboarding-container">
+<a href="{{dashboard_url}}">{{#pix}}t/left, core, {{#str}}back, block_onboarding{{/str}}{{/pix}}{{#str}}backtomainpage, block_onboarding{{/str}}</a>
+<br>
+<div class="block-onboarding-home-container">
+    <div class="block-onboarding-card">
+    <a href="./guide/overview.php"></a>
+        <div class="">
             <br>
-            <h4>{{#str}}guide, block_onboarding{{/str}}</h4>
-            <p>{{#str}}guide_summary, block_onboarding{{/str}}</p>
+            <p class = "block-onboarding-home-title">{{#str}}firststeps, block_onboarding{{/str}}</p>
+            <p class="block-onboarding-home-description">{{#str}}guide_summary, block_onboarding{{/str}}</p>
             <br>
             <br>
         </div>
-        <a class="onboarding-card-button btn btn-block btn-normal" href="./guide/overview.php">To the Guide</a>
+        <a class="block-onboarding-card-button btn btn-block block-onboarding-btn-normal" href="./guide/overview.php">{{#str}}firststeps, block_onboarding{{/str}}</a>
     </div>
-    <div class="onboarding-card">
-    <img src="{{base_plugin_url}}pix/students.jpeg" alt="Avatar" style="width:100%">
-    <div class="onboarding-container">
+    <div class="block-onboarding-card">
+        <a href="./experiences/overview.php"></a>
+    <div class="">
         <br>
-        <h4>{{#str}}experiences, block_onboarding{{/str}}</h4>
-        <p>{{#str}}experiences_summary, block_onboarding{{/str}}</p>
+        <p class="block-onboarding-home-title">{{#str}}experiences, block_onboarding{{/str}}</p>
+        <p class="block-onboarding-home-description">{{#str}}experiences_summary, block_onboarding{{/str}}</p>
         <br>
         <br>
     </div>
-    <a class="onboarding-card-button btn btn-block btn-normal" href="./experiences/overview.php">Experiences</a>
+    <a class="block-onboarding-card-button btn btn-block block-onboarding-btn-normal" href="./experiences/overview.php">{{#str}}experiences, block_onboarding{{/str}}</a>
     </div>
 </div>
 <br>

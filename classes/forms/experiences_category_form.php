@@ -14,24 +14,37 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * File containing the form definition for experience categories.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/formslib.php');
 
+/**
+ * Class providing the form for experience categories.
+ */
 class experiences_category_form extends moodleform {
 
+    /**
+     * Form definition.
+     */
     public function definition() {
-        global $CFG;
 
         $mform = $this->_form;
-
         $category = $this->_customdata['category'];
 
+        // Hidden category id.
         $mform->addElement('hidden', 'id', $category->id);
         $mform->setType('id', PARAM_INT);
 
         // Category Name Field.
-        $mform->addElement('text', 'name', get_string('category_name', 'block_onboarding'));
+        $mform->addElement('text', 'name', get_string('name', 'block_onboarding'));
         $mform->addRule('name', get_string('experience_category_missing', 'block_onboarding'),
             'required', null, 'server');
         $mform->addRule('name', 'Max Length is 30 characters', 'maxlength', 30, 'block_onboarding');
@@ -47,10 +60,21 @@ class experiences_category_form extends moodleform {
         $mform->setType('questions', PARAM_TEXT);
         $mform->setDefault('questions', isset($category->questions) ? $category->questions : '');
 
-        $this->add_action_buttons();
+        // Adds 'Submit'- Submit and next and 'Cancel'-buttons.
+        $this->add_buttons();
     }
+    /* Add an extra button for having add next*/
+    public function add_buttons() {
+        $mform =& $this->_form;
 
-    public function validation($data, $files) {
-        return array();
+        $buttonarray = array();
+        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('savechanges'));
+
+        $buttonarray[] = &$mform->createElement('submit', 'submitbutton2',
+            get_string('addanother', 'block_onboarding'));
+
+        $buttonarray[] = &$mform->createElement('cancel');
+        $mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
+        $mform->closeHeaderBefore('buttonar');
     }
 }

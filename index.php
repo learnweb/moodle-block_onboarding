@@ -14,6 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Homepage of the block_onboarding plugin.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 require(__DIR__ . '/../../config.php');
 
 require_login();
@@ -22,11 +30,13 @@ $context = context_system::instance();
 
 global $USER, $DB;
 
+redirect(new moodle_url("/blocks/onboarding/experiences/overview.php"));
+
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/blocks/onboarding'));
 $PAGE->set_title(get_string('pluginname', 'block_onboarding'));
 $PAGE->set_heading(get_string('pluginname', 'block_onboarding'));
-$PAGE->navbar->add(get_string('pluginname', 'block_onboarding'));
+
 $output = $PAGE->get_renderer('block_onboarding');
 echo $output->header();
 echo $output->container_start('onboarding-home');

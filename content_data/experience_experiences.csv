@@ -1,5 +1,5 @@
-user_id;name;popularity;contact;course_id;aboutme;timecreated;timemodified
-88527;Sport != Mord;0;a_koss05@uni-muenster.de;3;Moin! Ich studiere Wirtschaftsinformatik im sechsten Semester und würde gerne etwas von meinem Knowledge sharen :);1614895758;1614895758
-89000;Praxiserfahrungen;0;a_hegl01@uni-muenster.de;3;Moin! Ich studiere derzeit Wirtschaftsinformatik im 5ten Semester & wollte ein paar Erfahrungen über meine Praxiserfahrung & meine Zeit bei einer Studenteninitiative während des Studiums mit euch teilen. ;1614896270;1614896270
-91857;How to Uni in 5 min!;0;"";3;"";1614895708;1614895708
-81485;"Uni; Sport; Bier";0;"";3;"";1614910808;1614910808
+user_id;name;popularity;contact;course_id;aboutme;published;suspended;timecreated;timemodified
+88527;Sport != Mord;0;a_koss05@uni-muenster.de;3;Moin! Ich studiere Wirtschaftsinformatik im sechsten Semester und würde gerne etwas von meinem Knowledge sharen :);1;;1614895758;1614895758
+89000;Praxiserfahrungen;0;a_hegl01@uni-muenster.de;3;Moin! Ich studiere derzeit Wirtschaftsinformatik im 5ten Semester & wollte ein paar Erfahrungen über meine Praxiserfahrung & meine Zeit bei einer Studenteninitiative während des Studiums mit euch teilen.;1;;1614896270;1614896270
+91857;How to Uni in 5 min!;0;"";3;"";1;;1614895708;1614895708
+81485;Uni, Sport, Bier;0;"";3;"";1;;1614910808;1614910808

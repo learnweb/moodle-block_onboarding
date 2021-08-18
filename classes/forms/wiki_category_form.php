@@ -14,42 +14,70 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * File containing the form definition for Wiki categories.
+ *
+ * @package    block_onboarding
+ * @copyright  2021 Westfälische Wilhelms-Universität Münster
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/formslib.php');
 
+/**
+ * Class providing the form for Wiki categories.
+ */
 class wiki_category_form extends moodleform {
 
+    /**
+     * Form definition.
+     */
     public function definition() {
-        global $CFG, $DB;
+        global $DB;
 
         $mform = $this->_form;
-
-
         $category = $this->_customdata['category'];
 
-        $mform->addElement('hidden','id', $category->id);
+        // Hidden category id.
+        $mform->addElement('hidden', 'id', $category->id);
         $mform->setType('id', PARAM_INT);
 
-        $mform->addElement('text', 'name', get_string('category_name', 'block_onboarding'), array('maxlength'=>150, 'size'=>24, 'placeholder'=>get_string('default_category_name_wiki', 'block_onboarding')));
+        // Category name field.
+        $mform->addElement('text', 'name', get_string('name', 'block_onboarding'), array('maxlength' => 150, 'size' => 30,
+            'placeholder' => get_string('default_category_name_wiki', 'block_onboarding')));
         $mform->setType('name', PARAM_TEXT);
         $mform->setDefault('name', isset($category->name) ? $category->name : '');
         $mform->addRule('name', get_string('category_name_req', 'block_onboarding'), 'required', null, 'client');
 
-        $count_positions = $DB->count_records('block_onb_w_categories');
-        if($category->id == -1){
-            $position_array = range(1, $count_positions+1);
-        }else{
-            $position_array = range(1, $count_positions);
+        // Category position selector.
+        $countpositions = $DB->count_records('block_onb_w_categories');
+        if ($category->id == -1) {
+            $positionarray = range(1, $countpositions + 1);
+        } else {
+            $positionarray = range(1, $countpositions);
         }
-        $mform->addElement('select', 'position',get_string('category_number', 'block_onboarding'),$position_array , array());
+        $mform->addElement('select', 'position', get_string('category_number', 'block_onboarding'), $positionarray, array());
         $mform->setType('position', PARAM_INT);
-        $mform->setDefault('position', isset($category->position) ? $category->position-1 : $count_positions);
+        $mform->setDefault('position', isset($category->position) ? $category->position - 1 : $countpositions);
 
-        $this->add_action_buttons();
+        // Adds 'Submit'- and 'Cancel'-buttons.
+        $this->add_buttons();
     }
 
-    public function validation($data, $files) {
-        return array();
+    /* Add an extra button for having add next*/
+    public function add_buttons() {
+        $mform =& $this->_form;
+
+        $buttonarray = array();
+        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('savechanges'));
+
+        $buttonarray[] = &$mform->createElement('submit', 'submitbutton2',
+            get_string('addanother', 'block_onboarding'));
+
+        $buttonarray[] = &$mform->createElement('cancel');
+        $mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
+        $mform->closeHeaderBefore('buttonar');
     }
 }

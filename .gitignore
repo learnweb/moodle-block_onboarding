@@ -2,3 +2,8 @@
 .vscode/*
 .DS_Store
 node_modules
+Dockerfile
+Gruntfile.js
+docker-compose.yml
+docker/*
+*.json
