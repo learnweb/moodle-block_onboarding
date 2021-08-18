@@ -35,7 +35,7 @@ defined('MOODLE_INTERNAL') || die();
  * @throws downgrade_exception
  * @throws upgrade_exception
  */
-function xmldb_tool_lifecycle_upgrade($oldversion) {
+function xmldb_block_onboarding_upgrade($oldversion) {
 
     global $DB;
     $dbman = $DB->get_manager();
