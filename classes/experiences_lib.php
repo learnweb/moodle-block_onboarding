@@ -246,11 +246,33 @@ class experiences_lib {
      */
     public static function edit_report($fromform) {
         global $USER, $DB;
+        $reasons = array();
+        if ($fromform->profanity == 1) {
+            array_push($reasons, constants::PROFANITY);
+        }
+        if ($fromform->spam == 1) {
+            array_push($reasons, constants::SPAM);
+        }
+        if ($fromform->offensive == 1) {
+            array_push($reasons, constants::OFFENSIVE);
+        }
+        if ($fromform->falseinformation == 1) {
+            array_push($reasons, constants::FALSEINFO);
+        }
+        if ($fromform->falsematching == 1) {
+            array_push($reasons, constants::FALSEMATCH);
+        }
+        if ($fromform->personalinformation == 1) {
+            array_push($reasons, constants::PERSONALINFO);
+        }
+        if ($fromform->other == 1 || empty($reasons)) {
+            array_push($reasons, constants::OTHER);
+        }
         // Translates form data to new object for further processing.
         $report = new \stdClass();
         $report->experience_id = $fromform->experience_id;
         $report->user_id = $fromform->user_id;
-        $report->type = implode(',', $fromform->type);
+        $report->type = implode(',', $reasons);
         $report->description = $fromform->description;
         $report->timecreated = time();
 

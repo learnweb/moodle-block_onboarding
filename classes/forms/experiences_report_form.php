@@ -50,25 +50,6 @@ class experiences_report_form extends moodleform {
         $mform->addElement('hidden', 'user_id', $USER->id);
         $mform->setType('user_id', PARAM_INT);
 
-        // Reporting reason selector.
-        $radioarray = array();
-        $radioarray[] = $mform->createElement('advcheckbox', 'type', '',
-            get_string('spam', 'block_onboarding'), constants::SPAM, '');
-        $radioarray[] = $mform->createElement('advcheckbox', 'type', '',
-            get_string('profanity', 'block_onboarding'), constants::PROFANITY, '');
-        $radioarray[] = $mform->createElement('advcheckbox', 'type', '',
-            get_string('offensive', 'block_onboarding'), constants::OFFENSIVE, '');
-        $radioarray[] = $mform->createElement('advcheckbox', 'type', '',
-            get_string('falseinformation', 'block_onboarding'), constants::FALSEINFO, '');
-        $radioarray[] = $mform->createElement('advcheckbox', 'type', '',
-            get_string('falsematching', 'block_onboarding'), constants::FALSEMATCH, '');
-        $radioarray[] = $mform->createElement('advcheckbox', 'type', '',
-            get_string('personalinformation', 'block_onboarding'), constants::PERSONALINFO, '');
-        $radioarray[] = $mform->createElement('advcheckbox', 'type', '',
-            get_string('other', 'block_onboarding'), constants::OTHER, '');
-        $mform->addGroup($radioarray, 'types', get_string('reason_report', 'block_onboarding'), array('<br>'), false);
-        $mform->setDefault('type', constants::OTHER);
-
         $mform->addElement('textarea', 'description', get_string('experience_description', 'block_onboarding'),
             array('wrap="virtual" rows="5" cols="50"'));
 
@@ -76,18 +57,28 @@ class experiences_report_form extends moodleform {
             'server');
         $mform->setType('description', PARAM_TEXT);
 
+        // Reporting reason selector.
+        $mform->addElement('advcheckbox', 'spam',
+            get_string('spam', 'block_onboarding'), '', array('group' => 1, 'class' => 'onboarding_close_elements'), array(0, 1));
+        $mform->addElement('advcheckbox', 'profanity',
+            get_string('profanity', 'block_onboarding'), '', array('group' => 1, 'class' => 'onboarding_close_elements'),
+            array(0, 1));
+        $mform->addElement('advcheckbox', 'offensive',
+            get_string('offensive', 'block_onboarding'), '', array('group' => 1, 'class' => 'onboarding_close_elements'),
+            array(0, 1));
+        $mform->addElement('advcheckbox', 'falseinformation',
+            get_string('falseinformation', 'block_onboarding'), '', array('group' => 1, 'class' => 'onboarding_close_elements'),
+            array(0, 1));
+        $mform->addElement('advcheckbox', 'falsematching',
+            get_string('falsematching', 'block_onboarding'), '', array('group' => 1, 'class' => 'onboarding_close_elements'),
+            array(0, 1));
+        $mform->addElement('advcheckbox', 'personalinformation',
+            get_string('personalinformation', 'block_onboarding'), '',
+            array('group' => 1, 'class' => 'onboarding_close_elements'), array(0, 1));
+        $mform->addElement('advcheckbox', 'other',
+            get_string('other', 'block_onboarding'), '', array('group' => 1, 'class' => 'onboarding_close_elements'), array(0, 1));
         // Adds 'Report'- and 'Cancel'-buttons.
         $this->add_action_buttons($cancel = true, $submitlabel = get_string('report_experience', 'block_onboarding'));
     }
 
-    public function validation($data, $files) {
-        $errors = array();
-        // TODO: check if there is some content.
-        /*if (empty($data['enrolenddisabled'])){
-            if ($data['enrolenddate'] <= $data['enrolstartdate']){
-                $errors['enroldateendgrp'] = get_string('enrolenddaterror');
-            }
-        }*/
-        return $errors;
-    }
 }
