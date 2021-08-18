@@ -67,19 +67,16 @@ class experience_table extends table_sql {
 
     // Configure Column Content.
     public function col_name($values) {
-        var_dump($values);
-        if (isset($values->anonym)) {
-            return get_string('anonym', 'block_onboarding');
-        }
         return '<a href="experience.php?experience_id=' . $values->id . '">' . $values->name . '</a>';
     }
 
     public function col_author($values) {
+        global $DB;
+        $anonym = $DB->get_record('block_onb_e_exps', array('id' => $values->id), 'anonym');
+        if ($anonym) {
+            return get_string('anonym', 'block_onboarding');
+        }
         return $values->author;
-    }
-
-    public function col_degreeprogram($values) {
-        return $values->degreeprogram;
     }
 
     public function col_published($values) {
